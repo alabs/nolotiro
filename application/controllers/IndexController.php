@@ -9,6 +9,10 @@
 require_once 'Zend/Controller/Action.php';
 require_once 'Zend/Registry.php';
 
+
+
+
+
 class IndexController extends Zend_Controller_Action
 {
 
@@ -27,6 +31,9 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
+    	
+    	
+    	
         $this->render();
     }
 }

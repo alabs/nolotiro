@@ -11,6 +11,8 @@ require_once 'Zend/Controller/Action.php';
 require_once 'Zend/Registry.php';
 require_once 'Zend/Session.php';
 
+
+
 class UserController extends Zend_Controller_Action
 {
     /**
@@ -96,8 +98,9 @@ class UserController extends Zend_Controller_Action
     
  public function registerAction()
     {
-       
+       $this->render();
         
         //$this->_redirect('/user/login');
     }
+
 }

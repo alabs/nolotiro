@@ -24,6 +24,8 @@ set_include_path('.' . PATH_SEPARATOR . '../library/');
 require_once 'Zend/Controller/Front.php';
 require_once 'Zend/Config/Ini.php';
 require_once 'Zend/Registry.php';
+require_once 'Zend/Db.php';
+require_once 'Zend/Db/Table/Abstract.php';
 require_once 'Zend/Session/Namespace.php';
 
 // Load Configuration
@@ -33,6 +35,18 @@ Zend_Registry::set('config', $config);
 // Start Session
 $session = new Zend_Session_Namespace('Nolotiro');
 Zend_Registry::set('session', $session);
+
+//Setup the ddbb
+$dbAdapter = Zend_Db::factory($config->database);
+Zend_Db_Table_Abstract::setDefaultAdapter($dbAdapter);
+
+$registry = Zend_Registry::getInstance();
+$registry->configuration = $config;
+$registry->dbAdapter     = $dbAdapter;
+
+unset($dbAdapter, $registry);
+
+
 
 // Set up the front controller and dispatch
 try {
