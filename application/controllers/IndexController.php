@@ -20,9 +20,9 @@ class IndexController extends Zend_Controller_Action
     public function init()
     {
         parent::init();
-        if (!Zend_Registry::get('session')->logged_in) {
-            $this->_redirect('/user/login');
-        }
+//        if (!Zend_Registry::get('session')->logged_in) {
+//            $this->_redirect('/user/login');
+//        }
     }
 
     public function indexAction()

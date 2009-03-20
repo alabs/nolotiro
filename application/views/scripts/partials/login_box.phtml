@@ -1,0 +1,28 @@
+<?php
+/**
+ * Nolotiro - login box partial view 
+ * 
+ * @version $Id: department_list.phtml,v 1.3 2007-12-04 16:54:49 seva Exp $
+ */
+
+
+require_once 'Zend/Registry.php';
+require_once 'Zend/Controller/Front.php';
+
+$user = Zend_Registry::get('session')->username;
+?>
+<div class="user_info">
+
+<?php
+
+if (!Zend_Registry::get('session')->logged_in) {
+	echo'<a href="'.Zend_Controller_Front::getInstance()->getBaseUrl().'/user/login">Login</a>';
+}else {
+	echo 'Hi,'.$this->escape($user).' | '.'<a href="'.Zend_Controller_Front::getInstance()->getBaseUrl().'/user/logout">Logout</a>';
+}
+
+
+
+?>
+</div>
+	
