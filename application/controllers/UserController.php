@@ -89,4 +89,15 @@ class UserController extends Zend_Controller_Action
         
         $this->_redirect('/user/login');
     }
+    
+    /**
+     * register - register a new user into the nolotiro database
+     */
+    
+ public function registerAction()
+    {
+       
+        
+        //$this->_redirect('/user/login');
+    }
 }
