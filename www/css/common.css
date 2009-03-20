@@ -1,0 +1,127 @@
+BODY {
+	font-family: Georgia, serif;
+}
+
+H1, H2, H3 {
+	margin-top: 2px;
+}
+
+A {
+	color: #2030ff;
+	text-decoration: none;
+}
+
+A:hover {
+	background-color: #ffff00;
+	text-decoration: none;
+}
+
+.error {
+	border: 1px solid black;
+	background-color: #f88;
+	font-weight: bold;	
+}
+
+.department_tree {
+	float: left;
+	padding: 3px;
+	font-size: 10pt;
+	border: 1px solid black;
+	width: 190px;	
+}
+
+.department_tree H2 {
+	margin: 0px;
+	margin-bottom: 10px;
+	padding: 2px;
+	background-color: #fa2;
+	border: 1px solid black;	
+}
+
+.department_tree UL {
+	margin: 0px 15px 10px; 
+	padding: 2px;
+}
+
+.body_container {
+	padding-left: 210px;
+}
+
+.employee_list {
+	width: 100%;
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+.employee_list TH {
+	border: 1px solid black;
+	background-color: #69bfde;
+	text-align: left;
+}
+
+.employee_list TD {
+	border: 1px solid black;
+	padding: 2px;
+}
+
+.employee_list TR:hover {
+	background-color: #f2f2f2;
+}
+
+.page_footer {
+	position:   absolute;
+	bottom:     20px;
+	width:      99%;
+	text-align: center;
+	clear:      both;
+	font-size:  9pt;
+	color:      #999;
+}
+
+.login_container {
+	width: 50%;
+	padding: 20px 20px;
+}
+
+FORM {
+	margin-top: 20px;
+	text-align: left;
+	border: 1px solid #ccc;
+	padding: 5px;
+}
+
+FORM LABEL {
+	display: block;
+	clear: left;
+	float: left;
+	width: 150px;
+}
+
+FORM INPUT[type=text], FORM INPUT[type=password] {
+	margin: 2px;
+	font-size: 10pt;
+	background-color: #89dffe;
+	border: 1px solid black;
+}
+
+.button_container {
+	text-align: right;
+	padding: 5px;
+}
+
+.button_container INPUT {
+	border: 1px solid black;
+	background-color: #fa2;
+	font-size: 10pt;
+}
+
+.user_info {
+	border: 1px solid black;
+	float: right;
+	position: relative;
+	top: -50px;
+	left: -10px;
+	padding: 5px;
+}
+	

@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Default home page view
+ * 
+ * @version $Id: index.phtml,v 1.2 2007-12-04 12:19:45 seva Exp $
+ */
+
+// Render common HTML header
+echo $this->render('partials/html_header.phtml');
+
+// Render the common page headers
+echo $this->render('partials/department_list.phtml'); 
+
+?>
+
+<div class="body_container">
+
+	<h2>Welcome to Zets</h2>
+	<p>
+		<strong>Zets</strong> is the ultimate company department tree browser. 
+		It was designed to be robust yet flexible, and support enterprise grade 
+		technologies out of the box and across the board.
+	</p> 
+</div>
+
+<?= $this->render('partials/html_footer.phtml'); ?>

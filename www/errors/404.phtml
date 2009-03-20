@@ -1,0 +1,43 @@
+<?php
+/**
+ * 404 Error page
+ * 
+ * @version $Id: 404.phtml,v 1.3 2007-12-04 16:54:49 seva Exp $
+ */
+
+header("HTTP/1.x 404 Not Found");
+
+
+
+require_once 'Zend/Registry.php';
+
+/* @var $config Zend_Config_Ini */
+$config = Zend_Registry::get('config');
+
+?>
+<html>
+
+<head>
+	<title>Nolotiro.com - 404 Not Found</title>
+</head>
+
+<body>
+	<h1>Oops...</h1>
+	<hr />
+	The page you are trying to access does not exist or perhaps it was removed.<br />
+	Click <a href="<?= $config->www->baseurl ?>">here</a> to go to the home page.
+	
+<?php
+//echo '<pre>';
+//var_dump($config->config);
+//echo '</pre>';
+
+if (!$config->config): ?>
+	<div style="overflow: auto; margin-top: 10px; padding: 2px; border: 1px dashed black; background-color: #eee">
+		<strong>Debugging information:</strong><br />
+		<pre><?= $e->__toString(); ?></pre>
+	</div>
+<?php endif; ?>
+</body>
+
+</html>

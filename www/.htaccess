@@ -1,0 +1,4 @@
+# Enable URL rewriting for pretty URLs
+
+RewriteEngine on
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
