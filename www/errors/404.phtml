@@ -2,14 +2,8 @@
 /**
  * 404 Error page
  * 
- * @version $Id: 404.phtml,v 1.3 2007-12-04 16:54:49 seva Exp $
  */
-
 header("HTTP/1.x 404 Not Found");
-
-
-
-require_once 'Zend/Registry.php';
 
 /* @var $config Zend_Config_Ini */
 $config = Zend_Registry::get('config');
@@ -28,9 +22,6 @@ $config = Zend_Registry::get('config');
 	Click <a href="<?= $config->www->baseurl ?>">here</a> to go to the home page.
 	
 <?php
-//echo '<pre>';
-//var_dump($config->config);
-//echo '</pre>';
 
 if (!$config->config): ?>
 	<div style="overflow: auto; margin-top: 10px; padding: 2px; border: 1px dashed black; background-color: #eee">

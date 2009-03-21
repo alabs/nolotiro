@@ -4,6 +4,8 @@
  *
  * @author  Daniel Remeseiro
  * 
+ * nolotiro sourcecode its under GNU GPL3 License
+ * @see LICENSE
  */
 
 //Setting paths

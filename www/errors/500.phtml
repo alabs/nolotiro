@@ -1,13 +1,9 @@
 <?php
 /**
  * 500 Error page
- * 
- * @version $Id: 500.phtml,v 1.3 2007-12-04 16:54:49 seva Exp $
  */
 
 header("HTTP/1.x 500 Internal Server Error");
-
-require_once 'Zend/Registry.php';
 
 /* @var $config Zend_Config_Ini */
 $config = Zend_Registry::get('config');
