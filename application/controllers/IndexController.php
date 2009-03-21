@@ -6,12 +6,6 @@
  * @version $Id: IndexController.php,v 1.3 2007-12-04 16:54:49 seva Exp $
  */
 
-require_once 'Zend/Controller/Action.php';
-require_once 'Zend/Registry.php';
-
-
-
-
 
 class IndexController extends Zend_Controller_Action
 {

@@ -114,7 +114,8 @@ class UserController extends Zend_Controller_Action
                 // to a new location
                 // this is also considered a "redirect after post"
                 // @see http://en.wikipedia.org/wiki/Post/Redirect/Get
-                return $this->_helper->redirector('index');
+                //return $this->_helper->redirector('index');
+                $this->_redirect('/');
             }
         }
         // assign the form to the view

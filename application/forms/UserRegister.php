@@ -44,6 +44,19 @@ class Form_UserRegister extends Zend_Form
 		'required' => true,
 		'label' => 'Password:',
 		));
+		
+		$this->addElement('captcha', 'captcha', array(
+            'label'      => 'Please enter the 3 letters:',
+            'required'   => true,
+            'captcha'    => array('captcha' => 'Image',
+								 'wordLen' => 3,
+								 'height' => 50,
+								 'width' => 120,
+								 //'gcfreq'=> 100,
+								 'font'=> NOLOTIRO_PATH_ROOT.'/www/images/antigonimed.ttf',
+					 			 'imgdir'=>NOLOTIRO_PATH_ROOT.'/www/images/captcha')
+        ));
+		
 
         // add the submit button
         $this->addElement('submit', 'submit', array(

@@ -24,9 +24,7 @@ A:hover {
 
 
 
-.body_container {
-	padding-left: 210px;
-}
+
 
 
 
@@ -40,31 +38,8 @@ A:hover {
 	color:      #999;
 }
 
-.login_container {
-	width: 50%;
-	padding: 20px 20px;
-}
 
-FORM {
-	margin-top: 20px;
-	text-align: left;
-	border: 1px solid #ccc;
-	padding: 5px;
-}
 
-FORM LABEL {
-	display: block;
-	clear: left;
-	float: left;
-	width: 150px;
-}
-
-FORM INPUT[type=text], FORM INPUT[type=password] {
-	margin: 2px;
-	font-size: 10pt;
-	
-	border: 1px solid black;
-}
 
 .button_container {
 	text-align: right;
