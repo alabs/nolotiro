@@ -1,34 +1,29 @@
 <?php
-
 /**
  * Bootstrap file for nolotiro V2
  *
  * @author  Daniel Remeseiro
  * 
  */
-//error_reporting(E_ALL|E_STRICT);
-//ini_set('display_errors', 1);
 
+//Setting paths
 define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application/'));
 set_include_path(
     APPLICATION_PATH . '/../library' 
     . PATH_SEPARATOR . get_include_path()
 );
 
-
-
-date_default_timezone_set('Europe/Madrid');
-
-// Set the application root path
+// Set the nolotiro main root path
 define('NOLOTIRO_PATH_ROOT', realpath(dirname(__FILE__) . '/../'));
-
-
-// Set include path
 set_include_path(NOLOTIRO_PATH_ROOT . PATH_SEPARATOR . get_include_path());
 
 
+//Enabling the autoload classes
 require_once "Zend/Loader.php";
 Zend_Loader::registerAutoload();
+
+
+date_default_timezone_set('Europe/Madrid');
 
 
 // Load Configuration
