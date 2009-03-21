@@ -1,11 +1,10 @@
 <?php
 
 /**
- * Bootstap file for nolotiro V2
- *
+ * Bootstrap file for nolotiro V2
  *
  * @author  Daniel Remeseiro
- * @version $Id: index.php,v 1.4 2009-04-16 13:51:07 roy Exp $
+ * 
  */
 //error_reporting(E_ALL|E_STRICT);
 //ini_set('display_errors', 1);

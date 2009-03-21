@@ -22,15 +22,15 @@ class Model_DbTable_User extends Zend_Db_Table_Abstract
      *
      * @return $id
      */
-    public function getName(int $id)
+    public function insert(array $data)
     {
-        return parent::fetchRow($id);
+    	$data['created'] = date('Y-m-d H:i:s');
+        return parent::insert($data);
     }
 
-    public function setName($name)
+    public function update(array $data, $where)
     {
-        $this->name = $name;
-        return $this;
+        throw new Exception('chst! no se puede updatear un user');
     }
     
 }

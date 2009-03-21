@@ -1,10 +1,9 @@
 <?php
 
 /**
- * Zets user controller - Handling user related actions - currently log in and
+ * Nolotiro user controller - Handling user related actions - currently log in and
  * log out.
  * 
- * @version $Id: UserController.php,v 1.3 2007-12-04 16:54:49 seva Exp $
  */
 
 require_once 'Zend/Controller/Action.php';
