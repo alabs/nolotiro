@@ -10,27 +10,7 @@
 echo $this->render('partials/html_header.phtml');
 
 ?>
-<div class="login_container">
-	<h2>Nice you want to register!</h2>
-	
-<?php if (isset($this->error)): ?>
-	<div class="error">
-		<?= $this->escape($this->error); ?>
-	</div>
-<?php endif; ?>
+<?= $this->form ?>
 
-	<form method="post">
-		<label for="user">User name:</label>
-		<input type="text" name="user" id="user" value="<?= 
-			isset($this->user) ? $this->escape($this->user) : '' ?>" /><br />
-		
-		<label for="password">Password:</label>
-		<input type="password" name="password" id="password" value="" /><br />
-		
-		<div class="button_container">
-			<input type="submit" value="Sign In" />
-		</div>
-	</form>
-</div>
 
-<?= $this->render('partials/html_footer.phtml'); ?>
+<?=$this->render('partials/html_footer.phtml'); ?>

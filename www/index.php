@@ -8,24 +8,28 @@
  */
 //error_reporting(E_ALL|E_STRICT);
 //ini_set('display_errors', 1);
+
+define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application/'));
+set_include_path(
+    APPLICATION_PATH . '/../library' 
+    . PATH_SEPARATOR . get_include_path()
+);
+
+
+
 date_default_timezone_set('Europe/Madrid');
 
 // Set the application root path
 define('NOLOTIRO_PATH_ROOT', realpath(dirname(__FILE__) . '/../'));
 
+
 // Set include path
 set_include_path(NOLOTIRO_PATH_ROOT . PATH_SEPARATOR . get_include_path());
 
-//the path to Zend Network library :
-set_include_path('.' . PATH_SEPARATOR . '../library/');
 
-// Load required files
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Config/Ini.php';
-require_once 'Zend/Registry.php';
-require_once 'Zend/Db.php';
-require_once 'Zend/Db/Table/Abstract.php';
-require_once 'Zend/Session/Namespace.php';
+require_once "Zend/Loader.php";
+Zend_Loader::registerAutoload();
+
 
 // Load Configuration
 $config = new Zend_Config_Ini(NOLOTIRO_PATH_ROOT . '/config/nolotiro.ini', 'default');

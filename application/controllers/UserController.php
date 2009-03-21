@@ -6,21 +6,14 @@
  * 
  */
 
-require_once 'Zend/Controller/Action.php';
-require_once 'Zend/Registry.php';
-require_once 'Zend/Session.php';
-
-
 
 class UserController extends Zend_Controller_Action
 {
-    /**
-     * User session
-     *
-     * @var Zend_Session_Namespace
-     */
+    
     protected $session = null;
-
+	protected $_model;
+    
+	    
     /**
      * Overriding the init method to also load the session from the registry
      *
@@ -37,6 +30,8 @@ class UserController extends Zend_Controller_Action
      */
     public function indexAction()
     {
+    	
+    	
         if ($this->session->authenticated) {
             $this->_forward('logout');
         } else {
@@ -88,18 +83,83 @@ class UserController extends Zend_Controller_Action
         $this->session->logged_in = false;
         $this->session->username = false;
         
-        $this->_redirect('/user/login');
+        $this->_redirect('/');
     }
     
     /**
      * register - register a new user into the nolotiro database
      */
     
- public function registerAction()
+ 	public function registerAction()
     {
-       $this->render();
+       	$request = $this->getRequest();
+        $form    = $this->_getUserRegisterForm();
         
-        //$this->_redirect('/user/login');
+        
+
+        // check to see if this action has been POST'ed to
+        if ($this->getRequest()->isPost()) {
+            
+            // now check to see if the form submitted exists, and
+            // if the values passed in are valid for this form
+            if ($form->isValid($request->getPost())) {
+                
+                // since we now know the form validated, we can now
+                // start integrating that data sumitted via the form
+                // into our model
+                $model = $this->_getModel();
+                $model->save($form->getValues());
+                
+                // now that we have saved our model, lets url redirect
+                // to a new location
+                // this is also considered a "redirect after post"
+                // @see http://en.wikipedia.org/wiki/Post/Redirect/Get
+                return $this->_helper->redirector('index');
+            }
+        }
+        // assign the form to the view
+        $this->view->form = $form;
+        
     }
+    
+    /**
+     * _getModel() is a protected utility method for this controller. It is 
+     * responsible for creating the model object and returning it to the 
+     * calling action when needed. Depending on the depth and breadth of the 
+     * application, this may or may not be the best way of handling the loading 
+     * of models.
+     * Also note that since this is a protected method without the word 'Action',
+     * it is impossible that the application can actually route a url to this 
+     * method. 
+     *
+     * @return Model_User
+     */
+    protected function _getModel()
+    {
+        if (null === $this->_model) {
+            // autoload only handles "library" components.  Since this is an 
+            // application model, we need to require it from its application 
+            // path location.
+            require_once APPLICATION_PATH . '/models/User.php';
+            $this->_model = new Model_User();
+        }
+        return $this->_model;
+    }
+    
+    /**
+     * This method is essentially doing the same thing for the Form that we did 
+     * above in the protected model accessor.  Same logic applies here.
+     *
+     * @return Form_UserRegister
+     */
+    protected function _getUserRegisterForm()
+    {
+        require_once APPLICATION_PATH . '/forms/UserRegister.php';
+        $form = new Form_UserRegister();
+        $form->setAction($this->_helper->url('register'));
+        return $form;
+    }
+    
+    
 
 }
