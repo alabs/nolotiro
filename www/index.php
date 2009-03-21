@@ -2,10 +2,11 @@
 /**
  * Bootstrap file for nolotiro V2
  *
- * @author  Daniel Remeseiro
+ * @copyright Daniel Remeseiro
  * 
- * nolotiro sourcecode its under GNU GPL3 License
- * @see LICENSE
+ * All the sourcecode of this software it's under GNU GPL3 License
+ * @see LICENSE file on application directory
+ * @see http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 //Setting paths
@@ -27,7 +28,6 @@ Zend_Loader::registerAutoload();
 
 date_default_timezone_set('Europe/Madrid');
 
-
 // Load Configuration
 $config = new Zend_Config_Ini(NOLOTIRO_PATH_ROOT . '/config/nolotiro.ini', 'default');
 Zend_Registry::set('config', $config);
@@ -45,7 +45,6 @@ $registry->configuration = $config;
 $registry->dbAdapter     = $dbAdapter;
 
 unset($dbAdapter, $registry);
-
 
 
 // Set up the front controller and dispatch
