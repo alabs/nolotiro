@@ -61,6 +61,8 @@ class UserController extends Zend_Controller_Action
                 $this->session->username = $user;
                 
                 Zend_Session::regenerateId();
+                $this->_helper->_flashMessenger->addMessage('you are logged in now,'.$user);
+                
                 $this->_redirect('/');
                 
             // Wrong user name / password
@@ -115,6 +117,16 @@ class UserController extends Zend_Controller_Action
                 // this is also considered a "redirect after post"
                 // @see http://en.wikipedia.org/wiki/Post/Redirect/Get
                 //return $this->_helper->redirector('index');
+               
+//                $mail = new Zend_Mail();
+//                $mail->setBodyText('This is the text of the mail.');
+//                $mail->setFrom('noreply@nolotiro.com', 'nolotiro.com v2');
+//                $mail->addTo('root', 'Daniel Remeseiro');
+//                $mail->setSubject('nolotiro.com - confirm your email dear '.$form->email);
+//                $mail->send();
+                
+                $this->_helper->_flashMessenger->addMessage('Check your inbox email to finish the register process');
+                
                 $this->_redirect('/');
             }
         }

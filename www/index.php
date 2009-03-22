@@ -6,7 +6,7 @@
  * 
  * All the sourcecode of this software it's under GNU GPL3 License
  * @see LICENSE file on application directory
- * @see http://www.gnu.org/licenses/gpl-3.0.txt
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 //Setting paths

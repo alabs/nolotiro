@@ -14,9 +14,23 @@ echo $this->render('partials/login_box.phtml');
 
 ?>
 
+<div class="messages">
+   		<b>
+   		<? if ( count($this->mensajes) > 0)
+   				 {
+   					foreach ($this->mensajes as $msg) {
+   						echo $msg.'<br>';
+   					}
+   				 }
+   		?>
+   		</b>
+   	</div>
+
+
+
 <div class="body_container">
 
-	<h2>Welcome to Nolotiro</h2>
+	
 	<p>
 		blablalbalbalb
 	</p> 

@@ -18,6 +18,8 @@ class IndexController extends Zend_Controller_Action
     public function init()
     {
         parent::init();
+        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        
 //        if (!Zend_Registry::get('session')->logged_in) {
 //            $this->_redirect('/user/login');
 //        }
@@ -27,7 +29,7 @@ class IndexController extends Zend_Controller_Action
     {
     	
     	
-    	
+    	$this->view->mensajes = $this->_flashMessenger->getMessages();
         $this->render();
     }
 }
