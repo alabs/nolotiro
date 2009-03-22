@@ -4,17 +4,14 @@
  *
  * @copyright Daniel Remeseiro
  * 
- * All the sourcecode of this software it's under GNU GPL3 License
+ * All the sourcecode of this software is under GNU GPL3 License
  * @see LICENSE file on application directory
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 //Setting paths
 define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application/'));
-set_include_path(
-    APPLICATION_PATH . '/../library' 
-    . PATH_SEPARATOR . get_include_path()
-);
+set_include_path(APPLICATION_PATH . '/../library' . PATH_SEPARATOR . get_include_path());
 
 // Set the nolotiro main root path
 define('NOLOTIRO_PATH_ROOT', realpath(dirname(__FILE__) . '/../'));

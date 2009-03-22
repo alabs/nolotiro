@@ -173,6 +173,18 @@ class UserController extends Zend_Controller_Action
         return $form;
     }
     
-    
+
+/**
+     * Validate - check the token generated and send by mail by registerAction via url, then redirect to
+     * the log in page.
+     */
+    public function validateAction()
+    {
+        //$this->session->logged_in = false;
+        //$this->session->username = false;
+        $this->_helper->_flashMessenger->addMessage('register process finished succesfully, welcome to nolotiro');
+                
+        $this->_redirect('/');
+    }
 
 }
