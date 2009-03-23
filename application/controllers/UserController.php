@@ -61,7 +61,7 @@ class UserController extends Zend_Controller_Action
                 $this->session->username = $user;
                 
                 Zend_Session::regenerateId();
-                $this->_helper->_flashMessenger->addMessage('you are logged in now,'.$user);
+                $this->_helper->_flashMessenger->addMessage('You are now logged in, '.$user);
                 
                 $this->_redirect('/');
                 
@@ -112,10 +112,6 @@ class UserController extends Zend_Controller_Action
                 $model = $this->_getModel();
                 $model->save($form->getValues());
                 
-                // now that we have saved our model, lets url redirect
-                // to a new location
-                // this is also considered a "redirect after post"
-                // @see http://en.wikipedia.org/wiki/Post/Redirect/Get
                 //return $this->_helper->redirector('index');
                
 //                $mail = new Zend_Mail();
@@ -174,17 +170,38 @@ class UserController extends Zend_Controller_Action
     }
     
 
-/**
-     * Validate - check the token generated and send by mail by registerAction via url, then redirect to
-     * the log in page.
+	/**
+     * Validate - check the token generated  sent by mail by registerAction, then redirect to
+     * the logout  page (index home).
+     * @param t
+     * 
      */
     public function validateAction()
     {
-        //$this->session->logged_in = false;
-        //$this->session->username = false;
-        $this->_helper->_flashMessenger->addMessage('register process finished succesfully, welcome to nolotiro');
-                
-        $this->_redirect('/');
+        $token = $this->_request->getParam('t');//the token
+        //http://localhost/<controller>/<action>/param/value/param2/value2/etc...
+        
+        
+        if (!is_null($token)) {
+            
+            //TODO
+            //add validation token against bbdd , if matches...
+            $this->_helper->_flashMessenger->addMessage('Register finished succesfully,
+             welcome to nolotiro '.$this->session->username);
+          
+            
+            $this->_redirect('/user/logout');// redirect to logout action to kill the user logged in (if exists)
+        	;
+        }else {
+        	$this->_helper->_flashMessenger->addMessage('Sorry, register url no valid or expired.');
+        	$this->_redirect('/');
+        }
+        
+        
+        
+        
+              
+        //$this->_redirect('/');
     }
 
 }

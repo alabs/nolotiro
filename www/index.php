@@ -26,7 +26,7 @@ Zend_Loader::registerAutoload();
 date_default_timezone_set('Europe/Madrid');
 
 // Load Configuration
-$config = new Zend_Config_Ini(NOLOTIRO_PATH_ROOT . '/config/nolotiro.ini', 'default');
+$config = new Zend_Config_Ini(NOLOTIRO_PATH_ROOT . '/config/nolotiro.ini', 'dev');
 Zend_Registry::set('config', $config);
 
 // Start Session
@@ -37,11 +37,12 @@ Zend_Registry::set('session', $session);
 $dbAdapter = Zend_Db::factory($config->database);
 Zend_Db_Table_Abstract::setDefaultAdapter($dbAdapter);
 
+//Setup the registry
 $registry = Zend_Registry::getInstance();
 $registry->configuration = $config;
 $registry->dbAdapter     = $dbAdapter;
 
-unset($dbAdapter, $registry);
+unset($dbAdapter, $registry, $config);
 
 
 // Set up the front controller and dispatch
