@@ -1,11 +1,8 @@
 <?php
-
+echo '<?xml version="1.0" encoding="UTF-8" ?>';
 /**
  * Nolotiro common page header view
- * 
- * @version $Id: html_header.phtml,v 1.4 2007-12-12 13:56:49 roy Exp $
  */
-echo '<?xml version="1.0" encoding="UTF-8" ?>';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -13,13 +10,17 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
   <head>
     <title><?= isset($this->page_title) ? $this->page_title : 'Nolotiro.com' ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="copyright" content="mindbots" />
-	<meta name="DC.Title" content="nolotiro.com | &amp;nbsp;no lo tiro, te lo doy" />
+	<meta name="copyright" content="daniel remeseiro" />
+	<meta name="DC.Title" content="nolotiro.com | no lo tiro, te lo doy" />
 	<meta name="robots" content="index,follow" />
 
 	<link rel="shortcut icon" href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/css/common.css" />
-    
+	<link rel="stylesheet" href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+  	<link rel="stylesheet" href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/css/blueprint/print.css" type="text/css" media="print" /> 
+  	<!--[if IE]>
+    <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection" />
+  	<![endif]-->
     
   </head>
 
@@ -28,9 +29,17 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 
 		
 <body>
-	<h1 id="site-name"><a href="/" title="Principal">
-	              
-          <img src="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/images/nolotiro_logo.png" alt="Nolotiro.com logo" id="logo" />nolotiro.com</a>
-	    </h1>
-	              <h2 id='site-slogan'>&nbsp;no lo tiro, te lo doy</h2>
+<div id="wrapper-main">
 
+    <div id="header">
+    	<h1 id="site-name"><a href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/" title="nolotiro.com home">      
+              <img src="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/images/nolotiro_logo.png" alt="Nolotiro.com logo" id="logo" />nolotiro</a>
+    	    </h1>
+    	<h2 id='site-slogan'>&nbsp;no lo tiro, te lo doy</h2>
+    	
+    	
+    	<div id="publi_header">
+			banner
+			</div>
+		
+    </div>
