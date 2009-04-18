@@ -38,11 +38,11 @@ a:hover {
 #header {
   margin-top: 15px;
   width: 100%;
-  margin: 0 ;
-  height: 6em;
+  margin: 0;
+  height: 4.5em;
   position: relative;
   text-align: left;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
 }
 
 #main {
@@ -73,6 +73,21 @@ h2#site-slogan {
   padding-top: 1px;
 }
 
+#location_header_section{
+	background-color:#E5F2FF;
+	padding-top:10px;
+	padding-bottom:6px;
+	padding-left: 20px;
+	border-bottom: 1px solid #ddd;
+}
+
+#default_header_section{
+	background-color:#FFFFCC;
+	padding-top:10px;
+	padding-bottom:6px;
+	padding-left: 20px;
+	border-bottom: 1px solid #ddd;
+}
 /**
 * footer
 *
@@ -94,14 +109,16 @@ h2#site-slogan {
  */
 
 #publi_header{
-	border: 1px solid #000;
-	margin-top:10px;
-	margin-bottom:8px;
-	padding-bottom:0px;
-	margin-right:auto;
-	margin-left:auto;
-	width:728px;
-	
+	background-color:#f4f4f4;
+	padding-top:10px;
+	padding-bottom:6px;
+	text-align:right;
+	right:10px;
+	border-bottom: 1px solid #ddd;
 }
 
-	
+#publi_header img{
+	margin-right:10px;
+	border: 1px solid #999;
+}	
+

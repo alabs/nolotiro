@@ -10,9 +10,11 @@
 echo $this->render('partials/html_header.phtml');
 
 ?>
-<div class="login_container">
-	<h2>Please Sign In</h2>
-	
+
+<div id="default_header_section">
+<h3>Please, sign in:</h3>
+</div>
+
 <?php if (isset($this->error)): ?>
 	<div class="error">
 		<?= $this->escape($this->error); ?>
@@ -31,6 +33,6 @@ echo $this->render('partials/html_header.phtml');
 			<input type="submit" value="Sign In" />
 		
 	</form>
-</div>
+
 
 <?= $this->render('partials/html_footer.phtml'); ?>
