@@ -25,7 +25,16 @@ class Form_UserRegister extends Zend_Form
                 'EmailAddress',
             )
         ));
-
+        
+        $this->addElement('text', 'email2', array(
+            'label'      => 'Your email again:',
+            'required'   => true,
+            'filters'    => array('StringTrim'),
+            'validators' => array(
+                'EmailAddress',
+            )
+        ));
+        
         $this->addElement('text', 'username', array(
         	'label'      => 'Choose a username:',
     		'filters' => array('StringTrim', 'StringToLower'),
@@ -36,13 +45,9 @@ class Form_UserRegister extends Zend_Form
         	
 		));
 
-		$this->addElement('password', 'password', array(
-		'filters' => array('StringTrim'),
-		'validators' => array(
-		array('StringLength', false, array(5, 20)),
-		),
+		$this->addElement('checkbox', 'terms', array(		
 		'required' => true,
-		'label' => 'Password:',
+		'label' => 'acepta las putas condiciones!',
 		));
 		
 		$this->addElement('captcha', 'captcha', array(

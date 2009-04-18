@@ -1,15 +1,45 @@
 <?php
-//login page
-// Render common HTML header
+//register page
+//render common HTML header
 echo $this->render('partials/html_header.phtml');
-
 ?>
 
 <div id="default_header_section">
-<h3>Please, fill this form:</h3>
+<h3>New user</h3>
+(If you already are a registered user, please <a href="/user/login" title="user login" >login here</a>)
+
 </div>
 
-<?= $this->form ?>
+<?php 
+//echo  $this->form;
+?>
+
+<div id="main" class="span-16">
 
 
-<?=$this->render('partials/html_footer.phtml'); ?>
+<form action="<?= $this->escape($this->form->getAction()) ?>"
+      method="<?= $this->escape($this->form->getMethod()) ?>">
+
+<fieldset>
+    <legend>Please, fill this form to be a nolotiro's member</legend>
+	<p>
+	<?= $this->form->username ?>
+    </p>
+    
+    <?= $this->form->email ?>
+    <?= $this->form->email2 ?>
+    <?= $this->form->captcha ?>
+    <?= $this->form->terms ?>
+
+<?= $this->form->submit ?>
+</fieldset>
+</form>
+
+
+</div>
+
+
+
+<?//render the default footer
+echo $this->render('partials/html_footer.phtml');
+?>

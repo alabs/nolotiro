@@ -12,7 +12,7 @@ a:active {
 
 a:hover {
 	background-color: #ffff00;
-	color: #000;
+	color: #00C7EF;
 	text-decoration: none;
 }
 
@@ -46,8 +46,7 @@ a:hover {
 }
 
 #main {
-  clear: both;
-  padding-top: 0;
+  padding-top: 10;
   text-align: left; 
 }
 
@@ -112,13 +111,11 @@ h2#site-slogan {
 	background-color:#f4f4f4;
 	padding-top:10px;
 	padding-bottom:6px;
+	padding-right:10px;
 	text-align:right;
 	right:10px;
 	border-bottom: 1px solid #ddd;
 }
+	
 
-#publi_header img{
-	margin-right:10px;
-	border: 1px solid #999;
-}	
 

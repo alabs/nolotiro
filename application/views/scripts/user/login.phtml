@@ -1,9 +1,6 @@
 <?php
-
 /**
  * Log in page
- * 
- * @version $Id: login.phtml,v 1.2 2007-12-04 12:19:45 seva Exp $
  */
 
 // Render common HTML header
@@ -12,7 +9,9 @@ echo $this->render('partials/html_header.phtml');
 ?>
 
 <div id="default_header_section">
-<h3>Please, sign in:</h3>
+<h3>Login</h3>
+(If you are a new user, please <a href="/user/register" title="user register" >register here</a>) 
+
 </div>
 
 <?php if (isset($this->error)): ?>
@@ -22,6 +21,7 @@ echo $this->render('partials/html_header.phtml');
 <?php endif; ?>
 
 	<form method="post">
+	<fieldset>
 		<label for="user">User name:</label>
 		<input type="text" name="user" id="user" value="<?= 
 			isset($this->user) ? $this->escape($this->user) : '' ?>" /><br />
@@ -31,7 +31,7 @@ echo $this->render('partials/html_header.phtml');
 		
 		
 			<input type="submit" value="Sign In" />
-		
+	</fieldset>
 	</form>
 
 
