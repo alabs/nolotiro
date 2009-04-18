@@ -12,16 +12,18 @@ echo $this->render('partials/login_box.phtml');
 
 ?>
 
-<div class="messages">
-   		<b>
+
+   		
    		<? if ( count($this->mensajes) > 0)
    				 {
+   				    echo '<div class="success">'; 
    					foreach ($this->mensajes as $msg) {
    						echo $msg.'<br>';
    					}
+   					echo '</div>';
    				 }
    		?>
-   		</b>
+   		
    	</div>
 
 
