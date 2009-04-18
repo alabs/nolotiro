@@ -30,14 +30,37 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 <div class="container">
 
     <div id="header">
+    	
+
+<div class="user_login_box">
+<?php
+/**
+ * Nolotiro - login box partial view 
+ * 
+ */
+$user = Zend_Registry::get('session')->username;
+if (!Zend_Registry::get('session')->logged_in) {
+	echo'<a href="'.Zend_Controller_Front::getInstance()->getBaseUrl().'/user/register">new user</a> or ';
+	echo'<a href="'.Zend_Controller_Front::getInstance()->getBaseUrl().'/user/login">login</a>';
+}else {
+	echo 'hello, '.$this->escape($user).' | '.'<a href="'.Zend_Controller_Front::getInstance()->getBaseUrl().'/user/logout">Logout</a>';
+}
+
+?>
+</div>
+    	
+    	
+    	
     	<h1 id="site-name"><a href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/" title="nolotiro.com home">      
-              <img src="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/images/nolotiro_logo.png" alt="Nolotiro.com logo" id="logo" />nolotiro</a>
+              <img src="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/images/nolotiro_logo.png" alt="Nolotiro.com logo" id="logo" />nolotiro.com</a>
     	    </h1>
-    	<h2 id='site-slogan'>no lo tiro, te lo doy</h2>
+    	<h2 id='site-slogan'>&nbsp;no lo tiro, te lo doy (sin condiciones)</h2>
     	
     	
-    	<div id="publi_header">
-			banner
-			</div>
 		
     </div>
+    
+<div id="publi_header">
+<img alt="demo banner" src="/images/banner_dummy.gif">
+</div>
+<hr />

@@ -1,25 +1,82 @@
 
-a {
-	color: #2030ff;
-	text-decoration: none;
+a:link, a:visited{
+  color: #00ACCF;
+  text-decoration: none;
 }
+
+a:active {
+  color: #00C7EF;
+  text-decoration : underline;
+}
+
 
 a:hover {
 	background-color: #ffff00;
+	color: #000;
 	text-decoration: none;
 }
 
-.error {
-	border: 1px solid black;
-	background-color: #f88;
-	font-weight: bold;	
+
+
+.user_login_box {
+	margin-top:-0.4em;
+	border: 1px solid #ccc;
+	float: right;
+	position: absolute;
+	
+	right: 0;
+	padding: 4px;
 }
 
 
 
 
+/**
+ * Layout.
+ */
+
+#header {
+  margin-top: 15px;
+  width: 100%;
+  margin: 0 ;
+  height: 6em;
+  position: relative;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+#main {
+  clear: both;
+  padding-top: 0;
+  text-align: left; 
+}
+
+#footer {
+  clear: both;
+  text-align: center; 
+}
+
+/**
+ * Header Area.
+ */
 
 
+h1#site-name a img {
+  border: none;
+  float: left;
+  margin-bottom: 1px;
+  margin-left: 1px;
+  
+}
+h2#site-slogan {
+  font: 1em; 
+  padding-top: 1px;
+}
+
+/**
+* footer
+*
+*/
 
 .page_footer {
 	position:   absolute;
@@ -32,108 +89,19 @@ a:hover {
 }
 
 
-
-
-.button_container {
-	text-align: right;
-	padding: 5px;
-}
-
-.button_container INPUT {
-	border: 1px solid black;
-	font-size: 10pt;
-}
-
-.user_info {
-	border: 1px solid black;
-	float: right;
-	position: relative;
-	top: -50px;
-	left: -10px;
-	padding: 5px;
-}
-
-/** OLD css *****************************************************************************************/
-
-a:link, a:visited {
-  color: #00ACCF;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-  color: #00C7EF;
-}
-a:active, a.active {
-  color: #00C7EF;
-  text-decoration : underline;
-}
-
-
-
-
-/**
- * Layout.
- */
-
-#header {
-  margin-top: 35px;
-  width: 100%;
-  margin: 0 auto;
-  height: 5em;
-  position: relative;
-  text-align: left;
-   border-bottom: 1px solid #ccc;
-}
-
-
-
-
-
-#footer {
-  clear: both;
-  padding-top: 2em;
-  text-align: center; 
-}
-
-/**
- * Header Area.
- */
-h1#site-name {
-  padding: 0 0 0 0; 
-}
-#header h1#site-name a {
-  color: #00C7F0;
-}
-#header h1#site-name a:hover {
-  color: #00C7F0;
-  text-decoration: none;
-}
-h1#site-name a img {
-  border: none;
-  float: left;
-  margin-top: 1px;
-  margin-left: 1px;
-}
-h2#site-slogan {
-  font: 1em; 
-  padding-top: 1px;
-}
-
-
-
-
 /**
  * banners.
  */
 
 #publi_header{
-	padding-top: 10px;
-	padding-bottom: 5px;
-	margin-top:0;
+	border: 1px solid #000;
+	margin-top:10px;
+	margin-bottom:8px;
+	padding-bottom:0px;
 	margin-right:auto;
 	margin-left:auto;
-	width:740px;
+	width:728px;
+	
 }
-
 
 	

@@ -1,18 +1,13 @@
 <?php
-
 /**
  * index home page view
  */
-
 // Render common HTML header
 echo $this->render('partials/html_header.phtml');
 
-// Render the common page headers
-echo $this->render('partials/login_box.phtml'); 
-
 ?>
 
-
+<div id="main">
    		
    		<? if ( count($this->mensajes) > 0)
    				 {
@@ -23,16 +18,9 @@ echo $this->render('partials/login_box.phtml');
    					echo '</div>';
    				 }
    		?>
-   		
-   	</div>
-
-
-
-<div class="body_container">
-
 	
 	<p>
-		blablalbalbalb
+		blablalbalbalb esto es contenido de id main
 	</p> 
 </div>
 
