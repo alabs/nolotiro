@@ -1,0 +1,37 @@
+<?php
+/**
+ * contact  page
+ */
+$this->page_title = 'Contact form - nolotiro.com';
+// Render common HTML header
+echo $this->render('partials/html_header.phtml');
+
+?>
+
+<div id="default_header_section">
+<h3>Contact form</h3> 
+</div>
+
+<?php if (isset($this->error)): ?>
+	<div class="error">
+		<?= $this->escape($this->error); ?>
+	</div>
+<?php endif; ?>
+
+<div id="main">
+<div class="span-16">
+
+<form action="<?= $this->escape($this->form->getAction()) ?>"
+      method="<?= $this->escape($this->form->getMethod()) ?>">
+	<fieldset>
+	<legend>Please, write your message</legend>
+		
+		<?= $this->form ?>
+		
+	</fieldset>
+	</form>
+
+</div>
+
+</div>
+<?= $this->render('partials/html_footer.phtml'); ?>

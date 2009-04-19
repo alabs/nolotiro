@@ -21,7 +21,7 @@ class UserController extends Zend_Controller_Action
     public function init()
     {
         parent::init();
-        $this->session = Zend_Registry::get('session');
+        
     }
 
     /**
@@ -145,7 +145,7 @@ class UserController extends Zend_Controller_Action
              welcome to nolotiro '.$this->session->username);
           
             
-            $this->_redirect('/user/logout');// redirect to logout action to kill the user logged in (if exists)
+            $this->_redirect('/auth/logout');// redirect to logout action to kill the user logged in (if exists)
         	;
         }else {
         	$this->_helper->_flashMessenger->addMessage('Sorry, register url no valid or expired.');

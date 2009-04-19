@@ -24,7 +24,6 @@ class AuthController extends Zend_Controller_Action
 	/**
      * Log in - show the login form or handle a login request
      * 
-     * @todo Implement real authentication
      */
     public function loginAction()
     {

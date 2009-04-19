@@ -29,20 +29,20 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
     	
-    	
     	$this->view->mensajes = $this->_flashMessenger->getMessages();
         $this->render();
     }
     
     
-    function preDispatch()
-    {
-    $auth = Zend_Auth::getInstance();
-    if (!$auth->hasIdentity()) {
-        //$this->_redirect('auth/login');
-        
-    }
-}
+//    function preDispatch()
+//    {
+//    $auth = Zend_Auth::getInstance();
+//    if (!$auth->hasIdentity()) {
+//        //$this->_redirect('auth/login');
+//        
+//    }
+//    }
+    
     
     
 }
