@@ -22,6 +22,11 @@ set_include_path(NOLOTIRO_PATH_ROOT . PATH_SEPARATOR . get_include_path());
 require_once "Zend/Loader.php";
 Zend_Loader::registerAutoload();
 
+try {
+    $locale = new Zend_Locale('auto');
+} catch (Zend_Locale_Exception $e) {
+    $locale = new Zend_Locale('es');
+}
 
 date_default_timezone_set('Europe/Madrid');
 

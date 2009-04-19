@@ -12,14 +12,14 @@ echo $this->render('partials/html_header.phtml');
 <h3>Login</h3>
 (If you are a new user, please <a href="/user/register" title="user register" >register here</a>) 
 </div>
-<div id="main">
+
 <?php if (isset($this->error)): ?>
 	<div class="error">
 		<?= $this->escape($this->error); ?>
 	</div>
 <?php endif; ?>
 
-
+<div id="main">
 <div class="span-16">
 
 <form action="<?= $this->escape($this->form->getAction()) ?>"
@@ -35,6 +35,9 @@ echo $this->render('partials/html_header.phtml');
 	</fieldset>
 	</form>
 
+</div>
+<div >
+<img alt="demo banner" src="/images/banner_dummy300x250.jpg">
 </div>
 </div>
 <?= $this->render('partials/html_footer.phtml'); ?>

@@ -19,7 +19,8 @@ class IndexController extends Zend_Controller_Action
     {
         parent::init();
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        
+        $this->view->baseUrl = $this->_request->getBaseUrl();
+        $this->view->user = Zend_Auth::getInstance()->getIdentity();
 //        if (!Zend_Registry::get('session')->logged_in) {
 //            $this->_redirect('/user/login');
 //        }
@@ -32,4 +33,16 @@ class IndexController extends Zend_Controller_Action
     	$this->view->mensajes = $this->_flashMessenger->getMessages();
         $this->render();
     }
+    
+    
+    function preDispatch()
+    {
+    $auth = Zend_Auth::getInstance();
+    if (!$auth->hasIdentity()) {
+        //$this->_redirect('auth/login');
+        
+    }
+}
+    
+    
 }

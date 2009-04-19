@@ -19,7 +19,7 @@ class Form_UserLogin extends Zend_Form
         
         
         $this->addElement('text', 'username', array(
-        	'label'      => 'Choose a username:',
+        	'label'      => 'User name:',
     		'filters' => array('StringTrim', 'StringToLower'),
 			'validators' => array(
 			array('StringLength', false, array(3, 20)),

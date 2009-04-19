@@ -40,17 +40,7 @@ class UserController extends Zend_Controller_Action
     }
 
     
-    /**
-     * Log out - delete user information and clear the session, then redirect to
-     * the log in page.
-     */
-    public function logoutAction()
-    {
-        $this->session->logged_in = false;
-        $this->session->username = false;
-        
-        $this->_redirect('/');
-    }
+    
     
     /**
      * register - register a new user into the nolotiro database

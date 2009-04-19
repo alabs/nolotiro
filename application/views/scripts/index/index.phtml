@@ -11,11 +11,7 @@ echo $this->render('partials/html_header.phtml');
 <div id="location_header_section">
 <h3>Madrid</h3>
 </div>
-
-
-<div id="main">
-   		
-   		<? if ( count($this->mensajes) > 0)
+<? if ( count($this->mensajes) > 0)
    				 {
    				    echo '<div class="success">'; 
    					foreach ($this->mensajes as $msg) {
@@ -24,6 +20,8 @@ echo $this->render('partials/html_header.phtml');
    					echo '</div>';
    				 }
    		?>
+
+<div id="main">
 	
 	<p>
 		blablalbalbalb esto es contenido de id main

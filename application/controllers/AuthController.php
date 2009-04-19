@@ -21,7 +21,7 @@ class AuthController extends Zend_Controller_Action
     }
 
     
-/**
+	/**
      * Log in - show the login form or handle a login request
      * 
      * @todo Implement real authentication
@@ -43,39 +43,38 @@ class AuthController extends Zend_Controller_Action
                 $f = new Zend_Filter_StripTags();
                 $username = $f->filter($this->_request->getPost('username'));
                 $password = $f->filter($this->_request->getPost('password'));
-                
-                
-            //DDBB validation
-            // setup Zend_Auth adapter for a database table
-            $dbAdapter = Zend_Registry::get('dbAdapter');
-            $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
-            $authAdapter->setTableName('users');
-            $authAdapter->setIdentityColumn('username');
-            $authAdapter->setCredentialColumn('password');
-            // Set the input credential values to authenticate against
-            $authAdapter->setIdentity($username);
-            $authAdapter->setCredential($password);
-            // do the authentication
-            $auth = Zend_Auth::getInstance();
-            $result = $auth->authenticate($authAdapter);
-            if ($result->isValid()) {
-                // success: store database row to auth's storage
-                // system. (Not the password though!)
-                $data = $authAdapter->getResultRowObject(null,
-                        'password');
-                $auth->getStorage()->write($data);
-                
-                Zend_Session::regenerateId();
-                $this->_helper->_flashMessenger->addMessage('You are now logged in, '.$username);
-                $this->_redirect('/');
-            } else {
-                // failure: clear database row from session
-                $view = $this->initView();                
-                $view->error = 'Wrong user name or password, please try again';
-                
-                 
-            }            
-                
+                    
+                //DDBB validation
+                // setup Zend_Auth adapter for a database table
+                $dbAdapter = Zend_Registry::get('dbAdapter');
+                $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
+                $authAdapter->setTableName('users');
+                $authAdapter->setIdentityColumn('username');
+                $authAdapter->setCredentialColumn('password');
+                // Set the input credential values to authenticate against
+                $authAdapter->setIdentity($username);
+                $authAdapter->setCredential(md5($password));
+                // do the authentication
+                $auth = Zend_Auth::getInstance();
+                $result = $auth->authenticate($authAdapter);
+                if ($result->isValid()) {
+                    // success: store database row to auth's storage
+                    // system. (Not the password though!)
+                    $data = $authAdapter->getResultRowObject(null,
+                            'password');
+                    $auth->getStorage()->write($data);
+                    
+                    //Zend_Session::regenerateId();
+                    $this->_helper->_flashMessenger->addMessage('You are now logged in, '.$username);
+                    $this->_redirect('/');
+                } else {
+                    // failure: clear database row from session
+                    $view = $this->initView();                
+                    $view->error = 'Wrong user name or password, please try again';
+                    
+                     
+                }            
+                    
                 //_redirect('/');
             }
         }
@@ -84,6 +83,22 @@ class AuthController extends Zend_Controller_Action
                
     
     }
+    
+    
+    
+	/**
+     * Log out - delete user information and clear the session, then redirect to
+     * the log in page.
+     */
+    public function logoutAction()
+    {
+        Zend_Auth::getInstance()->clearIdentity();
+        //$this->session->logged_in = false;
+        //$this->session->username = false;
+        
+        $this->_redirect('/auth/login');
+    }
+    
     
 	/**
 	 * 
