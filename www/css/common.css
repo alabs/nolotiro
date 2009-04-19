@@ -20,15 +20,23 @@ a:hover {
 
 .user_login_box {
 	margin-top:-0.4em;
-	border: 1px solid #ccc;
+	border: 0px solid #ccc;
 	float: right;
 	position: absolute;
-	
+	background-color:#fff;
 	right: 0;
 	padding: 4px;
 }
 
-
+.select_language_box {
+	margin-top:-0.4em;
+	border: 1px solid #ccc;
+	float: right;
+	position: absolute;
+	background-color:#fff;
+	right: 30;
+	padding: 4px;
+}
 
 
 /**
@@ -46,7 +54,7 @@ a:hover {
 }
 
 #main {
-  padding-top: 10;
+  padding-top: 20px;
   text-align: left; 
 }
 

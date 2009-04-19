@@ -12,7 +12,7 @@
 class Model_User
 
 {  
-    /** Model_Table_Guestbook */
+    /** Model_Table_User */
     protected $_table;
 
     /**

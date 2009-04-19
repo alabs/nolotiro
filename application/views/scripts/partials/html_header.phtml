@@ -8,10 +8,10 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
   <head>
-    <title><?= isset($this->page_title) ? $this->page_title : 'Nolotiro.com' ?></title>
+    <title><?= isset($this->page_title) ? $this->page_title : 'nolotiro.com' ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="copyright" content="daniel remeseiro" />
-	<meta name="DC.Title" content="nolotiro.com | no lo tiro, te lo doy" />
+	<meta name="DC.Title" content="<?= isset($this->page_title) ? $this->page_title : 'nolotiro.com' ?>" />
 	<meta name="robots" content="index,follow" />
 
 	<link rel="shortcut icon" href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/images/favicon.ico" type="image/x-icon" />
@@ -42,9 +42,9 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 $user = Zend_Registry::get('session')->username;
 if (!Zend_Registry::get('session')->logged_in) {
 	echo'<a href="'.Zend_Controller_Front::getInstance()->getBaseUrl().'/user/register">new user</a> or ';
-	echo'<a href="'.Zend_Controller_Front::getInstance()->getBaseUrl().'/user/login">login</a>';
+	echo'<a href="'.Zend_Controller_Front::getInstance()->getBaseUrl().'/auth/login">login</a>';
 }else {
-	echo 'hello, '.$this->escape($user).' | '.'<a href="'.Zend_Controller_Front::getInstance()->getBaseUrl().'/user/logout">Logout</a>';
+	echo 'hello, '.$this->escape($user).' | '.'<a href="'.Zend_Controller_Front::getInstance()->getBaseUrl().'/auth/logout">Logout</a>';
 }
 
 ?>

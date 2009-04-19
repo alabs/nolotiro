@@ -39,43 +39,7 @@ class UserController extends Zend_Controller_Action
         }
     }
 
-    /**
-     * Log in - show the login form or handle a login request
-     * 
-     * @todo Implement real authentication
-     */
-    public function loginAction()
-    {
-        if ($this->getRequest()->getMethod() != 'POST') {
-            // Not a POST request, show log-in form
-            $this->render();
-        
-        } else {
-            // Handle log-in form
-            $user = $this->getRequest()->getParam('user');
-            $pass = $this->getRequest()->getParam('password');
-            
-            // TODO Fix here...
-            if ($user == $pass) {
-                $this->session->logged_in = true;
-                $this->session->username = $user;
-                
-                Zend_Session::regenerateId();
-                $this->_helper->_flashMessenger->addMessage('You are now logged in, '.$user);
-                
-                $this->_redirect('/');
-                
-            // Wrong user name / password
-            } else {
-                $view = $this->initView();
-                $view->user = $user;
-                $view->error = 'Wrong user name or password, please try again';
-                
-                $this->render();
-            }
-        }
-    }
-
+    
     /**
      * Log out - delete user information and clear the session, then redirect to
      * the log in page.
@@ -169,6 +133,7 @@ class UserController extends Zend_Controller_Action
         return $form;
     }
     
+	
 
 	/**
      * Validate - check the token generated  sent by mail by registerAction, then redirect to
@@ -179,7 +144,7 @@ class UserController extends Zend_Controller_Action
     public function validateAction()
     {
         $token = $this->_request->getParam('t');//the token
-        //http://localhost/<controller>/<action>/param/value/param2/value2/etc...
+        //http://nolotiro.com/user/validate/token234234234234234234
         
         
         if (!is_null($token)) {

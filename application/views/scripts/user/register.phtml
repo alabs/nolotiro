@@ -1,20 +1,17 @@
 <?php
 //register page
+$this->page_title = 'Register - nolotiro.com';
 //render common HTML header
 echo $this->render('partials/html_header.phtml');
 ?>
 
 <div id="default_header_section">
 <h3>New user</h3>
-(If you already are a registered user, please <a href="/user/login" title="user login" >login here</a>)
-
+(If you already are a registered user, please <a href="/auth/login" title="user login" >login here</a>)
 </div>
 
-<?php 
-//echo  $this->form;
-?>
-
-<div id="main" class="span-16">
+<div id="main">
+<div  class="span-16">
 
 
 <form action="<?= $this->escape($this->form->getAction()) ?>"
@@ -35,9 +32,10 @@ echo $this->render('partials/html_header.phtml');
 </fieldset>
 </form>
 
-
 </div>
-
+<div >
+<img alt="demo banner" src="/images/banner_dummy300x250.jpg">
+</div>
 
 
 <?//render the default footer
