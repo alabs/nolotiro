@@ -119,7 +119,6 @@ class UserController extends Zend_Controller_Action
     {
         require_once APPLICATION_PATH . '/forms/UserRegister.php';
         $form = new Form_UserRegister();
-        $form->setAction($this->_helper->url('register'));
         return $form;
     }
     

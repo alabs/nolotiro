@@ -50,7 +50,7 @@ class Form_UserRegister extends Zend_Form
 		));
 		
 		$this->addElement('captcha', 'captcha', array(
-            'label'      => 'Please enter the 4 letters:',
+            'label'      => 'Please, insert the 4 characters shown:',
             'required'   => true,
             'captcha'    => array('captcha' => 'Image',
 								 'wordLen' => 4,

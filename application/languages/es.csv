@@ -9,6 +9,8 @@ developers;desarrolladores
 contact;contacto
 
 #contact
+Value is required and can't be empty;Este campo no puede estar vacío
+Captcha value is wrong;Los cuatro carácteres no son correctos
 Please, write your message;Por favor, escribe tu mensaje
 Your email:;Tu email:
 Your message:;Tu mensaje:

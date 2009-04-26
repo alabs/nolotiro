@@ -110,7 +110,6 @@ class AuthController extends Zend_Controller_Action
     {
         require_once APPLICATION_PATH . '/forms/UserLogin.php';
         $form = new Form_UserLogin();
-        $form->setAction($this->_helper->url('login'));
         return $form;
     }
 
