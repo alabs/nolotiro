@@ -38,7 +38,7 @@ class ContactController extends Zend_Controller_Action
  		        $user_info .= ' '.$_SERVER['HTTP_USER_AGENT'].'<br />';
                 
  		        $mail = new Zend_Mail();
-                $mail->setBodyHtml($user_info.$message);
+                $mail->setBodyText($user_info.$message);
                 $mail->setFrom($email);
                 $mail->addTo('daniel.remeseiro@gmail.com', 'Daniel Remeseiro');
                 $mail->setSubject('nolotiro.com - contact  from '.$email);

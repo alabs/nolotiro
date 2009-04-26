@@ -1,9 +1,7 @@
 <?php
-
 /**
  * Nolotiro index controller - the default controller, showing the home page.
  * 
- * @version $Id: IndexController.php,v 1.3 2007-12-04 16:54:49 seva Exp $
  */
 
 

@@ -30,11 +30,9 @@ a:hover {
 
 .select_language_box {
 	margin-top:-0.4em;
-	border: 1px solid #ccc;
-	float: right;
 	position: absolute;
 	background-color:#fff;
-	right: 30;
+	right: 110px;
 	padding: 4px;
 }
 

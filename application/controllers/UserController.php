@@ -25,18 +25,18 @@ class UserController extends Zend_Controller_Action
     }
 
     /**
-     * Default action - if logged in, log out. If logged out, log in.
+     * Default action - if logged in, go to profile. If logged out, go to register.
      *
      */
     public function indexAction()
     {
-    	
-    	
-        if ($this->session->authenticated) {
-            $this->_forward('logout');
-        } else {
-            $this->_forward('login');
-        }
+    	//by now just redir to /
+    	$this->_redirect('/');
+//        if ($this->session->authenticated) {
+//            $this->_forward('profile');
+//        } else {
+//            $this->_forward('register');
+//        }
     }
 
     
@@ -134,7 +134,7 @@ class UserController extends Zend_Controller_Action
     public function validateAction()
     {
         $token = $this->_request->getParam('t');//the token
-        //http://nolotiro.com/user/validate/token234234234234234234
+        //http://nolotiro.com/user/validate/t/1234234234234234234
         
         
         if (!is_null($token)) {

@@ -30,11 +30,17 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 <body>
 <div class="container">
 
-    <div id="header">
+<div id="header">
     	
+<div class="select_language_box">
+<select name="site_language_code_select" id="site_language_code_select">
+<option value="en" id="en">English</option>
+<option value="es" id="es">Español</option>
+<option selected="selected" value="es" id="es">Español</option>
+</select>
+</div>
 
-
-<div class="user_login_box">
+	<div class="user_login_box">
 <?php
 /**
  * Nolotiro - login box partial view 
@@ -49,12 +55,12 @@ if (!$this->user) {
 }
 
 ?>
-</div>
+	</div>
     	
     	
     	
-    	<h1 id="site-name"><a href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/" title="nolotiro.com home">      
-              <img src="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/images/nolotiro_logo.png" alt="Nolotiro.com logo" id="logo" />nolotiro.com</a>
+    	<h1 id="site-name"><a href="<?=$this->baseUrl; ?>/" title="nolotiro.com home">      
+              <img src="<?=$this->baseUrl; ?>/images/nolotiro_logo.png" alt="Nolotiro.com logo" id="logo" />nolotiro.com</a>
     	    </h1>
     	<h2 id='site-slogan'>&nbsp;no lo tiro, te lo doy (sin condiciones)</h2>
     	

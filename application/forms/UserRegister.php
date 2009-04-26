@@ -26,14 +26,13 @@ class Form_UserRegister extends Zend_Form
             )
         ));
         
-        $this->addElement('text', 'email2', array(
-            'label'      => 'Your email again:',
-            'required'   => true,
-            'filters'    => array('StringTrim'),
-            'validators' => array(
-                'EmailAddress',
-            )
-        ));
+//        $emailcheck = $_POST['email'];
+//        $this->addElement('text', 'email2', array(
+//            'label'      => 'Your email again:',
+//            'required'   => true,
+//            'filters'    => array('StringTrim'),
+//            'validators' => array('Identical', $emailcheck)
+//        ));
         
         $this->addElement('text', 'username', array(
         	'label'      => 'Choose a username:',

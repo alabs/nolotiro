@@ -22,13 +22,10 @@ set_include_path(NOLOTIRO_PATH_ROOT . PATH_SEPARATOR . get_include_path());
 require_once "Zend/Loader.php";
 Zend_Loader::registerAutoload();
 
-try {
-    $locale = new Zend_Locale('auto');
-} catch (Zend_Locale_Exception $e) {
-    $locale = new Zend_Locale('es');
-}
 
-date_default_timezone_set('Europe/Madrid');
+//date_default_timezone_set('Europe/Madrid');
+
+
 
 // Load Configuration
 $config = new Zend_Config_Ini(NOLOTIRO_PATH_ROOT . '/config/nolotiro.ini', 'dev');
@@ -37,6 +34,9 @@ Zend_Registry::set('config', $config);
 // Start Session
 $session = new Zend_Session_Namespace('Nolotiro');
 Zend_Registry::set('session', $session);
+
+
+
 
 //Setup the ddbb
 $dbAdapter = Zend_Db::factory($config->database);
@@ -54,9 +54,32 @@ unset($dbAdapter, $registry, $config);
 try {
 	$front = Zend_Controller_Front::getInstance();
 	$front->throwExceptions(true);
+    
 	$front->setControllerDirectory(NOLOTIRO_PATH_ROOT . '/application/controllers');
+    //baseurl useful for fixed paths: css, images, etc
 	$front->setBaseUrl($config->www->baseurl);
-	$front->dispatch();
+    
+	//load the language plugin
+	$front->registerPlugin(new Nolotiro_Controller_Plugin_Language());
+    
+    //setting the language route url
+    $route = new Zend_Controller_Router_Route(
+			':language/:controller/:action/*',
+				array(
+					'language'   => 'en',
+					'module'	 => 'default',
+					'controller' => 'index',
+					'action'	 => 'index'
+				)
+			);
+
+    $router = $front->getRouter();
+    $router->addRoute('default', $route);
+    //$router->setGlobalParam('language', 'en');
+    $front->setRouter($router);
+	
+    
+    $front->dispatch();
 
 // Handle controller exceptions (usually 404)
 } catch (Zend_Controller_Exception $e) {
