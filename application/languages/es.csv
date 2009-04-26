@@ -1,3 +1,23 @@
-﻿#Example csv file
-message1;Nachricht1
-message2;Nachricht2
+﻿#header
+new user;nuevo usuario
+login;acceder
+
+#footer
+developers;Desarrolladores
+contact;contacto
+
+#contact
+Please, write your message;Por favor, escribe tu mensaje
+Your email:;Tu email:
+Your message:;Tu mensaje:
+Please, insert the 4 characters shown:;Por favor, introduce los cuatro caracteres:
+Send;Enviar
+Contact form;Formulario de contacto
+
+#login
+Login;Acceder
+(If you are a new user, please;(Si eres un nuevo usuario, por favor
+register here;regístrate aquí
+Please, insert your user and password;Por favor, introduce tu usuario y contraseña
+User name:;Nombre de usuario:
+Password:;Contraseña:

@@ -14,11 +14,11 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 	<meta name="DC.Title" content="<?= isset($this->page_title) ? $this->page_title : 'nolotiro.com' ?>" />
 	<meta name="robots" content="index,follow" />
 
-	<link rel="shortcut icon" href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/images/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/css/common.css" type="text/css" />
-	<link rel="stylesheet" href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/css/blueprint/forms.css" type="text/css" />
-	<link rel="stylesheet" href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/css/blueprint/screen.css" type="text/css" media="screen, projection" />
-  	<link rel="stylesheet" href="<?= Zend_Controller_Front::getInstance()->getBaseUrl() ?>/css/blueprint/print.css" type="text/css" media="print" /> 
+	<link rel="shortcut icon" href="<?=$this->baseUrl ?>/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="<?=$this->baseUrl ?>/css/common.css" type="text/css" />
+	<link rel="stylesheet" href="<?=$this->baseUrl ?>/css/blueprint/forms.css" type="text/css" />
+	<link rel="stylesheet" href="<?=$this->baseUrl ?>/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+  	<link rel="stylesheet" href="<?=$this->baseUrl ?>/css/blueprint/print.css" type="text/css" media="print" /> 
   	<!--[if IE]>
     <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection" />
   	<![endif]-->
@@ -47,9 +47,10 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
  * 
  */
 //$user = Zend_Registry::get('session')->username;
+echo 'language= '.$_COOKIE["lang"].'<br>';
 if (!$this->user) {
-	echo'<a href="'.$this->baseUrl.'/user/register">new user</a> or ';
-	echo'<a href="'.$this->baseUrl.'/auth/login">login</a>';
+	echo'<a href="'.$this->baseUrl.'user/register">new user</a> or ';
+	echo'<a href="'.$this->baseUrl.'auth/login">login</a>';
 }else {
 	echo 'hello, <b><a href="'.$this->baseUrl.'/user/profile/'.$this->escape($this->user->username).'">'.$this->escape($this->user->username).'</a></b> | '.'<a href="'.$this->baseUrl.'/auth/logout">logout</a>';
 }
@@ -59,7 +60,7 @@ if (!$this->user) {
     	
     	
     	
-    	<h1 id="site-name"><a href="<?=$this->baseUrl; ?>/" title="nolotiro.com home">      
+    	<h1 id="site-name"><a href="<?=$this->baseUrl.'/'; ?>" title="nolotiro.com home">      
               <img src="<?=$this->baseUrl; ?>/images/nolotiro_logo.png" alt="Nolotiro.com logo" id="logo" />nolotiro.com</a>
     	    </h1>
     	<h2 id='site-slogan'>&nbsp;no lo tiro, te lo doy (sin condiciones)</h2>
