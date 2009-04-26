@@ -1,13 +1,14 @@
 <?php
 //register page
-$this->page_title = 'Register - nolotiro.com';
+$this->page_title = $this->translate('Register').'nolotiro.com';
 //render common HTML header
 echo $this->render('partials/html_header.phtml');
 ?>
 
 <div id="default_header_section">
-<h3>New user</h3>
-(If you already are a registered user, please <a href="/auth/login" title="user login" >login here</a>)
+<h3><?=$this->translate('New user'); ?></h3>
+<?=$this->translate('(If you already are a registered user, please'); ?>&nbsp;
+<a href="/auth/login" title="user login" ><?=$this->translate('login here'); ?></a>)
 </div>
 
 <div id="main">
@@ -18,13 +19,13 @@ echo $this->render('partials/html_header.phtml');
       method="<?= $this->escape($this->form->getMethod()) ?>">
 
 <fieldset>
-    <legend>Please, fill this form to be a nolotiro's member</legend>
+    <legend><?=$this->translate('Please, fill this form to be a nolotiro member'); ?></legend>
 	<p>
-	<?= $this->form->username ?>
+	<?=$this->form->username ?>
     </p>
     
-    <?= $this->form->email ?>
-    <?= $this->form->email2 ?>
+    <?=$this->form->email ?>
+    <?=$this->form->email2 ?>
     <?= $this->form->captcha ?>
     <?= $this->form->terms ?>
 

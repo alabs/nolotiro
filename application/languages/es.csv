@@ -1,9 +1,11 @@
 ﻿#header
 new user;nuevo usuario
+or;o
 login;acceder
 
 #footer
-developers;Desarrolladores
+about;acerca de
+developers;desarrolladores
 contact;contacto
 
 #contact
@@ -21,3 +23,15 @@ register here;regístrate aquí
 Please, insert your user and password;Por favor, introduce tu usuario y contraseña
 User name:;Nombre de usuario:
 Password:;Contraseña:
+
+#user/register
+New user;Nuevo usuario
+Please, fill this form to be a nolotiro member;Por favor, rellena este formulario para ser miembro de nolotiro
+(If you already are a registered user, please;(Si ya eres un usuario registrado, por favor
+login here;accede aquí
+Choose a username:;Elige un nombre de usuario:
+Register;Regístrate
+
+
+
+

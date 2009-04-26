@@ -49,8 +49,8 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 //$user = Zend_Registry::get('session')->username;
 echo 'language= '.$_COOKIE["lang"].'<br>';
 if (!$this->user) {
-	echo'<a href="'.$this->baseUrl.'user/register">new user</a> or ';
-	echo'<a href="'.$this->baseUrl.'auth/login">login</a>';
+	echo'<a href="'.$this->baseUrl.'user/register">'.$this->translate('new user').'</a> '.$this->translate('or').' ';
+	echo'<a href="'.$this->baseUrl.'auth/login">'.$this->translate('login').'</a>';
 }else {
 	echo 'hello, <b><a href="'.$this->baseUrl.'/user/profile/'.$this->escape($this->user->username).'">'.$this->escape($this->user->username).'</a></b> | '.'<a href="'.$this->baseUrl.'/auth/logout">logout</a>';
 }

@@ -60,14 +60,13 @@ try {
 	$front->setBaseUrl($config->www->baseurl);
     
 	//load the language plugin
-	
 	$front->registerPlugin(new Nolotiro_Controller_Plugin_Language());
     
     //setting the language route url
     $route = new Zend_Controller_Router_Route(
 			':language/:controller/:action/*',
 				array(
-					'language'   => $language,
+					'language'   => 'es',
 					'module'	 => 'default',
 					'controller' => 'index',
 					'action'	 => 'index'
@@ -75,8 +74,10 @@ try {
 			);
 
     $router = $front->getRouter();
+    // Remove any default routes
+    $router->removeDefaultRoutes();
     $router->addRoute('default', $route);
-    $router->setGlobalParam('language', $language);
+    
     $front->setRouter($router);
 	
     

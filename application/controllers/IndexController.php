@@ -22,7 +22,7 @@ class IndexController extends Zend_Controller_Action
         
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
         
-        $this->_forward($language);
+        //$this->_forward($language);
 //        if (!Zend_Registry::get('session')->logged_in) {
 //            $this->_redirect('/user/login');
 //        }
