@@ -9,7 +9,8 @@ class AuthController extends Zend_Controller_Action
     public function init()
     {
         $this->initView();
-        $this->view->baseUrl = $this->_request->getBaseUrl();
+        //$this->view->baseUrl = $this->_request->getBaseUrl();
+        $this->view->baseUrl = Zend_Controller_Front::getParam($route);
     }
         
 	/**
@@ -95,7 +96,7 @@ class AuthController extends Zend_Controller_Action
         //$this->session->logged_in = false;
         //$this->session->username = false;
         
-        $this->_redirect('/auth/login');
+        $this->_redirect('/');
     }
     
     

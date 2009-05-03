@@ -31,6 +31,7 @@ class Nolotiro_Controller_Plugin_Language extends Zend_Controller_Plugin_Abstrac
 					 $language = ($translate->isAvailable($locale->getLanguage())) ? $locale->getLanguage() : 'es';
 				}
 		if (!$translate->isAvailable($language)) {
+		    
 			throw new Zend_Controller_Action_Exception('This language is not available (yet)',404);
 		} else {
 	        $locale->setLocale($language);
@@ -39,6 +40,9 @@ class Nolotiro_Controller_Plugin_Language extends Zend_Controller_Plugin_Abstrac
 			setcookie('lang', $locale->getLanguage(), null, '/');
 			Zend_Registry::set('Zend_Locale', $locale);
 			Zend_Registry::set('Zend_Translate', $translate);
+			
+			
+			
 			    
 			
 		}

@@ -1,7 +1,13 @@
+<?php 
+
+//TODO merge header and footer on a main template
+$locale = Zend_Registry::get("Zend_Locale"); 
+$lang = $locale->getLanguage();
+?>
 
 <hr />
 <div id="footer"> 
-	  	<a href='/about'><?=$this->translate('about'); ?></a> | <a href='/blog'>blog</a> | <a href='http://twitter.com/nolotiro'>twitter</a> | <a href='/contact'><?=$this->translate('contact'); ?></a> |   <a href='http://code.google.com/p/nolotiro/'><?=$this->translate('developers'); ?></a>
+	  	<a href='/<?=$this->baseUrl.$lang ?>/about'><?=$this->translate('about'); ?></a> | <a href='/blog'>blog</a> | <a href='http://twitter.com/nolotiro'>twitter</a> | <a href='/<?=$this->baseUrl.$lang ?>/contact'><?=$this->translate('contact'); ?></a> |   <a href='http://code.google.com/p/nolotiro/'><?=$this->translate('developers'); ?></a>
 	</div>
 </div><!-- /end of container -->
 	

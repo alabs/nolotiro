@@ -21,6 +21,7 @@ class UserController extends Zend_Controller_Action
     public function init()
     {
         parent::init();
+        $this->view->baseUrl = $this->_request->getBaseUrl();
         
     }
 

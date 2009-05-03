@@ -17,15 +17,13 @@ set_include_path(APPLICATION_PATH . '/../library' . PATH_SEPARATOR . get_include
 define('NOLOTIRO_PATH_ROOT', realpath(dirname(__FILE__) . '/../'));
 set_include_path(NOLOTIRO_PATH_ROOT . PATH_SEPARATOR . get_include_path());
 
-
-//Enabling the autoload classes
-require_once "Zend/Loader.php";
-Zend_Loader::registerAutoload();
+//1.8 autoloader way 
+require_once 'Zend/Loader/Autoloader.php';
+$autoloader = Zend_Loader_Autoloader::getInstance();
+$autoloader->registerNamespace(array('Zend_', 'Nolotiro_'));
 
 
 //date_default_timezone_set('Europe/Madrid');
-
-
 
 // Load Configuration
 $config = new Zend_Config_Ini(NOLOTIRO_PATH_ROOT . '/config/nolotiro.ini', 'dev');
@@ -34,7 +32,6 @@ Zend_Registry::set('config', $config);
 // Start Session
 $session = new Zend_Session_Namespace('Nolotiro');
 Zend_Registry::set('session', $session);
-
 
 
 
@@ -49,6 +46,7 @@ $registry->dbAdapter     = $dbAdapter;
 
 unset($dbAdapter, $registry, $config);
 
+	
 
 // Set up the front controller and dispatch
 try {
@@ -56,12 +54,20 @@ try {
 	$front->throwExceptions(true);
     
 	$front->setControllerDirectory(NOLOTIRO_PATH_ROOT . '/application/controllers');
-    //baseurl useful for fixed paths: css, images, etc
-	$front->setBaseUrl($config->www->baseurl);
     
+ //baseurl useful for fixed paths: css, images, etc
+	//$front->setBaseUrl($config->www->baseurl);
+    
+//    if (isset($_COOKIE['language'])) {
+//    	
+//        $front->setBaseUrl($config->www->baseurl.'es');
+//    } else {
+//    	$front->setBaseUrl('en');;
+//    }
 	//load the language plugin
 	$front->registerPlugin(new Nolotiro_Controller_Plugin_Language());
-    
+
+	
     //setting the language route url
     $route = new Zend_Controller_Router_Route(
 			':language/:controller/:action/*',
@@ -80,6 +86,10 @@ try {
     
     $front->setRouter($router);
 	
+    //$front->setBaseUrl('es/'.$config->www->baseurl); 
+   
+    
+    
     
     $front->dispatch();
 

@@ -65,7 +65,7 @@ class ContactController extends Zend_Controller_Action
     {
         require_once APPLICATION_PATH . '/forms/Contact.php';
         $form = new Form_Contact();
-        $form->setAction($this->_helper->url(''));
+        //$form->setAction($this->_helper->url(''));
         return $form;
     }
 
