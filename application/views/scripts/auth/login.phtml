@@ -11,7 +11,7 @@ echo $this->render('partials/html_header.phtml');
 <div id="default_header_section">
 <h3><?=$this->translate('Login'); ?></h3>
 <?=$this->translate('(If you are a new user, please'); ?>
-&nbsp;<a href="/user/register" title="user register" ><?=$this->translate('register here'); ?></a>) 
+&nbsp;<a href="<?=$lang; ?>/user/register" title="user register" ><?=$this->translate('register here'); ?></a>) 
 </div>
 
 <?php if (isset($this->error)): ?>

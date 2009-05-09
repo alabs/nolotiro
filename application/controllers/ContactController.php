@@ -9,7 +9,8 @@ class ContactController extends Zend_Controller_Action
     public function init()
     {
         $this->initView();
-        $this->view->baseUrl = $this->_request->getBaseUrl();
+        //$this->view->baseUrl = $this->_request->getBaseUrl();
+        $this->view->baseUrl = Zend_Controller_Front::getParam($route);
     }
         
 	/**
@@ -34,7 +35,9 @@ class ContactController extends Zend_Controller_Action
                 $email = $f->filter($this->_request->getPost('email'));
                 $message = $f->filter(utf8_decode($this->_request->getPost('message')));
                 
-                $user_info = $_SERVER['REMOTE_ADDR'];
+                //get ht username if its nolotiro user
+                $user_info = $this->view->user->username;
+                $user_info .= $_SERVER['REMOTE_ADDR'];
  		        $user_info .= ' '.$_SERVER['HTTP_USER_AGENT'].'<br />';
                 
  		        $mail = new Zend_Mail();
@@ -44,7 +47,7 @@ class ContactController extends Zend_Controller_Action
                 $mail->setSubject('nolotiro.com - contact  from '.$email);
                 $mail->send();
                       
-                $this->_helper->_flashMessenger->addMessage('Message sent successfully!');
+                $this->_helper->_flashMessenger->addMessage($this->view->translate('Message sent successfully!'));
                 $this->_redirect('/');    
                 
             }

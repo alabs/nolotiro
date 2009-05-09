@@ -65,12 +65,12 @@ class AuthController extends Zend_Controller_Action
                     $auth->getStorage()->write($data);
                     
                     //Zend_Session::regenerateId();
-                    $this->_helper->_flashMessenger->addMessage('You are now logged in, '.$username);
+                    $this->_helper->_flashMessenger->addMessage($this->view->translate('You are now logged in, ').$username);
                     $this->_redirect('/');
                 } else {
                     // failure: clear database row from session
-                    $view = $this->initView();                
-                    $view->error = 'Wrong user name or password, please try again';
+                    $view = $this->initView();
+                    $view->error = $this->view->translate('Wrong user name or password, please try again');
                     
                      
                 }            

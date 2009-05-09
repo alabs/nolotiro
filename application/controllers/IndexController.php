@@ -19,8 +19,8 @@ class IndexController extends Zend_Controller_Action
         
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
          
-        $this->view->baseUrl = $this->_request->getBaseUrl();
-        
+        //$this->view->baseUrl = $this->_request->getBaseUrl();
+        $this->view->baseUrl = Zend_Controller_Front::getParam($route);
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
         
         //$this->_forward($language);

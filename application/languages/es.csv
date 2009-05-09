@@ -1,6 +1,9 @@
 ﻿#header
+#no lo tiro, te lo doy (sin condiciones);no lo tiro, te lo doy (sin condiciones)
 new user;nuevo usuario
 or;o
+hello,;hola,
+logout;salir
 login;acceder
 
 #footer
@@ -9,6 +12,14 @@ developers;desarrolladores
 contact;contacto
 
 #contact
+'%value%' is not a valid email address in the basic format local-part@hostname;'%value%' no es una dirección de correo válida con el formato: usuario@ejemplo.com
+'%hostname%' is not a valid hostname for email address '%value%';'%hostname%' no es nombre correcto de dominio para la dirección de correo '%value%'
+'%value%' appears to be a local network name but local network names are not allowed;'%value%' parece ser una dirección de red local
+'%value%' does not match the expected structure for a DNS hostname;'%value%' no concide con la estructura requerida para un nombre de dominio DNS
+'%value%' appears to be a DNS hostname but cannot match TLD against known list; '%value%' parece ser un nombre de dominio pero no coincide con ningun TLD conocido
+Message sent successfully!;Tu mensaje se ha enviado correctamente.
+
+
 Value is required and can't be empty;Este campo no puede estar vacío
 Captcha value is wrong;Los cuatro carácteres no son correctos
 Please, write your message;Por favor, escribe tu mensaje
@@ -22,9 +33,12 @@ Contact form;Formulario de contacto
 Login;Acceder
 (If you are a new user, please;(Si eres un nuevo usuario, por favor
 register here;regístrate aquí
-Please, insert your user and password;Por favor, introduce tu usuario y contraseña
+Please, insert your user and password;Por favor, introduce tu nombre de usuario y contraseña
 User name:;Nombre de usuario:
 Password:;Contraseña:
+'%value%' is less than %min% characters long; Este campo debe contener %min% ó mas caracteres
+You are now logged in, ; Ahora estás logeado 
+Wrong user name or password, please try again;Nombre de usuario o contraseña errónea, por favor, inténtalo de nuevo.
 
 #user/register
 New user;Nuevo usuario

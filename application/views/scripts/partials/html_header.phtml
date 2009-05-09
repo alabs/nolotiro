@@ -14,11 +14,11 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 	<meta name="DC.Title" content="<?= isset($this->page_title) ? $this->page_title : 'nolotiro.com' ?>" />
 	<meta name="robots" content="index,follow" />
 
-	<link rel="shortcut icon" href="<?=Zend_Controller_Front::getInstance()->getBaseUrl() ?>/images/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="<?=Zend_Controller_Front::getInstance()->getBaseUrl() ?>/css/common.css" type="text/css" />
-	<link rel="stylesheet" href="<?=Zend_Controller_Front::getInstance()->getBaseUrl() ?>/css/blueprint/forms.css" type="text/css" />
-	<link rel="stylesheet" href="<?=Zend_Controller_Front::getInstance()->getBaseUrl() ?>/css/blueprint/screen.css" type="text/css" media="screen, projection" />
-  	<link rel="stylesheet" href="<?=Zend_Controller_Front::getInstance()->getBaseUrl() ?>/css/blueprint/print.css" type="text/css" media="print" /> 
+	<link rel="shortcut icon" href="<?=$this->baseUrl ?>/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="<?$this->baseUrl ?>/css/common.css" type="text/css" />
+	<link rel="stylesheet" href="<?$this->baseUrl ?>/css/blueprint/forms.css" type="text/css" />
+	<link rel="stylesheet" href="<?$this->baseUrl ?>/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+  	<link rel="stylesheet" href="<?$this->baseUrl ?>/css/blueprint/print.css" type="text/css" media="print" /> 
   	<!--[if IE]>
     <link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection" />
   	<![endif]-->
@@ -37,26 +37,23 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
  * Nolotiro - login box partial view 
  */
 $locale = Zend_Registry::get("Zend_Locale"); 
-$lang = $locale->getLanguage();
-//echo '<pre>';
-//var_dump(Zend_Registry::get('Zend_Locale'));
-//echo '</pre>';
+$this->lang = $locale->getLanguage();
 ?>
   	
 <div class="select_language_box">
 <select name="site_language_code_select" id="site_language_code_select">
-<option <?= $lang== 'en' ? 'selected="selected"' : '';?> value="<?=$this->baseUrl.'en' ?>" id="en">English</option>
-<option <?= $lang== 'es' ? 'selected="selected"' : '';?> value="<?=$this->baseUrl.'es' ?>" id="es">Español</option>
+<option <?= $this->lang== 'en' ? 'selected="selected"' : '';?> value="<?=$this->baseUrl.'en' ?>" id="en">English</option>
+<option <?= $this->lang== 'es' ? 'selected="selected"' : '';?> value="<?=$this->baseUrl.'es' ?>" id="es">Español</option>
 </select>
 </div>
 
 	<div class="user_login_box">
 <?php
 if (!$this->user) {
-	echo'<a href="/'.$this->baseUrl.$lang.'/user/register">'.$this->translate('new user').'</a> '.$this->translate('or').' ';
-	echo'<a href="/'.$this->baseUrl.$lang.'/auth/login">'.$this->translate('login').'</a>';
+	echo'<a href="/'.$this->baseUrl.$this->lang.'/user/register">'.$this->translate('new user').'</a> '.$this->translate('or').' ';
+	echo'<a href="/'.$this->baseUrl.$this->lang.'/auth/login">'.$this->translate('login').'</a>';
 }else {
-	echo 'hello, <b><a href="'.$this->baseUrl.$lang.'/user/profile/'.$this->escape($this->user->username).'">'.$this->escape($this->user->username).'</a></b> | '.'<a href="'.$this->baseUrl.$lang.'/auth/logout">logout</a>';
+	echo $this->translate('hello,').'<b>&nbsp;<a href="'.$this->baseUrl.$this->lang.'/user/profile/'.$this->escape($this->user->username).'">'.$this->escape($this->user->username).'</a></b> | '.'<a href="'.$this->baseUrl.$this->lang.'/auth/logout">'.$this->translate('logout').'</a>';
 }
 
 ?>
@@ -64,10 +61,10 @@ if (!$this->user) {
     	
     	
     	
-    	<h1 id="site-name"><a href="/<?=$lang ?>" title="nolotiro.com home">      
+    	<h1 id="site-name"><a href="/<?=$this->lang ?>" title="nolotiro.com home">      
               <img src="<?=Zend_Controller_Front::getInstance()->getBaseUrl(); ?>/images/nolotiro_logo.png" alt="Nolotiro.com logo" id="logo" />nolotiro.com</a>
     	    </h1>
-    	<h2 id='site-slogan'>&nbsp;no lo tiro, te lo doy (sin condiciones)</h2>
+    	<h2 id='site-slogan'><?=$this->translate('no lo tiro, te lo doy (sin condiciones)') ?></h2>
     	
     	
 		
