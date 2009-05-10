@@ -1,13 +1,10 @@
 <?php
-
 /**
  * Nolotiro_User - a model class representing a single user
  *
  * This is the DbTable class for the users table.
  *  
  */
-
-
 
 class Model_User
 
@@ -18,7 +15,7 @@ class Model_User
     /**
      * Retrieve table object
      * 
-     * @return Model_Guestbook_Table
+     * @return Model_User_Table
      */
     public function getTable()
     {

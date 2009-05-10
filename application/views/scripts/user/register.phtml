@@ -1,6 +1,11 @@
 <?php
 //register page
 $this->page_title = $this->translate('Register').' - nolotiro.com';
+
+
+$locale = Zend_Registry::get("Zend_Locale"); 
+$this->lang = $locale->getLanguage();
+
 //render common HTML header
 echo $this->render('partials/html_header.phtml');
 ?>
@@ -8,7 +13,7 @@ echo $this->render('partials/html_header.phtml');
 <div id="default_header_section">
 <h3><?=$this->translate('New user'); ?></h3>
 <?=$this->translate('(If you already are a registered user, please'); ?>&nbsp;
-<a href="/auth/login" title="user login" ><?=$this->translate('login here'); ?></a>)
+<a href="/<?=$this->lang ?>/auth/login" title="user login" ><?=$this->translate('login here'); ?></a>)
 </div>
 
 <div id="main">
