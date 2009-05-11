@@ -9,8 +9,8 @@ class AuthController extends Zend_Controller_Action
     public function init()
     {
         $this->initView();
-        //$this->view->baseUrl = $this->_request->getBaseUrl();
-        $this->view->baseUrl = Zend_Controller_Front::getParam($route);
+        $this->view->baseUrl = $this->_request->getBaseUrl();
+        //$this->view->baseUrl = Zend_Controller_Front::getParam($route);
     }
         
 	/**
@@ -54,9 +54,15 @@ class AuthController extends Zend_Controller_Action
                 // Set the input credential values to authenticate against
                 $authAdapter->setIdentity($username);
                 $authAdapter->setCredential(md5($password));
+                
                 // do the authentication
                 $auth = Zend_Auth::getInstance();
-                $result = $auth->authenticate($authAdapter);
+                
+                //check first if the user is activated (by confirmed email)
+                $select = $authAdapter->getDbSelect();
+                $select->where('status > 0');
+                
+                $result = $authAdapter->authenticate();
                 if ($result->isValid()) {
                     // success: store database row to auth's storage
                     // system. (Not the password though!)
@@ -64,7 +70,7 @@ class AuthController extends Zend_Controller_Action
                             'password');
                     $auth->getStorage()->write($data);
                     
-                    //Zend_Session::regenerateId();
+                    
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('You are now logged in, ').$username);
                     $this->_redirect('/');
                 } else {
