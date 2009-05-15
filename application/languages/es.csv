@@ -47,6 +47,15 @@ Please, fill this form to be a nolotiro member;Por favor, rellena este formulari
 login here;accede aquí
 Choose a username:;Elige un nombre de usuario:
 Register;Regístrate
+Check your inbox email to finish the register process;Comprueba tu correo para terminar el proceso de registro
+, confirm your email;, confirma tu email
+Please, click on this url to finish your register process:<br />;Hola %username%.Por favor, haz click en este enlace para terminar tu proceso de registro:<br /> 
+
+#user/validate
+Sorry, register url no valid or expired.;Lo siento, esta url de registro no es válida o ha caducado.
+Sorry, this validation url does not exists.;Lo siento, esta url de validación no 
+
+
 
 
 

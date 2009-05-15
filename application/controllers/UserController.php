@@ -64,21 +64,31 @@ class UserController extends Zend_Controller_Action
             if ($form->isValid($request->getPost())) {
                 
                 // since we now know the form validated, we can now
-                // start integrating that data sumitted via the form
+                // start integrating that data submitted via the form
                 // into our model
                 $model = $this->_getModel();
                 $model->save($form->getValues());
                 
                 //return $this->_helper->redirector('index');
-               
-//                $mail = new Zend_Mail();
-//                $mail->setBodyText('This is the text of the mail.');
-//                $mail->setFrom('noreply@nolotiro.com', 'nolotiro.com v2');
-//                $mail->addTo('root', 'Daniel Remeseiro');
-//                $mail->setSubject('nolotiro.com - confirm your email dear '.$form->email);
-//                $mail->send();
                 
-                $this->_helper->_flashMessenger->addMessage('Check your inbox email to finish the register process');
+                // collect the data from the user
+                $f = new Zend_Filter_StripTags();
+                $email = $f->filter($this->_request->getPost('email'));
+                $username = $f->filter($this->_request->getPost('username'));
+                
+                //$message = $f->filter(utf8_decode($this->_request->getPost('message')));
+               
+                $mail = new Zend_Mail();
+                $mail->setBodyHtml($this->view->translate('Please, click on this url to finish your register process:<br />')
+                .$this->baseUrl.'http://nolotiro/user/validate/t/1231298742938472938479');
+                $mail->setFrom('noreply@nolotiro.com', 'nolotiro.com');
+                
+                $mail->addTo('daniel.remeseiro@gmail.com');
+                //$mail->addTo($email);
+                $mail->setSubject($username.$this->view->translate(', confirm your email'));
+                $mail->send();
+                
+                $this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to finish the register process'));
                 
                 $this->_redirect('/');
             }
@@ -125,9 +135,7 @@ class UserController extends Zend_Controller_Action
         return $form;
     }
     
-	
-
-	/**
+/**
      * Validate - check the token generated  sent by mail by registerAction, then redirect to
      * the logout  page (index home).
      * @param t
@@ -136,21 +144,45 @@ class UserController extends Zend_Controller_Action
     public function validateAction()
     {
         $token = $this->_request->getParam('t');//the token
-        //http://nolotiro.com/user/validate/t/1234234234234234234
-        
+        //http://nolotiro.com/es/auth/validate/t/1232452345234
         
         if (!is_null($token)) {
             
             //TODO
             //add validation token against bbdd , if matches...
-            $this->_helper->_flashMessenger->addMessage('Register finished succesfully,
-             welcome to nolotiro '.$this->session->username);
+
+            //DDBB validation
+            // setup Zend_Auth adapter for a database table
+            $dbAdapter = Zend_Registry::get('dbAdapter');
+            $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
+            $authAdapter->setTableName('users');
+            $authAdapter->setIdentityColumn('token');
+                 
+            // Set the input credential values to authenticate against
+            $authAdapter->setIdentity($token);
+            
+            // do the authentication
+            $auth = Zend_Auth::getInstance();
+            $result = $auth->authenticate($authAdapter);
+            
+            if ($result->isValid()) {
+            //OK
+            $this->_helper->_flashMessenger->addMessage('Register finished succesfully, welcome to nolotiro '.$this->session->username);
           
             
-            $this->_redirect('/auth/logout');// redirect to logout action to kill the user logged in (if exists)
-        	;
+            $this->_redirect('/es/auth/logout');// redirect to logout action to kill the user logged in (if exists)
+            }else {
+                   $this->_helper->_flashMessenger->addMessage('Sorry, this validation url does not exists.');
+        	       $this->_redirect('/');
+                     
+                }     
+            
+            
+            
+            
+            
         }else {
-        	$this->_helper->_flashMessenger->addMessage('Sorry, register url no valid or expired.');
+        	$this->_helper->_flashMessenger->addMessage($this->view->translate('Sorry, register url no valid or expired.'));
         	$this->_redirect('/');
         }
         
@@ -161,4 +193,5 @@ class UserController extends Zend_Controller_Action
         //$this->_redirect('/');
     }
 
+	
 }

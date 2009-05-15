@@ -31,9 +31,9 @@ class Model_DbTable_User extends Zend_Db_Table_Abstract
         
     }
 
-    public function update(array $data, $where)
+    public function checkvalidate()
     {
-        throw new Exception('chst! no se puede updatear un user');
+        return parent::fetchRow();
     }
     
 }

@@ -35,7 +35,7 @@ class ContactController extends Zend_Controller_Action
                 $email = $f->filter($this->_request->getPost('email'));
                 $message = $f->filter(utf8_decode($this->_request->getPost('message')));
                 
-                //get ht username if its nolotiro user
+                //get the username if its nolotiro user
                 $user_info = $this->view->user->username;
                 $user_info .= $_SERVER['REMOTE_ADDR'];
  		        $user_info .= ' '.$_SERVER['HTTP_USER_AGENT'].'<br />';

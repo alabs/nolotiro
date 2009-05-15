@@ -90,6 +90,16 @@ class AuthController extends Zend_Controller_Action
     
     }
     
+	/**
+     *
+     * @return Form_UserLogin
+     */
+    protected function _getUserLoginForm()
+    {
+        require_once APPLICATION_PATH . '/forms/UserLogin.php';
+        $form = new Form_UserLogin();
+        return $form;
+    }
     
     
 	/**
@@ -105,20 +115,9 @@ class AuthController extends Zend_Controller_Action
         $this->_redirect('/');
     }
     
+
     
-	/**
-	 * 
-     * This method is essentially doing the same thing for the Form that we did 
-     * above in the protected model accessor.  Same logic applies here.
-     *
-     * @return Form_UserLogin
-     */
-    protected function _getUserLoginForm()
-    {
-        require_once APPLICATION_PATH . '/forms/UserLogin.php';
-        $form = new Form_UserLogin();
-        return $form;
-    }
-
-
+    
+    
+    
 }
