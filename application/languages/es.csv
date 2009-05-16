@@ -1,66 +1,59 @@
 ﻿#header
-#no lo tiro, te lo doy (sin condiciones);no lo tiro, te lo doy (sin condiciones)
-new user;nuevo usuario
-or;o
-hello,;hola,
-logout;salir
-login;acceder
+#"no lo tiro, te lo doy (sin condiciones)";"no lo tiro, te lo doy (sin condiciones)"
+"new user";"nuevo usuario"
+"or";"o"
+"hello,";"hola,"
+"logout";"salir"
+"login";"acceder"
 
 #footer
-about;acerca de
-developers;desarrolladores
-contact;contacto
+"about";"acerca de"
+"developers";"desarrolladores"
+"contact";"contacto"
 
 #contact
-'%value%' is not a valid email address in the basic format local-part@hostname;'%value%' no es una dirección de correo válida con el formato: usuario@ejemplo.com
-'%hostname%' is not a valid hostname for email address '%value%';'%hostname%' no es nombre correcto de dominio para la dirección de correo '%value%'
-'%value%' appears to be a local network name but local network names are not allowed;'%value%' parece ser una dirección de red local
-'%value%' does not match the expected structure for a DNS hostname;'%value%' no concide con la estructura requerida para un nombre de dominio DNS
-'%value%' appears to be a DNS hostname but cannot match TLD against known list; '%value%' parece ser un nombre de dominio pero no coincide con ningun TLD conocido
-Message sent successfully!;Tu mensaje se ha enviado correctamente.
+"'%value%' is not a valid email address in the basic format local-part@hostname";"'%value%' no es una dirección de correo válida con el formato: usuario@ejemplo.com"
+"'%hostname%' is not a valid hostname for email address '%value%'";"'%hostname%' no es nombre correcto de dominio para la dirección de correo '%value%'"
+"'%value%' appears to be a local network name but local network names are not allowed";"'%value%' parece ser una dirección de red local"
+"'%value%' does not match the expected structure for a DNS hostname";"'%value%' no concide con la estructura requerida para un nombre de dominio DNS"
+"'%value%' appears to be a DNS hostname but cannot match TLD against known list";"'%value%' parece ser un nombre de dominio pero no coincide con ningun TLD conocido"
+"Message sent successfully!";"Tu mensaje se ha enviado correctamente."
 
 
-Value is required and can't be empty;Este campo no puede estar vacío
-Captcha value is wrong;Los cuatro carácteres no son correctos
-Please, write your message;Por favor, escribe tu mensaje
-Your email:;Tu email:
-Your message:;Tu mensaje:
-Please, insert the 4 characters shown:;Por favor, introduce los cuatro caracteres:
-Send;Enviar
-Contact form;Formulario de contacto
+"Value is required and can't be empty";"Este campo no puede estar vacío"
+"Captcha value is wrong";"Los cuatro carácteres no son correctos"
+"Please, write your message";"Por favor, escribe tu mensaje"
+"Your email:";"Tu email:"
+"Your message:";"Tu mensaje:"
+"Please, insert the 4 characters shown:";"Por favor, introduce los cuatro caracteres:"
+"Send";"Enviar"
+"Contact form";"Formulario de contacto"
 
 #login
-Login;Acceder
-(If you are a new user, please;(Si eres un nuevo usuario, por favor
-register here;regístrate aquí
-Please, insert your user and password;Por favor, introduce tu nombre de usuario y contraseña
-User name:;Nombre de usuario:
-Password:;Contraseña:
-<a href='/en/user/forgot'>Forgot</a> your password?;¿<a href='/es/user/forgot'>Olvidaste</a> tu contraseña?
-'%value%' is less than %min% characters long; Este campo debe contener %min% ó mas caracteres
-You are now logged in, ; Ahora estás logeado 
-Wrong user name or password, please try again;Nombre de usuario o contraseña errónea, por favor, inténtalo de nuevo.
+"Login";"Acceder"
+"(If you are a new user, please";"(Si eres un nuevo usuario, por favor"
+"register here";"regístrate aquí"
+"Please, insert your user and password";"Por favor, introduce tu nombre de usuario y contraseña"
+"User name:";"Nombre de usuario:"
+"Password:";"Contraseña:"
+"<a href='/en/user/forgot'>Forgot</a> your password?";"¿<a href='/es/user/forgot'>Olvidaste</a> tu contraseña?"
+"'%value%' is less than %min% characters long";"Este campo debe contener %min% ó mas caracteres"
+"You are now logged in, ";"Ahora estás logeado "
+"Wrong user name or password, please try again";"Nombre de usuario o contraseña errónea, por favor, inténtalo de nuevo."
 
 #user/register
-New user;Nuevo usuario
-Please, fill this form to be a nolotiro member;Por favor, rellena este formulario para ser miembro de nolotiro
-(If you already are a registered user, please;(Si ya eres un usuario registrado, por favor
-login here;accede aquí
-Choose a username:;Elige un nombre de usuario:
-Choose a password (5 or more characters):;Elige una contraseña (5 o mas caracteres):
-Register;Regístrate
-'%value%' has not only alphabetic and digit characters;'%value%' contiene carácteres no válidos (usa solo letras y números)
-By sending this form, you are indicating that you have read, understood, and agree to nolotiro's <a href='/en/page/user-agreement'>user agreement</a> and <a href='/en/page/privacy'>privacy policy.</a>;Enviando este formulario, admites haber leido, comprendido, y estás conforme con las <a href="/es/page/user-agreement">condiciones de uso</a> y la <a href="/es/page/privacy">política de privacidad</a> de nolotiro.com.
-Check your inbox email to finish the register process;Comprueba tu correo para terminar el proceso de registro
-, confirm your email;, confirma tu email
-Please, click on this url to finish your register process:<br />;Por favor, haz click en este enlace para terminar tu proceso de registro:<br /> 
-
+"New user";"Nuevo usuario"
+"Please, fill this form to be a nolotiro member";"Por favor, rellena este formulario para ser miembro de nolotiro"
+"(If you already are a registered user, please";"(Si ya eres un usuario registrado, por favor"
+"login here";"accede aquí"
+"Choose a username:";"Elige un nombre de usuario:"
+"Choose a password (5 or more characters):";"Elige una contraseña (5 o mas caracteres):"
+"Register";"Regístrate"
+"'%value%' has not only alphabetic and digit characters";"'%value%' contiene carácteres no válidos (usa solo letras y números)"
+"By sending this form, you are indicating that you have read, understood, and agree to nolotiro's <a href='/en/page/user-agreement'>user agreement</a> and <a href='/en/page/privacy'>privacy policy.</a>";"Enviando este formulario, admites haber leido, comprendido, y estás conforme con las <a href='/es/page/user-agreement'>condiciones de uso</a> y la <a href='/es/page/privacy'>política de privacidad</a> de nolotiro.com."
+"Check your inbox email to finish the register process";"Comprueba tu correo para terminar el proceso de registro"
+", confirm your email";", confirma tu email"
+"Please, click on this url to finish your register process:<br />";"Por favor, haz click en este enlace para terminar tu proceso de registro:<br />"
 #user/validate
-Sorry, register url no valid or expired.;Lo siento, esta url no es válida o ha caducado.
-Sorry, this validation url does not exists.;Lo siento, esta url de validación no existe.
-
-
-
-
-
-
+"Sorry, register url no valid or expired.";"Lo siento, esta url no es válida o ha caducado."
+"Sorry, this validation url does not exists.";"Lo siento, esta url de validación no existe."

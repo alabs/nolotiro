@@ -28,15 +28,15 @@ echo $this->render('partials/html_header.phtml');
 <div id="main">
 <div class="span-16">
 
-<form action="<?= $this->escape($this->form->getAction()) ?>"
-      method="<?= $this->escape($this->form->getMethod()) ?>">
+<form action="<?=$this->escape($this->form->getAction()) ?>"
+      method="<?=$this->escape($this->form->getMethod()) ?>">
 	<fieldset>
 	<legend><?=$this->translate('Please, insert your user and password'); ?></legend>
 		
-		<?= $this->form->username ?>
-		<?= $this->form->password ?>
+		<?=$this->form->username ?>
+		<?=$this->form->password ?>
 		
-		<?= $this->form->submit ?>
+		<?=$this->form->submit ?>
 		<br />
 		<?=$this->translate('<a href=\'/en/user/forgot\'>Forgot</a> your password?'); ?>
 	</fieldset>
@@ -47,4 +47,4 @@ echo $this->render('partials/html_header.phtml');
 <!-- <img alt="demo banner" src="/images/banner_dummy300x250.jpg"> -->
 </div>
 </div>
-<?= $this->render('partials/html_footer.phtml'); ?>
+<?=$this->render('partials/html_footer.phtml'); ?>

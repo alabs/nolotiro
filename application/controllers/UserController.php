@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Nolotiro user controller - Handling user related actions - currently log in and
- * log out.
+ * Nolotiro user controller - Handling user related actions
  * 
  */
 
