@@ -20,21 +20,15 @@ echo $this->render('partials/html_header.phtml');
 <div  class="span-16">
 
 
-<form action="<?= $this->escape($this->form->getAction()) ?>"
-      method="<?= $this->escape($this->form->getMethod()) ?>">
+<form action="<?=$this->escape($this->form->getAction()) ?>"
+      method="<?=$this->escape($this->form->getMethod()) ?>">
 
 <fieldset>
-    <legend><?=$this->translate('Please, fill this form to be a nolotiro member'); ?></legend>
-	<p>
-	<?=$this->form->username ?>
-    </p>
-    
-    <?=$this->form->email ?>
-    <?=$this->form->email2 ?>
-    <?= $this->form->captcha ?>
-    <?= $this->form->terms ?>
+<legend><?=$this->translate('Please, fill this form to be a nolotiro member'); ?></legend>	
 
-<?= $this->form->submit ?>
+<?=$this->form ?>
+
+<?=$this->translate('By sending this form, you are indicating that you have read, understood, and agree to nolotiro\'s <a href=\'/en/page/user-agreement\'>user agreement</a> and <a href=\'/en/page/privacy\'>privacy policy.</a>') ?>
 </fieldset>
 </form>
 

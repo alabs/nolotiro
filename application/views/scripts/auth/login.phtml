@@ -34,10 +34,11 @@ echo $this->render('partials/html_header.phtml');
 	<legend><?=$this->translate('Please, insert your user and password'); ?></legend>
 		
 		<?= $this->form->username ?>
-		
 		<?= $this->form->password ?>
 		
 		<?= $this->form->submit ?>
+		<br />
+		<?=$this->translate('<a href=\'/en/user/forgot\'>Forgot</a> your password?'); ?>
 	</fieldset>
 	</form>
 

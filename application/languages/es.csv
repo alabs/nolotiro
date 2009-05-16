@@ -36,6 +36,7 @@ register here;regístrate aquí
 Please, insert your user and password;Por favor, introduce tu nombre de usuario y contraseña
 User name:;Nombre de usuario:
 Password:;Contraseña:
+<a href='/en/user/forgot'>Forgot</a> your password?;¿<a href='/es/user/forgot'>Olvidaste</a> tu contraseña?
 '%value%' is less than %min% characters long; Este campo debe contener %min% ó mas caracteres
 You are now logged in, ; Ahora estás logeado 
 Wrong user name or password, please try again;Nombre de usuario o contraseña errónea, por favor, inténtalo de nuevo.
@@ -46,14 +47,17 @@ Please, fill this form to be a nolotiro member;Por favor, rellena este formulari
 (If you already are a registered user, please;(Si ya eres un usuario registrado, por favor
 login here;accede aquí
 Choose a username:;Elige un nombre de usuario:
+Choose a password (5 or more characters):;Elige una contraseña (5 o mas caracteres):
 Register;Regístrate
+'%value%' has not only alphabetic and digit characters;'%value%' contiene carácteres no válidos (usa solo letras y números)
+By sending this form, you are indicating that you have read, understood, and agree to nolotiro's <a href='/en/page/user-agreement'>user agreement</a> and <a href='/en/page/privacy'>privacy policy.</a>;Enviando este formulario, admites haber leido, comprendido, y estás conforme con las <a href="/es/page/user-agreement">condiciones de uso</a> y la <a href="/es/page/privacy">política de privacidad</a> de nolotiro.com.
 Check your inbox email to finish the register process;Comprueba tu correo para terminar el proceso de registro
 , confirm your email;, confirma tu email
-Please, click on this url to finish your register process:<br />;Hola %username%.Por favor, haz click en este enlace para terminar tu proceso de registro:<br /> 
+Please, click on this url to finish your register process:<br />;Por favor, haz click en este enlace para terminar tu proceso de registro:<br /> 
 
 #user/validate
-Sorry, register url no valid or expired.;Lo siento, esta url de registro no es válida o ha caducado.
-Sorry, this validation url does not exists.;Lo siento, esta url de validación no 
+Sorry, register url no valid or expired.;Lo siento, esta url no es válida o ha caducado.
+Sorry, this validation url does not exists.;Lo siento, esta url de validación no existe.
 
 
 

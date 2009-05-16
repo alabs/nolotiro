@@ -26,28 +26,28 @@ class Form_UserRegister extends Zend_Form
             )
         ));
         
-//        $emailcheck = $_POST['email'];
-//        $this->addElement('text', 'email2', array(
-//            'label'      => 'Your email again:',
-//            'required'   => true,
-//            'filters'    => array('StringTrim'),
-//            'validators' => array('Identical', $emailcheck)
-//        ));
+//        $this->addElement('password', 'password', array(
+//                'filters' => array('StringTrim'),
+//                'validators' => array(
+//                array('StringLength', false, array(5, 20)),
+//                ),
+//                'required' => true,
+//                'label' => 'Choose a password (5 or more characters):',
+//                ));
+		
         
         $this->addElement('text', 'username', array(
         	'label'      => 'Choose a username:',
     		'filters' => array('StringTrim', 'StringToLower'),
 			'validators' => array(
-			array('StringLength', false, array(3, 20)),
+            'alnum',
+            array('regex', false, array('/^[a-z]/i')),
+        	array('StringLength', false, array(3, 20)),
 			),
 			'required' => true,
         	
 		));
 
-		$this->addElement('checkbox', 'terms', array(		
-		'required' => true,
-		'label' => 'acepta las putas condiciones!',
-		));
 		
 		$this->addElement('captcha', 'captcha', array(
             'label'      => 'Please, insert the 4 characters shown:',
