@@ -57,3 +57,7 @@
 #user/validate
 "Sorry, register url no valid or expired.";"Lo siento, esta url no es válida o ha caducado."
 "Sorry, this validation url does not exists.";"Lo siento, esta url de validación no existe."
+
+#user/forgot
+"Forgot your password?";"¿Olvidaste tu contraseña?"
+"Please, enter your email address and a link will be emailed to you:";"Por favor, introduce tu email y te enviaremos una contraseña nueva:"

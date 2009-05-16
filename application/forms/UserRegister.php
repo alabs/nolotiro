@@ -16,7 +16,6 @@ class Form_UserRegister extends Zend_Form
         // set the method for the display form to POST
         $this->setMethod('post');
 
-        // add an email element
         $this->addElement('text', 'email', array(
             'label'      => 'Your email:',
             'required'   => true,

@@ -122,8 +122,6 @@ class UserController extends Zend_Controller_Action
     }
     
     /**
-     * This method is essentially doing the same thing for the Form that we did 
-     * above in the protected model accessor.  Same logic applies here.
      *
      * @return Form_UserRegister
      */
@@ -133,8 +131,76 @@ class UserController extends Zend_Controller_Action
         $form = new Form_UserRegister();
         return $form;
     }
+
     
-/**
+    /**
+     * forgot - sends (resets) a new password to the user 
+     */
+    
+ 	public function forgotAction()
+    {
+       	$request = $this->getRequest();
+        $form    = $this->_getUserForgotForm();
+        
+        
+
+        // check to see if this action has been POST'ed to
+        if ($this->getRequest()->isPost()) {
+            
+            // now check to see if the form submitted exists, and
+            // if the values passed in are valid for this form
+            if ($form->isValid($request->getPost())) {
+                
+                // since we now know the form validated, we can now
+                // start integrating that data submitted via the form
+                // into our model
+                $model = $this->_getModel();
+                $model->save($form->getValues());
+                
+                //return $this->_helper->redirector('index');
+                
+                // collect the data from the user
+                $f = new Zend_Filter_StripTags();
+                $email = $f->filter($this->_request->getPost('email'));
+                $username = $f->filter($this->_request->getPost('username'));
+                
+                //$message = $f->filter(utf8_decode($this->_request->getPost('message')));
+               
+//                $mail = new Zend_Mail();
+//                $mail->setBodyHtml($this->view->translate('Please, click on this url to finish your register process:<br />')
+//                .$this->baseUrl.'http://nolotiro/user/validate/t/1231298742938472938479');
+//                $mail->setFrom('noreply@nolotiro.com', 'nolotiro.com');
+//                
+//                $mail->addTo('daniel.remeseiro@gmail.com');
+//                //$mail->addTo($email);
+//                $mail->setSubject($username.$this->view->translate(', confirm your email'));
+//                $mail->send();
+//                
+                $this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to finish the register process'));
+                
+                $this->_redirect('/');
+            }
+        }
+        // assign the form to the view
+        $this->view->form = $form;
+        
+    }
+    
+	/**
+     *
+     * @return Form_UserRegister
+     */
+    protected function _getUserForgotForm()
+    {
+        require_once APPLICATION_PATH . '/forms/UserForgot.php';
+        $form = new Form_UserForgot();
+        return $form;
+    }
+    
+    
+    
+    
+    /**
      * Validate - check the token generated  sent by mail by registerAction, then redirect to
      * the logout  page (index home).
      * @param t
