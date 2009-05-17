@@ -47,13 +47,21 @@ class Model_User
         return $table->insert($data);
     }
 
+    
+    public function checkEmail($email)
+    {
+        $table = $this->getTable();
+        $select = $table->select()->where('email = ?', $email);
+        return $table->fetchRow($select);
+    }
+    
     /**
      * Fetch an individual entry
      * 
      * @param  int|string $id 
      * @return null|Zend_Db_Table_Row_Abstract
      */
-    public function fetchEntry($id)
+    public function fetchUser($id)
     {
         $table = $this->getTable();
         $select = $table->select()->where('id = ?', $id);

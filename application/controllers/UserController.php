@@ -1,10 +1,8 @@
 <?php
-
 /**
  * Nolotiro user controller - Handling user related actions
  * 
  */
-
 
 class UserController extends Zend_Controller_Action
 {
@@ -135,37 +133,44 @@ class UserController extends Zend_Controller_Action
     
     /**
      * forgot - sends (resets) a new password to the user 
+     * 
      */
     
  	public function forgotAction()
     {
        	$request = $this->getRequest();
         $form    = $this->_getUserForgotForm();
-        
-        
-
-        // check to see if this action has been POST'ed to
+         
         if ($this->getRequest()->isPost()) {
             
-            // now check to see if the form submitted exists, and
-            // if the values passed in are valid for this form
             if ($form->isValid($request->getPost())) {
                 
-                // since we now know the form validated, we can now
-                // start integrating that data submitted via the form
-                // into our model
-                $model = $this->_getModel();
-                $model->save($form->getValues());
-                
-                //return $this->_helper->redirector('index');
-                
-                // collect the data from the user
+                // collect the data from the form
                 $f = new Zend_Filter_StripTags();
                 $email = $f->filter($this->_request->getPost('email'));
-                $username = $f->filter($this->_request->getPost('username'));
+                    
                 
-                //$message = $f->filter(utf8_decode($this->_request->getPost('message')));
-               
+                $model = $this->_getModel();
+                //var_dump($model->checkEmail($email));
+                $mailcheck = $model->checkEmail($email);
+                
+                if ($mailcheck == NULL) {
+                	// failure: email does not exists on ddbb
+                    $view = $this->initView();
+                    $view->error = $this->view->translate('This email is not in our database. Please, try again.');
+                	
+                } else { // success: the email exists , so lets change the password and send to user by mail
+                  //Zend_Debug::dump($mailcheck->toArray());
+                  $mailcheck = $mailcheck->toArray();
+                  $user_password = $mailcheck['password'];
+                  Zend_Debug::dump($user_password);
+                  
+                }
+                
+                
+                //$this->_redirect('/');
+             
+                
 //                $mail = new Zend_Mail();
 //                $mail->setBodyHtml($this->view->translate('Please, click on this url to finish your register process:<br />')
 //                .$this->baseUrl.'http://nolotiro/user/validate/t/1231298742938472938479');
@@ -176,9 +181,9 @@ class UserController extends Zend_Controller_Action
 //                $mail->setSubject($username.$this->view->translate(', confirm your email'));
 //                $mail->send();
 //                
-                $this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to finish the register process'));
+                $this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to get your new password'));
                 
-                $this->_redirect('/');
+                //$this->_redirect('/');
             }
         }
         // assign the form to the view

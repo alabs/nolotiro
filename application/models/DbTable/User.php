@@ -17,7 +17,7 @@ class Model_DbTable_User extends Zend_Db_Table_Abstract
 
     
     /**
-     * @abstract get a users nameeeeeeeeeeeeee rowww
+     * @abstract inserts a user row
      *
      * @return $id
      */
@@ -31,9 +31,6 @@ class Model_DbTable_User extends Zend_Db_Table_Abstract
         
     }
 
-    public function checkvalidate()
-    {
-        return parent::fetchRow();
-    }
+   
     
 }

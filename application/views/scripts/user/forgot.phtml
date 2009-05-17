@@ -16,6 +16,11 @@ echo $this->render('partials/html_header.phtml');
 &nbsp;<a href="/<?=$this->lang; ?>/user/register" title="user register" ><?=$this->translate('register here'); ?></a>) 
 </div>
 
+<?php if (isset($this->error)): ?>
+	<div class="error">
+		<?= $this->escape($this->error); ?>
+	</div>
+<?php endif; ?>
 <div id="main">
 <div  class="span-16">
 
@@ -24,11 +29,11 @@ echo $this->render('partials/html_header.phtml');
       method="<?=$this->escape($this->form->getMethod()) ?>">
 
 <fieldset>
-<legend><?=$this->translate('Please, enter your email address and a link will be emailed to you:'); ?></legend>	
+<legend><?=$this->translate('Please, enter your email address. A new password will be emailed to you'); ?></legend>	
 
 <?=$this->form ?>
 
-<?=$this->translate('Byagreemen') ?>
+<?=$this->translate('The email address must be the same you used to register.') ?>
 </fieldset>
 </form>
 

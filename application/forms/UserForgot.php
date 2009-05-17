@@ -1,22 +1,14 @@
 <?php
-
 /**
- * This is the UserLogin form.   
+ * This is the UserForgot form.   
  */
-
 
 class Form_UserForgot extends Zend_Form
 {
-    /**
-     * @see    http://framework.zend.com/manual/en/zend.form.html
-     * @return void
-     */ 
-    public function init()
+   public function init()
     {
         // set the method for the display form to POST
         $this->setMethod('post');
-
-        
         
         $this->addElement('text', 'email', array(
             'label'      => 'Your email:',

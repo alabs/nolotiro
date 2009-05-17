@@ -74,7 +74,7 @@ class AuthController extends Zend_Controller_Action
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('You are now logged in, ').$username);
                     $this->_redirect('/');
                 } else {
-                    // failure: clear database row from session
+                    // failure: wrong username
                     $view = $this->initView();
                     $view->error = $this->view->translate('Wrong user name or password, please try again');
                     
