@@ -163,8 +163,11 @@ class UserController extends Zend_Controller_Action
                   //Zend_Debug::dump($mailcheck->toArray());
                   $mailcheck = $mailcheck->toArray();
                   $user_password = $mailcheck['password'];
-                  Zend_Debug::dump($user_password);
+                  //Zend_Debug::dump($user_password);
                   
+                  Zend_Debug::dump($this->_generatePassword());
+                  
+                    
                 }
                 
                 
@@ -190,6 +193,27 @@ class UserController extends Zend_Controller_Action
         $this->view->form = $form;
         
     }
+    
+    
+    /**
+     * @abstract generate a text plain random password
+     * remember it's no encrypted !
+     * @return string (7) $password
+     */
+    protected function _generatePassword()
+    { 
+        $salt = "abcdefghjkmnpqrstuvwxyz0123456789";
+        srand((double)microtime()*1000000);
+        $i = 0;
+        while ($i <= 6) {
+           $num = rand() % 33;
+           $pass .= substr($salt, $num, 1);
+           $i++;
+        }
+       
+       return $pass;
+    }
+    
     
 	/**
      *
