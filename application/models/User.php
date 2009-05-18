@@ -47,6 +47,13 @@ class Model_User
         return $table->insert($data);
     }
 
+    public function update(array $data)
+    {
+        $table = $this->getTable();
+        $where = $table->getAdapter()->quoteInto('id= ?', $data['id']) ;
+        $table->update($data, $where);
+        
+    }
     
     public function checkEmail($email)
     {

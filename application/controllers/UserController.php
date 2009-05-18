@@ -151,7 +151,6 @@ class UserController extends Zend_Controller_Action
                     
                 
                 $model = $this->_getModel();
-                //var_dump($model->checkEmail($email));
                 $mailcheck = $model->checkEmail($email);
                 
                 if ($mailcheck == NULL) {
@@ -162,31 +161,31 @@ class UserController extends Zend_Controller_Action
                 } else { // success: the email exists , so lets change the password and send to user by mail
                   //Zend_Debug::dump($mailcheck->toArray());
                   $mailcheck = $mailcheck->toArray();
-                  $user_password = $mailcheck['password'];
-                  //Zend_Debug::dump($user_password);
+                
+                  //update the ddbb with new password  
+                  $data['password'] = $this->_generatePassword();
+                  $data['id'] = $mailcheck['id'];
                   
-                  Zend_Debug::dump($this->_generatePassword());
+                  //Zend_Debug::dump($data);
+                  $model->update($data);
+  
+                  //lets send the new password..
+                  $mail = new Zend_Mail();
+                  $mail->setBodyHtml($this->view->translate('Hi, this is your new password:<br />').
+                  $this->view->translate('username:').$mailcheck['username'].'<br />'.
+                  $this->view->translate('password:').$data['password']);
+                  $mail->setFrom('noreply@nolotiro.com', 'nolotiro.com');
+                
                   
-                    
+                  $mail->addTo($mailcheck['email']);
+                  $mail->setSubject($this->view->translate('your nolotiro.com new password'));
+                  $mail->send();
+                
+                //$this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to get your new password'));
+                
+                //$this->_redirect('/es/auth/login');
                 }
                 
-                
-                //$this->_redirect('/');
-             
-                
-//                $mail = new Zend_Mail();
-//                $mail->setBodyHtml($this->view->translate('Please, click on this url to finish your register process:<br />')
-//                .$this->baseUrl.'http://nolotiro/user/validate/t/1231298742938472938479');
-//                $mail->setFrom('noreply@nolotiro.com', 'nolotiro.com');
-//                
-//                $mail->addTo('daniel.remeseiro@gmail.com');
-//                //$mail->addTo($email);
-//                $mail->setSubject($username.$this->view->translate(', confirm your email'));
-//                $mail->send();
-//                
-                $this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to get your new password'));
-                
-                //$this->_redirect('/');
             }
         }
         // assign the form to the view
@@ -198,11 +197,11 @@ class UserController extends Zend_Controller_Action
     /**
      * @abstract generate a text plain random password
      * remember it's no encrypted !
-     * @return string (7) $password
+     * @return string (7) $pass
      */
     protected function _generatePassword()
     { 
-        $salt = "abcdefghjkmnpqrstuvwxyz0123456789";
+        $salt = "abcdefghjkmnpqrstuvwxyz123456789";
         srand((double)microtime()*1000000);
         $i = 0;
         while ($i <= 6) {
@@ -216,8 +215,8 @@ class UserController extends Zend_Controller_Action
     
     
 	/**
-     *
-     * @return Form_UserRegister
+	 *
+     * @return Form_UserForgotForm
      */
     protected function _getUserForgotForm()
     {
