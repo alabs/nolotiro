@@ -62,6 +62,13 @@ class Model_User
         return $table->fetchRow($select);
     }
     
+    public function checkUsername($username)
+    {
+        $table = $this->getTable();
+        $select = $table->select()->where('username = ?', $username);
+        return $table->fetchRow($select);
+    }
+    
     /**
      * Fetch an individual entry
      * 

@@ -35,6 +35,6 @@ class Model_DbTable_User extends Zend_Db_Table_Abstract
     public function update(array $data)
     {
         $data['password'] = md5($data['password']);
-        return parent::update($data , $where);
+        return parent::update($data ,$where);
     }
 }

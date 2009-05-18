@@ -63,31 +63,56 @@ class UserController extends Zend_Controller_Action
                 // since we now know the form validated, we can now
                 // start integrating that data submitted via the form
                 // into our model
+                $formulario = $form->getValues();
+                Zend_Debug::dump($formulario);
+                
                 $model = $this->_getModel();
-                $model->save($form->getValues());
                 
-                //return $this->_helper->redirector('index');
+                //check user email and nick if exists
+                $checkemail = $model->checkEmail($formulario['email']);
+                $checkuser = $model->checkUsername($formulario['username']);
                 
-                // collect the data from the user
-                $f = new Zend_Filter_StripTags();
-                $email = $f->filter($this->_request->getPost('email'));
-                $username = $f->filter($this->_request->getPost('username'));
                 
-                //$message = $f->filter(utf8_decode($this->_request->getPost('message')));
+                if ($checkemail !== NULL ) {
+                	$view = $this->initView();
+                    $view->error = $this->view->translate('This email is taken. Please, try again.'); 
+                    
+                } 
+                
+                if ($checkuser !== NULL){
+                    $view = $this->initView();
+                    $view->error = $this->view->translate('This username is taken. Please, try again.');
+                    
+                }
+                
+                if ($checkemail == NULL and  $checkuser == NULL ) { 
+                    
+                    // success: insert the new user on ddbb
+                    $model->save($form->getValues());
+                    
+
+                    //now lets send the confirm token by email to confirm the user email
+                                    
+                    $mail = new Zend_Mail();
+                    $mail->setBodyHtml($this->view->translate('Please, click on this url to finish your register process:<br />')
+                    .$this->baseUrl.'http://nolotiro/user/validate/t/1231298742938472938479');
+                    $mail->setFrom('noreply@nolotiro.com', 'nolotiro.com');
+                    
+                    //$mail->addTo('daniel.remeseiro@gmail.com');
+                    $mail->addTo($formulario['email']);
+                    $mail->setSubject($formulario['username'].$this->view->translate(', confirm your email'));
+                    $mail->send();
+                    
+                    $this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to finish the register process'));
+                    
+                    $this->_redirect('/');
+                    
+                    //return $this->_helper->redirector('index');
+                    
+                    
+                }
+                
                
-                $mail = new Zend_Mail();
-                $mail->setBodyHtml($this->view->translate('Please, click on this url to finish your register process:<br />')
-                .$this->baseUrl.'http://nolotiro/user/validate/t/1231298742938472938479');
-                $mail->setFrom('noreply@nolotiro.com', 'nolotiro.com');
-                
-                $mail->addTo('daniel.remeseiro@gmail.com');
-                //$mail->addTo($email);
-                $mail->setSubject($username.$this->view->translate(', confirm your email'));
-                $mail->send();
-                
-                $this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to finish the register process'));
-                
-                $this->_redirect('/');
             }
         }
         // assign the form to the view
@@ -171,19 +196,19 @@ class UserController extends Zend_Controller_Action
   
                   //lets send the new password..
                   $mail = new Zend_Mail();
-                  $mail->setBodyHtml($this->view->translate('Hi, this is your new password:<br />').
-                  $this->view->translate('username:').$mailcheck['username'].'<br />'.
-                  $this->view->translate('password:').$data['password']);
+                  $mail->setBodyHtml(utf8_decode($this->view->translate('Hi, this is your new password:<br />')).
+                  utf8_decode($this->view->translate('User name:')).$mailcheck['username'].'<br />'.
+                  utf8_decode($this->view->translate('Password:')).$data['password']);
                   $mail->setFrom('noreply@nolotiro.com', 'nolotiro.com');
                 
                   
                   $mail->addTo($mailcheck['email']);
-                  $mail->setSubject($this->view->translate('your nolotiro.com new password'));
+                  $mail->setSubject(utf8_decode($this->view->translate('Your nolotiro.com new password')));
                   $mail->send();
                 
-                //$this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to get your new password'));
+                  $this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to get your new password'));
                 
-                //$this->_redirect('/es/auth/login');
+                  $this->_redirect('/');
                 }
                 
             }
