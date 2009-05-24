@@ -60,7 +60,7 @@ class AuthController extends Zend_Controller_Action
                 
                 //check first if the user is activated (by confirmed email)
                 $select = $authAdapter->getDbSelect();
-                $select->where('status > 0');
+                $select->where('active > 0');
                 
                 $result = $authAdapter->authenticate();
                 if ($result->isValid()) {

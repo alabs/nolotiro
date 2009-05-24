@@ -24,7 +24,6 @@ class Model_DbTable_User extends Zend_Db_Table_Abstract
     public function insert(array $data)
     {
     	$data['created'] = date('Y-m-d H:i:s');
-    	$data['password'] = md5($data['password']);
     	$data['token']= md5(uniqid(rand(),1));
 
     	return parent::insert($data);
@@ -32,9 +31,5 @@ class Model_DbTable_User extends Zend_Db_Table_Abstract
     }
 
    
-    public function update(array $data)
-    {
-        $data['password'] = md5($data['password']);
-        return parent::update($data ,$where);
-    }
+    
 }

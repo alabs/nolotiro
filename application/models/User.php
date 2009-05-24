@@ -69,6 +69,20 @@ class Model_User
         return $table->fetchRow($select);
     }
     
+    public function getToken($email)
+    {
+        $table = $this->getTable();
+        $select = $table->select()->where('email = ?', $email);
+        return $table->fetchRow($select)->token;
+    }
+    
+    public function validateToken($token)
+    {
+        $table = $this->getTable();
+        $select = $table->select()->where('token = ?', $token);
+        return $table->fetchRow($select);
+    }
+    
     /**
      * Fetch an individual entry
      * 
