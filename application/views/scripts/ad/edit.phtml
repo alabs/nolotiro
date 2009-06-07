@@ -1,0 +1,43 @@
+<?php
+//register page
+$this->page_title = $this->translate('Edit ad').' - nolotiro.com';
+
+
+$locale = Zend_Registry::get("Zend_Locale"); 
+$this->lang = $locale->getLanguage();
+
+//render common HTML header
+echo $this->render('partials/html_header.phtml');
+?>
+
+<div id="default_header_section">
+<h3><?=$this->translate('Edit ad'); ?></h3>
+</div>
+
+
+<?php if (isset($this->error)): ?>
+	<div class="error">
+		<?= $this->escape($this->error); ?>
+	</div>
+<?php endif; ?>
+<div id="main">
+<div  class="span-16">
+
+
+<form action="<?=$this->escape($this->form->getAction()) ?>"
+      method="<?=$this->escape($this->form->getMethod()) ?>">
+
+<fieldset>
+<legend><?=$this->translate('Change your ad.... blabla'); ?></legend>	
+
+<?=$this->form ?>
+
+</fieldset>
+</form>
+
+</div>
+
+
+<?//render the default footer
+echo $this->render('partials/html_footer.phtml');
+?>
