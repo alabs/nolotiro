@@ -39,7 +39,7 @@
 "<a href='/en/user/forgot'>Forgot</a> your password?";"¿<a href='/es/user/forgot'>Olvidaste</a> tu contraseña?"
 "'%value%' is less than %min% characters long";"Este campo debe contener %min% ó mas caracteres"
 "You are now logged in, ";"Ahora estás logeado "
-"Wrong user name or password, please try again";"Nombre de usuario o contraseña errónea, por favor, inténtalo de nuevo."
+"Wrong email or password, please try again";"Email o contraseña errónea. Por favor, inténtalo de nuevo."
 
 #user/register
 "New user";"Nuevo usuario"

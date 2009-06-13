@@ -41,7 +41,7 @@ class AuthController extends Zend_Controller_Action
                 // collect the data from the user
                 
                 $f = new Zend_Filter_StripTags();
-                $username = $f->filter($this->_request->getPost('username'));
+                $email = $f->filter($this->_request->getPost('email'));
                 $password = $f->filter($this->_request->getPost('password'));
                     
                 //DDBB validation
@@ -49,10 +49,10 @@ class AuthController extends Zend_Controller_Action
                 $dbAdapter = Zend_Registry::get('dbAdapter');
                 $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
                 $authAdapter->setTableName('users');
-                $authAdapter->setIdentityColumn('username');
+                $authAdapter->setIdentityColumn('email');
                 $authAdapter->setCredentialColumn('password');
                 // Set the input credential values to authenticate against
-                $authAdapter->setIdentity($username);
+                $authAdapter->setIdentity($email);
                 $authAdapter->setCredential(md5($password));
                 
                 // do the authentication
@@ -76,7 +76,7 @@ class AuthController extends Zend_Controller_Action
                 } else {
                     // failure: wrong username
                     $view = $this->initView();
-                    $view->error = $this->view->translate('Wrong user name or password, please try again');
+                    $view->error = $this->view->translate('Wrong email or password, please try again');
                     
                      
                 }            

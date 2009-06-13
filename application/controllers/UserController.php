@@ -208,7 +208,7 @@ class UserController extends Zend_Controller_Action
                   $data['password'] = md5($password);
                   $data['id'] = $mailcheck['id'];
                   
-                  Zend_Debug::dump($data);
+                  //Zend_Debug::dump($data);
                   $model->update($data);
   
                   //lets send the new password..
@@ -225,7 +225,7 @@ class UserController extends Zend_Controller_Action
                 
                   $this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to get your new password'));
                 
-                  //$this->_redirect('/');
+                  $this->_redirect('/');
                 }
                 
             }

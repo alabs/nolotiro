@@ -10,6 +10,21 @@
 
 
 class AdController extends Zend_Controller_Action {
+	
+	/**
+     * Overriding the init method to also load the session from the registry
+     *
+     */
+    public function init()
+    {
+        parent::init();
+        //$this->view->baseUrl = $this->_request->getBaseUrl();
+        
+        $this->view->baseUrl = Zend_Controller_Front::getParam($route);
+        
+    }
+
+
 	/**
 	 * The default action - show the home page
 	 */

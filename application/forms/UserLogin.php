@@ -18,12 +18,12 @@ class Form_UserLogin extends Zend_Form
 
         
         
-        $this->addElement('text', 'username', array(
-        	'label'      => 'User name:',
+        $this->addElement('text', 'email', array(
+        	'label'      => 'Your email:',
     		'filters' => array('StringTrim', 'StringToLower'),
 			'validators' => array(
-			array('StringLength', false, array(3, 20)),
-			),
+                'EmailAddress',
+            ),
 			'required' => true,
         	
 		));
