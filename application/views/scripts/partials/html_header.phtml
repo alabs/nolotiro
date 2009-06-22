@@ -46,11 +46,18 @@ $this->lang = $locale->getLanguage();
 
 	<div class="user_login_box">
 <?php
-if (!$this->user) {
+
+$auth = Zend_Auth::getInstance();
+
+if (!$auth->hasIdentity()) {
+	
 	echo'<a href="/'.$this->baseUrl.$this->lang.'/user/register">'.$this->translate('new user').'</a> '.$this->translate('or').' ';
 	echo'<a href="/'.$this->baseUrl.$this->lang.'/auth/login">'.$this->translate('login').'</a>';
 }else {
-	echo $this->translate('hello,').'<b>&nbsp;<a href="'.$this->baseUrl.$this->lang.'/user/profile/'.$this->escape($this->user->username).'">'.$this->escape($this->user->username).'</a></b> | '.'<a href="'.$this->baseUrl.$this->lang.'/auth/logout">'.$this->translate('logout').'</a>';
+	$auth_username = $auth->getIdentity()->username;
+	
+	echo $this->translate('hello,').'<b>&nbsp;<a href="/'.$this->lang.'/user/profile/'.$this->escape($auth_username).
+	'">'.$this->escape($auth_username).'</a></b> | '.'<a href="/'.$this->lang.'/auth/logout">'.$this->translate('logout').'</a>';
 }
 
 ?>

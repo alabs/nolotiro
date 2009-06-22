@@ -8,7 +8,7 @@
  */
 class Model_DbTable_Ad extends Zend_Db_Table
 {
-    protected $_name = 'ad';
+    protected $_name = 'ads';
     public function getAd($id)
     {
         $id = (int)$id;

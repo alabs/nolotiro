@@ -14,13 +14,26 @@ class Form_AdEdit extends Zend_Form
         $this->setMethod('post');
 
         
+        $this->addElement('select', 'type', array(
+            
+            'label'      => 'Choose:',
+            'required'   => true,
+            'attribs' =>   array(
+                                'type'=>'type',
+        						'type'=>'type',
+                            ),
+            'multioptions'   => array(
+                            'give' => 'i give...',
+                            'want' => 'i want...',
+                            ),
+        ));
+		
+        
         $this->addElement('text', 'title', array(
-        	'label'      => 'Choose a username:',
-    		'filters' => array('StringTrim', 'StringToLower'),
+        	'label'      => 'Title of your ad:',
+    		//'filters' => array('StringTrim', 'StringToLower'),
 			'validators' => array(
-            'alnum',
-            array('regex', false, array('/^[a-z]/i')),
-        	array('StringLength', false, array(3, 20)),
+        	array('StringLength', false, array(10, 50)),
 			),
 			'required' => true,
         	
@@ -28,7 +41,7 @@ class Form_AdEdit extends Zend_Form
 		$this->addElement('textarea', 'body', array(
         	'label'      => 'Ad body:',
 			'validators' => array(
-			array('StringLength', false, array(3, 500)),
+			array('StringLength', false, array(30, 500)),
 			),
 			'required' => true,
         	
@@ -37,7 +50,7 @@ class Form_AdEdit extends Zend_Form
 
         // add the submit button
         $this->addElement('submit', 'submit', array(
-            'label'    => 'Edit',
+            'label'    => 'Send',
         ));
     }
 }

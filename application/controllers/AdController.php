@@ -30,15 +30,51 @@ class AdController extends Zend_Controller_Action {
 	 */
 	public function indexAction() {
 		
-		//by now just redir to /
-    	$this->_redirect('/');
+		
+		$model = $this->_getModel();
+		$this->view->ads = $model->fetchAll();
+		
+		
 	}
 
 	
 	
-	public function showAction() {
+	public function createAction(){
+
+	
+	//first we check if user is logged, if not redir to login
+	$auth = Zend_Auth::getInstance();
+    if (!$auth->hasIdentity()) {
+        $this->_redirect('/es/auth/login');
+    } else {
 		
 		
+		$request = $this->getRequest();
+        $form    = $this->_getAdEditForm();
+        
+
+        // check to see if this action has been POST'ed to
+        if ($this->getRequest()->isPost()) {
+            
+            // now check to see if the form submitted exists, and
+            // if the values passed in are valid for this form
+            if ($form->isValid($request->getPost())) {
+                
+                
+                $formulario = $form->getValues();
+                
+                $model = $this->_getModel();
+                
+                $formulario['user_owner'] = $auth->getIdentity()->id;               
+                $model->save($formulario);
+                
+                Zend_Debug::dump($formulario);
+                
+                
+            	}
+        	}
+		}
+	
 	}
 	
 	public function editAction(){
@@ -57,7 +93,7 @@ class AdController extends Zend_Controller_Action {
                 // start integrating that data submitted via the form
                 // into our model
                 $formulario = $form->getValues();
-                //Zend_Debug::dump($formulario);
+                Zend_Debug::dump($formulario);
 		
             }
         }
@@ -80,4 +116,28 @@ class AdController extends Zend_Controller_Action {
 	public function deleteAction(){
 		
 	}
+
+
+	
+/**
+     * _getModel() is a protected utility method for this controller. It is 
+     * responsible for creating the model object and returning it to the 
+     * calling action when needed. Depending on the depth and breadth of the 
+     * application, this may or may not be the best way of handling the loading 
+     * of models.
+     * 
+     * @return Model_User
+     */
+    protected function _getModel()
+    {
+        if (null === $this->_model) {
+            
+            require_once APPLICATION_PATH . '/models/Ad.php';
+            $this->_model = new Model_Ad();
+        }
+        return $this->_model;
+    }
+	
+	
+
 }
