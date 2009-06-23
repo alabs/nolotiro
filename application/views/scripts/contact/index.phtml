@@ -2,37 +2,40 @@
 /**
  * contact  page
  */
-$this->page_title = $this->translate('Contact form').' - nolotiro.com';
+$this->page_title = $this->translate ( 'Contact form' ) . ' - nolotiro.com';
 // Render common HTML header
-echo $this->render('partials/html_header.phtml');
+echo $this->render ( 'partials/html_header.phtml' );
 
 ?>
 
 <div id="default_header_section">
-<h3><?=$this->translate('Contact form'); ?></h3> 
+<h3><?=$this->translate ( 'Contact form' );?></h3>
 </div>
 
-<?php if (isset($this->error)): ?>
-	<div class="error">
-		<?= $this->escape($this->error); ?>
+<?php
+if (isset ( $this->error )) :
+	?>
+<div class="error">
+		<?=$this->escape ( $this->error );?>
 	</div>
-<?php endif; ?>
+
+<?php endif;
+?>
 
 <div id="main">
 <div class="span-16">
 
-<form action="<?= $this->escape($this->form->getAction()) ?>"
-      method="<?= $this->escape($this->form->getMethod()) ?>">
-	<fieldset>
-	<legend><?=$this->translate('Please, write your message'); ?></legend>
+<form action="<?=$this->escape ( $this->form->getAction () )?>"
+	method="<?=$this->escape ( $this->form->getMethod () )?>">
+<fieldset><legend><?=$this->translate ( 'Please, write your message' );?></legend>
       
 		
-		<?= $this->form ?>
+		<?=$this->form?>
 		
 	</fieldset>
-	</form>
+</form>
 
 </div>
 
 </div>
-<?= $this->render('partials/html_footer.phtml'); ?>
+<?=$this->render ( 'partials/html_footer.phtml' );?>

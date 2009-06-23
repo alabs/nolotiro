@@ -33,7 +33,7 @@
 "Login";"Acceder"
 "(If you are a new user, please";"(Si eres un nuevo usuario, por favor"
 "register here";"regístrate aquí"
-"Please, insert your user and password";"Por favor, introduce tu nombre de usuario y contraseña"
+"Please, insert your email and password";"Por favor, introduce tu email y contraseña"
 "User name:";"Nombre de usuario:"
 "Password:";"Contraseña:"
 "<a href='/en/user/forgot'>Forgot</a> your password?";"¿<a href='/es/user/forgot'>Olvidaste</a> tu contraseña?"

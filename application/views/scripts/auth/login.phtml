@@ -3,48 +3,49 @@
  * Log in page
  */
 
+$locale = Zend_Registry::get ( "Zend_Locale" );
+$this->lang = $locale->getLanguage ();
 
-$locale = Zend_Registry::get("Zend_Locale"); 
-$this->lang = $locale->getLanguage();
-
-$this->page_title = $this->translate('Login').' - nolotiro.com';
+$this->page_title = $this->translate ( 'Login' ) . ' - nolotiro.com';
 // Render common HTML header
-echo $this->render('partials/html_header.phtml');
+echo $this->render ( 'partials/html_header.phtml' );
 
 ?>
 
 <div id="default_header_section">
-<h3><?=$this->translate('Login'); ?></h3>
-<?=$this->translate('(If you are a new user, please'); ?>
-&nbsp;<a href="/<?=$this->lang; ?>/user/register" title="user register" ><?=$this->translate('register here'); ?></a>) 
+<h3><?=$this->translate ( 'Login' );?></h3>
+<?=$this->translate ( '(If you are a new user, please' );?>
+&nbsp;<a href="/<?=$this->lang;?>/user/register" title="user register"><?=$this->translate ( 'register here' );?></a>)
 </div>
 
-<?php if (isset($this->error)): ?>
-	<div class="error">
-		<?= $this->escape($this->error); ?>
+<?php
+if (isset ( $this->error )) :
+	?>
+<div class="error">
+		<?=$this->escape ( $this->error );?>
 	</div>
-<?php endif; ?>
+
+<?php endif;
+?>
 
 <div id="main">
 <div class="span-16">
 
-<form action="<?=$this->escape($this->form->getAction()) ?>"
-      method="<?=$this->escape($this->form->getMethod()) ?>">
-	<fieldset>
-	<legend><?=$this->translate('Please, insert your user and password'); ?></legend>
+<form action="<?=$this->escape ( $this->form->getAction () )?>"
+	method="<?=$this->escape ( $this->form->getMethod () )?>">
+<fieldset><legend><?=$this->translate ( 'Please, insert your email and password' );?></legend>
 		
-		<?=$this->form->email ?>
-		<?=$this->form->password ?>
+		<?=$this->form->email?>
+		<?=$this->form->password?>
 		
-		<?=$this->form->submit ?>
+		<?=$this->form->submit?>
 		<br />
-		<?=$this->translate('<a href=\'/en/user/forgot\'>Forgot</a> your password?'); ?>
+		<?=$this->translate ( '<a href=\'/en/user/forgot\'>Forgot</a> your password?' );?>
 	</fieldset>
-	</form>
+</form>
 
 </div>
-<div >
-<!-- <img alt="demo banner" src="/images/banner_dummy300x250.jpg"> -->
+<div><!-- <img alt="demo banner" src="/images/banner_dummy300x250.jpg"> -->
 </div>
 </div>
-<?=$this->render('partials/html_footer.phtml'); ?>
+<?=$this->render ( 'partials/html_footer.phtml' );?>

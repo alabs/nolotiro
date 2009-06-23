@@ -3,32 +3,38 @@
  * 404 Error page
  * 
  */
-header("HTTP/1.x 404 Not Found");
+header ( "HTTP/1.x 404 Not Found" );
 
 /* @var $config Zend_Config_Ini */
-$config = Zend_Registry::get('config');
+$config = Zend_Registry::get ( 'config' );
 
 ?>
 <html>
 
 <head>
-	<title>Nolotiro.com - 404 Not Found</title>
+<title>Nolotiro.com - 404 Not Found</title>
 </head>
 
 <body>
-	<h1>Oops...</h1>
-	<hr />
-	The page you are trying to access does not exist or perhaps it was removed.<br />
-	Click <a href="<?= $config->www->baseurl ?>">here</a> to go to the home page.
+<h1>Oops...</h1>
+<hr />
+The page you are trying to access does not exist or perhaps it was
+removed.
+<br />
+Click
+<a href="<?=$config->www->baseurl?>">here</a> to go to the home page.
 	
 <?php
 
-if (!$config->config): ?>
-	<div style="overflow: auto; margin-top: 10px; padding: 2px; border: 1px dashed black; background-color: #eee">
-		<strong>Debugging information:</strong><br />
-		<pre><?= $e->__toString(); ?></pre>
-	</div>
-<?php endif; ?>
+if (! $config->config) :
+	?>
+	<div
+	style="overflow: auto; margin-top: 10px; padding: 2px; border: 1px dashed black; background-color: #eee">
+<strong>Debugging information:</strong><br />
+<pre><?=$e->__toString ();?></pre></div>
+
+<?php endif;
+?>
 </body>
 
 </html>

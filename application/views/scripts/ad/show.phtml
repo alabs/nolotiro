@@ -1,6 +1,6 @@
 <?php
 //register page
-$this->page_title = $this->translate ( 'Create a new ad' ) . ' - nolotiro.com';
+$this->page_title = $this->translate ( 'View ad' ) . $this->ad['title'].' - nolotiro.com';
 
 $locale = Zend_Registry::get ( "Zend_Locale" );
 $this->lang = $locale->getLanguage ();
@@ -10,7 +10,7 @@ echo $this->render ( 'partials/html_header.phtml' );
 ?>
 
 <div id="default_header_section">
-<h3><?=$this->translate ( 'Create a new ad' );?></h3>
+<h3><?=$this->translate ( 'View ad' ).' - '.$this->ad['title'] ?></h3>
 </div>
 
 
@@ -27,15 +27,10 @@ if (isset ( $this->error )) :
 <div class="span-16">
 
 
-<form action="<?=$this->escape ( $this->form->getAction () )?>"
-	method="<?=$this->escape ( $this->form->getMethod () )?>">
+<?php 
+Zend_Debug::dump($this->ad);
 
-<fieldset><legend><?=$this->translate ( 'To publish your ad, please, insert the data required below ' );?></legend>	
-
-<?=$this->form?>
-
-</fieldset>
-</form>
+?>
 
 </div>
 

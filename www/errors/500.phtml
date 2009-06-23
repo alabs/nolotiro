@@ -3,29 +3,33 @@
  * 500 Error page
  */
 
-header("HTTP/1.x 500 Internal Server Error");
+header ( "HTTP/1.x 500 Internal Server Error" );
 
 /* @var $config Zend_Config_Ini */
-$config = Zend_Registry::get('config');
+$config = Zend_Registry::get ( 'config' );
 
 ?>
 <html>
 
 <head>
-	<title>Nolotiro.com - 500 Internal Server Error</title>
+<title>Nolotiro.com - 500 Internal Server Error</title>
 </head>
 
 <body>
-	<h1>Oops...</h1>
-	<hr />
-	<strong>Nolotiro.com</strong> has encountered some internal error. The application 
+<h1>Oops...</h1>
+<hr />
+<strong>Nolotiro.com</strong> has encountered some internal error. The application 
 	administrators have been informed and this error will be fixed soon (maybe...)
-<?php if ($config->debug): ?>
-	<div style="overflow: auto; margin-top: 10px; padding: 2px; border: 1px dashed black; background-color: #eee">
-		<strong>Debugging information:</strong><br />
-		<pre><?= $e->__toString(); ?></pre>
-	</div>
-<?php endif; ?>
+<?php
+if ($config->debug) :
+	?>
+	<div
+	style="overflow: auto; margin-top: 10px; padding: 2px; border: 1px dashed black; background-color: #eee">
+<strong>Debugging information:</strong><br />
+<pre><?=$e->__toString ();?></pre></div>
+
+<?php endif;
+?>
 </body>
 
 </html>

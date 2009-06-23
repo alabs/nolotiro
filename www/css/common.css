@@ -1,14 +1,12 @@
-
-a:link, a:visited{
-  color: #00ACCF;
-  text-decoration: none;
+a:link,a:visited {
+	color: #00ACCF;
+	text-decoration: none;
 }
 
 a:active {
-  color: #00C7EF;
-  text-decoration : underline;
+	color: #00C7EF;
+	text-decoration: underline;
 }
-
 
 a:hover {
 	background-color: #ffff00;
@@ -16,112 +14,101 @@ a:hover {
 	text-decoration: none;
 }
 
-
-
 .user_login_box {
-	margin-top:-0.4em;
+	margin-top: -0.4em;
 	border: 0px solid #ccc;
 	float: right;
 	position: absolute;
-	background-color:#fff;
+	background-color: #fff;
 	right: 0;
 	padding: 4px;
 }
 
 .select_language_box {
-	margin-top:-0.4em;
+	margin-top: -0.4em;
 	position: absolute;
-	background-color:#fff;
+	background-color: #fff;
 	right: 110px;
 	padding: 4px;
 }
 
-
 /**
  * Layout.
  */
-
 #header {
-  margin-top: 15px;
-  width: 100%;
-  margin: 0;
-  height: 4.5em;
-  position: relative;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+	margin-top: 15px;
+	width: 100%;
+	margin: 0;
+	height: 4.5em;
+	position: relative;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
 }
 
 #main {
-  padding-top: 20px;
-  text-align: left; 
+	padding-top: 20px;
+	text-align: left;
 }
 
 #footer {
-  clear: both;
-  text-align: center; 
+	clear: both;
+	text-align: center;
 }
 
 /**
  * Header Area.
  */
-
-
 h1#site-name a img {
-  border: none;
-  float: left;
-  margin-bottom: 1px;
-  margin-left: 1px;
-  
+	border: none;
+	float: left;
+	margin-bottom: 1px;
+	margin-left: 1px;
 }
+
 h2#site-slogan {
-  font: 1em; 
-  padding-top: 1px;
+	font: 1em;
+	padding-top: 1px;
 }
 
-#location_header_section{
-	background-color:#E5F2FF;
-	padding-top:10px;
-	padding-bottom:6px;
+#location_header_section {
+	background-color: #E5F2FF;
+	padding-top: 10px;
+	padding-bottom: 6px;
 	padding-left: 20px;
 	border-bottom: 1px solid #ddd;
 }
 
-#default_header_section{
-	background-color:#FFFFCC;
-	padding-top:10px;
-	padding-bottom:6px;
+#default_header_section {
+	background-color: #FFFFCC;
+	padding-top: 10px;
+	padding-bottom: 6px;
 	padding-left: 20px;
 	border-bottom: 1px solid #ddd;
 }
+
 /**
 * footer
 *
 */
-
 .page_footer {
-	position:   absolute;
-	bottom:     20px;
-	width:      99%;
+	position: absolute;
+	bottom: 20px;
+	width: 99%;
 	text-align: center;
-	clear:      both;
-	font-size:  9pt;
-	color:      #999;
+	clear: both;
+	font-size: 9pt;
+	color: #999;
 }
-
 
 /**
  * banners.
  */
-
-#publi_header{
-	background-color:#f4f4f4;
-	padding-top:10px;
-	padding-bottom:6px;
-	padding-right:10px;
-	text-align:right;
-	right:10px;
+#publi_header {
+	background-color: #f4f4f4;
+	padding-top: 10px;
+	padding-bottom: 6px;
+	padding-right: 10px;
+	text-align: right;
+	right: 10px;
 	border-bottom: 1px solid #ddd;
 }
-	
-
-

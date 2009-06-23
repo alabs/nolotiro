@@ -3,7 +3,7 @@
  * index home page view
  */
 // Render common HTML header
-echo $this->render('partials/html_header.phtml');
+echo $this->render ( 'partials/html_header.phtml' );
 
 ?>
 
@@ -11,21 +11,19 @@ echo $this->render('partials/html_header.phtml');
 <div id="location_header_section">
 <h3>Madrid</h3>
 </div>
-<? if ( count($this->mensajes) > 0)
-   				 {
-   				    echo '<div class="success">'; 
-   					foreach ($this->mensajes as $msg) {
-   						echo $msg.'<br>';
-   					}
-   					echo '</div>';
-   				 }
-   		?>
+<?
+if (count ( $this->mensajes ) > 0) {
+	echo '<div class="success">';
+	foreach ( $this->mensajes as $msg ) {
+		echo $msg . '<br>';
+	}
+	echo '</div>';
+}
+?>
 
 <div id="main">
-	
-	<p>
-		blablalbalbalb
-	</p> 
+
+<p>blablalbalbalb</p>
 </div>
 
-<?= $this->render('partials/html_footer.phtml'); ?>
+<?=$this->render ( 'partials/html_footer.phtml' );?>

@@ -7,29 +7,23 @@
  *  
  */
 
-
-
-class Model_DbTable_User extends Zend_Db_Table_Abstract
+class Model_DbTable_User extends Zend_Db_Table_Abstract 
 
 {
-    protected $_name = 'users';
-    protected $_primary = 'id';
+	protected $_name = 'users';
+	protected $_primary = 'id';
+	
+	/**
+	 * @abstract inserts a user row
+	 *
+	 * @return $id
+	 */
+	public function insert(array $data) {
+		$data ['created'] = date ( 'Y-m-d H:i:s' );
+		$data ['token'] = md5 ( uniqid ( rand (), 1 ) );
+		
+		return parent::insert ( $data );
+	
+	}
 
-    
-    /**
-     * @abstract inserts a user row
-     *
-     * @return $id
-     */
-    public function insert(array $data)
-    {
-    	$data['created'] = date('Y-m-d H:i:s');
-    	$data['token']= md5(uniqid(rand(),1));
-
-    	return parent::insert($data);
-        
-    }
-
-   
-    
 }

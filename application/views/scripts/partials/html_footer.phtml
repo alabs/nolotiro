@@ -1,15 +1,18 @@
-<?php 
+<?php
 //TODO merge header and footer on a main template
-$locale = Zend_Registry::get("Zend_Locale"); 
-$lang = $locale->getLanguage();
+$locale = Zend_Registry::get ( "Zend_Locale" );
+$lang = $locale->getLanguage ();
 ?>
 
 <hr />
-<div id="footer"> 
-	  	<a href='/<?=$this->baseUrl.$lang ?>/page/about'><?=$this->translate('about'); ?></a> | <a href='/blog'>blog</a> | <a href='http://twitter.com/nolotiro'>twitter</a> | <a href='/<?=$this->baseUrl.$lang ?>/contact'><?=$this->translate('contact'); ?></a> |   <a href='http://code.google.com/p/nolotiro/'><?=$this->translate('developers'); ?></a>
-	</div>
-</div><!-- /end of container -->
-	
+<div id="footer"><a href='/<?=$this->baseUrl . $lang?>/page/about'><?=$this->translate ( 'about' );?></a>
+| <a href='/blog'>blog</a> | <a href='http://twitter.com/nolotiro'>twitter</a>
+| <a href='/<?=$this->baseUrl . $lang?>/contact'><?=$this->translate ( 'contact' );?></a>
+| <a href='http://code.google.com/p/nolotiro/'><?=$this->translate ( 'developers' );?></a>
+</div>
+</div>
+<!-- /end of container -->
+
 <script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
 <script type="text/javascript">var pageTracker = _gat._getTracker("UA-141609-7");pageTracker._initData();pageTracker._trackPageview();</script>
 
