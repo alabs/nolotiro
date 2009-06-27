@@ -7,10 +7,8 @@ echo $this->render ( 'partials/html_header.phtml' );
 
 ?>
 
+<?=$this->render ( 'location/index.phtml' );?>
 
-<div id="location_header_section">
-<h3>Madrid</h3>
-</div>
 <?
 if (count ( $this->mensajes ) > 0) {
 	echo '<div class="success">';
