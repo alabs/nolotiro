@@ -1,7 +1,17 @@
 <?php
-
+//TODO merge header and footer on a main template
+$locale = Zend_Registry::get ( "Zend_Locale" );
+$lang = $locale->getLanguage ();
 ?>
 
 <div id="location_header_section">
-<h3>Massssdrid</h3>
+<h3>
+<?php
+//get the location stored at session location value 
+//(setted by default on bootstrap to Madrid woeid number)
+$aNamespace = new Zend_Session_Namespace('Nolotiro');
+echo $aNamespace->location;
+?>
+</h3>
+<a  rel="superbox[iframe][640x280]" href='/<?=$this->baseUrl . $lang?>/location/change'><?=$this->translate ( 'change location' );?></a>
 </div>

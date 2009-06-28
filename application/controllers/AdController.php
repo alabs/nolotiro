@@ -28,8 +28,8 @@ class AdController extends Zend_Controller_Action {
 	 */
 	public function indexAction() {
 		
-		$model = $this->_getModel ();
-		$this->view->ads = $model->fetchAll ();
+		//$model = $this->_getModel ();
+		//$this->view->ads = $model->fetchAll ();
 	
 	}
 	

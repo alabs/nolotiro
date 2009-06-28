@@ -33,6 +33,13 @@ Zend_Registry::set ( 'config', $config );
 $session = new Zend_Session_Namespace ( 'Nolotiro' );
 Zend_Registry::set ( 'session', $session );
 
+if (!isset($session->location)) {
+    // if location its not setted , set the Madrid woeid 
+   $session->location = 766273;    
+}
+
+Zend_Session::start();
+
 //Setup the ddbb
 $dbAdapter = Zend_Db::factory ( $config->database );
 Zend_Db_Table_Abstract::setDefaultAdapter ( $dbAdapter );
@@ -42,7 +49,12 @@ $registry = Zend_Registry::getInstance ();
 $registry->configuration = $config;
 $registry->dbAdapter = $dbAdapter;
 
-unset ( $dbAdapter, $registry, $config );
+
+
+
+
+
+//unset ( $dbAdapter, $registry, $config );
 
 // Set up the front controller and dispatch
 try {

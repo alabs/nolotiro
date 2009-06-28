@@ -130,11 +130,16 @@ h2#site-slogan {
 * html #superbox-overlay{position:absolute;height:expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight + 'px' : document.body.offsetHeight + 'px');}
 * html #superbox-wrapper{position:absolute;margin-top:expression(0 - parseInt(this.offsetHeight / 2) + (document.documentElement && document.documentElement.scrollTop || document.body.scrollTop) + 'px');}
 
-/* Default Theme */
-#superbox-overlay{background:#000;}
+
 #superbox-container .loading{text-align:center;font-size:40px;color:#fff;}
 #superbox{padding:10px;background:#fff;}
 #superbox-innerbox{padding:10px 0;}
 #superbox.image{text-align:center;}
-#superbox .close,
-#superbox .nextprev{overflow:hidden;margin:0;}
+
+/* nolotiro Theme */
+		#superbox-overlay{background:#e0e4cc;}
+		#superbox-container .loading{width:32px;height:32px;margin:0 auto;text-indent:-9999px;background:url(styles/loader.gif) no-repeat 0 0;}
+		#superbox .close a{float:right;padding:0 5px;line-height:20px;background:#333;cursor:pointer;}
+		#superbox .close a span{color:#fff;}
+		#superbox .nextprev a{float:left;margin-right:5px;padding:0 5px;line-height:20px;background:#333;cursor:pointer;color:#fff;}
+		#superbox .nextprev .disabled{background:#ccc;cursor:default;}
