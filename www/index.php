@@ -30,15 +30,16 @@ $config = new Zend_Config_Ini ( NOLOTIRO_PATH_ROOT . '/config/nolotiro.ini', 'de
 Zend_Registry::set ( 'config', $config );
 
 // Start Session
+Zend_Session::start();
 $session = new Zend_Session_Namespace ( 'Nolotiro' );
 Zend_Registry::set ( 'session', $session );
 
 if (!isset($session->location)) {
-    // if location its not setted , set the Madrid woeid 
+    // ifd location its not setted , set the Madrid woeid
    $session->location = 766273;    
 }
 
-Zend_Session::start();
+
 
 //Setup the ddbb
 $dbAdapter = Zend_Db::factory ( $config->database );
@@ -49,12 +50,7 @@ $registry = Zend_Registry::getInstance ();
 $registry->configuration = $config;
 $registry->dbAdapter = $dbAdapter;
 
-
-
-
-
-
-//unset ( $dbAdapter, $registry, $config );
+unset ( $dbAdapter, $registry, $config );
 
 // Set up the front controller and dispatch
 try {
@@ -63,16 +59,7 @@ try {
 	
 	$front->setControllerDirectory ( NOLOTIRO_PATH_ROOT . '/application/controllers' );
 	
-	//baseurl useful for fixed paths: css, images, etc
-	//$front->setBaseUrl($config->www->baseurl);
 	
-
-	//    if (isset($_COOKIE['language'])) {
-	//    	
-	//        $front->setBaseUrl($config->www->baseurl.'es');
-	//    } else {
-	//    	$front->setBaseUrl('en');;
-	//    }
 	//load the language plugin
 	$front->registerPlugin ( new Nolotiro_Controller_Plugin_Language ( ) );
 	

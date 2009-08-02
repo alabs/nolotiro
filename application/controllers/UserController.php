@@ -101,8 +101,8 @@ class UserController extends Zend_Controller_Action {
 					$mail->setBodyHtml ( $this->view->translate ( 'Please, click on this url to finish your register process:<br />' ) . $hostname . $this->view->translate ( '/en/user/validate/t/' ) . $token . '<br /><br />' . utf8_decode ( $this->view->translate ( 'After validate this link you will be able to access with this data:' ) ) . '<br />' . utf8_decode ( $this->view->translate ( 'User name:' ) ) . $formulario ['username'] . '<br />' . utf8_decode ( $this->view->translate ( 'Password:' ) ) . $password );
 					$mail->setFrom ( 'noreply@nolotiro.com', 'nolotiro.com' );
 					
-					$mail->addTo ( 'daniel.remeseiro@gmail.com' );
-					//$mail->addTo($formulario['email']);
+					//$mail->addTo ( 'daniel.remeseiro@gmail.com' );
+					$mail->addTo($formulario['email']);
 					$mail->setSubject ( $formulario ['username'] . $this->view->translate ( ', confirm your email' ) );
 					$mail->send ();
 					
@@ -195,10 +195,10 @@ class UserController extends Zend_Controller_Action {
 					//lets send the new password..
 					$mail = new Zend_Mail ( );
 					$mail->setBodyHtml ( utf8_decode ( $this->view->translate ( 'Hi, this is your new password:<br />' ) ) . $password );
-					$mail->setFrom ( 'noreply@nolotiro.com', 'nolotiro.com' );
+					$mail->setFrom ( 'noreply@nolotiro.org', 'nolotiro.org' );
 					
 					$mail->addTo ( $mailcheck ['email'] );
-					$mail->setSubject ( utf8_decode ( $this->view->translate ( 'Your nolotiro.com new password' ) ) );
+					$mail->setSubject ( utf8_decode ( $this->view->translate ( 'Your nolotiro.org new password' ) ) );
 					$mail->send ();
 					
 					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Check your inbox email to get your new password' ) );

@@ -8,11 +8,11 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title><?=isset ( $this->page_title ) ? $this->page_title : 'nolotiro.com'?></title>
+<title><?=isset ( $this->page_title ) ? $this->page_title : 'nolotiro.org'?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="copyright" content="daniel remeseiro" />
 <meta name="DC.Title"
-	content="<?=isset ( $this->page_title ) ? $this->page_title : 'nolotiro.com'?>" />
+	content="<?=isset ( $this->page_title ) ? $this->page_title : 'nolotiro.org'?>" />
 <meta name="robots" content="index,follow" />
 
 <link rel="shortcut icon" href="<?=$this->baseUrl?>/images/favicon.ico" type="image/x-icon" />
@@ -29,10 +29,10 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 <script type="text/javascript">
 		$(function(){
 			$.superbox.settings = {
-				closeTxt: "Close",
-				loadTxt: "Loading...",
-				nextTxt: "Next",
-				prevTxt: "Previous"
+				closeTxt: "<?=$this->translate ( 'Close' )?>",
+				loadTxt: "<?=$this->translate ( 'Loading' )?>...",
+				nextTxt: "<?=$this->translate ( 'Next' )?>",
+				prevTxt: "<?=$this->translate ( 'Previous' )?>"
 			};
 			$.superbox();
 		});
@@ -80,12 +80,13 @@ if (! $auth->hasIdentity ()) {
 
 
 <h1 id="site-name"><a href="/<?=$this->lang?>"
-	title="nolotiro.com home"> <img
-	src="<?=Zend_Controller_Front::getInstance ()->getBaseUrl ();?>/images/nolotiro_logo.png"
-	alt="Nolotiro.com logo" id="logo" />nolotiro.com</a></h1>
+	title="nolotiro.org home"> <img
+	src="/images/nolotiro_logo.png"
+	alt="Nolotiro.org logo" id="logo" />nolotiro.org</a></h1>
 <h2 id='site-slogan'><?=$this->translate ( 'no lo tiro, te lo doy (sin condiciones)' )?></h2>
 
 </div>
 
+<!--
 <div id="publi_header"><img alt="demo banner"
-	src="/images/banner_dummy.gif"></div>
+	src="/images/banner_dummy.gif"></div> -->
