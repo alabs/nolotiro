@@ -88,7 +88,7 @@ class AdController extends Zend_Controller_Action {
 					$formulario ['user_owner'] = $auth->getIdentity ()->id;
 					
 					//get date created
-				    //TODO to use the Zend Date object to apapt the time to the locale user zone
+                    //TODO to use the Zend Date object to apapt the time to the locale user zone
 					$datenow = date("Y-m-d H:i:s", time() );
 					$formulario ['date_created'] = $datenow;
 					
@@ -103,7 +103,8 @@ class AdController extends Zend_Controller_Action {
 					$model->save ( $formulario );
 					
 					Zend_Debug::dump ( $formulario );
-				    //TODO redir to root and show message green success created new ad
+
+                    //TODO redir to root and show message green success created new ad
 					
 				}
 			}
