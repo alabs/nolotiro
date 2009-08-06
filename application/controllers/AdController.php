@@ -65,15 +65,31 @@ class AdController extends Zend_Controller_Action {
 					
 					$formulario = $form->getValues ();
 					
-					//anti hoygan to title
-					$formulario['title'] = strtolower($formulario['title']);
-					$formulario['title'] = ucfirst($formulario['title']);
+					//strip html tags to title
+					$formulario['title'] = strip_tags($formulario['title']);
 					
+					//anti hoygan to title
+					//dont use strtolower because dont convert utf8 properly . ej: á é ó ...
+					$formulario['title'] = ucfirst(mb_convert_case($formulario['title'], MB_CASE_LOWER, "UTF-8")); 
+					
+					//strip html tags to body
+					$formulario['body'] = strip_tags($formulario['body']);
+					
+					//anti hoygan to body
+					$split=explode(". ", $formulario['body']);
+                    
+					foreach ($split as $sentence) {
+                        $sentencegood = ucfirst(mb_convert_case($sentence, MB_CASE_LOWER, "UTF-8"));
+                        $formulario['body'] = str_replace($sentence, $sentencegood, $formulario['body']);
+                    }
+					
+                    
 					//get this ad user owner
 					$formulario ['user_owner'] = $auth->getIdentity ()->id;
 					
 					//get date created
-				    $datenow = date("Y-m-d H:i:s", time() );
+				    //TODO to use the Zend Date object to apapt the time to the locale user zone
+					$datenow = date("Y-m-d H:i:s", time() );
 					$formulario ['date_created'] = $datenow;
 					
 					//get woeid to assign to this ad
@@ -87,7 +103,7 @@ class AdController extends Zend_Controller_Action {
 					$model->save ( $formulario );
 					
 					Zend_Debug::dump ( $formulario );
-				
+				    //TODO redir to root and show message green success created new ad
 					
 				}
 			}
