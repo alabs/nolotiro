@@ -84,6 +84,15 @@ class AdController extends Zend_Controller_Action {
                     }
 					
                     
+                    //get the ip of the ad publisher
+                    if (getenv(HTTP_X_FORWARDED_FOR)) {							
+                        $ip = getenv(HTTP_X_FORWARDED_FOR); 
+                    } else { 
+                        $ip = getenv(REMOTE_ADDR);
+                    }
+            
+                    $formulario['ip'] = $ip;        
+                    
 					//get this ad user owner
 					$formulario ['user_owner'] = $auth->getIdentity ()->id;
 					
