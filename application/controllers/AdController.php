@@ -3,7 +3,7 @@
 /**
  * AdController
  * 
- * @author
+ * @author  dani remeseiro
  * @abstract this is the Ad controller , 
  * do the crud relative to ads : create, show, edit, delete
  */
@@ -48,7 +48,9 @@ class AdController extends Zend_Controller_Action {
 		//first we check if user is logged, if not redir to login
 		$auth = Zend_Auth::getInstance ();
 		if (! $auth->hasIdentity ()) {
-			$this->_redirect ( '/es/auth/login' );
+			$this->_redirect ( '/es/auth/login' );//TODO get the languege route automatic
+			
+			
 		} else {
 			
 			$request = $this->getRequest ();
@@ -63,13 +65,30 @@ class AdController extends Zend_Controller_Action {
 					
 					$formulario = $form->getValues ();
 					
-					$model = $this->_getModel ();
+					//anti hoygan to title
+					$formulario['title'] = strtolower($formulario['title']);
+					$formulario['title'] = ucfirst($formulario['title']);
 					
+					//get this ad user owner
 					$formulario ['user_owner'] = $auth->getIdentity ()->id;
+					
+					//get date created
+				    $datenow = date("Y-m-d H:i:s", time() );
+					$formulario ['date_created'] = $datenow;
+					
+					//get woeid to assign to this ad
+					//the location its stored at session location value 
+                    //(setted by default on bootstrap to Madrid woeid number)
+                    $aNamespace = new Zend_Session_Namespace('Nolotiro');
+                    $formulario ['woeid_code'] = $aNamespace->location;
+					
+					
+					$model = $this->_getModel ();
 					$model->save ( $formulario );
 					
 					Zend_Debug::dump ( $formulario );
 				
+					
 				}
 			}
 		}
@@ -115,11 +134,7 @@ class AdController extends Zend_Controller_Action {
 	}
 	
 	/**
-	 * _getModel() is a protected utility method for this controller. It is 
-	 * responsible for creating the model object and returning it to the 
-	 * calling action when needed. Depending on the depth and breadth of the 
-	 * application, this may or may not be the best way of handling the loading 
-	 * of models.
+	 * _getModel() is a protected utility method for this controller.
 	 * 
 	 * @return Model_User
 	 */

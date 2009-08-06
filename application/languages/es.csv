@@ -72,3 +72,15 @@
 "This email is not in our database. Please, try again.";"Ese email no está en nuestra base de datos. Por favor, intentalo de nuevo."
 "Hi, this is your new password:<br />";"Hola, esta es tu nueva contraseña:<br />"
 "Your nolotiro.com new password";"Tu nueva contraseña de nolotiro.com"
+
+#super lightbox
+"Close";"Cerrar"
+"Loading";"Cargando"
+"Next";"Siguiente"
+"Previous";"Anterior"
+
+#location
+"change location";"cambiar ubicación"
+"Change your location";"Cambia tu ubicación"
+"Please, start to write your location";"Por favor, empieza a escribir tu ubicación"
+"Location";"Ubicación"

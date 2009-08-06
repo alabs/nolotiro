@@ -10,6 +10,7 @@ class Model_DbTable_Ad extends Zend_Db_Table {
 	protected $_name = 'ads';
 	
 	public function addAd($body, $title) {
+
 		$data = array ('body' => $body, 'title' => $title );
 		$this->insert ( $data );
 	}
