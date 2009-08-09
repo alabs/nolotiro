@@ -111,9 +111,9 @@ class AdController extends Zend_Controller_Action {
 					$model = $this->_getModel ();
 					$model->save ( $formulario );
 					
-					Zend_Debug::dump ( $formulario );
-
-                    //TODO redir to root and show message green success created new ad
+					//Zend_Debug::dump ( $formulario );
+                    $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad published succesfully!' ) );
+					$this->_redirect ( '/' );
 					
 				}
 			}
