@@ -49,7 +49,7 @@ class AuthController extends Zend_Controller_Action {
 				$authAdapter->setCredentialColumn ( 'password' );
 				// Set the input credential values to authenticate against
 				$authAdapter->setIdentity ( $email );
-				$authAdapter->setCredential ( md5 ( $password ) );
+				$authAdapter->setCredential ( md5 ( trim($password) ) ); //trim whitespaces from copy&pasting the pass from email
 				
 				// do the authentication
 				$auth = Zend_Auth::getInstance ();

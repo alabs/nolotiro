@@ -45,10 +45,13 @@ class AdController extends Zend_Controller_Action {
 	
 	public function createAction() {
 		
+	    $locale = Zend_Registry::get ( "Zend_Locale" );
+        $lang = $locale->getLanguage ();
+	    
 		//first we check if user is logged, if not redir to login
 		$auth = Zend_Auth::getInstance ();
 		if (! $auth->hasIdentity ()) {
-			$this->_redirect ( '/es/auth/login' );//TODO get the languege route automatic
+			$this->_redirect ( $lang.'/auth/login' );
 			
 			
 		} else {

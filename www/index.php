@@ -77,8 +77,6 @@ try {
 	
 	$front->setRouter ( $router );
 	
-	//$front->setBaseUrl('es/'.$config->www->baseurl); 
-	
 
 	$front->dispatch ();
 	

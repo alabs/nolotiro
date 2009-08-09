@@ -32,6 +32,17 @@ a:hover {
 	padding: 4px;
 }
 
+
+.ad_create_tab {
+	position: absolute;
+	margin-top: 1.4em;
+	background-color: #fff;
+    font-size: 15pt;
+    font-weight: bold;
+	right: 10px;
+	padding: 4px;
+}
+
 /**
  * Layout.
  */
