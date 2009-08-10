@@ -1,6 +1,6 @@
 <?php
 /**
- * Nolotiro_Page - a model class representing ad crud
+ * a model class representing ad crud
  *
  * This is the DbTable class for the ads table.
  *  
@@ -15,7 +15,7 @@ class Model_Ad
 	/**
 	 * Retrieve table object
 	 * 
-	 * @return Model_User_Table
+	 * @return Model_Ad_Table
 	 */
 	public function getTable() {
 		if (null === $this->_table) {
@@ -67,6 +67,35 @@ class Model_Ad
 		
 	}
 
+	
+	/**
+	 * Fetch a list of ads where woeid and ad_type matches 
+	 * 
+	 * @param  int $woeid
+	 * @param  string $ad_type  
+	 * @return array list of ads with this params
+	 */
+	public function getAdList($woeid,$ad_type) {
+		$woeid = ( int ) $woeid;
+		$ad_type = ( string ) $ad_type;
+		
+		
+		$table = $this->getTable ();
+		$select = $table->select ()->where ( 'woeid_code = ?', $woeid );
+		
+		if (!$table->fetchAll ( $select )) {
+			throw new Exception ( "Count not find row $woeid" );
+			
+		} else {
+			$result = $table->fetchAll ( $select )->toArray ();
+		}
+		
+		return $result;
+		
+	}
+
+	
+	
 }
 
 

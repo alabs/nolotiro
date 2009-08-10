@@ -24,13 +24,22 @@ class AdController extends Zend_Controller_Action {
 	}
 	
 	/**
-	 * The default action - show the home page
+	 * The default action - show a list where woeid and ad type 
+	 * Get the woeid and the ad_type from the session reg
 	 */
-	public function indexAction() {
-		
-		//$model = $this->_getModel ();
-		//$this->view->ads = $model->fetchAll ();
+	public function listAction() {
+
+	    
+	    $woeid = $this->_request->getParam ( 'woeid' );
+	    $ad_type = $this->_request->getParam ( 'ad_type' );
+        
+		$model = $this->_getModel ();
+		$this->view->ad = $model->getAdList($woeid, $ad_type);
 	
+		//$this->view->mensajes = $this->_flashMessenger->getMessages ();
+		//$this->render ();
+
+		
 	}
 	
 	public function showAction() {

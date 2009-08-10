@@ -1,0 +1,55 @@
+<?php
+/**
+ * index home page view
+ */
+// Render common HTML header
+echo $this->render ( 'partials/html_header.phtml' );
+
+?>
+
+<?=$this->render ( 'location/index.phtml' );?>
+
+<?
+if (count ( $this->mensajes ) > 0) {
+	echo '<div class="success">';
+	foreach ( $this->mensajes as $msg ) {
+		echo $msg . '<br>';
+	}
+	echo '</div>';
+}
+?>
+
+<div id="main">
+
+
+
+<?php
+//Zend_Debug::dump($this->ad)
+
+
+if ($this->ad): ?>
+
+
+        <?php foreach ($this->ad as $key => $val): ?>
+        <div class="ad">
+           <span><a href="<?php echo $this->url(array('controller'=>'ad',
+    'action'=>'show', 'id'=>$ad->id));?>"></a><?php echo $this->escape($val['title']) ?></span>
+           <span><?php echo $this->escape($val['body']) ?></span>
+        </div>
+        <hr>
+        <?php endforeach; ?>
+
+
+<?php else: ?>
+
+    <p>There are no ads to display for this location.</p>
+
+<?php endif;?>
+
+
+
+</div>
+
+<?=$this->render ( 'partials/html_footer.phtml' );?>
+
+

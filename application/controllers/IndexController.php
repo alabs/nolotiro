@@ -20,28 +20,26 @@ class IndexController extends Zend_Controller_Action {
 		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
 		$this->view->user = Zend_Auth::getInstance ()->getIdentity ();
 		
-	//$this->_forward($language);
-	//        if (!Zend_Registry::get('session')->logged_in) {
-	//            $this->_redirect('/user/login');
-	//        }
+	
 	}
 	
 	public function indexAction() {
 		
-		$this->view->mensajes = $this->_flashMessenger->getMessages ();
-		$this->render ();
+		
+		//redir to the list of ads of woeid + ad_type sessiob stored , ad controller
+		
+	    $aNamespace = new Zend_Session_Namespace('Nolotiro');
+        $woeid = $aNamespace->location;
+        $ad_type = $aNamespace->ad_type;
+	    
+		
+		
+		$locale = Zend_Registry::get ( "Zend_Locale" );
+        $lang = $locale->getLanguage ();
+        
+		$this->_redirect('/'.$lang.'/ad/list/woeid/'.$woeid.'/ad_type/'.$ad_type);
 	}
 	
-	function preDispatch() {
-		//$auth = Zend_Auth::getInstance();
-	//if (!$auth->hasIdentity()) {
-	//$this->_redirect('auth/login');
-	//}
-	//    if ($this->_request->getParam('language') == null) {
-	//    	$this->_redirect($this->view->baseUrl.$_COOKIE["lang"].'/');
-	//    }
 	
-
-	}
 
 }

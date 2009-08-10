@@ -29,11 +29,7 @@ class UserController extends Zend_Controller_Action {
 	public function indexAction() {
 		//by now just redir to /
 		$this->_redirect ( '/' );
-		//        if ($this->session->authenticated) {
-	//            $this->_forward('profile');
-	//        } else {
-	//            $this->_forward('register');
-	//        }
+	
 	}
 	
 	/**
