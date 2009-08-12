@@ -50,16 +50,12 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 $locale = Zend_Registry::get ( "Zend_Locale" );
 $this->lang = $locale->getLanguage ();
 ?>
-  	
-<div class="select_language_box"><select
-	name="site_language_code_select" id="site_language_code_select">
-	<option <?=$this->lang == 'en' ? 'selected="selected"' : '';?>
-		value="<?=$this->baseUrl . 'en'?>" id="en">English</option>
-	<option <?=$this->lang == 'es' ? 'selected="selected"' : '';?>
-		value="<?=$this->baseUrl . 'es'?>" id="es">Español</option>
-</select></div>
+
 
 <div class="user_login_box">
+
+
+
 <?php
 
 $auth = Zend_Auth::getInstance ();
@@ -75,7 +71,21 @@ if (! $auth->hasIdentity ()) {
 }
 
 ?>
-	</div>
+
+
+<span class="select_language_box">
+<select	name="site_language_code_select" id="site_language_code_select">
+	<option <?=$this->lang == 'en' ? 'selected="selected"' : '';?>
+		value="<?=$this->baseUrl . 'en'?>" id="en">English</option>
+	<option <?=$this->lang == 'es' ? 'selected="selected"' : '';?>
+		value="<?=$this->baseUrl . 'es'?>" id="es">Español</option>
+</select>
+</span>
+
+
+
+
+</div>
 
 
 
@@ -86,7 +96,7 @@ if (! $auth->hasIdentity ()) {
 <h2 id='site-slogan'><?=$this->translate ( 'no lo tiro, te lo doy (sin condiciones)' )?></h2>
 
 
-<div class="ad_create_tab"><a href="/<?=$this->lang.'/ad/create' ?>">Create new ad</a></div>
+<div class="ad_create_tab"><a href="/<?=$this->lang.'/ad/create' ?>"><?=$this->translate ('Create new ad')?></a></div>
 
 
 </div>
