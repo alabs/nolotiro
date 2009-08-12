@@ -3,6 +3,13 @@
  * index home page view
  */
 // Render common HTML header
+
+
+//TODO merge header and footer on a main template
+$locale = Zend_Registry::get ( "Zend_Locale" );
+$lang = $locale->getLanguage ();
+
+
 echo $this->render ( 'partials/html_header.phtml' );
 
 ?>
@@ -30,14 +37,20 @@ if (count ( $this->mensajes ) > 0) {
 if ($this->ad): ?>
 
 
-        <?php foreach ($this->ad as $key => $val): ?>
-        <div class="ad">
-           <span><a href="<?php echo $this->url(array('controller'=>'ad',
-    'action'=>'show', 'id'=>$ad->id));?>"></a><?php echo $this->escape($val['title']) ?></span>
+       <?php foreach ($this->ad as $key => $val): ?>
+        <div class="ad_excerpt">
+           <h4><a href="/<?=$lang ?>/ad/show/id/<?=$this->escape($val['id']) ?>"><?=$this->escape($val['title']) ?></a></h4>
+           
+           <span class="ad_date">Posted on <?=$this->escape($val['date_created']) ?>
+            by user 
+            <a href="/<?=$lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['user_owner']) ?></a>
+            </span>
+           <br>
            <span><?php echo $this->escape($val['body']) ?></span>
         </div>
         <hr>
         <?php endforeach; ?>
+
 
 
 <?php else: ?>

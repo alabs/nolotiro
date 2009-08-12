@@ -35,13 +35,33 @@ a:hover {
 
 .ad_create_tab {
 	position: absolute;
-	margin-top: 1.4em;
+	margin-top: 30px;
 	background-color: #fff;
-    font-size: 15pt;
+    font-size: 1.3em;
     font-weight: bold;
 	right: 10px;
 	padding: 4px;
 }
+
+.ad_excerpt{
+    padding-bottom: 14px;
+    padding-left: 18px;
+    
+}
+
+.ad_excerpt h4{
+
+    font-size: 1.3em;
+    font-weight: bold;   
+}
+
+.ad_date{
+    color:#666;
+    font-size: 0.9em;
+    font-weight: normal;   
+}
+
+
 
 /**
  * Layout.

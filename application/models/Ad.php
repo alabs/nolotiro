@@ -81,7 +81,7 @@ class Model_Ad
 		
 		
 		$table = $this->getTable ();
-		$select = $table->select ()->where ( 'woeid_code = ?', $woeid );
+		$select = $table->select ()->where ( 'woeid_code = ?', $woeid , 'ad_type = ?', $ad_type );
 		
 		if (!$table->fetchAll ( $select )) {
 			throw new Exception ( "Count not find row $woeid" );
