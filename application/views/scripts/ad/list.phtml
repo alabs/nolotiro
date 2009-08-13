@@ -43,6 +43,8 @@ if ($this->ad): ?>
            
            <span class="ad_date"><?=$this->translate('Posted on '). $this->escape($val['date_created']) ?>
             <?=$this->translate('by user ') ?> 
+            
+           
             <a href="/<?=$lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['user_owner']) ?></a>
             </span>
            <br>
@@ -55,7 +57,7 @@ if ($this->ad): ?>
 
 <?php else: ?>
 
-    <p><?=$this->translate ( 'No ads to display for this location.');?></p>
+    <p><h3><?=$this->translate ( 'No ads to display for this location.');?></p></h3>
 
 <?php endif;?>
 

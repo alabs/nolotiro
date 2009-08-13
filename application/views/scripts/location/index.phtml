@@ -10,8 +10,20 @@ $lang = $locale->getLanguage ();
 //get the location stored at session location value 
 //(setted by default on bootstrap to Madrid woeid number)
 $aNamespace = new Zend_Session_Namespace('Nolotiro');
-echo $this->translate ($aNamespace->ad_type) .' - '. $aNamespace->location;
+//$this->translate ($aNamespace->ad_type);
+echo $aNamespace->location;
 ?>
 </h3>
-<a  rel="superbox[iframe][640x280]" href='/<?=$lang?>/location/change'><?=$this->translate ( 'change location' );?></a>
+
+
+<span class="give-want">
+<a id="actual" href='/<?=$lang?>/ad/list/woeid/<?=$aNamespace->location?>/ad_type/give'><?=$this->translate ( 'give' );?></a>
+&nbsp;
+<a id="actual" href='/<?=$lang?>/ad/list/woeid/<?=$aNamespace->location?>/ad_type/want'><?=$this->translate ( 'want' );?></a>
+</span>
+
+
+<a rel="superbox[iframe][640x280]" href='/<?=$lang?>/location/change'><?=$this->translate ( 'change location' );?></a>
+
+
 </div>

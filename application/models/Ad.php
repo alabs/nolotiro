@@ -81,7 +81,10 @@ class Model_Ad
 		
 		
 		$table = $this->getTable ();
-		$select = $table->select ()->where ( 'woeid_code = ?', $woeid , 'ad_type = ?', $ad_type );
+		$select = $table->select ()->where ( 'woeid_code = ?', $woeid  )
+		->where ( 'type = ?', $ad_type )
+		->order('date_created DESC')
+		;
 		
 		if (!$table->fetchAll ( $select )) {
 			throw new Exception ( "Count not find row $woeid" );

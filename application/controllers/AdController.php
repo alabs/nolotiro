@@ -16,10 +16,14 @@ class AdController extends Zend_Controller_Action {
 	 */
 	public function init() {
 		parent::init ();
-		//$this->view->baseUrl = $this->_request->getBaseUrl();
+			
+		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
 		
-
+		//$this->view->baseUrl = $this->_request->getBaseUrl();
 		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
+		
+	
+	
 	
 	}
 	
@@ -35,9 +39,11 @@ class AdController extends Zend_Controller_Action {
         
 		$model = $this->_getModel ();
 		$this->view->ad = $model->getAdList($woeid, $ad_type);
+		
+		
 	
-		//$this->view->mensajes = $this->_flashMessenger->getMessages ();
-		//$this->render ();
+		$this->view->mensajes = $this->_flashMessenger->getMessages ();
+		$this->render ();
 
 		
 	}
@@ -182,6 +188,15 @@ class AdController extends Zend_Controller_Action {
 			require_once APPLICATION_PATH . '/models/Ad.php';
 			$this->_model = new Model_Ad ( );
 		}
+		return $this->_model;
+	}
+	
+	protected function _getModelUser() {
+		
+			
+			require_once APPLICATION_PATH . '/models/User.php';
+			$this->_model = new Model_User( );
+		
 		return $this->_model;
 	}
 

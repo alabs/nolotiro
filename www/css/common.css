@@ -1,4 +1,9 @@
-a:link,a:visited {
+a:link {
+	color: #00ACCF;
+	text-decoration: none;
+}
+
+a:visited {
 	color: #00ACCF;
 	text-decoration: none;
 }
@@ -60,6 +65,38 @@ a:hover {
     font-size: 0.9em;
     font-weight: normal;   
 }
+
+
+.give-want {
+    
+	position: relative;
+	width:auto;
+	float:right;
+	background-color: #fff;
+    font-size: 2em;
+    font-weight: bold;
+	right: 10px;
+	top:-50px;
+	padding: 6px;
+}
+
+
+.give-want a:hover {
+	background-color: #00ACCF;
+	color: #FFF;
+	text-decoration: none;
+}
+
+
+
+
+.give-want a:active a:visited{
+	background-color: #fff;
+	color:  #00ACCF;
+	border-bottom: 4px solid #999;
+	text-decoration: underline;
+}
+
 
 
 
