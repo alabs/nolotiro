@@ -2,6 +2,7 @@
 //TODO merge header and footer on a main template
 $locale = Zend_Registry::get ( "Zend_Locale" );
 $lang = $locale->getLanguage ();
+
 ?>
 
 <div id="location_header_section">
@@ -12,14 +13,16 @@ $lang = $locale->getLanguage ();
 $aNamespace = new Zend_Session_Namespace('Nolotiro');
 //$this->translate ($aNamespace->ad_type);
 echo $aNamespace->location;
+
+
 ?>
 </h3>
 
 
 <span class="give-want">
-<a id="actual" href='/<?=$lang?>/ad/list/woeid/<?=$aNamespace->location?>/ad_type/give'><?=$this->translate ( 'give' );?></a>
+<a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$lang?>/ad/list/woeid/<?=$aNamespace->location?>/ad_type/give'><?=$this->translate ( 'give' );?></a>
 &nbsp;
-<a id="actual" href='/<?=$lang?>/ad/list/woeid/<?=$aNamespace->location?>/ad_type/want'><?=$this->translate ( 'want' );?></a>
+<a class="<?=(preg_match("/want/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$lang?>/ad/list/woeid/<?=$aNamespace->location?>/ad_type/want'><?=$this->translate ( 'want' );?></a>
 </span>
 
 

@@ -41,7 +41,6 @@ class AdController extends Zend_Controller_Action {
 		$this->view->ad = $model->getAdList($woeid, $ad_type);
 		
 		
-	
 		$this->view->mensajes = $this->_flashMessenger->getMessages ();
 		$this->render ();
 
@@ -191,13 +190,6 @@ class AdController extends Zend_Controller_Action {
 		return $this->_model;
 	}
 	
-	protected function _getModelUser() {
-		
-			
-			require_once APPLICATION_PATH . '/models/User.php';
-			$this->_model = new Model_User( );
-		
-		return $this->_model;
-	}
+	
 
 }

@@ -14,9 +14,8 @@ a:active {
 }
 
 a:hover {
-	background-color: #ffff00;
-	color: #00C7EF;
-	text-decoration: none;
+	/*color: #FF08DE;*/
+	text-decoration: underline;
 }
 
 .user_login_box {
@@ -40,11 +39,11 @@ a:hover {
 
 .ad_create_tab {
 	position: absolute;
-	margin-top: 30px;
+	margin-top: 35px;
 	background-color: #fff;
     font-size: 1.3em;
     font-weight: bold;
-	right: 10px;
+	right: 20px;
 	padding: 4px;
 }
 
@@ -68,7 +67,6 @@ a:hover {
 
 
 .give-want {
-    
 	position: relative;
 	width:auto;
 	float:right;
@@ -77,28 +75,19 @@ a:hover {
     font-weight: bold;
 	right: 10px;
 	top:-50px;
-	padding: 6px;
+	padding: 15px;
 }
 
 
-.give-want a:hover {
-	background-color: #00ACCF;
-	color: #FFF;
-	text-decoration: none;
-}
-
-
-
-
-.give-want a:active a:visited{
-	background-color: #fff;
-	color:  #00ACCF;
-	border-bottom: 4px solid #999;
+a.actual {
+	
+	/*color: #FF08DE;*/
 	text-decoration: underline;
 }
 
-
-
+.errors{
+    color:red;
+}
 
 /**
  * Layout.
