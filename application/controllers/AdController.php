@@ -41,6 +41,26 @@ class AdController extends Zend_Controller_Action {
 		$this->view->ad = $model->getAdList($woeid, $ad_type);
 		
 		
+		//set the location reg var from the url
+		$aNamespace = new Zend_Session_Namespace('Nolotiro');
+        $aNamespace->location = $woeid;
+        
+        
+        
+        //paginator
+                        
+        
+        $page=$this->_getParam('page');
+        $paginator = Zend_Paginator::factory($this->view->ad);
+        $paginator->setItemCountPerPage(2);
+        $paginator->setCurrentPageNumber($page);
+
+        $this->view->paginator=$paginator;
+
+        
+        
+		
+		///
 		$this->view->mensajes = $this->_flashMessenger->getMessages ();
 		$this->render ();
 

@@ -86,12 +86,9 @@ class Model_Ad
 		->order('date_created DESC')
 		;
 		
-		if (!$table->fetchAll ( $select )) {
-			throw new Exception ( "Count not find row $woeid" );
-			
-		} else {
-			$result = $table->fetchAll ( $select )->toArray ();
-		}
+		
+		$result = $table->fetchAll ( $select )->toArray ();
+
 		
 		return $result;
 		

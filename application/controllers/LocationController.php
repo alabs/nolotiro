@@ -11,9 +11,6 @@ class LocationController extends Zend_Controller_Action {
 		
 		
 	}
-
-	
-	
 	
 	
 	/**

@@ -31,15 +31,17 @@ if (count ( $this->mensajes ) > 0) {
 
 
 <?php
-//Zend_Debug::dump($this->ad)
+//Zend_Debug::dump($this->ad);
+//Zend_Debug::dump($this->paginator);
 
 
 if ($this->ad): ?>
 
 
-       <?php foreach ($this->ad as $key => $val): ?>
+       <?php foreach ($this->paginator as $key => $val): ?>
         <div class="ad_excerpt">
-           <h4><a href="/<?=$lang ?>/ad/show/id/<?=$this->escape($val['id']) ?>"><?=$this->escape($val['title']) ?></a></h4>
+           <h4><a href="/<?=$lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+           <?=$this->escape($val['title']) ?></a></h4>
            
            <span class="ad_date"><?=$this->translate('Posted on '). $this->escape($val['date_created']) ?>
             <?=$this->translate('by user ') ?> 
@@ -62,8 +64,9 @@ if ($this->ad): ?>
 <?php endif;?>
 
 
-
-</div>
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'partials/paginator_ads.phtml'); ?>
 
 <?=$this->render ( 'partials/html_footer.phtml' );?>
 

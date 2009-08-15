@@ -129,10 +129,16 @@ h2#site-slogan {
 
 #location_header_section {
 	background-color: #E5F2FF;
+	
 	padding-top: 10px;
 	padding-bottom: 6px;
 	padding-left: 20px;
 	border-bottom: 1px solid #ddd;
+}
+
+#location_header_section  a{
+    
+    font-weight: bold;
 }
 
 #default_header_section {
