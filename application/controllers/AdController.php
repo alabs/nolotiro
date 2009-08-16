@@ -76,14 +76,10 @@ class AdController extends Zend_Controller_Action {
 		
 		$model = $this->_getModel ();
 		
-		$getAd = $model->getAd ( $id );
 		$this->view->ad = $model->getAd( $id );
 	
-		$this->view->comments = $model->fetchAll( $id )->findDependentRowset('Comment');
+		$this->view->comments = $model->getComments( $id );
 		
-		///comments from comment controller
-		//$comment = new CommentController;
-		//$this->view->comment = $comment->listAction();  
 		
 		
 	}
@@ -224,3 +220,5 @@ class AdController extends Zend_Controller_Action {
 	
 
 }
+
+

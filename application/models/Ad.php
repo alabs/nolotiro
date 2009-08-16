@@ -67,8 +67,31 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 			throw new Exception ( "Count not find row $id" );
 			
 		} else {
-			$result = $table->fetchRow ( $select )->toArray ();
+		    
+		    //$result = $table->fetchRow ( $select )->findDependentRowset('Comment')->toArray ();
+			
+		    
+		    $result = $table->fetchRow ( $select )->toArray ();
+			
 		}
+		
+		return $result;
+		
+	}
+	
+	/**
+	 * Fetch the comments of an ad
+	 * 
+	 * @param  int|string $id 
+	 * @return null|Zend_Db_Table_Row_Abstract
+	 */
+	public function getComments($id) {
+		$id = ( int ) $id;
+		
+		$table = new Model_Ad ( );
+		$select = $table->select ()->where ( 'id = ?', $id );
+		
+		$result = $table->fetchRow ( $select )->findDependentRowset('Comment')->toArray ();
 		
 		return $result;
 		
@@ -96,6 +119,50 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		
 		$result = $table->fetchAll ( $select )->toArray ();
 
+		
+		return $result;
+		
+	}
+
+	
+	
+}
+
+
+
+
+
+
+class Comment extends Zend_Db_Table_Abstract  {
+	protected $_name = 'comments';
+    
+	protected $_referenceMap    = array(
+    'Ad' => array(
+        'columns'           => array('ads_id'),
+        'refTableClass'     => 'Model_Ad',
+        'refColumns'        => array('id')
+    )
+);
+
+	
+	
+	
+
+	/**
+	 * Fetch a list of comments where id_ad_parent match 
+	 * 
+	 * @param  int $ads_id
+	 * @return array list of ads with this params
+	 */
+	public function getComments($ads_id) {
+		$id_ad_parent = ( int ) $ads_id;
+		
+		$table = $this->getTable ();
+		$select = $table->select ()->where ( 'ads_id = ?', $ads_id  )
+		->order('date_created ASC');
+		
+		
+		$result = $table->fetchAll ( $select )->toArray ();
 		
 		return $result;
 		
