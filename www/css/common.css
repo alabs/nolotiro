@@ -108,6 +108,7 @@ a.actual {
 }
 
 #footer {
+    padding-bottom:10px;
 	clear: both;
 	text-align: center;
 }
@@ -147,6 +148,13 @@ h2#site-slogan {
 	padding-bottom: 6px;
 	padding-left: 20px;
 	border-bottom: 1px solid #ddd;
+}
+
+
+.pagination{
+    padding:6px;
+    font-size:1.2em;
+    text-align: left;
 }
 
 /**

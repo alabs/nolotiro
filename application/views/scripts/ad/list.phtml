@@ -1,8 +1,7 @@
 <?php
 /**
- * index home page view
+ * index home page view: list ads where woeid and type matches
  */
-// Render common HTML header
 
 
 //TODO merge header and footer on a main template
@@ -67,6 +66,9 @@ if ($this->ad): ?>
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'partials/paginator_ads.phtml'); ?>
+
+                                    
+</div> <!-- /main -->
 
 <?=$this->render ( 'partials/html_footer.phtml' );?>
 

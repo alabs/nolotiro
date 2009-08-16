@@ -35,7 +35,7 @@ $session = new Zend_Session_Namespace ( 'Nolotiro' );
 Zend_Registry::set ( 'session', $session );
 
 if (!isset($session->location)) {
-    // ifd location its not setted , set the Madrid woeid
+    // if location is not setted , set the Madrid woeid
    $session->location = 766273;    
 }
 

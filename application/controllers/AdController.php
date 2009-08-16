@@ -17,7 +17,7 @@ class AdController extends Zend_Controller_Action {
 	public function init() {
 		parent::init ();
 			
-		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
+		
 		
 		//$this->view->baseUrl = $this->_request->getBaseUrl();
 		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
@@ -32,7 +32,7 @@ class AdController extends Zend_Controller_Action {
 	 * Get the woeid and the ad_type from the session reg
 	 */
 	public function listAction() {
-
+	    
 	    
 	    $woeid = $this->_request->getParam ( 'woeid' );
 	    $ad_type = $this->_request->getParam ( 'ad_type' );
@@ -50,8 +50,9 @@ class AdController extends Zend_Controller_Action {
         //paginator
                         
         
-        $page=$this->_getParam('page');
+        $page = $this->_getParam('page');
         $paginator = Zend_Paginator::factory($this->view->ad);
+        $paginator->setDefaultScrollingStyle('Elastic');
         $paginator->setItemCountPerPage(2);
         $paginator->setCurrentPageNumber($page);
 
@@ -61,8 +62,9 @@ class AdController extends Zend_Controller_Action {
         
 		
 		///
+		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
 		$this->view->mensajes = $this->_flashMessenger->getMessages ();
-		$this->render ();
+		
 
 		
 	}
@@ -73,8 +75,17 @@ class AdController extends Zend_Controller_Action {
 		$id = $this->_request->getParam ( 'id' );
 		
 		$model = $this->_getModel ();
-		$this->view->ad = $model->getAd ( $id );
+		
+		$getAd = $model->getAd ( $id );
+		$this->view->ad = $model->getAd( $id );
 	
+		$this->view->comments = $model->fetchAll( $id )->findDependentRowset('Comment');
+		
+		///comments from comment controller
+		//$comment = new CommentController;
+		//$this->view->comment = $comment->listAction();  
+		
+		
 	}
 	
 	public function createAction() {

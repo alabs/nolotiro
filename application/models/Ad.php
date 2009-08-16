@@ -1,31 +1,38 @@
 <?php
+
 /**
- * a model class representing ad crud
+ * Nolotiro_Ad - a model class representing an ad 
  *
  * This is the DbTable class for the ads table.
  *  
  */
+class Model_Ad extends Zend_Db_Table_Abstract  {
+	protected $_name = 'ads';
+	protected $_primary = "id";
+	protected $_dependentTables = array('comments');
 
-class Model_Ad 
-
-{
+    
 	/** Model_Table_Page */
 	protected $_table;
 	
-	/**
-	 * Retrieve table object
-	 * 
-	 * @return Model_Ad_Table
-	 */
-	public function getTable() {
-		if (null === $this->_table) {
-			// since the dbTable is not a library item but an application item,
-			// we must require it to use it
-			require_once APPLICATION_PATH . '/models/DbTable/Ad.php';
-			$this->_table = new Model_DbTable_Ad ( );
-		}
-		return $this->_table;
+	
+	public function addAd($body, $title) {
+
+		$data = array ('body' => $body, 'title' => $title );
+		$this->insert ( $data );
 	}
+	function updateAd($id, $body, $title) {
+		$data = array ('body' => $body, 'title' => $title );
+		$this->update ( $data, 'id = ' . ( int ) $id );
+	}
+	function deleteAd($id) {
+		$this->delete ( 'id =' . ( int ) $id );
+	}
+
+
+
+	
+	
 	
 	/**
 	 * Save a new entry
@@ -34,7 +41,7 @@ class Model_Ad
 	 * @return int|string
 	 */
 	public function save(array $data) {
-		$table = $this->getTable ();
+		$table = new Model_Ad ();
 		$fields = $table->info ( Zend_Db_Table_Abstract::COLS );
 		foreach ( $data as $field => $value ) {
 			if (! in_array ( $field, $fields )) {
@@ -53,7 +60,7 @@ class Model_Ad
 	public function getAd($id) {
 		$id = ( int ) $id;
 		
-		$table = $this->getTable ();
+		$table = new Model_Ad ( );
 		$select = $table->select ()->where ( 'id = ?', $id );
 		
 		if (!$table->fetchRow ( $select )) {
@@ -80,7 +87,7 @@ class Model_Ad
 		$ad_type = ( string ) $ad_type;
 		
 		
-		$table = $this->getTable ();
+		$table = new Model_Ad ( );
 		$select = $table->select ()->where ( 'woeid_code = ?', $woeid  )
 		->where ( 'type = ?', $ad_type )
 		->order('date_created DESC')
