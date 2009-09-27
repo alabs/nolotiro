@@ -20,22 +20,29 @@ a:hover {
 
 .user_login_box {
 	margin-top: -0.4em;
-	border: 0px solid #ccc;
-	float: right;
-	position: absolute;
-	background-color: #fff;
-	right: 0;
-	padding: 4px;
+	position:absolute;
+	font-size: 1em;
+	background-color: #FFFFCC;
+	border-bottom: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	right: 0px;
+	padding-left: 6px;
 }
 
 .select_language_box {
+
 	margin-top: -0.4em;
-	position: absolute;
-	background-color: #fff;
-	right: 110px;
 	padding: 4px;
 }
 
+
+.select_language_box select {
+    font-size: 0.9em;
+    font-weight: bold;
+    background-color: #fff;
+
+}
 
 .ad_create_tab {
 	position: absolute;
@@ -50,19 +57,19 @@ a:hover {
 .ad_excerpt{
     padding-bottom: 14px;
     padding-left: 18px;
-    
+
 }
 
 .ad_excerpt h4{
 
     font-size: 1.3em;
-    font-weight: bold;   
+    font-weight: bold;
 }
 
 .ad_date{
     color:#666;
     font-size: 0.9em;
-    font-weight: normal;   
+    font-weight: normal;
 }
 
 
@@ -80,7 +87,7 @@ a:hover {
 
 
 a.actual {
-	
+
 	/*color: #FF08DE;*/
 	text-decoration: underline;
 }
@@ -130,7 +137,6 @@ h2#site-slogan {
 
 #location_header_section {
 	background-color: #E5F2FF;
-	
 	padding-top: 10px;
 	padding-bottom: 6px;
 	padding-left: 20px;
@@ -138,7 +144,7 @@ h2#site-slogan {
 }
 
 #location_header_section  a{
-    
+
     font-weight: bold;
 }
 
@@ -208,10 +214,10 @@ h2#site-slogan {
 #superbox.image{text-align:center;}
 
 /* nolotiro Theme */
-		#superbox-overlay{background:#e0e4cc;}
-		/*#superbox-overlay{background:#fff;}*/
-		#superbox-container .loading{width:32px;height:32px;margin:0 auto;text-indent:-9999px;background:url(styles/loader.gif) no-repeat 0 0;}
-		#superbox .close a{float:right;padding:0 5px;line-height:20px;background:#333;cursor:pointer;}
-		#superbox .close a span{color:#fff;}
-		#superbox .nextprev a{float:left;margin-right:5px;padding:0 5px;line-height:20px;background:#333;cursor:pointer;color:#fff;}
-		#superbox .nextprev .disabled{background:#ccc;cursor:default;}
+#superbox-overlay{background:#e0e4cc;}
+/*#superbox-overlay{background:#fff;}*/
+#superbox-container .loading{width:32px;height:32px;margin:0 auto;text-indent:-9999px;background:url(styles/loader.gif) no-repeat 0 0;}
+#superbox .close a{float:right;padding:0 5px;line-height:20px;background:#333;cursor:pointer;}
+#superbox .close a span{color:#fff;}
+#superbox .nextprev a{float:left;margin-right:5px;padding:0 5px;line-height:20px;background:#333;cursor:pointer;color:#fff;}
+#superbox .nextprev .disabled{background:#ccc;cursor:default;}

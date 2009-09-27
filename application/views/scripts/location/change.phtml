@@ -4,46 +4,12 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 //TODO merge header and footer on a main template
 $locale = Zend_Registry::get ( "Zend_Locale" );
 $lang = $locale->getLanguage ();
+
+
+
+echo $this->render ( 'partials/html_header.phtml' );
+
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title><?=isset ( $this->page_title ) ? $this->page_title : 'nolotiro.com'?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="copyright" content="daniel remeseiro" />
-<meta name="DC.Title"
-	content="<?=isset ( $this->page_title ) ? $this->page_title : 'nolotiro.com'?>" />
-<meta name="robots" content="index,follow" />
-
-<link rel="shortcut icon" href="<?=$this->baseUrl?>/images/favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" href="<?$this->baseUrl?>/css/common.css" type="text/css" />
-<link rel="stylesheet" href="<?$this->baseUrl?>/css/blueprint/forms.css" type="text/css" />
-<link rel="stylesheet" href="<?$this->baseUrl?>/css/blueprint/screen.css" type="text/css" media="screen, projection" />
-
-<!--[if IE]>
-    <link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection" />
-  	<![endif]-->
-<script src="<?$this->baseUrl?>/js/jquery.min.js" type="text/javascript"></script>
-<script src="<?$this->baseUrl?>/js/site_lang.js" type="text/javascript"></script>
-<script src="<?$this->baseUrl?>/js/jquery.superbox-min.js" type="text/javascript"></script>
-<script type="text/javascript">
-		$(function(){
-			$.superbox.settings = {
-				closeTxt: "Close",
-				loadTxt: "Loading...",
-				nextTxt: "Next",
-				prevTxt: "Previous"
-			};
-			$.superbox();
-		});
-	</script>
-
-</head>
-
-
-
-<body>
 
 <div id="default_header_section">
 <h3><?=$this->translate ( 'Change your location' );?></h3>
@@ -72,14 +38,15 @@ if (isset ( $this->error )) :
 <form action="<?=$this->escape ( $this->form->getAction () )?>"
 	method="<?=$this->escape ( $this->form->getMethod () )?>">
 <fieldset><legend><?=$this->translate ( 'Please, start to write your location' );?></legend>
-      
-		
+
+
 		<?=$this->form?>
-		
+
 	</fieldset>
 </form>
 
 </div>
 
 </div>
-</body>
+
+<?=$this->render ( 'partials/html_footer.phtml' );?>

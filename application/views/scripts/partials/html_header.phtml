@@ -30,7 +30,7 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 <script type="text/javascript">
 		$(function(){
 			$.superbox.settings = {
-				closeTxt: "<?=$this->translate ( 'Close' )?>",
+				closeTxt: "<?=$this->translate ( 'Cancel' )?>",
 				loadTxt: "<?=$this->translate ( 'Loading' )?>...",
 				nextTxt: "<?=$this->translate ( 'Next' )?>",
 				prevTxt: "<?=$this->translate ( 'Previous' )?>"
@@ -54,24 +54,22 @@ $this->lang = $locale->getLanguage ();
 
 
 <div class="user_login_box">
-
-
-
 <?php
 
 $auth = Zend_Auth::getInstance ();
 
 if (! $auth->hasIdentity ()) {
-	
+
 	echo '<a href="/' . $this->baseUrl . $this->lang . '/user/register">' . $this->translate ( 'new user' ) . '</a> ' . $this->translate ( 'or' ) . ' ';
 	echo '<a href="/' . $this->baseUrl . $this->lang . '/auth/login">' . $this->translate ( 'login' ) . '</a>';
 } else {
 	$auth_username = $auth->getIdentity ()->username;
-	
+
 	echo $this->translate ( 'hello,' ) . '<b>&nbsp;<a href="/' . $this->lang . '/user/profile/' . $this->escape ( $auth_username ) . '">' . $this->escape ( $auth_username ) . '</a></b> | ' . '<a href="/' . $this->lang . '/auth/logout">' . $this->translate ( 'logout' ) . '</a>';
 }
 
 ?>
+
 
 
 <span class="select_language_box">
@@ -82,11 +80,9 @@ if (! $auth->hasIdentity ()) {
 		value="<?=$this->baseUrl . 'es'?>" id="es">Español</option>
 </select>
 </span>
-
-
-
-
 </div>
+
+
 
 
 
@@ -98,7 +94,7 @@ if (! $auth->hasIdentity ()) {
 
 
 <div class="ad_create_tab">
-<a class="<?=(preg_match("/create/", $_SERVER['REQUEST_URI']))?"actual":""?>" href="/<?=$this->lang.'/ad/create' ?>"><?=$this->translate ('Create new ad')?></a></div>
+<a class="<?=(preg_match("/create/", $_SERVER['REQUEST_URI']))?"actual":""?>" href="/<?=$this->lang.'/ad/create' ?>"><?='+ '.$this->translate ('Create new ad')?></a></div>
 
 
 </div>
