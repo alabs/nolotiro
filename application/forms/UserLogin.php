@@ -13,7 +13,8 @@ class Form_UserLogin extends Zend_Form {
 		// set the method for the display form to POST
 		$this->setMethod ( 'post' );
 		
-		$this->addElement ( 'text', 'email', array ('label' => 'Your email:', 'filters' => array ('StringTrim', 'StringToLower' ), 'validators' => array ('EmailAddress' ), 'required' => true )
+		$this->addElement ( 'text', 'email', array ('label' => 'Your email:', 'filters' => array ('StringTrim', 'StringToLower' ),
+		 'validators' => array ('EmailAddress' ), 'required' => true )
 
 		 );
 		

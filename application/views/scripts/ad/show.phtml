@@ -5,12 +5,21 @@ $this->page_title = $this->translate ( 'View ad' ) . $this->ad['title'].' - nolo
 $locale = Zend_Registry::get ( "Zend_Locale" );
 $this->lang = $locale->getLanguage ();
 
+$aNamespace = new Zend_Session_Namespace('Nolotiro');
+				
+
+
 //render common HTML header
 echo $this->render ( 'partials/html_header.phtml' );
 ?>
 
 <div id="default_header_section">
-<h3><?=$this->translate ( 'View ad' ).' - '.$this->ad['title'] ?></h3>
+<h5>
+<a href="/<?=$this->lang ?>/ad/list/woeid/<?=$this->ad['woeid_code'].'/ad_type/'.$this->ad['type']?>">
+           <?=$aNamespace->locationName.' > '. $this->translate($this->ad['type']) ?></a>
+</h5>
+<h3><?=$this->ad['title'] ?>
+</h3>
 </div>
 
 
@@ -19,7 +28,7 @@ if (isset ( $this->error )) :
 	?>
 <div class="error">
 		<?=$this->escape ( $this->error );?>
-	</div>
+</div>
 
 <?php endif;
 ?>
@@ -29,10 +38,66 @@ if (isset ( $this->error )) :
 
 <?php 
 
-Zend_Debug::dump($this->ad);
-Zend_Debug::dump($this->comments);
+//Zend_Debug::dump($this->ad);
 
-?>
+if ($this->ad): ?>
+
+
+       
+        <div class="ad_excerpt">
+          
+           
+           <span class="ad_date"><?=$this->translate('Posted on '). $this->ad['date_created'] ?>
+            <?=$this->translate('by user ') ?> 
+            
+           
+            <a href="/<?=$lang ?>/user/profile/id/<?=$this->ad['user_owner'] ?>"><?=$this->ad['user_owner'] ?></a>
+            </span>
+           <br>
+           <span><h4><?php echo $this->ad['body'] ?><h4></span>
+        </div>
+        <hr>
+       
+
+
+
+<?php else: ?>
+
+    <p><h3><?=$this->translate ( 'This ad does not exists.');?></h3></p>
+
+<?php endif;?>
+
+
+<?
+//comments
+//Zend_Debug::dump($this->comments);
+
+if ($this->comments): ?>
+
+
+       <?php foreach ($this->comments as $key => $val): ?>
+        <div class="ad_excerpt">
+           <h4><a href="/<?=$lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+           <?=$this->escape($val['title']) ?></a></h4>
+           
+           <span class="ad_date"><?=$this->translate('Posted on '). $this->escape($val['date_created']) ?>
+            <?=$this->translate('by user ') ?> 
+            
+           
+            <a href="/<?=$lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['user_owner']) ?></a>
+            </span>
+           <br>
+           <span><?php echo $this->escape($val['body']) ?></span>
+        </div>
+        <br />
+        <?php endforeach; ?>
+
+
+
+<?php endif;?>
+
+
+
 
 </div>
 

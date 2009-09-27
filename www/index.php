@@ -39,6 +39,13 @@ if (!isset($session->location)) {
    $session->location = 766273;    
 }
 
+if (!isset($session->location)) {
+    // if location is not setted , set the Madrid woeid
+   $session->locationName = 'Madrid, España';    
+}
+
+
+
 if (!isset($session->ad_type)) {
     // if ad_type is not setted , set the 'give' status to show the ads on home
    $session->ad_type = 'give';    

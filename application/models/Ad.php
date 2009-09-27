@@ -68,8 +68,6 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 			
 		} else {
 		    
-		    //$result = $table->fetchRow ( $select )->findDependentRowset('Comment')->toArray ();
-			
 		    
 		    $result = $table->fetchRow ( $select )->toArray ();
 			
@@ -147,27 +145,6 @@ class Comment extends Zend_Db_Table_Abstract  {
 	
 	
 	
-
-	/**
-	 * Fetch a list of comments where id_ad_parent match 
-	 * 
-	 * @param  int $ads_id
-	 * @return array list of ads with this params
-	 */
-	public function getComments($ads_id) {
-		$id_ad_parent = ( int ) $ads_id;
-		
-		$table = $this->getTable ();
-		$select = $table->select ()->where ( 'ads_id = ?', $ads_id  )
-		->order('date_created ASC');
-		
-		
-		$result = $table->fetchAll ( $select )->toArray ();
-		
-		return $result;
-		
-	}
-
 	
 	
 }

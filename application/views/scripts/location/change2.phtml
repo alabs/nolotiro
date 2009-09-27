@@ -45,15 +45,12 @@ $lang = $locale->getLanguage ();
 
 <body>
 
-<div id="default_header_section">
-<h3><?=$this->translate ( 'Change your location' );?></h3>
-</div>
-
 <?php
 
 //$aNamespace = new Zend_Session_Namespace('Nolotiro');
-//echo 'location actual = '.$aNamespace->location;
-
+//Zend_Debug::dump($aNamespace->locationTemp);
+//echo 'view location = '.var_dump($aNamespace->location).'<br>';
+//echo 'view locationtemp = '.$aNamespace->locationTemp;
 
 
 
@@ -71,10 +68,27 @@ if (isset ( $this->error )) :
 
 <form action="<?=$this->escape ( $this->form->getAction () )?>"
 	method="<?=$this->escape ( $this->form->getMethod () )?>">
-<fieldset><legend><?=$this->translate ( 'Please, start to write your location' );?></legend>
+<fieldset><legend><?=$this->translate ( 'Please, choose to write your location' );?></legend>
       
 		
-		<?=$this->form?>
+<?
+		
+        //echo $this->form->my_select_field;
+		
+        
+        //Zend_Debug::dump($this->form->location);
+		
+        echo $this->form;
+		//echo $this->locationtemp;
+		
+		
+		//echo '<pre>';
+		//Zend_Debug::dump($this->places);
+		//echo '</pre>';
+
+		
+		
+?>
 		
 	</fieldset>
 </form>

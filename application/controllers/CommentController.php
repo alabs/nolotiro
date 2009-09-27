@@ -1,14 +1,14 @@
 <?php
 
 /**
- * AdController
+ * CommentController
  * 
  * @author  dani remeseiro
- * @abstract this is the Ad controller , 
- * do the crud relative to ads : create, show, edit, delete
+ * @abstract this is the Ad Comment controller , 
+ * do the crud relative to ad comment : create, show, edit, delete
  */
 
-class AdController extends Zend_Controller_Action {
+class CommentController extends Zend_Controller_Action {
 	
 	/**
 	 * Overriding the init method to also load the session from the registry
@@ -16,64 +16,18 @@ class AdController extends Zend_Controller_Action {
 	 */
 	public function init() {
 		parent::init ();
+			
+		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
 		
 		//$this->view->baseUrl = $this->_request->getBaseUrl();
 		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
+		
+	
 	
 	
 	}
 	
-	/**
-	 * The default action - show a list where woeid and ad type 
-	 * Get the woeid and the ad_type from the session reg
-	 */
-	public function listAction() {
-	    
-	    
-	    $woeid = $this->_request->getParam ( 'woeid' );
-	    $ad_type = $this->_request->getParam ( 'ad_type' );
-        
-		$model = $this->_getModel ();
-		$this->view->ad = $model->getAdList($woeid, $ad_type);
-		
-		
-		//set the location reg var from the url
-		$aNamespace = new Zend_Session_Namespace('Nolotiro');
-        $aNamespace->location = $woeid;
-        
-        
-        //paginator
-        $page = $this->_getParam('page');
-        $paginator = Zend_Paginator::factory($this->view->ad);
-        $paginator->setDefaultScrollingStyle('Elastic');
-        $paginator->setItemCountPerPage(10);
-        $paginator->setCurrentPageNumber($page);
-
-        $this->view->paginator=$paginator;
-
-        
-		
-		///
-		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
-		$this->view->mensajes = $this->_flashMessenger->getMessages ();
-		
-
-		
-	}
 	
-	public function showAction() {
-		
-		
-		$id = $this->_request->getParam ( 'id' );
-		
-		$model = $this->_getModel ();
-		
-		$this->view->ad = $model->getAd( $id );
-	    $this->view->comments = $model->getComments( $id );
-		
-		
-		
-	}
 	
 	public function createAction() {
 		
@@ -81,15 +35,15 @@ class AdController extends Zend_Controller_Action {
         $lang = $locale->getLanguage ();
 	    
 		//first we check if user is logged, if not redir to login
-		$auth = Zend_Auth::getInstance ();
-		if (! $auth->hasIdentity ()) {
-			$this->_redirect ( $lang.'/auth/login' );
+		//$auth = Zend_Auth::getInstance ();
+		//if (! $auth->hasIdentity ()) {
+			//$this->_redirect ( $lang.'/auth/login' );
 			
 			
-		} else {
+		//} else {
 			
 			$request = $this->getRequest ();
-			$form = $this->_getAdEditForm ();
+			$form = $this->_getCommentForm ();
 			
 			// check to see if this action has been POST'ed to
 			if ($this->getRequest ()->isPost ()) {
@@ -136,29 +90,23 @@ class AdController extends Zend_Controller_Action {
 					$datenow = date("Y-m-d H:i:s", time() );
 					$formulario ['date_created'] = $datenow;
 					
-					//get woeid to assign to this ad
-					//the location its stored at session location value 
-                    //(setted by default on bootstrap to Madrid woeid number)
-                    $aNamespace = new Zend_Session_Namespace('Nolotiro');
-                    $formulario ['woeid_code'] = $aNamespace->location;
-					
 					
 					$model = $this->_getModel ();
 					$model->save ( $formulario );
 					
 					//Zend_Debug::dump ( $formulario );
-                    $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad published succesfully!' ) );
+                    $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Comment published succesfully!' ) );
 					$this->_redirect ( '/' );
 					
 				}
 			}
 		}
 	
-	}
+	//}
 	
 	public function editAction() {
 		$request = $this->getRequest ();
-		$form = $this->_getAdEditForm ();
+		$form = $this->_getCommentForm ();
 		
 		// check to see if this action has been POST'ed to
 		if ($this->getRequest ()->isPost ()) {
@@ -181,9 +129,9 @@ class AdController extends Zend_Controller_Action {
 	 *
 	 * @return Form_AdEdit 
 	 */
-	protected function _getAdEditForm() {
-		require_once APPLICATION_PATH . '/forms/AdEdit.php';
-		$form = new Form_AdEdit ( );
+	protected function _getCommentForm() {
+		require_once APPLICATION_PATH . '/forms/Comment.php';
+		$form = new Form_Comment ();
 		
 		// assign the form to the view
 		$this->view->form = $form;
@@ -197,13 +145,13 @@ class AdController extends Zend_Controller_Action {
 	/**
 	 * _getModel() is a protected utility method for this controller.
 	 * 
-	 * @return Model_User
+	 * @return Model_Comment
 	 */
 	protected function _getModel() {
 		if (null === $this->_model) {
 			
-			require_once APPLICATION_PATH . '/models/Ad.php';
-			$this->_model = new Model_Ad ( );
+			require_once APPLICATION_PATH . '/models/Comment.php';
+			$this->_model = new Model_Comment ( );
 		}
 		return $this->_model;
 	}
@@ -211,5 +159,3 @@ class AdController extends Zend_Controller_Action {
 	
 
 }
-
-
