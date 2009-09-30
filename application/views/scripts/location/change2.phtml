@@ -11,6 +11,9 @@ echo $this->render ( 'partials/html_header.phtml' );
 
 ?>
 
+<div id="default_header_section">
+<h3><?=$this->translate ( 'Choose your' ).' "'.ucwords($this->locationtemp)."\"";?></h3>
+</div>
 
 <?php
 
@@ -35,7 +38,7 @@ if (isset ( $this->error )) :
 
 <form action="<?=$this->escape ( $this->form->getAction () )?>"
 	method="<?=$this->escape ( $this->form->getMethod () )?>">
-<fieldset><legend><?=$this->translate ( 'Please, choose your "' ).ucwords($this->locationtemp)."\"";?></legend>
+<fieldset><legend></legend>
 
 
 <?

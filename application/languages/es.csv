@@ -1,3 +1,12 @@
+#location
+"Location changed successfully to:";"Ubicación cambiada con éxito a:"
+#(VERY IMPORTANT TO PARSE THE XML API QUERY!)
+"Town";"Pueblo"
+"Choose your location";"Elige tu ubicación"
+"Choose your";"Elige tu"
+
+
+
 ﻿#header
 #"no lo tiro, te lo doy (sin condiciones)";"no lo tiro, te lo doy (sin condiciones)"
 "new user";"nuevo usuario"
@@ -100,3 +109,6 @@
 "Title of your ad:";"Título de tu anuncio:"
 "Ad body:";"Cuerpo del anuncio:"
 
+#paginator
+"Previous";"Anterior"
+"Next";"Siguiente"

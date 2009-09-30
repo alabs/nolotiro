@@ -79,7 +79,7 @@ class LocationController extends Zend_Controller_Action {
 
 		foreach ($places as $item) {
 
-    		$name = $item->name.' ('.$item->placeTypeName.'), '.$item->admin2.', '.$item->country;
+    		$name = $item->name.', '.$item->admin1.', '.$item->country;
 
     		$woeid = (string)$item->woeid; //we have to set to string to not disturb the zend form translate parser!
 
@@ -125,8 +125,8 @@ class LocationController extends Zend_Controller_Action {
 				$aNamespace->locationName = $values[1];//location name
 
 
-				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Location changed successfully to ' )
-				.$values[1]);
+				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Location changed successfully to:' )
+				.' '.$values[1]);
 
 				$locale = Zend_Registry::get ( "Zend_Locale" );
                 $lang = $locale->getLanguage ();
@@ -147,8 +147,10 @@ class LocationController extends Zend_Controller_Action {
         $lang = $locale->getLanguage ();
 
         $appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
-	    $htmlString = 'http://where.yahooapis.com/v1/places.q('.urlencode($locationtemp).');start=0;count=10'.
-	    '?appid='.$appid.'&lang='.$lang;
+	    //$htmlString = 'http://where.yahooapis.com/v1/places.q('.urlencode($locationtemp).');count=10?appid='.$appid.'&lang='.$lang;
+	    $htmlString = 'http://where.yahooapis.com/v1/places$and(.q('.
+	    urlencode($locationtemp).'),.type('.$this->view->translate ('Town').'));count=10?appid='.$appid.'&lang='.$lang;
+
 
 	    $xml = simplexml_load_file($htmlString);
 
