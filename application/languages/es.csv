@@ -5,7 +5,16 @@
 "Choose your location";"Elige tu ubicación"
 "Choose your";"Elige tu"
 
-
+"change location";"cambiar ubicación"
+"Change your location";"Cambia tu ubicación"
+"Please, write your location";"Por favor, escribe tu ubicación"
+"Location";"Ubicación"
+"give";"regalo"
+"want";"quiero"
+"Create new ad";"Crear nuevo anuncio"
+"No ads to display for this location.";"No hay anuncios para esta ubicación."
+"Posted on ";"Publicado el "
+"by user ";"por el usuario "
 
 ﻿#header
 #"no lo tiro, te lo doy (sin condiciones)";"no lo tiro, te lo doy (sin condiciones)"
@@ -88,17 +97,7 @@
 "Next";"Siguiente"
 "Previous";"Anterior"
 
-#location
-"change location";"cambiar ubicación"
-"Change your location";"Cambia tu ubicación"
-"Please, start to write your location";"Por favor, empieza a escribir tu ubicación"
-"Location";"Ubicación"
-"give";"regalo"
-"want";"quiero"
-"Create new ad";"Crear nuevo anuncio"
-"No ads to display for this location.";"No hay anuncios para esta ubicación."
-"Posted on ";"Publicado el "
-"by user ";"por el usuario "
+
 
 #ad/create
 "Create a new ad";"Crea un nuevo anuncio"

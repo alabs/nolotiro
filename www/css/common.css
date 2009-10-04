@@ -46,13 +46,12 @@ a:hover {
 
 .ad_create_tab {
 	position: absolute;
-	margin-top: 35px;
-	background-color: #fff;
+    margin:5px;
     font-size: 1.3em;
     font-weight: bold;
 	right: 20px;
-	padding: 4px;
 }
+
 
 .ad_excerpt{
     padding-bottom: 14px;
@@ -77,12 +76,14 @@ a:hover {
 	position: relative;
 	width:auto;
 	float:right;
+	text-align:center;
+	border: 1px solid #ddd;
 	background-color: #fff;
     font-size: 2em;
     font-weight: bold;
 	right: 10px;
 	top:-50px;
-	padding: 15px;
+	padding: 14px;
 }
 
 

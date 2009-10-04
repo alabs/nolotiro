@@ -7,10 +7,10 @@ See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Previous
+    &lt; <?=$this->translate('Previous'); ?>
   </a> |
 <?php else: ?>
-  <span class="disabled">&lt; Previous</span> |
+  <span class="disabled">&lt; <?=$this->translate('Previous'); ?></span> |
 <?php endif; ?>
 
 <!-- Numbered page links -->
@@ -27,10 +27,10 @@ See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 <!-- Next page link -->
 <?php if (isset($this->next)): ?>
   <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Next &gt;
+    <?=$this->translate('Next'); ?> &gt;
   </a>
 <?php else: ?>
-  <span class="disabled">Next &gt;</span>
+  <span class="disabled"><?=$this->translate('Next'); ?> &gt;</span>
 <?php endif; ?>
 </div>
 <?php endif; ?>

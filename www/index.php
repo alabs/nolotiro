@@ -34,23 +34,26 @@ Zend_Session::start();
 $session = new Zend_Session_Namespace ( 'Nolotiro' );
 Zend_Registry::set ( 'session', $session );
 
-if (!isset($session->location)) {
-    // if location is not setted , set the Madrid woeid
-   $session->location = 766273;
-}
 
-if (!isset($session->location)) {
-    // if location is not setted , set the Madrid woeid
-   $session->locationName = 'Madrid, Comunidad de Madrid, España';
-}
+        $aNamespace->location = $woeid;
+        //set the default values to show if the session is empty
+        // Start Session is in the bootstrap
+
+        if (!isset($session->location) || ($session->location == null)) {
+            // if location is not setted , set the Madrid woeid
+           $session->location = 766273;
+        }
+
+        if (!isset($session->locationName) || ($session->locationName == null)) {
+            // if location is not setted , set the Madrid woeid
+           $session->locationName = 'Madrid, Comunidad de Madrid, España';
+        }
 
 
-
-if (!isset($session->ad_type)) {
-    // if ad_type is not setted , set the 'give' status to show the ads on home
-   $session->ad_type = 'give';
-}
-
+        if (!isset($session->ad_type)) {
+            // if ad_type is not setted , set the 'give' status to show the ads on home
+           $session->ad_type = 'give';
+        }
 
 //Setup the ddbb
 $dbAdapter = Zend_Db::factory ( $config->database );

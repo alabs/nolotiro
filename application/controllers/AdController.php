@@ -39,14 +39,17 @@ class AdController extends Zend_Controller_Action {
 
 		//set the location reg var from the url
 		$aNamespace = new Zend_Session_Namespace('Nolotiro');
+		Zend_Registry::set ( 'session', $session );
         $aNamespace->location = $woeid;
+
+
 
 
         //paginator
         $page = $this->_getParam('page');
         $paginator = Zend_Paginator::factory($this->view->ad);
         $paginator->setDefaultScrollingStyle('Elastic');
-        $paginator->setItemCountPerPage(10);
+        $paginator->setItemCountPerPage(5);
         $paginator->setCurrentPageNumber($page);
 
         $this->view->paginator=$paginator;

@@ -92,14 +92,8 @@ if (! $auth->hasIdentity ()) {
 	alt="Nolotiro.org logo" id="logo" />nolotiro.org</a></h1>
 <h2 id='site-slogan'><?=$this->translate ( 'no lo tiro, te lo doy (sin condiciones)' )?></h2>
 
-
 <div class="ad_create_tab">
-<a class="<?=(preg_match("/create/", $_SERVER['REQUEST_URI']))?"actual":""?>" href="/<?=$this->lang.'/ad/create' ?>"><?='+ '.$this->translate ('Create new ad')?></a></div>
-
-
+<a class="rounded" href="/<?=$this->lang.'/ad/create' ?>"><?='+ '.$this->translate ('Create new ad')?></a></span>
 </div>
 
-
-<!--
-<div id="publi_header"><img alt="demo banner"
-	src="/images/banner_dummy.gif"></div> -->
+</div>

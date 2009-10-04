@@ -27,7 +27,7 @@ if (count ( $this->mensajes ) > 0) {
 
 <div id="main">
 
-
+<div class="span-18">
 
 <?php
 //Zend_Debug::dump($this->ad);
@@ -41,11 +41,11 @@ if ($this->ad): ?>
         <div class="ad_excerpt">
            <h4><a href="/<?=$lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
-           
+
            <span class="ad_date"><?=$this->translate('Posted on '). $this->escape($val['date_created']) ?>
-            <?=$this->translate('by user ') ?> 
-            
-           
+            <?=$this->translate('by user ') ?>
+
+
             <a href="/<?=$lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['user_owner']) ?></a>
             </span>
            <br>
@@ -67,7 +67,10 @@ if ($this->ad): ?>
                                     'Sliding',
                                     'partials/paginator_ads.phtml'); ?>
 
-                                    
+
+
+
+</div> <!-- /div ads -->
 </div> <!-- /main -->
 
 <?=$this->render ( 'partials/html_footer.phtml' );?>

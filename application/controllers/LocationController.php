@@ -88,6 +88,12 @@ class LocationController extends Zend_Controller_Action {
 
             $location_options[$woeid]= $name;
 
+            //check the first value of the array results to show the first selected to form
+            $counter = $counter+1;
+            if ($counter == 1) {
+            	$firstitem = $woeid;
+            }
+
         }
 
 
@@ -95,6 +101,7 @@ class LocationController extends Zend_Controller_Action {
 		$form->addElement('select', 'location', array('validators'))
         ->getElement('location')
         ->addMultiOptions($location_options)
+        ->setValue($firstitem)
         ->setIsArray(true);//this set select expanded
 
 
@@ -149,7 +156,7 @@ class LocationController extends Zend_Controller_Action {
         $appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
 	    //$htmlString = 'http://where.yahooapis.com/v1/places.q('.urlencode($locationtemp).');count=10?appid='.$appid.'&lang='.$lang;
 	    $htmlString = 'http://where.yahooapis.com/v1/places$and(.q('.
-	    urlencode($locationtemp).'),.type('.$this->view->translate ('Town').'));count=10?appid='.$appid.'&lang='.$lang;
+	    urlencode($locationtemp).'),.type('.$this->view->translate ('Town').'));count=20?appid='.$appid.'&lang='.$lang;
 
 
 	    $xml = simplexml_load_file($htmlString);
