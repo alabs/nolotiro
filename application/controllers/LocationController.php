@@ -89,7 +89,7 @@ class LocationController extends Zend_Controller_Action {
             $location_options[$woeid]= $name;
 
             //check the first value of the array results to show the first selected to form
-            $counter = $counter+1;
+            $counter++;
             if ($counter == 1) {
             	$firstitem = $woeid;
             }

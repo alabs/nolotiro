@@ -47,9 +47,22 @@ a:hover {
 .ad_create_tab {
 	position: absolute;
     margin:5px;
-    font-size: 1.3em;
+	right: 3px;
+
+}
+
+.ad_create_tab a {
+    background:transparent url(/images/btn_new_ad.png) no-repeat scroll 100% 0;
+    height:24px;
+    overflow:hidden;
+    color:#fff;
+    font-size: 1.2em;
     font-weight: bold;
-	right: 20px;
+    border: 1px solid #ddd;
+    padding:2px !important;
+    text-align:center;
+    width:200px;
+    display:block;
 }
 
 
