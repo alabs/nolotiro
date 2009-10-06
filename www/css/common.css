@@ -47,7 +47,7 @@ a:hover {
 .ad_create_tab {
 	position: absolute;
     margin:5px;
-	right: 3px;
+	right: 0px;
 
 }
 
@@ -59,9 +59,12 @@ a:hover {
     font-size: 1.2em;
     font-weight: bold;
     border: 1px solid #ddd;
-    padding:2px !important;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:2px;
+    padding-bottom:2px;
     text-align:center;
-    width:200px;
+    width:auto;
     display:block;
 }
 

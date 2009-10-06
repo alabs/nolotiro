@@ -32,7 +32,7 @@ class LocationController extends Zend_Controller_Action {
 		$request = $this->getRequest();
 		$form = $this->_getLocationChangeForm();
 
-
+        $this->getLocationGeoIP('12.12.12.12');
 		// check to see if this action has been POST'ed to
 		if ($this->getRequest ()->isPost ()) {
 
@@ -182,6 +182,30 @@ class LocationController extends Zend_Controller_Action {
 		//$form->setAction($this->_helper->url(''));
 		return $form;
 	}
+
+
+
+
+	public function getLocationGeoIP($IP){
+
+	    require_once ( NOLOTIRO_PATH_ROOT . '/library/GeoIP/geoipcity.inc' );
+
+
+        $gi = geoip_open("/usr/local/share/GeoIP/GeoLiteCity.dat",GEOIP_STANDARD);
+
+        $record = geoip_record_by_addr($gi,$IP);
+        print $record->country_name . "\n";
+        //print $record->region . " " . $GEOIP_REGION_NAME[$record->country_code][$record->region] . "\n";
+        print $GEOIP_REGION_NAME[$record->country_code][$record->region];
+        print $record->city . "\n";
+
+
+        geoip_close($gi);
+
+
+
+	}
+
 
 }
 
