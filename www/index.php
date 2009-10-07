@@ -4,9 +4,9 @@
  *
  * @copyright Daniel Remeseiro
  *
- * All the sourcecode of this software is under GNU GPL3 License
+ * All the sourcecode of this software is under GNU Affero General Public License
  * @see LICENSE file on application directory
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @license http://www.gnu.org/licenses/agpl.txt
  */
 
 //Setting paths
