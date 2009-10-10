@@ -20,14 +20,15 @@ a:hover {
 
 .user_login_box {
 	margin-top: -0.4em;
-	position:absolute;
 	font-size: 1em;
 	background-color: #FFFFCC;
 	border-bottom: 1px solid #ddd;
 	border-left: 1px solid #ddd;
 	border-right: 1px solid #ddd;
-	right: 0px;
+	float:right;
+	right:20px;
 	padding-left: 6px;
+	padding-right: 6px;
 }
 
 .select_language_box {
@@ -46,8 +47,9 @@ a:hover {
 
 .ad_create_tab {
 	position: absolute;
-    margin:5px;
+	
 	right: 0px;
+	
 
 }
 
@@ -117,13 +119,14 @@ a.actual {
  * Layout.
  */
 #header {
-	margin-top: 15px;
+	margin-top: 0px;
 	width: 100%;
-	margin: 0;
-	height: 10em;
+	margin-left: 0px;
+	margin-right: 20px;
+	margin-bottom: 45px;
 	position: relative;
 	text-align: left;
-	border-bottom: 1px solid #ddd;
+	
 }
 
 #main {
@@ -140,16 +143,24 @@ a.actual {
 /**
  * Header Area.
  */
-h1#site-name a img {
+h1#site-name  {
 	border: none;
-	float: left;
-	margin-bottom: 1px;
-	margin-left: 1px;
+	margin-top: 0px;
+	padding-top: 10px;
+	font-size: 3em;
+	margin-left: 78px;
+}
+h1#site-name img {
+	position:absolute;
+	top:16px;
+	left:20px;
 }
 
 h2#site-slogan {
-	font: 1em;
+	float:left;
+	font-size: 1em;
 	padding-top: 1px;
+	margin-left: 78px;
 }
 
 #location_header_section {
@@ -157,6 +168,7 @@ h2#site-slogan {
 	padding-top: 10px;
 	padding-bottom: 6px;
 	padding-left: 20px;
+	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 }
 
