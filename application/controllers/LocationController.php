@@ -22,7 +22,7 @@ class LocationController extends Zend_Controller_Action {
 	public function indexAction(){
 		//$this->_redirect ( '/' );
 
-
+		
 	}
 
 
@@ -31,8 +31,16 @@ class LocationController extends Zend_Controller_Action {
 	public function changeAction(){
 		$request = $this->getRequest();
 		$form = $this->_getLocationChangeForm();
+		
+		
+		//get the ip of the ad publisher
+                    if (getenv(HTTP_X_FORWARDED_FOR)) {
+                        $ip = getenv(HTTP_X_FORWARDED_FOR);
+                    } else {
+                        $ip = getenv(REMOTE_ADDR);
+                    }
 
-        $this->getLocationGeoIP('12.12.12.12');
+		$this->getLocationGeoIP($ip);
 		// check to see if this action has been POST'ed to
 		if ($this->getRequest ()->isPost ()) {
 
@@ -46,7 +54,7 @@ class LocationController extends Zend_Controller_Action {
 				$aNamespace->locationTemp = $formulario['location'];
 
 				$locale = Zend_Registry::get ( "Zend_Locale" );
-                $this->lang = $locale->getLanguage ();
+				$this->lang = $locale->getLanguage ();
 
 				$this->_redirect ( '/'.$this->lang.'/location/change2' );
 
@@ -60,7 +68,7 @@ class LocationController extends Zend_Controller_Action {
 
 	public function change2Action(){
 
-	    $aNamespace = new Zend_Session_Namespace('Nolotiro');
+		$aNamespace = new Zend_Session_Namespace('Nolotiro');
 		$locationtemp = $aNamespace->locationTemp;
 
 		$places = $this->getYahooGeoWoeidList($locationtemp);
@@ -86,7 +94,7 @@ class LocationController extends Zend_Controller_Action {
     		//glue together woeid and text to parse after with *
     		$woeid = $woeid.'*'.$name;
 
-            $location_options[$woeid]= $name;
+		$location_options[$woeid]= $name;
 
             //check the first value of the array results to show the first selected to form
             $counter++;
@@ -99,10 +107,10 @@ class LocationController extends Zend_Controller_Action {
 
 
 		$form->addElement('select', 'location', array('validators'))
-        ->getElement('location')
-        ->addMultiOptions($location_options)
-        ->setValue($firstitem)
-        ->setIsArray(true);//this set select expanded
+		->getElement('location')
+		->addMultiOptions($location_options)
+		->setValue($firstitem)
+		->setIsArray(true);//this set select expanded
 
 
 		// add the submit button
@@ -125,7 +133,7 @@ class LocationController extends Zend_Controller_Action {
 				$aNamespace = new Zend_Session_Namespace('Nolotiro');
 				$aNamespace->location = $values[0];//woeid
 
-		        $name = $item->name.', '.$item->admin1.', '.$item->country;
+				$name = $item->name.', '.$item->admin1.', '.$item->country;
 
 
 
@@ -136,7 +144,7 @@ class LocationController extends Zend_Controller_Action {
 				.' '.$values[1]);
 
 				$locale = Zend_Registry::get ( "Zend_Locale" );
-                $lang = $locale->getLanguage ();
+				$lang = $locale->getLanguage ();
 
 				$this->_redirect ( '/'.$lang.'/ad/list/woeid/'.$values[0].'/ad_type/give' );
 
@@ -149,19 +157,19 @@ class LocationController extends Zend_Controller_Action {
 
 	public function getYahooGeoWoeidList($locationtemp){
 
-	    //get the user session language to fetch the proper yahoo xml language
-	    $locale = Zend_Registry::get ( "Zend_Locale" );
-        $lang = $locale->getLanguage ();
+		//get the user session language to fetch the proper yahoo xml language
+		$locale = Zend_Registry::get ( "Zend_Locale" );	
+		$lang = $locale->getLanguage ();
 
-        $appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
-	    //$htmlString = 'http://where.yahooapis.com/v1/places.q('.urlencode($locationtemp).');count=10?appid='.$appid.'&lang='.$lang;
-	    $htmlString = 'http://where.yahooapis.com/v1/places$and(.q('.
-	    urlencode($locationtemp).'),.type('.$this->view->translate ('Town').'));count=20?appid='.$appid.'&lang='.$lang;
+		$appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
+		//$htmlString = 'http://where.yahooapis.com/v1/places.q('.urlencode($locationtemp).');count=10?appid='.$appid.'&lang='.$lang;
+		$htmlString = 'http://where.yahooapis.com/v1/places$and(.q('.
+		urlencode($locationtemp).'),.type('.$this->view->translate ('Town').'));count=20?appid='.$appid.'&lang='.$lang;
 
 
-	    $xml = simplexml_load_file($htmlString);
+		$xml = simplexml_load_file($htmlString);
 
-	    return $xml;
+		return $xml;
 
 	}
 
@@ -198,7 +206,7 @@ class LocationController extends Zend_Controller_Action {
         //print $record->region . " " . $GEOIP_REGION_NAME[$record->country_code][$record->region] . "\n";
         print $GEOIP_REGION_NAME[$record->country_code][$record->region];
         print $record->city . "\n";
-
+	var_dump($record);
 
         geoip_close($gi);
 
