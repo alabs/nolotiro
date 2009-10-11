@@ -1,17 +1,16 @@
 <?php
 
 /**
- * This is the main Contact form.   
+ * This is the ad Comment form.   
  */
 
 class Form_Comment extends Zend_Form {
 	
 	public function init() {
-		// set the method for the display form to POST
+		
 		$this->setMethod ( 'post' );
-		
-		
-		$this->addElement ( 'textarea', 'message', array ('label' => 'Your comment:', 'validators' => array (array ('StringLength', false, array (3, 2000 ) ) ), 'required' => true )
+
+		$this->addElement ( 'textarea', 'body', array ('label' => 'Your comment:', 'validators' => array (array ('StringLength', false, array (3, 2000 ) ) ), 'required' => true )
 
 		 );
 		

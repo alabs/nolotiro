@@ -3,9 +3,8 @@
  * Nolotiro_User - a model class representing a single user
  *
  * This is the DbTable class for the users table.
- *  
- */
-
+ *
+ * */
 class Model_User 
 
 {
@@ -14,9 +13,8 @@ class Model_User
 	
 	/**
 	 * Retrieve table object
-	 * 
 	 * @return Model_User_Table
-	 */
+	 * */
 	public function getTable() {
 		if (null === $this->_table) {
 			// since the dbTable is not a library item but an application item,
@@ -28,11 +26,10 @@ class Model_User
 	}
 	
 	/**
-	 * Save a new entry
-	 * 
-	 * @param  array $data 
-	 * @return int|string
-	 */
+	 *	 * Save a new entry
+	 * * @param  array $data
+	 * * @return int|string
+	 * */
 	public function save(array $data) {
 		$table = $this->getTable ();
 		$fields = $table->info ( Zend_Db_Table_Abstract::COLS );
@@ -77,8 +74,7 @@ class Model_User
 	
 	/**
 	 * Fetch an individual entry
-	 * 
-	 * @param  int|string $id 
+	 * @param  int|string $id
 	 * @return null|Zend_Db_Table_Row_Abstract
 	 */
 	public function fetchUser($id) {

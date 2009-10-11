@@ -29,9 +29,8 @@ class AdController extends Zend_Controller_Action {
 	 */
 	public function listAction() {
 
-
-	    $woeid = $this->_request->getParam ( 'woeid' );
-	    $ad_type = $this->_request->getParam ( 'ad_type' );
+		$woeid = $this->_request->getParam ( 'woeid' );
+		$ad_type = $this->_request->getParam ( 'ad_type' );
 
 		$model = $this->_getModel ();
 		$this->view->ad = $model->getAdList($woeid, $ad_type);
@@ -40,19 +39,17 @@ class AdController extends Zend_Controller_Action {
 		//set the location reg var from the url
 		$aNamespace = new Zend_Session_Namespace('Nolotiro');
 		Zend_Registry::set ( 'session', $session );
-        $aNamespace->location = $woeid;
+		$aNamespace->location = $woeid;
 
 
-
-
-        //paginator
-        $page = $this->_getParam('page');
-        $paginator = Zend_Paginator::factory($this->view->ad);
-        $paginator->setDefaultScrollingStyle('Elastic');
-        $paginator->setItemCountPerPage(5);
-        $paginator->setCurrentPageNumber($page);
-
-        $this->view->paginator=$paginator;
+		//paginator
+		$page = $this->_getParam('page');
+		$paginator = Zend_Paginator::factory($this->view->ad);
+		$paginator->setDefaultScrollingStyle('Elastic');
+		$paginator->setItemCountPerPage(10);
+		$paginator->setCurrentPageNumber($page);
+	
+		$this->view->paginator=$paginator;
 
 
 
@@ -72,7 +69,7 @@ class AdController extends Zend_Controller_Action {
 		$model = $this->_getModel ();
 
 		$this->view->ad = $model->getAd( $id );
-	    $this->view->comments = $model->getComments( $id );
+		$this->view->comments = $model->getComments( $id );
 
 
 
@@ -80,8 +77,8 @@ class AdController extends Zend_Controller_Action {
 
 	public function createAction() {
 
-	    $locale = Zend_Registry::get ( "Zend_Locale" );
-        $lang = $locale->getLanguage ();
+	$locale = Zend_Registry::get ( "Zend_Locale" );
+	$lang = $locale->getLanguage ();
 
 		//first we check if user is logged, if not redir to login
 		$auth = Zend_Auth::getInstance ();

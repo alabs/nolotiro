@@ -1,10 +1,8 @@
 <?php
-
 /**
  * Nolotiro_User - a model class representing a single user
- *
  * This is the DbTable class for the users table.
- *  
+ *
  */
 
 class Model_DbTable_User extends Zend_Db_Table_Abstract 
@@ -15,7 +13,6 @@ class Model_DbTable_User extends Zend_Db_Table_Abstract
 	
 	/**
 	 * @abstract inserts a user row
-	 *
 	 * @return $id
 	 */
 	public function insert(array $data) {

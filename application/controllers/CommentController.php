@@ -31,18 +31,20 @@ class CommentController extends Zend_Controller_Action {
 	
 	public function createAction() {
 		
-	    $locale = Zend_Registry::get ( "Zend_Locale" );
-        $lang = $locale->getLanguage ();
+		
+		
+		$locale = Zend_Registry::get ( "Zend_Locale" );
+		$lang = $locale->getLanguage ();
 	    
 		//first we check if user is logged, if not redir to login
 		//$auth = Zend_Auth::getInstance ();
 		//if (! $auth->hasIdentity ()) {
-			//$this->_redirect ( $lang.'/auth/login' );
-			
+			//$this->_redirect ( $lang.'/auth/login' );	
 			
 		//} else {
 			
 			$request = $this->getRequest ();
+			$ad_id = $this->_request->getParam ( 'ad_id' );
 			$form = $this->_getCommentForm ();
 			
 			// check to see if this action has been POST'ed to
@@ -54,13 +56,6 @@ class CommentController extends Zend_Controller_Action {
 					
 					$formulario = $form->getValues ();
 					
-					//strip html tags to title
-					$formulario['title'] = strip_tags($formulario['title']);
-					
-					//anti hoygan to title
-					//dont use strtolower because dont convert utf8 properly . ej: á é ó ...
-					$formulario['title'] = ucfirst(mb_convert_case($formulario['title'], MB_CASE_LOWER, "UTF-8")); 
-					
 					//strip html tags to body
 					$formulario['body'] = strip_tags($formulario['body']);
 					
@@ -68,35 +63,42 @@ class CommentController extends Zend_Controller_Action {
 					$split=explode(". ", $formulario['body']);
                     
 					foreach ($split as $sentence) {
-                        $sentencegood = ucfirst(mb_convert_case($sentence, MB_CASE_LOWER, "UTF-8"));
-                        $formulario['body'] = str_replace($sentence, $sentencegood, $formulario['body']);
-                    }
+						$sentencegood = ucfirst(mb_convert_case($sentence, MB_CASE_LOWER, "UTF-8"));
+						$formulario['body'] = str_replace($sentence, $sentencegood, $formulario['body']);
+					}
 					
                     
-                    //get the ip of the ad publisher
-                    if (getenv(HTTP_X_FORWARDED_FOR)) {							
-                        $ip = getenv(HTTP_X_FORWARDED_FOR); 
-                    } else { 
-                        $ip = getenv(REMOTE_ADDR);
-                    }
-            
-                    $formulario['ip'] = $ip;        
+					//get the ip of the ad publisher
+					if (getenv(HTTP_X_FORWARDED_FOR)) {							
+					    $ip = getenv(HTTP_X_FORWARDED_FOR); 
+					} else { 
+					    $ip = getenv(REMOTE_ADDR);
+					}
+				
+					$formulario['ip'] = $ip;
+					$formulario['ads_id'] = $ad_id;
                     
 					//get this ad user owner
-					$formulario ['user_owner'] = $auth->getIdentity ()->id;
+					//$formulario ['user_owner'] = $auth->getIdentity ()->id;
 					
 					//get date created
-                    //TODO to use the Zend Date object to apapt the time to the locale user zone
+					//TODO to use the Zend Date object to apapt the time to the locale user zone
 					$datenow = date("Y-m-d H:i:s", time() );
 					$formulario ['date_created'] = $datenow;
 					
 					
 					$model = $this->_getModel ();
-					$model->save ( $formulario );
+					$model->save( $formulario );
 					
-					//Zend_Debug::dump ( $formulario );
-                    $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Comment published succesfully!' ) );
-					$this->_redirect ( '/' );
+					Zend_Debug::dump ( $formulario );
+					
+					//TODO pass the message to parent
+					//$mensajes = parent::getHelper('mensajes');
+					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Comment published succesfully!' ) );
+					$locale = Zend_Registry::get ( "Zend_Locale" );
+					$lang = $locale->getLanguage ();
+
+					$this->_redirect ( '/'.$lang.'/ad/show/id/'.$ad_id );
 					
 				}
 			}

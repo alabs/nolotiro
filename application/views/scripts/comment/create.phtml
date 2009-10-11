@@ -1,0 +1,75 @@
+<?php
+//register page
+$this->page_title = $this->translate ( 'View ad' ) . $this->ad['title'].' - nolotiro.com';
+
+$locale = Zend_Registry::get ( "Zend_Locale" );
+$this->lang = $locale->getLanguage ();
+$aNamespace = new Zend_Session_Namespace('Nolotiro');
+				
+
+
+//render common HTML header
+echo $this->render ( 'partials/html_header.phtml' );
+?>
+
+<?
+if (count ( $this->mensajes ) > 0) {
+	echo '<div class="success">';
+	foreach ( $this->mensajes as $msg ) {
+		echo $msg . '<br>';
+	}
+	echo '</div>';
+}
+?>
+
+
+
+<?php
+if (isset ( $this->error )) :
+	?>
+<div class="error">
+		<?=$this->escape ( $this->error );?>
+</div>
+
+<?php endif;
+?>
+
+<div id="default_header_section">
+<h3><?=$this->translate ( 'Create a new comment' );?></h3>
+</div>
+
+<?php
+
+//$location = Zend_Registry::get('Nolotiro_location');
+//echo $location;
+
+//Zend_Debug::dump($location);
+
+
+
+if (isset ( $this->error )) :
+	?>
+<div class="error">
+		<?=$this->escape ( $this->error );?>
+	</div>
+
+<?php endif;
+?>
+
+<div id="main">
+<div class="span-16">
+
+<form action="<?=$this->escape ( $this->form->getAction () )?>"
+	method="<?=$this->escape ( $this->form->getMethod () )?>">
+<fieldset><legend><?=$this->translate ( 'Please, start to write your location' );?></legend>
+      
+		
+		<?=$this->form?>
+		
+	</fieldset>
+</form>
+
+</div>
+
+</div>
+</body>
