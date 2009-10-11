@@ -75,20 +75,25 @@ class LocationController extends Zend_Controller_Action {
 		$aNamespace = new Zend_Session_Namespace('Nolotiro');
 		$locationtemp = $aNamespace->locationTemp;
 
+		$locale = Zend_Registry::get ( "Zend_Locale" );
+		$lang = $locale->getLanguage ();
+		
 		$places = $this->getYahooGeoWoeidList($locationtemp);
 
-
+		
+		//check if we got response from yahoo geo api
+		if ($places === false) {
+			$this->_helper->_flashMessenger->addMessage (
+				$this->view->translate ( 'I can not connect to Yahoo geo service, sorry!'));
+			$this->_redirect ( '/'.$lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+			
+		}
 
 		//check if the yahoo geo api returns no results!
 		if ( count($places->place ) == 0){
 					
-			//Zend_Debug::dump($places);
-			//die('el ojete esta vacio');
-			$locale = Zend_Registry::get ( "Zend_Locale" );
-			$lang = $locale->getLanguage ();
-			
 			$this->_helper->_flashMessenger->addMessage (
-				$this->view->translate ( 'No location found named:' .'  "'. $locationtemp .'"'));
+				$this->view->translate ( 'No location found named:') .'  "'. $locationtemp .'"');
 			$this->_redirect ( '/'.$lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
 		
 		}
@@ -115,7 +120,6 @@ class LocationController extends Zend_Controller_Action {
 			$woeid = $woeid.'*'.$name;
 	
 			$location_options[$woeid]= $name;
-
 
 			//check the first value of the array results to show the first selected to form
 			$counter++;
@@ -177,6 +181,7 @@ class LocationController extends Zend_Controller_Action {
 	}
 
 	public function getYahooGeoWoeidList($locationtemp){
+
 
 		//get the user session language to fetch the proper yahoo xml language
 		$locale = Zend_Registry::get ( "Zend_Locale" );	
