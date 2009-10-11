@@ -47,9 +47,7 @@ a:hover {
 
 .ad_create_tab {
 	position: absolute;
-	
-	right: 0px;
-	
+	right: 15px;
 
 }
 
@@ -72,21 +70,21 @@ a:hover {
 
 
 .ad_excerpt{
-    padding-bottom: 14px;
-    padding-left: 18px;
+	padding-bottom: 14px;
+	padding-left: 18px;
 
 }
 
 .ad_excerpt h4{
 
-    font-size: 1.3em;
-    font-weight: bold;
+	font-size: 1.3em;
+	font-weight: bold;
 }
 
 .ad_date{
-    color:#666;
-    font-size: 0.9em;
-    font-weight: normal;
+	color:#666;
+	font-size: 0.9em;
+	font-weight: normal;
 }
 
 
@@ -97,8 +95,8 @@ a:hover {
 	text-align:center;
 	border: 1px solid #ddd;
 	background-color: #fff;
-    font-size: 2em;
-    font-weight: bold;
+	font-size: 2em;
+	font-weight: bold;
 	right: 10px;
 	top:-50px;
 	padding: 14px;
@@ -112,7 +110,7 @@ a.actual {
 }
 
 .errors{
-    color:red;
+	color:red;
 }
 
 /**
@@ -123,7 +121,7 @@ a.actual {
 	width: 100%;
 	margin-left: 0px;
 	margin-right: 20px;
-	margin-bottom: 45px;
+	margin-bottom: 40px;
 	position: relative;
 	text-align: left;
 	
@@ -135,7 +133,7 @@ a.actual {
 }
 
 #footer {
-    padding-bottom:10px;
+	padding-bottom:10px;
 	clear: both;
 	text-align: center;
 }
@@ -148,7 +146,7 @@ h1#site-name  {
 	margin-top: 0px;
 	padding-top: 10px;
 	font-size: 3em;
-	margin-left: 78px;
+	margin-left: 74px;
 }
 h1#site-name img {
 	position:absolute;
@@ -160,7 +158,7 @@ h2#site-slogan {
 	float:left;
 	font-size: 1em;
 	padding-top: 1px;
-	margin-left: 78px;
+	margin-left: 74px;
 }
 
 #location_header_section {
@@ -182,6 +180,7 @@ h2#site-slogan {
 	padding-top: 10px;
 	padding-bottom: 6px;
 	padding-left: 20px;
+	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 }
 
