@@ -32,19 +32,27 @@ class CommentController extends Zend_Controller_Action {
 	public function createAction() {
 		
 		
+		$request = $this->getRequest ();
+		$ad_id = $this->_request->getParam ( 'ad_id' );
 		
 		$locale = Zend_Registry::get ( "Zend_Locale" );
 		$lang = $locale->getLanguage ();
 	    
 		//first we check if user is logged, if not redir to login
-		//$auth = Zend_Auth::getInstance ();
-		//if (! $auth->hasIdentity ()) {
-			//$this->_redirect ( $lang.'/auth/login' );	
+		$auth = Zend_Auth::getInstance ();
+		if (! $auth->hasIdentity ()) { 
 			
-		//} else {
+			//keep this url in zend session to redir after login
+			$aNamespace = new Zend_Session_Namespace('Nolotiro');
+			$aNamespace->redir = '/comment/create/'.$ad_id;
 			
-			$request = $this->getRequest ();
-			$ad_id = $this->_request->getParam ( 'ad_id' );
+			//Zend_Debug::dump($aNamespace->redir);
+			$this->_redirect ( $lang.'/auth/login' );	
+			
+		} else {
+			
+			
+			
 			$form = $this->_getCommentForm ();
 			
 			// check to see if this action has been POST'ed to
@@ -104,7 +112,7 @@ class CommentController extends Zend_Controller_Action {
 			}
 		}
 	
-	//}
+	}
 	
 	public function editAction() {
 		$request = $this->getRequest ();

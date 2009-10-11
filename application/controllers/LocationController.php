@@ -50,6 +50,7 @@ class LocationController extends Zend_Controller_Action {
 
 				$formulario = $form->getValues ();
 
+
 				$aNamespace = new Zend_Session_Namespace('Nolotiro');
 				$aNamespace->locationTemp = $formulario['location'];
 
@@ -57,6 +58,9 @@ class LocationController extends Zend_Controller_Action {
 				$this->lang = $locale->getLanguage ();
 
 				$this->_redirect ( '/'.$this->lang.'/location/change2' );
+				
+				
+
 
 			}
 		}
@@ -73,6 +77,22 @@ class LocationController extends Zend_Controller_Action {
 
 		$places = $this->getYahooGeoWoeidList($locationtemp);
 
+
+
+		//check if the yahoo geo api returns no results!
+		if ( count($places->place ) == 0){
+					
+			//Zend_Debug::dump($places);
+			//die('el ojete esta vacio');
+			$locale = Zend_Registry::get ( "Zend_Locale" );
+			$lang = $locale->getLanguage ();
+			
+			$this->_helper->_flashMessenger->addMessage (
+				$this->view->translate ( 'No location found named:' .'  "'. $locationtemp .'"'));
+			$this->_redirect ( '/'.$lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+		
+		}
+
 		$request = $this->getRequest();
 		$form = $this->_getLocationChange2Form($locationtemp);
 
@@ -87,22 +107,23 @@ class LocationController extends Zend_Controller_Action {
 
 		foreach ($places as $item) {
 
-    		$name = $item->name.', '.$item->admin1.', '.$item->country;
+			$name = $item->name.', '.$item->admin1.', '.$item->country;
+	
+			$woeid = (string)$item->woeid; //we have to set to string to not disturb the zend form translate parser!
+	
+			//glue together woeid and text to parse after with *
+			$woeid = $woeid.'*'.$name;
+	
+			$location_options[$woeid]= $name;
 
-    		$woeid = (string)$item->woeid; //we have to set to string to not disturb the zend form translate parser!
 
-    		//glue together woeid and text to parse after with *
-    		$woeid = $woeid.'*'.$name;
+			//check the first value of the array results to show the first selected to form
+			$counter++;
+			if ($counter == 1) {
+			    $firstitem = $woeid;
+			}
 
-		$location_options[$woeid]= $name;
-
-            //check the first value of the array results to show the first selected to form
-            $counter++;
-            if ($counter == 1) {
-            	$firstitem = $woeid;
-            }
-
-        }
+		}
 
 
 

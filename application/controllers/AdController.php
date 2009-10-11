@@ -83,6 +83,12 @@ class AdController extends Zend_Controller_Action {
 		//first we check if user is logged, if not redir to login
 		$auth = Zend_Auth::getInstance ();
 		if (! $auth->hasIdentity ()) {
+			
+			//keep this url in zend session to redir after login
+			$aNamespace = new Zend_Session_Namespace('Nolotiro');
+			$aNamespace->redir = '/ad/create';
+			
+			//Zend_Debug::dump($aNamespace->redir);
 			$this->_redirect ( $lang.'/auth/login' );
 
 
