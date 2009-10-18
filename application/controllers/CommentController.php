@@ -44,7 +44,7 @@ class CommentController extends Zend_Controller_Action {
 			
 			//keep this url in zend session to redir after login
 			$aNamespace = new Zend_Session_Namespace('Nolotiro');
-			$aNamespace->redir = '/comment/create/'.$ad_id;
+			$aNamespace->redir = $lang.'/comment/create/ad_id/'.$ad_id;
 			
 			//Zend_Debug::dump($aNamespace->redir);
 			$this->_redirect ( $lang.'/auth/login' );	

@@ -66,7 +66,25 @@ class AuthController extends Zend_Controller_Action {
 					$auth->getStorage ()->write ( $data );
 					
 					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'You are now logged in, ' ) . $username );
-					$this->_redirect ( '/' );
+					
+					
+					//check the redir value if setted
+					$aNamespace = new Zend_Session_Namespace('Nolotiro');
+					$redir = $aNamespace->redir;
+					
+					if ($redir !== null){
+						
+					  $aNamespace->redir = null; //reset redir value
+					  $this->_redirect ( $redir );
+					
+					}else {
+					
+					  //if redir empty goto main home ads
+					  $this->_redirect ( '/' );
+					}
+					
+					
+					
 				} else {
 					// failure: wrong username
 					$view = $this->initView ();

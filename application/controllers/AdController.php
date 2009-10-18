@@ -86,7 +86,7 @@ class AdController extends Zend_Controller_Action {
 			
 			//keep this url in zend session to redir after login
 			$aNamespace = new Zend_Session_Namespace('Nolotiro');
-			$aNamespace->redir = '/ad/create';
+			$aNamespace->redir = $lang.'/ad/create';
 			
 			//Zend_Debug::dump($aNamespace->redir);
 			$this->_redirect ( $lang.'/auth/login' );
