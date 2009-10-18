@@ -57,7 +57,9 @@ if ($this->ad): ?>
         </div>
         <hr>
        
-
+<a href="/<?=$this->lang ?>/comment/create/ad_id/<?=$this->ad['id'] ?>"><?=$this->translate('Post a comment') ?></a>
+    &nbsp;&nbsp;&nbsp;  
+<a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'] ?>"><?=$this->translate('Send a private message') ?></a>
 
 
 <?php else: ?>
@@ -69,21 +71,21 @@ if ($this->ad): ?>
 
 <?
 //comments
-//Zend_Debug::dump($this->comments);
+Zend_Debug::dump($this->comments);
 
 if ($this->comments): ?>
 
 
        <?php foreach ($this->comments as $key => $val): ?>
         <div class="ad_excerpt">
-           <h4><a href="/<?=$lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+           <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
            
            <span class="ad_date"><?=$this->translate('Posted on '). $this->escape($val['date_created']) ?>
             <?=$this->translate('by user ') ?> 
             
            
-            <a href="/<?=$lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['user_owner']) ?></a>
+            <a href="/<?=$this->lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['user_owner']) ?></a>
             </span>
            <br>
            <span><?php echo $this->escape($val['body']) ?></span>
