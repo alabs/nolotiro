@@ -45,6 +45,8 @@ a:hover {
 
 }
 
+
+
 .ad_create_tab {
 	position: absolute;
 	right: 15px;
@@ -69,7 +71,17 @@ a:hover {
 }
 
 
+.ad_list_image {
+	float:right;
+	right:5px;
+	padding: 0 15px 0 0;
+	width:100px;
+}
+
 .ad_excerpt{
+	float:left;
+	left:5px;
+	width:750px;
 	padding-bottom: 14px;
 	padding-left: 18px;
 
