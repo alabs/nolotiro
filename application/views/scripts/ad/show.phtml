@@ -32,12 +32,11 @@ if (isset ( $this->error )) :
 <?php endif;
 ?>
 <div id="main">
-<div class="span-16">
+<div class="span-19">
 
 
 <?php 
-
-Zend_Debug::dump($this->ad);
+//Zend_Debug::dump($this->ad);
 
 if ($this->ad): ?>
 
@@ -45,7 +44,13 @@ if ($this->ad): ?>
        
         <div class="ad_excerpt">
           
-           
+           <?php
+	   if ($this->ad['photo'] !== null){
+		      echo '<div class="ad_list_image">
+		      <a href="/images/uploads/ads/original/'.$this->ad['photo'].'" rel="superbox[image]">
+		      <img alt="'.$this->ad['title'].'" src="/images/uploads/ads/100/'.$this->ad['photo'].'" /></a></div>';
+	   }
+	   ?>
            <span class="ad_date"><?=$this->translate('Posted on '). $this->ad['date_created'] ?>
             <?=$this->translate('by user ') ?> 
             
@@ -53,13 +58,9 @@ if ($this->ad): ?>
             <a href="/<?=$lang ?>/user/profile/id/<?=$this->ad['user_owner'] ?>"><?=$this->ad['user_owner'] ?></a>
             </span>
            <br>
-           <span><h4><?php echo $this->ad['body'] ?><h4></span>
+           <span><?php echo $this->ad['body'] ?></span>
 	   
-	   <?php
-	   if ($this->ad['photo'] !== null){
-		      echo '<img alt="'.$this->ad['title'].'" src="/images/uploads/ads/100/'.$this->ad['photo'].'" />';
-	   }
-	   ?>
+	   
 	   
         </div>
         <hr>

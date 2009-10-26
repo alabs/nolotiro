@@ -42,9 +42,11 @@ if ($this->ad): ?>
 		
 	  <?php
 	   if ($val['photo'] !== null){
-		      echo '<div class="ad_list_image"><img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
-		      $this->escape($val['photo']).'" /></div>';
-		      //Zend_Debug::dump($val['photo']);
+		      echo '<div class="ad_list_image">
+		      <a href="/'.$lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->escape($val['title']).' ">
+		      <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
+		      $this->escape($val['photo']).'" /></a></div>';
+		      
 	   }
 	   ?>
 	

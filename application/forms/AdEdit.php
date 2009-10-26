@@ -17,13 +17,14 @@ class Form_AdEdit extends Zend_Form {
 		//upload image stuff
 		$this->addElement('file', 'photo', array(
 			
-			'label' => 'Seleccione un archivo de imagen que desea subir.',
+			'label' => 'Select an image file for your ad (optional).',
 			'required' => false,
 			'setDestination' => (NOLOTIRO_PATH_ROOT. '/www/images/uploads'),
-			'description' => 'Allowed format files: gif, jpg, png. Max:1Mb Size',
+			'description' => 'Allowed format files: gif, jpg, png, bmp. Max:1Mb Size',
 			'validators' => array(
+			'Extension' => array(false, 'jpg,jpeg,bmp,gif,png'),
 			'Size' => array('min' => 1, 'max' => 1000000),
-			'IsImage' => array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/png')
+			'IsImage' => array( 'image/bmp', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/png')
 			)
 			));
 
