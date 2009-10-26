@@ -1,5 +1,5 @@
 <?php
-//register page
+//create new ad page
 $this->page_title = $this->translate ( 'Create a new ad' ) . ' - nolotiro.com';
 
 $locale = Zend_Registry::get ( "Zend_Locale" );
@@ -13,32 +13,24 @@ echo $this->render ( 'partials/html_header.phtml' );
 <h3><?=$this->translate ( 'Create a new ad' );?></h3>
 </div>
 
-
 <?php
 if (isset ( $this->error )) :
 	?>
 <div class="error">
 		<?=$this->escape ( $this->error );?>
-	</div>
-
+</div>
 <?php endif;
 ?>
+
 <div id="main">
 <div class="span-16">
 
 
-<form action="<?=$this->escape ( $this->form->getAction () )?>"
-	method="<?=$this->escape ( $this->form->getMethod () )?>">
-
-<fieldset><legend><?=$this->translate ( 'To publish your ad, please, insert the data required below ' );?></legend>	
 
 <?=$this->form?>
 
-</fieldset>
-</form>
 
 </div>
-
 
 <? //render the default footer
 echo $this->render ( 'partials/html_footer.phtml' );

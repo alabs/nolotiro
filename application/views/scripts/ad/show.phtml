@@ -37,7 +37,7 @@ if (isset ( $this->error )) :
 
 <?php 
 
-//Zend_Debug::dump($this->ad);
+Zend_Debug::dump($this->ad);
 
 if ($this->ad): ?>
 
@@ -54,6 +54,13 @@ if ($this->ad): ?>
             </span>
            <br>
            <span><h4><?php echo $this->ad['body'] ?><h4></span>
+	   
+	   <?php
+	   if ($this->ad['photo'] !== null){
+		      echo '<img alt="'.$this->ad['title'].'" src="/images/uploads/ads/100/'.$this->ad['photo'].'" />';
+	   }
+	   ?>
+	   
         </div>
         <hr>
        
@@ -71,7 +78,7 @@ if ($this->ad): ?>
 
 <?
 //comments
-Zend_Debug::dump($this->comments);
+//Zend_Debug::dump($this->comments);
 
 if ($this->comments): ?>
 

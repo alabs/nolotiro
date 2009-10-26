@@ -222,19 +222,20 @@ class LocationController extends Zend_Controller_Action {
 
 	public function getLocationGeoIP($IP){
 
-	    require_once ( NOLOTIRO_PATH_ROOT . '/library/GeoIP/geoipcity.inc' );
+		require_once ( NOLOTIRO_PATH_ROOT . '/library/GeoIP/geoipcity.inc' );
 
 
-        $gi = geoip_open("/usr/local/share/GeoIP/GeoLiteCity.dat",GEOIP_STANDARD);
+		$gi = geoip_open("/usr/local/share/GeoIP/GeoLiteCity.dat",GEOIP_STANDARD);
 
-        $record = geoip_record_by_addr($gi,$IP);
-        print $record->country_name . "\n";
-        //print $record->region . " " . $GEOIP_REGION_NAME[$record->country_code][$record->region] . "\n";
-        print $GEOIP_REGION_NAME[$record->country_code][$record->region];
-        print $record->city . "\n";
-	var_dump($record);
+	        $record = geoip_record_by_addr($gi,$IP);
+	        print $record->country_name . "\n";
+	        //print $record->region . " " . $GEOIP_REGION_NAME[$record->country_code][$record->region] . "\n";
+	        print $GEOIP_REGION_NAME[$record->country_code][$record->region];
+	        print $record->city . "\n";
+	
+		var_dump($record);
 
-        geoip_close($gi);
+		geoip_close($gi);
 
 
 

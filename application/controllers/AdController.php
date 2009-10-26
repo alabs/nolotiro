@@ -106,6 +106,16 @@ class AdController extends Zend_Controller_Action {
 
 					$formulario = $form->getValues ();
 
+					//create thumbnail if image exists
+					 if ($formulario['photo'] !== null){
+						
+					  $photobrut = $formulario['photo'];
+					  $formulario['photo'] = $this->_createThumbnail($photobrut,'100','90');
+					  
+					 }
+					 
+					
+			
 					//strip html tags to title
 					$formulario['title'] = strip_tags($formulario['title']);
 
@@ -120,9 +130,9 @@ class AdController extends Zend_Controller_Action {
 					$split=explode(". ", $formulario['body']);
 
 					foreach ($split as $sentence) {
-                        $sentencegood = ucfirst(mb_convert_case($sentence, MB_CASE_LOWER, "UTF-8"));
-                        $formulario['body'] = str_replace($sentence, $sentencegood, $formulario['body']);
-                    }
+						$sentencegood = ucfirst(mb_convert_case($sentence, MB_CASE_LOWER, "UTF-8"));
+						$formulario['body'] = str_replace($sentence, $sentencegood, $formulario['body']);
+					}
 
 
                     //get the ip of the ad publisher
@@ -138,15 +148,15 @@ class AdController extends Zend_Controller_Action {
 					$formulario ['user_owner'] = $auth->getIdentity ()->id;
 
 					//get date created
-                    //TODO to use the Zend Date object to apapt the time to the locale user zone
+					//TODO to use the Zend Date object to apapt the time to the locale user zone
 					$datenow = date("Y-m-d H:i:s", time() );
 					$formulario ['date_created'] = $datenow;
 
 					//get woeid to assign to this ad
 					//the location its stored at session location value
-                    //(setted by default on bootstrap to Madrid woeid number)
-                    $aNamespace = new Zend_Session_Namespace('Nolotiro');
-                    $formulario ['woeid_code'] = $aNamespace->location;
+					//(setted by default on bootstrap to Madrid woeid number)
+					$aNamespace = new Zend_Session_Namespace('Nolotiro');
+					$formulario ['woeid_code'] = $aNamespace->location;
 
 
 					$model = $this->_getModel ();
@@ -182,6 +192,32 @@ class AdController extends Zend_Controller_Action {
 			}
 		}
 	}
+
+	/*
+	 *_createThumbnail uses resize class
+	 *
+	 */
+
+	protected function _createThumbnail($file,$x,$y){
+
+		require_once ( NOLOTIRO_PATH_ROOT . '/library/SimpleImage.php' );
+	
+		$file_ext = substr(strrchr($file,'.'),1);
+		$fileuniquename = md5(uniqid(mktime())).'.'.$file_ext;
+	
+		$image = new SimpleImage();
+		$image->load('/tmp/'.$file);
+		
+		//save original to right place
+		$image->save( NOLOTIRO_PATH_ROOT.'/www/images/uploads/ads/original/'.$fileuniquename);
+		
+		//save thumb 100 
+		$image->resizeToWidth($x);
+		$image->save( NOLOTIRO_PATH_ROOT.'/www/images/uploads/ads/100/'.$fileuniquename);
+		
+		return $fileuniquename;
+	}
+
 
 	/**
 	 *

@@ -27,7 +27,7 @@ if (count ( $this->mensajes ) > 0) {
 
 <div id="main">
 
-<div class="span-18">
+<div class="span-19">
 
 <?php
 //Zend_Debug::dump($this->ad);
@@ -39,6 +39,15 @@ if ($this->ad): ?>
 
        <?php foreach ($this->paginator as $key => $val): ?>
         <div class="ad_excerpt">
+		
+	  <?php
+	   if ($val['photo'] !== null){
+		      echo '<div class="ad_list_image"><img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
+		      $this->escape($val['photo']).'" /></div>';
+		      //Zend_Debug::dump($val['photo']);
+	   }
+	   ?>
+	
            <h4><a href="/<?=$lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
@@ -49,7 +58,12 @@ if ($this->ad): ?>
             <a href="/<?=$lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['user_owner']) ?></a>
             </span>
            <br>
-           <span><?php echo $this->escape($val['body']) ?></span>
+           
+	   
+	   <div><?php echo $this->escape($val['body']) ?></div>
+	   
+	   
+	   
         </div>
         <hr>
         <?php endforeach; ?>
