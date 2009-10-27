@@ -10,6 +10,8 @@ class LocationController extends Zend_Controller_Action {
 		parent::init ();
 		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
 
+		$locale = Zend_Registry::get ( "Zend_Locale" );
+		$this->lang = $locale->getLanguage ();
 	}
 
 
@@ -54,8 +56,7 @@ class LocationController extends Zend_Controller_Action {
 				$aNamespace = new Zend_Session_Namespace('Nolotiro');
 				$aNamespace->locationTemp = $formulario['location'];
 
-				$locale = Zend_Registry::get ( "Zend_Locale" );
-				$this->lang = $locale->getLanguage ();
+				
 
 				$this->_redirect ( '/'.$this->lang.'/location/change2' );
 				

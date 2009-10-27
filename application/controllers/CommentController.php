@@ -22,7 +22,9 @@ class CommentController extends Zend_Controller_Action {
 		//$this->view->baseUrl = $this->_request->getBaseUrl();
 		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
 		
-	
+		$locale = Zend_Registry::get ( "Zend_Locale" );
+		$this->lang = $locale->getLanguage ();
+
 	
 	
 	}
@@ -35,19 +37,17 @@ class CommentController extends Zend_Controller_Action {
 		$request = $this->getRequest ();
 		$ad_id = $this->_request->getParam ( 'ad_id' );
 		
-		$locale = Zend_Registry::get ( "Zend_Locale" );
-		$lang = $locale->getLanguage ();
-	    
+		
 		//first we check if user is logged, if not redir to login
 		$auth = Zend_Auth::getInstance ();
 		if (! $auth->hasIdentity ()) { 
 			
 			//keep this url in zend session to redir after login
 			$aNamespace = new Zend_Session_Namespace('Nolotiro');
-			$aNamespace->redir = $lang.'/comment/create/ad_id/'.$ad_id;
+			$aNamespace->redir = $this->lang.'/comment/create/ad_id/'.$ad_id;
 			
 			//Zend_Debug::dump($aNamespace->redir);
-			$this->_redirect ( $lang.'/auth/login' );	
+			$this->_redirect ( $this->lang.'/auth/login' );	
 			
 		} else {
 			
@@ -103,10 +103,8 @@ class CommentController extends Zend_Controller_Action {
 					//TODO pass the message to parent
 					//$mensajes = parent::getHelper('mensajes');
 					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Comment published succesfully!' ) );
-					$locale = Zend_Registry::get ( "Zend_Locale" );
-					$lang = $locale->getLanguage ();
-
-					$this->_redirect ( '/'.$lang.'/ad/show/id/'.$ad_id );
+					
+					$this->_redirect ( '/'.$this->lang.'/ad/show/id/'.$ad_id );
 					
 				}
 			}
