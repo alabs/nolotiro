@@ -76,8 +76,6 @@ class LocationController extends Zend_Controller_Action {
 		$aNamespace = new Zend_Session_Namespace('Nolotiro');
 		$locationtemp = $aNamespace->locationTemp;
 
-		$locale = Zend_Registry::get ( "Zend_Locale" );
-		$lang = $locale->getLanguage ();
 		
 		$places = $this->getYahooGeoWoeidList($locationtemp);
 
@@ -86,7 +84,7 @@ class LocationController extends Zend_Controller_Action {
 		if ($places === false) {
 			$this->_helper->_flashMessenger->addMessage (
 				$this->view->translate ( 'I can not connect to Yahoo geo service, sorry!'));
-			$this->_redirect ( '/'.$lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+			$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
 			
 		}
 
@@ -95,7 +93,7 @@ class LocationController extends Zend_Controller_Action {
 					
 			$this->_helper->_flashMessenger->addMessage (
 				$this->view->translate ( 'No location found named:') .'  "'. $locationtemp .'"');
-			$this->_redirect ( '/'.$lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+			$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
 		
 		}
 
@@ -169,10 +167,7 @@ class LocationController extends Zend_Controller_Action {
 				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Location changed successfully to:' )
 				.' '.$values[1]);
 
-				$locale = Zend_Registry::get ( "Zend_Locale" );
-				$lang = $locale->getLanguage ();
-
-				$this->_redirect ( '/'.$lang.'/ad/list/woeid/'.$values[0].'/ad_type/give' );
+				$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$values[0].'/ad_type/give' );
 
 			}
 		}
@@ -183,16 +178,9 @@ class LocationController extends Zend_Controller_Action {
 
 	public function getYahooGeoWoeidList($locationtemp){
 
-
-		//get the user session language to fetch the proper yahoo xml language
-		$locale = Zend_Registry::get ( "Zend_Locale" );	
-		$lang = $locale->getLanguage ();
-
 		$appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
-		//$htmlString = 'http://where.yahooapis.com/v1/places.q('.urlencode($locationtemp).');count=10?appid='.$appid.'&lang='.$lang;
 		$htmlString = 'http://where.yahooapis.com/v1/places$and(.q('.
-		urlencode($locationtemp).'),.type('.$this->view->translate ('Town').'));count=20?appid='.$appid.'&lang='.$lang;
-
+		urlencode($locationtemp).'),.type('.$this->view->translate ('Town').'));count=20?appid='.$appid.'&lang='.$this->lang;
 
 		$xml = simplexml_load_file($htmlString);
 

@@ -10,13 +10,24 @@ a:visited {
 
 a:active {
 	color: #00C7EF;
-	text-decoration: underline;
 }
 
 a:hover {
 	/*color: #FF08DE;*/
-	text-decoration: underline;
+	color: #26DAFF;
+	
 }
+
+
+a.actual {
+
+	/*color: #FF08DE;
+	text-decoration: underline;*/
+	border-bottom: solid;
+	border-width:3px;
+}
+
+
 
 .user_login_box {
 	margin-top: -0.4em;
@@ -39,9 +50,9 @@ a:hover {
 
 
 .select_language_box select {
-    font-size: 0.9em;
-    font-weight: bold;
-    background-color: #fff;
+	font-size: 0.9em;
+	font-weight: bold;
+	background-color: #fff;
 
 }
 
@@ -54,36 +65,36 @@ a:hover {
 }
 
 .ad_create_tab a {
-    background:transparent url(/images/btn_new_ad.png) no-repeat scroll 100% 0;
-    height:24px;
-    overflow:hidden;
-    color:#fff;
-    font-size: 1.2em;
-    font-weight: bold;
-    border: 1px solid #ddd;
-    padding-left:10px;
-    padding-right:10px;
-    padding-top:2px;
-    padding-bottom:2px;
-    text-align:center;
-    width:auto;
-    display:block;
+	background:transparent url(/images/btn_new_ad.png) no-repeat scroll 100% 0;
+	height:24px;
+	overflow:hidden;
+	color:#fff;
+	font-size: 1.2em;
+	font-weight: bold;
+	border: 1px solid #ddd;
+	padding-left:10px;
+	padding-right:10px;
+	padding-top:2px;
+	padding-bottom:2px;
+	text-align:center;
+	width:auto;
+	display:block;
 }
 
 
 .ad_list_image {
 	float:right;
-	right:5px;
-	padding: 0 15px 0 0;
+	
+	
 	width:100px;
 }
 
 .ad_excerpt{
 	float:left;
-	left:5px;
-	width:750px;
-	padding-bottom: 14px;
-	padding-left: 18px;
+	border-bottom: 1px solid #ddd;
+	width: 100% !important;
+	padding: 18px;
+	margin:0;
 
 }
 
@@ -93,6 +104,10 @@ a:hover {
 	font-weight: bold;
 }
 
+.ad_excerpt:hover{
+	background-color:#FFFFCC;
+	
+}
 .ad_date{
 	color:#666;
 	font-size: 0.9em;
@@ -115,11 +130,7 @@ a:hover {
 }
 
 
-a.actual {
 
-	/*color: #FF08DE;*/
-	text-decoration: underline;
-}
 
 .errors{
 	color:red;
@@ -140,7 +151,7 @@ a.actual {
 }
 
 #main {
-	padding-top: 20px;
+	padding-top: 0;
 	text-align: left;
 }
 
@@ -198,9 +209,12 @@ h2#site-slogan {
 
 
 .pagination{
-    padding:6px;
-    font-size:1.2em;
-    text-align: left;
+	clear:both;
+	position:relative;
+	margin: 14px;
+	padding:6px;
+	font-size:1.2em;
+	text-align: left;
 }
 
 /**

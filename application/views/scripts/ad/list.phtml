@@ -27,7 +27,7 @@ if (count ( $this->mensajes ) > 0) {
 
 <div id="main">
 
-<div class="span-19">
+<div class="span-18">
 
 <?php
 //Zend_Debug::dump($this->ad);
@@ -59,7 +59,7 @@ if ($this->ad): ?>
 
             <a href="/<?=$lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['user_owner']) ?></a>
             </span>
-           <br>
+           
            
 	   
 	   <div><?php echo $this->escape($val['body']) ?></div>
@@ -67,7 +67,7 @@ if ($this->ad): ?>
 	   
 	   
         </div>
-        <hr>
+        
         <?php endforeach; ?>
 
 
