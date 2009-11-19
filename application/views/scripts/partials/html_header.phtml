@@ -15,7 +15,7 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
 	content="<?=isset ( $this->page_title ) ? $this->page_title : 'nolotiro.org'?>" />
 <meta name="robots" content="index,follow" />
 
-<link rel="shortcut icon" href="<?=$this->baseUrl?>/images/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="<?=$this->baseUrl?>/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="<?$this->baseUrl?>/css/common.css" type="text/css" />
 <link rel="stylesheet" href="<?$this->baseUrl?>/css/blueprint/forms.css" type="text/css" />
 <link rel="stylesheet" href="<?$this->baseUrl?>/css/blueprint/screen.css" type="text/css" media="screen, projection" />
@@ -59,12 +59,16 @@ $auth = Zend_Auth::getInstance ();
 
 if (! $auth->hasIdentity ()) {
 
-	echo '<a href="/' . $this->baseUrl . $this->lang . '/user/register">' . $this->translate ( 'new user' ) . '</a> ' . $this->translate ( 'or' ) . ' ';
+	echo '<a href="/' . $this->baseUrl . $this->lang . '/user/register">' . $this->translate ( 'new user' ) . '</a> ' .
+	$this->translate ( 'or' ) . ' ';
 	echo '<a href="/' . $this->baseUrl . $this->lang . '/auth/login">' . $this->translate ( 'login' ) . '</a>';
 } else {
-	$auth_username = $auth->getIdentity ()->username;
+	$auth_username = $auth->getIdentity()->username;
+	$auth_userid = $auth->getIdentity()->id;
 
-	echo $this->translate ( 'hello,' ) . '<b>&nbsp;<a href="/' . $this->lang . '/user/profile/' . $this->escape ( $auth_username ) . '">' . $this->escape ( $auth_username ) . '</a></b> | ' . '<a href="/' . $this->lang . '/auth/logout">' . $this->translate ( 'logout' ) . '</a>';
+
+	echo $this->translate ( 'hello,' ) . '<b>&nbsp;<a href="/' .
+	$this->lang . '/user/profile/id/' . $this->escape ( $auth_userid ) . '">' . $this->escape ( $auth_username ) . '</a></b> | ' . '<a href="/' . $this->lang . '/auth/logout">' . $this->translate ( 'logout' ) . '</a>';
 }
 
 ?>

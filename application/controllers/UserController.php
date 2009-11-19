@@ -118,6 +118,24 @@ class UserController extends Zend_Controller_Action {
 	
 	}
 	
+	
+	
+	public function profileAction(){
+		
+		$request = $this->getRequest ();
+		$user_id = $this->_request->getParam ( 'id' );
+		
+		$model = $this->_getModel ();
+		
+		$theuser = $model->fetchUser($user_id);
+		
+		Zend_Debug::dump($theuser);
+		
+		
+		
+	}
+	
+	
 	/**
 	 * _getModel() is a protected utility method for this controller. It is 
 	 * responsible for creating the model object and returning it to the 

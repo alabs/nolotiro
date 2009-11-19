@@ -28,14 +28,14 @@ class IndexController extends Zend_Controller_Action {
 		
 		//redir to the list of ads of woeid + ad_type sessiob stored , ad controller
 		
-	    $aNamespace = new Zend_Session_Namespace('Nolotiro');
-        $woeid = $aNamespace->location;
-        $ad_type = $aNamespace->ad_type;
+		$aNamespace = new Zend_Session_Namespace('Nolotiro');
+		$woeid = $aNamespace->location;
+		$ad_type = $aNamespace->ad_type;
 	    
 		
 		
 		$locale = Zend_Registry::get ( "Zend_Locale" );
-        $lang = $locale->getLanguage ();
+		$lang = $locale->getLanguage ();
         
 		$this->_redirect('/'.$lang.'/ad/list/woeid/'.$woeid.'/ad_type/'.$ad_type);
 	}

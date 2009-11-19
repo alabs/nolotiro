@@ -70,7 +70,7 @@
 "Choose a password (5 or more characters):";"Elige una contraseña (5 o mas caracteres):"
 "Register";"Regístrate"
 "'%value%' has not only alphabetic and digit characters";"'%value%' contiene carácteres no válidos (usa solo letras y números)"
-"By sending this form, you are indicating that you have read, understood, and agree to nolotiro's <a href='/en/page/user-agreement'>user agreement</a> and <a href='/en/page/privacy'>privacy policy.</a>";"Enviando este formulario, admites haber leido, comprendido, y estás conforme con las <a href='/es/page/user-agreement'>condiciones de uso</a> y la <a href='/es/page/privacy'>política de privacidad</a> de nolotiro.com."
+"By sending this form, you are indicating that you have read, understood, and agree to nolotiro's <a href='/en/page/user-agreement'>user agreement</a> and <a href='/en/page/privacy'>privacy policy.</a>";"Enviando este formulario, admites haber leido, comprendido, y estás conforme con las <a href='/es/page/user-agreement'>condiciones de uso</a> y la <a href='/es/page/privacy'>política de privacidad</a> de nolotiro.org."
 "Check your inbox email to finish the register process";"Comprueba tu correo para terminar el proceso de registro"
 ", confirm your email";", confirma tu email"
 "Please, click on this url to finish your register process:<br />";"Por favor, haz click en este enlace para terminar tu proceso de registro:<br />"
@@ -91,7 +91,7 @@
 "Check your inbox email to get your new password";"Comprueba tu correo para obtener la nueva password"
 "This email is not in our database. Please, try again.";"Ese email no está en nuestra base de datos. Por favor, intentalo de nuevo."
 "Hi, this is your new password:<br />";"Hola, esta es tu nueva contraseña:<br />"
-"Your nolotiro.org new password";"Tu nueva contraseña de nolotiro.com"
+"Your nolotiro.org new password";"Tu nueva contraseña de nolotiro.org"
 
 #super lightbox
 "Close";"Cerrar"

@@ -20,6 +20,9 @@ class AdController extends Zend_Controller_Action {
 		//$this->view->baseUrl = $this->_request->getBaseUrl();
 		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
 
+		$locale = Zend_Registry::get ( "Zend_Locale" );
+		$this->lang = $locale->getLanguage ();
+
 
 	}
 
@@ -77,8 +80,7 @@ class AdController extends Zend_Controller_Action {
 
 	public function createAction() {
 
-	$locale = Zend_Registry::get ( "Zend_Locale" );
-	$lang = $locale->getLanguage ();
+	
 
 		//first we check if user is logged, if not redir to login
 		$auth = Zend_Auth::getInstance ();
@@ -86,10 +88,10 @@ class AdController extends Zend_Controller_Action {
 			
 			//keep this url in zend session to redir after login
 			$aNamespace = new Zend_Session_Namespace('Nolotiro');
-			$aNamespace->redir = $lang.'/ad/create';
+			$aNamespace->redir = $this->lang.'/ad/create';
 			
 			//Zend_Debug::dump($aNamespace->redir);
-			$this->_redirect ( $lang.'/auth/login' );
+			$this->_redirect ( $this->lang.'/auth/login' );
 
 
 		} else {
@@ -135,14 +137,14 @@ class AdController extends Zend_Controller_Action {
 					}
 
 
-                    //get the ip of the ad publisher
-                    if (getenv(HTTP_X_FORWARDED_FOR)) {
-                        $ip = getenv(HTTP_X_FORWARDED_FOR);
-                    } else {
-                        $ip = getenv(REMOTE_ADDR);
-                    }
-
-                    $formulario['ip'] = $ip;
+					//get the ip of the ad publisher
+					if (getenv(HTTP_X_FORWARDED_FOR)) {
+					    $ip = getenv(HTTP_X_FORWARDED_FOR);
+					} else {
+					    $ip = getenv(REMOTE_ADDR);
+					}
+		    
+					$formulario['ip'] = $ip;
 
 					//get this ad user owner
 					$formulario ['user_owner'] = $auth->getIdentity ()->id;
@@ -164,7 +166,7 @@ class AdController extends Zend_Controller_Action {
 
 					//Zend_Debug::dump ( $formulario );
                     $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad published succesfully!' ) );
-					$this->_redirect ( '/'.$lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+					$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
 
 				}
 			}
