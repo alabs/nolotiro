@@ -75,10 +75,10 @@
 ", confirm your email";", confirma tu email"
 "Please, click on this url to finish your register process:<br />";"Por favor, haz click en este enlace para terminar tu proceso de registro:<br />"
 "/en/user/validate/t/";"/es/user/validate/t/"
-"Register finished succesfully. Now you can <a href="/en/auth/login">login</a>.";"Te has registrado con éxito. Ahora puedes <a href="/es/auth/login">acceder</a>."
+"Register finished succesfully. Now you can login.";"Te has registrado con éxito. Ahora puedes acceder."
 "This username is taken. Please, try again.";"Ese nombre de usuario ya existe. Por favor, prueba con otro distinto."
 "This email is taken. Please, try again.";"Esa dirección de email ya existe. Por favor, prueba con otra diferente."
-"After validate this link you will be able to access with this data:";"Una vez validado este enlace, podrás acceder con estos datos de usuario:"
+"After validate this link you will be able to access with your email and this password:";"Una vez validado este enlace, podrás acceder con tu email y esta contraseña:"
 
 #user/validate
 "Sorry, register url no valid or expired.";"Lo siento, esta url no es válida o ha caducado."
@@ -109,6 +109,8 @@
 "i want...";"quiero..."
 "Title of your ad:";"Título de tu anuncio:"
 "Ad body:";"Cuerpo del anuncio:"
+"Allowed format files: gif, jpg, png. Max:1Mb Size";"Formatos permitidos: gif, jpg, png. Max:1Mb de tamaño."
+"Select an image file for your ad (optional).";"Selecciona una imagen para tu anuncio (opcional)."
 "Ad published succesfully!";"¡Tu anuncio ha sido publicado con éxito!"
 
 #paginator

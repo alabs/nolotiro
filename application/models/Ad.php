@@ -61,10 +61,14 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		$id = ( int ) $id;
 		
 		$table = new Model_Ad ( );
-		$select = $table->select ()->where ( 'id = ?', $id );
+		$select = $table->select()->setIntegrityCheck(false);
+		$select->from(array('a' => 'ads'), array('a.*' ));
+		$select->joinInner(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
+		
+		$select->where ( 'a.id = ?', $id );
 		
 		if (!$table->fetchRow ( $select )) {
-			throw new Exception ( "Count not find row $id" );
+			throw new Exception ( "I can not find row $id" ,404);
 			
 		} else {
 		    
@@ -109,11 +113,13 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		
 		
 		$table = new Model_Ad ( );
-		$select = $table->select ()->where ( 'woeid_code = ?', $woeid  )
-		->where ( 'type = ?', $ad_type )
-		->order('date_created DESC')
-		;
+		$select = $table->select()->setIntegrityCheck(false);
+		$select->from(array('a' => 'ads'), array('a.*' ));
+		$select->joinInner(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
+		$select->where('a.woeid_code = ?', $woeid);
+		$select->where('a.type = ?', $ad_type);
 		
+		$select->order('a.date_created DESC');		
 		
 		$result = $table->fetchAll ( $select )->toArray ();
 

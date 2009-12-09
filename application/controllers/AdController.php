@@ -10,14 +10,11 @@
 
 class AdController extends Zend_Controller_Action {
 
-	/**
-	 * Overriding the init method to also load the session from the registry
-	 *
-	 */
-	public function init() {
+	
+	public function init() {	
+		// Overriding the init method to also load the session from the registry
 		parent::init ();
 
-		//$this->view->baseUrl = $this->_request->getBaseUrl();
 		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
 
 		$locale = Zend_Registry::get ( "Zend_Locale" );

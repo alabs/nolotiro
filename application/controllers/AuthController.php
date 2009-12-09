@@ -116,8 +116,8 @@ class AuthController extends Zend_Controller_Action {
 	 */
 	public function logoutAction() {
 		Zend_Auth::getInstance ()->clearIdentity ();
-		//$this->session->logged_in = false;
-		//$this->session->username = false;
+		$this->session->logged_in = false;
+		$this->session->username = false;
 		
 
 		$this->_redirect ( '/' );
