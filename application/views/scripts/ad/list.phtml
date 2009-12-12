@@ -1,19 +1,39 @@
+<?=$this->render ( 'partials/html_header.phtml' );?>
+
+<div id="location_header_section">
+<h3>
 <?php
-/**
- * index home page view: list ads where woeid and type matches
- */
+//get the location stored at session location value
+//(setted by default on bootstrap to Madrid woeid number)
+$aNamespace = new Zend_Session_Namespace('Nolotiro');
+//Zend_Debug::dump($aNamespace->locatioName);
+//echo $aNamespace->locationName;
+
+//echo $this->action('woeidhead', 'location' ,'',array('woeid'=>$this->woeid)) ;
 
 
-//TODO merge header and footer on a main template
-$locale = Zend_Registry::get ( "Zend_Locale" );
-$lang = $locale->getLanguage ();
+            //echo $this->action('woeidhead', 'location' ,'default' ,array('woeid'=>$woeid)) ;
 
-
-echo $this->render ( 'partials/html_header.phtml' );
+         echo $this->woeidName;
+//var_dump($aNamespace);
 
 ?>
+</h3>
 
-<?=$this->render ( 'location/index.phtml' );?>
+
+<span class="give-want">
+<a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/ad/list/woeid/<?=$this->woeid?>/ad_type/give'><?=$this->translate ( 'give' );?></a>
+&nbsp;
+<a class="<?=(preg_match("/want/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/ad/list/woeid/<?=$this->woeid?>/ad_type/want'><?=$this->translate ( 'want' );?></a>
+</span>
+
+
+
+<a  href='/<?=$this->lang?>/location/change'><?=$this->translate ( 'change location' );?></a>
+
+
+</div>
+
 
 <?
 if (count ( $this->mensajes ) > 0) {
@@ -43,21 +63,21 @@ if ($this->ad): ?>
 	  <?php
 	   if ($val['photo'] !== null){
 		      echo '<div class="ad_list_image">
-		      <a href="/'.$lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->escape($val['title']).' ">
+		      <a href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->escape($val['title']).' ">
 		      <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
 		      $this->escape($val['photo']).'" /></a></div>';
 		      
 	   }
 	   ?>
 	
-           <h4><a href="/<?=$lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+           <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
            <span class="ad_date"><?=$this->translate('Posted on '). $this->escape($val['date_created']) ?>
             <?=$this->translate('by user ') ?>
 
 
-            <a href="/<?=$lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['username']) ?></a>
+            <a href="/<?=$this->lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['username']) ?></a>
             </span>
            
            

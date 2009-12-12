@@ -20,6 +20,8 @@ class UserController extends Zend_Controller_Action {
 		$locale = Zend_Registry::get ( "Zend_Locale" );
 		$this->lang = $locale->getLanguage ();
 
+                $aNamespace = new Zend_Session_Namespace('Nolotiro');
+		$this->location = $aNamespace->location;
 	
 	}
 	
@@ -117,7 +119,7 @@ class UserController extends Zend_Controller_Action {
 					
 					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Check your inbox email to finish the register process' ) );
 					
-					$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+					$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
 
 
 				}
@@ -228,7 +230,7 @@ class UserController extends Zend_Controller_Action {
 					
 					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Check your inbox email to get your new password' ) );
 					
-					$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+					$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
 
 				}
 			
@@ -245,7 +247,7 @@ class UserController extends Zend_Controller_Action {
 	 * @return string (7) $pass
 	 */
 	protected function _generatePassword() {
-		$salt = "abcdefghjkmnpqrstuvwxyz23456789";
+		$salt = "abcdefghjkmnpqrstuvwxyz123456789";
 		srand ( ( double ) microtime () * 1000000 );
 		$i = 0;
 		while ( $i <= 6 ) {
@@ -299,13 +301,13 @@ class UserController extends Zend_Controller_Action {
 				//Zend_Debug::dump($data);
 				$model->update ( $data );
 				
-				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Register finished succesfully. Now you can <a href="/en/auth/login">login</a>.' ) );
+				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Register finished succesfully. Now you can login.' ) );
 				//kill the user logged in (if exists)
 				Zend_Auth::getInstance ()->clearIdentity ();
 				$this->session->logged_in = false;
 				$this->session->username = false;
 				
-				$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+				$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
 
 			} else {
 				// just redirect to index, dont tell anything to badboys

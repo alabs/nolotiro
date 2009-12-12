@@ -12,20 +12,17 @@ class LocationController extends Zend_Controller_Action {
 
 		$locale = Zend_Registry::get ( "Zend_Locale" );
 		$this->lang = $locale->getLanguage ();
+
+               
+                //$this->aNamespace = new Zend_Session_Namespace('Nolotiro');
 	}
 
 
-	/**
-	 * get the location stored at session location value
-	 * (setted by default on bootstrap to Madrid woeid number)
-	 *
-	 */
+        public function indexAction(){
+             $this->_redirect ( '/' );
+        }
 
-	public function indexAction(){
-		//$this->_redirect ( '/' );
 
-		
-	}
 
 
 
@@ -113,7 +110,7 @@ class LocationController extends Zend_Controller_Action {
 
 			$name = $item->name.', '.$item->admin1.', '.$item->country;
 	
-			$woeid = (string)$item->woeid; //we have to set to string to not disturb the zend form translate parser!
+			$woeid = (string)$item->woeid; //we have to cast to string item to not disturb the zend form translate parser!
 	
 			//glue together woeid and text to parse after with *
 			$woeid = $woeid.'*'.$name;
@@ -187,6 +184,10 @@ class LocationController extends Zend_Controller_Action {
 		return $xml;
 
 	}
+
+
+        
+
 
 	/**
 	 *

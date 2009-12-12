@@ -55,6 +55,11 @@ Zend_Registry::set ( 'session', $session );
            $session->ad_type = 'give';
         }
 
+
+ Zend_Controller_Action_HelperBroker::addPath(
+        APPLICATION_PATH .'/controllers/helpers');
+
+
 //Setup the ddbb
 $dbAdapter = Zend_Db::factory ( $config->database );
 Zend_Db_Table_Abstract::setDefaultAdapter ( $dbAdapter );
@@ -64,7 +69,7 @@ $registry = Zend_Registry::getInstance ();
 $registry->configuration = $config;
 $registry->dbAdapter = $dbAdapter;
 
-unset ( $dbAdapter, $registry, $config );
+unset ( $dbAdapter, $registry, $config, $session );
 
 // Set up the front controller and dispatch
 try {

@@ -14,7 +14,6 @@ class AdController extends Zend_Controller_Action {
 	public function init() {	
 		// Overriding the init method to also load the session from the registry
 		parent::init ();
-
 		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
 
 		$locale = Zend_Registry::get ( "Zend_Locale" );
@@ -33,13 +32,17 @@ class AdController extends Zend_Controller_Action {
 		$ad_type = $this->_request->getParam ( 'ad_type' );
 
 		$model = $this->_getModel ();
+
+                $this->view->woeid = $woeid;
 		$this->view->ad = $model->getAdList($woeid, $ad_type);
 
 
+               $this->view->woeidName =  $this->_helper->woeid->name($woeid,$this->lang);
+
 		//set the location reg var from the url
-		$aNamespace = new Zend_Session_Namespace('Nolotiro');
-		Zend_Registry::set ( 'session', $session );
-		$aNamespace->location = $woeid;
+		//$aNamespace = new Zend_Session_Namespace('Nolotiro');
+		//Zend_Registry::set ( 'session', $session );
+		//$aNamespace->location = $woeid;
 
 
 		//paginator
