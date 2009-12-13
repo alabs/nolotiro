@@ -52,8 +52,6 @@ class Zend_Controller_Action_Helper_Woeid extends Zend_Controller_Action_Helper_
 
                         $name = $cache->load($woeid.$lang);
                         //$name .= ' *cached!';
-
-
                 }
             
            return $name;
