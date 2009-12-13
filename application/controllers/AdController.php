@@ -36,7 +36,6 @@ class AdController extends Zend_Controller_Action {
                 $this->view->woeid = $woeid;
 		$this->view->ad = $model->getAdList($woeid, $ad_type);
 
-
                $this->view->woeidName =  $this->_helper->woeid->name($woeid,$this->lang);
 
 		//set the location reg var from the url
@@ -53,7 +52,6 @@ class AdController extends Zend_Controller_Action {
 		$paginator->setCurrentPageNumber($page);
 	
 		$this->view->paginator=$paginator;
-
 
 
 		///

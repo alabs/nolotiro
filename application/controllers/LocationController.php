@@ -14,7 +14,7 @@ class LocationController extends Zend_Controller_Action {
 		$this->lang = $locale->getLanguage ();
 
                
-                //$this->aNamespace = new Zend_Session_Namespace('Nolotiro');
+                
 	}
 
 
