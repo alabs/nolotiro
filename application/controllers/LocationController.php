@@ -77,16 +77,17 @@ class LocationController extends Zend_Controller_Action {
 		$aNamespace = new Zend_Session_Namespace('Nolotiro');
 		$locationtemp = $aNamespace->locationTemp;
 
-		$town = 'Town';
+                
+		$town =$this->view->translate('Town');
 		$places = $this->getYahooGeoWoeidList($locationtemp, $this->lang, $town);
 
-		var_dump($places);
-                //die ();
+		//var_dump($places);
+                
 		//check if we got response from yahoo geo api
 		if ($places === false) {
 			$this->_helper->_flashMessenger->addMessage (
 				$this->view->translate ( 'I can not connect to Yahoo geo service, sorry!'));
-                               // $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+                                $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
 			
 		}
 
@@ -95,7 +96,7 @@ class LocationController extends Zend_Controller_Action {
 					
 			$this->_helper->_flashMessenger->addMessage (
 				$this->view->translate ( 'No location found named:') .'  "'. $locationtemp .'"');
-                                //$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+                                $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
 		
 		}
 
@@ -113,7 +114,7 @@ class LocationController extends Zend_Controller_Action {
                 
 		foreach ($places->place as $item) {
 
-			//var_dump($item);
+			
                         $name = $item->name.', '.$item->admin1.', '.$item->country;
 			$woeid = (string)$item->woeid; //we have to cast to string item to not disturb the zend form translate parser!
 	
@@ -136,6 +137,7 @@ class LocationController extends Zend_Controller_Action {
 		->getElement('location')
 		->addMultiOptions($location_options)
 		->setValue($firstitem)
+                ->setRegisterInArrayValidator(false)
 		->setIsArray(true);//this set select expanded
 
 
@@ -200,7 +202,7 @@ class LocationController extends Zend_Controller_Action {
                             'cache_id_prefix' => 'woeidList',
                             'logging' => FALSE,
                             'write_control' => true,
-                            'automatic_serialization' => true,
+                            'automatic_serialization' =>true,
                             'ignore_user_abort' => true
                     ) );
 
@@ -209,24 +211,21 @@ class LocationController extends Zend_Controller_Action {
 
             //locationtemp normalize spaces and characters not allowed (ñ) by memcached to create the item name
             $locationtempHash = md5($locationtemp );
-           //var_dump($locationtempHash);
-            //var_dump($cache->test($locationtempHash.$lang));
-
+           
 
             if (!$cache->test($locationtempHash.$lang) ){
 
                 $appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
-		$htmlString = "http://where.yahooapis.com/v1/places\$and(.q(".$locationtemp."),.type(".$town."));count=20?appid=".$appid."&lang=".$lang;
+		$htmlString = "http://where.yahooapis.com/v1/places\$and(.q(".
+                urlencode($locationtemp)."),.type(".$town."));count=20?appid=".$appid."&lang=".$lang;
 
 		$xml = simplexml_load_file($htmlString);
 
                 // due to simplexml is unable to put xml into memcached, we have to convert to objects
-                // this line  converts all the SimpleXML elements into stdClass objects
-                $xml = json_decode(json_encode($xml));
+                // the json_decode(json_encode...  converts all the SimpleXML elements into stdClass objects
                 
+                $cache->save(json_decode(json_encode($xml)), $locationtempHash.$lang);
 
-                $cache->save($xml, $locationtempHash.$lang);
-                
                 var_dump('no cached!!');
                 } else {
                  
@@ -234,8 +233,6 @@ class LocationController extends Zend_Controller_Action {
                 var_dump('***********cached!!');
 
                 }
-
-           
             
 		return $xml;
 
