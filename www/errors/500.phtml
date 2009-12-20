@@ -24,7 +24,7 @@ $config = Zend_Registry::get ( 'config' );
 if ($config->debug) :
 	?>
 	<div
-	style="overflow: auto; margin-top: 10px; padding: 2px; border: 1px dashed black; background-color: #eee">
+	style="overflow: scroll; margin-top: 10px; padding: 2px; border: 1px dashed black; background-color: #eee">
 <strong>Debugging information:</strong><br />
 <pre><?=$e->__toString ();?></pre></div>
 

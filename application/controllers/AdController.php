@@ -19,6 +19,11 @@ class AdController extends Zend_Controller_Action {
 		$locale = Zend_Registry::get ( "Zend_Locale" );
 		$this->lang = $locale->getLanguage ();
 
+                ///
+		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
+		$this->view->mensajes = $this->_flashMessenger->getMessages ();
+
+
 
 	}
 
@@ -38,11 +43,11 @@ class AdController extends Zend_Controller_Action {
 
                $this->view->woeidName =  $this->_helper->woeid->name($woeid,$this->lang);
 
-		//set the location reg var from the url
-		//$aNamespace = new Zend_Session_Namespace('Nolotiro');
-		//Zend_Registry::set ( 'session', $session );
-		//$aNamespace->location = $woeid;
-
+		//set the location name reg var from the woeid helper
+		$aNamespace = new Zend_Session_Namespace('Nolotiro');
+		Zend_Registry::set ( 'session', $session );
+		$aNamespace->locationName = $this->view->woeidName;
+                //var_dump($aNamespace->locationName);
 
 		//paginator
 		$page = $this->_getParam('page');
@@ -51,19 +56,12 @@ class AdController extends Zend_Controller_Action {
 		$paginator->setItemCountPerPage(10);
 		$paginator->setCurrentPageNumber($page);
 	
-		$this->view->paginator=$paginator;
-
-
-		///
-		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
-		$this->view->mensajes = $this->_flashMessenger->getMessages ();
-
+		$this->view->paginator=$paginator;		
 
 
 	}
 
 	public function showAction() {
-
 
 		$id = $this->_request->getParam ( 'id' );
 
@@ -72,6 +70,13 @@ class AdController extends Zend_Controller_Action {
 		$this->view->ad = $model->getAd( $id );
 		$this->view->comments = $model->getComments( $id );
 
+                // construct comment create form
+
+
+
+                require_once APPLICATION_PATH . '/forms/Comment.php';
+                $form = new Form_Comment();               
+                $this->view->createcomment = $form;
 
 
 	}

@@ -36,21 +36,22 @@ class Zend_Controller_Action_Helper_Woeid extends Zend_Controller_Action_Helper_
             // build a caching object
             $cache = Zend_Cache::factory( $oFrontend, $oBackend );
 
+             //locationtemp normalize spaces and characters not allowed (ñ) by memcached to create the item name
+            $woeidHash = md5($woeid );
             
-            
-            if (!$cache->test($woeid.$lang) ){
+            if (!$cache->test($woeidHash.$lang) ){
                         $appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
                         $htmlString = 'http://where.yahooapis.com/v1/place/'.$woeid.'?appid='.$appid.'&lang='.$lang;
 
                         $name = simplexml_load_file($htmlString);
                         $name = $name->name.', '.$name->admin1.', '.$name->country;
 
-                        $cache->save($name, $woeid.$lang);
+                        $cache->save($name, $woeidHash.$lang);
                         //$name .= ' *no cached!';
 
                         } else {
 
-                        $name = $cache->load($woeid.$lang);
+                        $name = $cache->load($woeidHash.$lang);
                         //$name .= ' *cached!';
                 }
             

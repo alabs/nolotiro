@@ -22,15 +22,17 @@ echo $this->render ( 'partials/html_header.phtml' );
 </div>
 
 
-<?php
-if (isset ( $this->error )) :
-	?>
-<div class="error">
-		<?=$this->escape ( $this->error );?>
-</div>
-
-<?php endif;
+<?
+if (count ( $this->mensajes ) > 0) {
+	echo '<div class="success">';
+	foreach ( $this->mensajes as $msg ) {
+		echo $msg . '<br>';
+	}
+	echo '</div>';
+}
 ?>
+
+
 <div id="main">
 <div class="span-19">
 
@@ -63,10 +65,9 @@ if ($this->ad): ?>
 	   
 	   
         </div>
-        <hr>
+        
        
-<a href="/<?=$this->lang ?>/comment/create/ad_id/<?=$this->ad['id'] ?>"><?=$this->translate('Post a comment') ?></a>
-    &nbsp;&nbsp;&nbsp;  
+ 
 <a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'] ?>"><?=$this->translate('Send a private message') ?></a>
 
 
@@ -77,10 +78,11 @@ if ($this->ad): ?>
 <?php endif;?>
 
 
+<h5>Comments</h5>
 <?
+
 //comments
 //Zend_Debug::dump($this->comments);
-
 if ($this->comments): ?>
 
 
@@ -106,6 +108,15 @@ if ($this->comments): ?>
 <?php endif;?>
 
 
+
+<form action="/<?=$this->lang ?>/comment/create/ad_id/<?=$this->ad['id'] ?>"
+	method="<?=$this->escape ( $this->createcomment->getMethod () )?>">
+
+
+		<?=$this->createcomment?>
+
+	
+</form>
 
 
 </div>

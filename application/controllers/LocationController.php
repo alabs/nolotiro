@@ -225,12 +225,12 @@ class LocationController extends Zend_Controller_Action {
                 // the json_decode(json_encode...  converts all the SimpleXML elements into stdClass objects
                 
                 $cache->save(json_decode(json_encode($xml)), $locationtempHash.$lang);
-
-                var_dump('no cached!!');
+                
+                //var_dump('no cached!!');
                 } else {
                  
                 $xml = $cache->load($locationtempHash.$lang);
-                var_dump('***********cached!!');
+                //var_dump('***********cached!!');
 
                 }
             

@@ -10,7 +10,8 @@ class Form_Comment extends Zend_Form {
 		
 		$this->setMethod ( 'post' );
 
-		$this->addElement ( 'textarea', 'body', array ('label' => 'Your comment:', 'validators' => array (array ('StringLength', false, array (3, 2000 ) ) ), 'required' => true )
+		$this->addElement ( 'textarea', 'body', array ('label' => 'Your comment:',
+                    'validators' => array (array ('StringLength', false, array (3, 2000 ) ) ), 'required' => false )
 
 		 );
 		

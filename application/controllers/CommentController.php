@@ -44,7 +44,7 @@ class CommentController extends Zend_Controller_Action {
 			
 			//keep this url in zend session to redir after login
 			$aNamespace = new Zend_Session_Namespace('Nolotiro');
-			$aNamespace->redir = $this->lang.'/comment/create/ad_id/'.$ad_id;
+			$aNamespace->redir = $this->lang.'/ad/show/id/'.$ad_id;
 			
 			//Zend_Debug::dump($aNamespace->redir);
 			$this->_redirect ( $this->lang.'/auth/login' );	
@@ -56,14 +56,21 @@ class CommentController extends Zend_Controller_Action {
 			$form = $this->_getCommentForm ();
 			
 			// check to see if this action has been POST'ed to
-			if ($this->getRequest ()->isPost ()) {
+			if ($this->getRequest ()->isPost () ) {
 				
 				// now check to see if the form submitted exists, and
 				// if the values passed in are valid for this form
 				if ($form->isValid ( $request->getPost () )) {
 					
 					$formulario = $form->getValues ();
-					
+
+                                        //if comment its empty dont do nothing as redir to same ad
+                                        if (empty ($formulario['body'])){
+                                            $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Write something!' ) );
+
+					$this->_redirect ( '/'.$this->lang.'/ad/show/id/'.$ad_id );
+                                        }
+
 					//strip html tags to body
 					$formulario['body'] = strip_tags($formulario['body']);
 					
@@ -87,7 +94,7 @@ class CommentController extends Zend_Controller_Action {
 					$formulario['ads_id'] = $ad_id;
                     
 					//get this ad user owner
-					//$formulario ['user_owner'] = $auth->getIdentity ()->id;
+					$formulario ['user_owner'] = $auth->getIdentity ()->id;
 					
 					//get date created
 					//TODO to use the Zend Date object to apapt the time to the locale user zone
@@ -98,10 +105,9 @@ class CommentController extends Zend_Controller_Action {
 					$model = $this->_getModel ();
 					$model->save( $formulario );
 					
-					Zend_Debug::dump ( $formulario );
+					//Zend_Debug::dump ( $formulario );
 					
-					//TODO pass the message to parent
-					//$mensajes = parent::getHelper('mensajes');
+					
 					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Comment published succesfully!' ) );
 					
 					$this->_redirect ( '/'.$this->lang.'/ad/show/id/'.$ad_id );
