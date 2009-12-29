@@ -108,15 +108,7 @@ if ($this->comments): ?>
 <?php endif;?>
 
 
-
-<form action="/<?=$this->lang ?>/comment/create/ad_id/<?=$this->ad['id'] ?>"
-	method="<?=$this->escape ( $this->createcomment->getMethod () )?>">
-
-
-		<?=$this->createcomment?>
-
-	
-</form>
+<?=$this->createcomment?>
 
 
 </div>

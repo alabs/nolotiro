@@ -113,6 +113,10 @@
 "Select an image file for your ad (optional).";"Selecciona una imagen para tu anuncio (opcional)."
 "Ad published succesfully!";"¡Tu anuncio ha sido publicado con éxito!"
 
+
+#comment
+"Comment published succesfully!";"Tu comentario se ha publicado con éxito."
+
 #paginator
 "Previous";"Anterior"
 "Next";"Siguiente"

@@ -41,7 +41,7 @@ class AdController extends Zend_Controller_Action {
                 $this->view->woeid = $woeid;
 		$this->view->ad = $model->getAdList($woeid, $ad_type);
 
-               $this->view->woeidName =  $this->_helper->woeid->name($woeid,$this->lang);
+                $this->view->woeidName =  $this->_helper->woeid->name($woeid,$this->lang);
 
 		//set the location name reg var from the woeid helper
 		$aNamespace = new Zend_Session_Namespace('Nolotiro');
@@ -70,14 +70,23 @@ class AdController extends Zend_Controller_Action {
 		$this->view->ad = $model->getAd( $id );
 		$this->view->comments = $model->getComments( $id );
 
-                // construct comment create form
 
+		//if user logged in, show the comment form, if not show the login link
+		$auth = Zend_Auth::getInstance ();
+		if (! $auth->hasIdentity ()) {
+			
+                       
+                        $this->view->createcomment ='<a href="/' . $this->lang . '/auth/login">' . $this->view->translate ( 'login to post a comment' ) . '</a> ';
+                
+		} else {
+			require_once APPLICATION_PATH . '/forms/Comment.php';
+                        $form = new Form_Comment();
 
+                        $form->setAction('/'.$this->lang .'/comment/create/ad_id/'.$id);
 
-                require_once APPLICATION_PATH . '/forms/Comment.php';
-                $form = new Form_Comment();               
-                $this->view->createcomment = $form;
-
+                        
+                        $this->view->createcomment = $form;
+		}
 
 	}
 

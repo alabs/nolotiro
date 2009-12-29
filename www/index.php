@@ -42,12 +42,13 @@ Zend_Registry::set ( 'session', $session );
         if (!isset($session->location) || ($session->location == null)) {
             // if location is not setted , set the Madrid woeid
            $session->location = 766273;
+           setcookie ( 'location', 766273, null, '/' );
         }
 
-        if (!isset($session->locationName) || ($session->locationName == null)) {
-            // if location is not setted , set the Madrid woeid
-           $session->locationName = 'Madrid, Comunidad de Madrid, España';
-        }
+//        if (!isset($session->locationName) || ($session->locationName == null)) {
+//            // if location is not setted , set the Madrid woeid
+//           //$session->locationName = 'Madrid, Comunidad de Madrid, España';
+//        }
 
 
         if (!isset($session->ad_type)) {

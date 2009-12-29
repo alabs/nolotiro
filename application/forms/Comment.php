@@ -7,7 +7,8 @@
 class Form_Comment extends Zend_Form {
 	
 	public function init() {
-		
+            
+               
 		$this->setMethod ( 'post' );
 
 		$this->addElement ( 'textarea', 'body', array ('label' => 'Your comment:',
@@ -19,3 +20,4 @@ class Form_Comment extends Zend_Form {
 		$this->addElement ( 'submit', 'submit', array ('label' => 'Send' ) );
 	}
 }
+
