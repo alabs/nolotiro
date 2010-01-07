@@ -177,7 +177,7 @@ class AdController extends Zend_Controller_Action {
 					$model->save ( $formulario );
 
 					//Zend_Debug::dump ( $formulario );
-                    $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad published succesfully!' ) );
+                                        $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad published succesfully!' ) );
 					$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
 
 				}
