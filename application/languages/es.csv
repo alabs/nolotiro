@@ -120,3 +120,7 @@
 #paginator
 "Previous";"Anterior"
 "Next";"Siguiente"
+
+
+#format date string (date php)
+"l dS \o\f F Y H:i:s";" d \d\e\l m \d\e Y \, H:i:s"

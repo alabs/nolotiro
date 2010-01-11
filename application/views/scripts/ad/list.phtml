@@ -63,7 +63,7 @@ if ($this->ad): ?>
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
-           <span class="ad_date"><?=$this->translate('Posted on '). $this->escape($val['date_created']) ?>
+            <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
             <?=$this->translate('by user ') ?>
 
 
@@ -97,6 +97,24 @@ if ($this->ad): ?>
 
 
 </div> <!-- /div ads -->
+
+<div class="google_ads">
+<!-- google adsense block -->
+<script type="text/javascript"><!--
+google_ad_client = "pub-7190437604389924";
+/* 160x600, creado 9/01/10 */
+google_ad_slot = "9535564204";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<!-- end  of google adsense block -->
+</div>
+
+
 </div> <!-- /main -->
 
 <?=$this->render ( 'partials/html_footer.phtml' );?>

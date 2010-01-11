@@ -10,7 +10,7 @@ echo $this->render ( 'partials/html_header.phtml' );
 ?>
 
 <div id="default_header_section">
-<h3><?=$this->translate ( 'User profile' );?></h3>
+<h3><?=$this->translate ( 'User profile' ).'  -  '.$this->theuser['username'];?></h3>
 
 </div>
 
@@ -26,9 +26,20 @@ if (isset ( $this->error )) :
 ?>
 
 <div id="main">
-<div class="span-16">
+<div class="span-18">
 
-lala
+<ul id="tabnav">
+	<li class="tab1"><a href="index.html"><?=$this->translate('profile');?></a></li>
+	<li class="tab2"><a href="index2.html"><?=$this->translate('ads');?></a></li>
+
+</ul>
+
+<?=var_dump($this->theuser);?>
+    <div class="user_profile">
+        <span><?=$this->translate('User name:').': '.$this->theuser['username'];?></span>
+        <span><?=$this->translate('Member since:').': '.$this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($this->theuser['created'])));?></span>
+    </div>
+
 </div>
 
 <? //render the default footer

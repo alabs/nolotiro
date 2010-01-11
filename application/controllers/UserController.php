@@ -140,9 +140,10 @@ class UserController extends Zend_Controller_Action {
 		
 		$model = $this->_getModel ();
 		
-		$theuser = $model->fetchUser($user_id);
+		$this->view->theuser = $model->fetchUser($user_id);
 		
-		Zend_Debug::dump($theuser);
+		
+                
 		
 		
 		
