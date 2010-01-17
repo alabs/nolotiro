@@ -7,10 +7,10 @@
 "I can not connect to Yahoo geo service, sorry!";"No puedo conectar al servicio de geolocalización de Yahoo."
 "No location found named:";"No se encontró ninguna ubicación llamada"
 
-"change location";"cambiar ubicación"
-"Change your location";"Cambia tu ubicación"
-"Please, write your location";"Por favor, escribe tu ubicación"
-"Location";"Ubicación"
+"change location";"cambiar ciudad"
+"Change your location";"Cambia tu ciudad"
+"Please, write your location";"Por favor, escribe tu ciudad"
+"Location:";"Ciudad:"
 "give";"regalo"
 "want";"quiero"
 "Create new ad";"Crear nuevo anuncio"
@@ -28,8 +28,14 @@
 
 #footer
 "about";"acerca de"
+"faqs";"preguntas frecuentes"
 "developers";"desarrolladores"
 "contact";"contacto"
+"terms of use";"términos de uso"
+"privacy policy";"política de privacidad"
+"facebook group";"grupo en facebook"
+#footer excerpt
+"nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.";"nolotiro.org es un sitio web donde puedes regalar las cosas que ya no quieres o ya no necesitas para que las recoja otra gente a la que puede servirle o serle de mucha utilidad."
 
 #contact
 "'%value%' is not a valid email address in the basic format local-part@hostname";"'%value%' no es una dirección de correo válida con el formato: usuario@ejemplo.com"
