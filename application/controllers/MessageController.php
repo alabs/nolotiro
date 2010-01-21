@@ -28,6 +28,8 @@ class MessageController extends Zend_Controller_Action {
         public function createAction(){
 
             $id_user_to = $this->_request->getParam ( 'id_user_to' );
+            $form = $this->_getNewMessageForm();
+
             //first we check if user is logged, if not redir to login
 		$auth = Zend_Auth::getInstance ();
 		if (! $auth->hasIdentity ()) {
@@ -44,7 +46,7 @@ class MessageController extends Zend_Controller_Action {
 
             //the user is logged, then can create and send the private message
 
-            $form = $this->_getNewMessageForm();
+            
 
 		// check to see if this action has been POST'ed to
 		if ($this->getRequest ()->isPost ()) {

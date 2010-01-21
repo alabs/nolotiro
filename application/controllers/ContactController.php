@@ -9,6 +9,17 @@ class ContactController extends Zend_Controller_Action {
 		$this->initView ();
 		//$this->view->baseUrl = $this->_request->getBaseUrl();
 		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
+
+
+                $locale = Zend_Registry::get ( "Zend_Locale" );
+		$this->lang = $locale->getLanguage ();
+
+                $this->aNamespace = new Zend_Session_Namespace('Nolotiro');
+
+
+		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
+		$this->view->mensajes = $this->_flashMessenger->getMessages ();
+
 	}
 	
 	/**
@@ -18,6 +29,7 @@ class ContactController extends Zend_Controller_Action {
 	public function indexAction() {
 		$request = $this->getRequest ();
 		$form = $this->_getContactForm ();
+
 		
 		// check to see if this action has been POST'ed to
 		if ($this->getRequest ()->isPost ()) {
@@ -34,17 +46,16 @@ class ContactController extends Zend_Controller_Action {
 				//get the username if its nolotiro user
 				$user_info = $this->view->user->username;
 				$user_info .= $_SERVER ['REMOTE_ADDR'];
-				$user_info .= ' ' . $_SERVER ['HTTP_USER_AGENT'] . '<br />';
-				
+				$user_info .= ' ' . $_SERVER ['HTTP_USER_AGENT'];
 				$mail = new Zend_Mail ( );
-				$mail->setBodyText ( $user_info . $message );
+				$mail->setBodyText ( $user_info . nl2br('\r\n'). $message );
 				$mail->setFrom ( $email );
 				$mail->addTo ( 'daniel.remeseiro@gmail.com', 'Daniel Remeseiro' );
 				$mail->setSubject ( 'nolotiro.com - contact  from ' . $email );
 				$mail->send ();
 				
 				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Message sent successfully!' ) );
-				$this->_redirect ( '/' );
+				$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->aNamespace->location.'/ad_type/give' );
 			
 			}
 		}

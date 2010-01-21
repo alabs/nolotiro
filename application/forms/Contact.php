@@ -13,7 +13,7 @@ class Form_Contact extends Zend_Form {
 		// add an email element
 		$this->addElement ( 'text', 'email', array ('label' => 'Your email:', 'required' => true, 'filters' => array ('StringTrim' ), 'validators' => array ('EmailAddress' ) ) );
 		
-		$this->addElement ( 'textarea', 'message', array ('label' => 'Your message:', 'validators' => array (array ('StringLength', false, array (3, 2000 ) ) ), 'required' => true )
+		$this->addElement ( 'textarea', 'message', array ('label' => 'Your message:', 'validators' => array (array ('StringLength', false, array (20, 2000 ) ) ), 'required' => true )
 
 		 );
 		

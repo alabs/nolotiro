@@ -9,8 +9,7 @@ class New_Message extends Zend_Form {
 		// set the method for the display form to POST
 		$this->setMethod ( 'post' );
 		
-		// add an email element
-		//$this->addElement ( 'text', 'email', array ('label' => 'Your email:', 'required' => true, 'filters' => array ('StringTrim' ), 'validators' => array ('EmailAddress' ) ) );
+		
                 $this->addElement ( 'text', 'subject', array ('label' => 'Subject:', //'filters' => array('StringTrim', 'StringToLower'),
 		'validators' => array (array ('StringLength', false, array (10, 100 ) ) ), 'required' => true )
 
