@@ -3,7 +3,7 @@
  * This is the New Message  form.
  */
 
-class New_Message extends Zend_Form {
+class Form_Message extends Zend_Form {
 	
 	public function init() {
 		// set the method for the display form to POST

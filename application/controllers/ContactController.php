@@ -51,7 +51,7 @@ class ContactController extends Zend_Controller_Action {
 				$mail->setBodyText ( $user_info . nl2br('\r\n'). $message );
 				$mail->setFrom ( $email );
 				$mail->addTo ( 'daniel.remeseiro@gmail.com', 'Daniel Remeseiro' );
-				$mail->setSubject ( 'nolotiro.com - contact  from ' . $email );
+				$mail->setSubject ( 'nolotiro.org - contact  from ' . $email );
 				$mail->send ();
 				
 				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Message sent successfully!' ) );
