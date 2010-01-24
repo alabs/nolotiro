@@ -41,14 +41,16 @@ class ContactController extends Zend_Controller_Action {
 				// collect the data from the user
 				$f = new Zend_Filter_StripTags ( );
 				$email = $f->filter ( $this->_request->getPost ( 'email' ) );
-				$message = $f->filter ( utf8_decode ( $this->_request->getPost ( 'message' ) ) );
+				$message = $f->filter ( $this->_request->getPost ( 'message' ) );
 				
 				//get the username if its nolotiro user
 				$user_info = $this->view->user->username;
 				$user_info .= $_SERVER ['REMOTE_ADDR'];
 				$user_info .= ' ' . $_SERVER ['HTTP_USER_AGENT'];
-				$mail = new Zend_Mail ( );
-				$mail->setBodyText ( $user_info . nl2br('\r\n'). $message );
+
+				$mail = new Zend_Mail ('utf-8');
+                                $body = $user_info.'<br/>'.$message;
+				$mail->setBodyHtml ( $body );
 				$mail->setFrom ( $email );
 				$mail->addTo ( 'daniel.remeseiro@gmail.com', 'Daniel Remeseiro' );
 				$mail->setSubject ( 'nolotiro.org - contact  from ' . $email );

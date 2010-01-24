@@ -15,7 +15,7 @@ class Form_Message extends Zend_Form {
 
 		 );
 		
-		$this->addElement ( 'textarea', 'message', array ('label' => 'Your message:', 'validators' => array (array ('StringLength', false, array (3, 2000 ) ) ), 'required' => true )
+		$this->addElement ( 'textarea', 'body', array ('label' => 'Your message:', 'validators' => array (array ('StringLength', false, array (3, 1600 ) ) ), 'required' => true )
 
 		 );
 		
