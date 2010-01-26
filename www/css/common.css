@@ -56,7 +56,19 @@ a.actual {
 
 }
 
+.google_ads{
 
+    padding: 15px;
+    float: right;
+    right:10px;
+    margin-top:10px;
+    margin-bottom: 20px;
+    border: 1px;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #fff;
+    
+}
 
 .ad_create_tab {
 	position: absolute;
@@ -117,6 +129,18 @@ a.actual {
 	font-weight: normal;
 }
 
+.ad_excerpt_show{
+	float:left;
+        font-size: 1.2em;
+	border-bottom: 1px solid #ddd;
+	width: 100% !important;
+	padding-left: 18px;
+	padding-right: 18px;
+	padding-bottom:14px;
+	padding-top:14px;
+	margin:0;
+
+}
 
 .give-want {
 	position: relative;
@@ -158,12 +182,29 @@ a.actual {
 	text-align: left;
 }
 
+
+
 #footer {
-	padding-bottom:10px;
+        font-size: 1em;
+        line-height: 1.33em;
+        margin-top:10px;
+	padding:20px;
 	clear: both;
-	text-align: center;
+	border-top: 1px solid #ddd;
+        background-color: #F2F2F2;
 }
 
+ .links-right{
+    text-align: right;
+    margin-bottom: 10px;
+    right: 10px;
+}
+
+
+ .links-left{
+    text-align: left;
+    left: 10px;
+}
 /**
  * Header Area.
  */
@@ -234,18 +275,53 @@ h2#site-slogan {
 	color: #999;
 }
 
-/**
- * banners.
- */
-#publi_header {
-	background-color: #f4f4f4;
-	padding-top: 10px;
-	padding-bottom: 6px;
-	padding-right: 10px;
-	text-align: right;
-	right: 10px;
-	border-bottom: 1px solid #ddd;
+
+/* begin css tabs */
+
+ul#tabnav { /* general settings */
+text-align: left; /* set to left, right or center */
+margin: 1em 0 1em 0; /* set margins as desired */
+font-size: 14px;
+font-weight: bold;
+border-bottom: 1px solid #ddd;
+list-style-type: none;
+padding: 3px 15px 3px 15px; /* THIRD number must change with respect to padding-top (X) below */
 }
+
+ul#tabnav li {
+display: inline;
+}
+
+body#tab1 li.tab1, body#tab2 li.tab2, body#tab3 li.tab3, body#tab4 li.tab4 { /* settings for selected tab */
+border-bottom: 1px solid #fff; /* set border color to page background color */
+background-color: #fff; /* set background color to match above border color */
+}
+
+body#tab1 li.tab1 a, body#tab2 li.tab2 a, body#tab3 li.tab3 a, body#tab4 li.tab4 a { /* settings for selected tab link */
+background-color: #fff; /* set selected tab background color as desired */
+color: #000; /* set selected tab link color as desired */
+position: relative;
+top: 1px;
+padding-top: 4px; /* must change with respect to padding (X) above and below */
+}
+
+ul#tabnav li a { 
+padding: 3px 10px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+border: 1px solid #ddd; /* set border COLOR as desired; usually matches border color specified in #tabnav */
+background-color: #cfc; /* set unselected tab background color as desired */
+color: #666; /* set unselected tab link color as desired */
+margin-right: 0px; /* set additional spacing between tabs as desired */
+text-decoration: none;
+border-bottom: none;
+}
+
+ul#tabnav a:hover { 
+background: #fff; 
+}
+
+/* end css tabs */
+
+
 
 
 /* Base Superbox Styles ******************************************************************/
