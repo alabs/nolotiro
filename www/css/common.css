@@ -127,6 +127,7 @@ a.actual {
 	color:#666;
 	font-size: 0.9em;
 	font-weight: normal;
+        padding-bottom: 5px;
 }
 
 .ad_excerpt_show{
@@ -142,6 +143,48 @@ a.actual {
 
 }
 
+
+.ad_comments{
+        padding-left: 18px;
+        margin-bottom: 80px;
+        
+}
+
+.ad_comment{
+	float:left;
+        font-size: 1em;
+	border-bottom: 1px dashed #ddd;
+	width: 100% !important;
+	
+	padding-right: 18px;
+	padding-bottom:18px;
+	margin-top: 14px;
+
+}
+
+.ad_comment span{
+    clear: left;
+    float: left;
+     padding: 5px;
+}
+
+
+.ad_comments h5{
+        
+	font-size: 1.1em;
+	font-weight: bold;
+        margin-top: 20px;
+}
+
+
+.ad_comment_form{
+        float: left;
+        margin-bottom: 20px;
+        margin-top: 20px;
+}
+
+
+
 .give-want {
 	position: relative;
 	width:auto;
@@ -155,7 +198,6 @@ a.actual {
 	top:-50px;
 	padding: 14px;
 }
-
 
 
 
@@ -187,7 +229,8 @@ a.actual {
 #footer {
         font-size: 1em;
         line-height: 1.33em;
-        margin-top:10px;
+        float: left;
+        margin-top:40px;
 	padding:20px;
 	clear: both;
 	border-top: 1px solid #ddd;

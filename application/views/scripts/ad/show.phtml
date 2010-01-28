@@ -77,7 +77,7 @@ if ($this->ad): ?>
 
 <?php endif;?>
 
-
+<div class="ad_comments">
 <h5>Comments</h5>
 <?
 
@@ -87,7 +87,7 @@ if ($this->comments): ?>
 
 
        <?php foreach ($this->comments as $key => $val): ?>
-        <div class="ad_excerpt">
+        <div class="ad_comment">
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
            
@@ -100,17 +100,20 @@ if ($this->comments): ?>
            <br>
            <span><?php echo $this->escape($val['body']) ?></span>
         </div>
-        <br />
+        
         <?php endforeach; ?>
 
 
 
 <?php endif;?>
 
+        <div class="ad_comment_form">
+        <?=$this->createcomment?>
+        </div>
 
-<?=$this->createcomment?>
 
 
+</div>
 </div>
 
 <!-- google adsense block -->
