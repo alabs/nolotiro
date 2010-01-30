@@ -6,9 +6,16 @@
 
 class AuthController extends Zend_Controller_Action {
 	public function init() {
-		$this->initView ();
-		$this->view->baseUrl = $this->_request->getBaseUrl ();
-		//$this->view->baseUrl = Zend_Controller_Front::getParam($route);
+
+                //parent::init ();
+		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
+
+		$locale = Zend_Registry::get ( "Zend_Locale" );
+		$this->lang = $locale->getLanguage ();
+
+                $aNamespace = new Zend_Session_Namespace('Nolotiro');
+		$this->location = $aNamespace->location;
+
 	}
 	
 	/**
@@ -57,6 +64,8 @@ class AuthController extends Zend_Controller_Action {
 				//check first if the user is activated (by confirmed email)
 				$select = $authAdapter->getDbSelect ();
 				$select->where ( 'active > 0' );
+                                //check if the user is not locked (spammers, bad users, etc)
+                                $select->where ( 'locked = 0' );
 				
 				$result = $authAdapter->authenticate ();
 				if ($result->isValid ()) {
@@ -79,8 +88,8 @@ class AuthController extends Zend_Controller_Action {
 					
 					}else {
 					
-					  //if redir empty goto main home ads
-					  $this->_redirect ( '/' );
+					  //if redir empty goto main home ads and set the welcome logged in message
+					 $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
 					}
 					
 					
