@@ -1,0 +1,91 @@
+<?php
+//register page
+$this->page_title = $this->translate ( 'Register' ) . ' - nolotiro.com';
+
+$locale = Zend_Registry::get ( "Zend_Locale" );
+$this->lang = $locale->getLanguage ();
+
+//render common HTML header
+echo $this->render ( 'partials/html_header.phtml' );
+?>
+
+<div id="default_header_section">
+<h3><?=$this->translate ( 'User profile' ).'  -  '.$this->theuser['username'];?></h3>
+
+</div>
+
+
+<?php
+if (isset ( $this->error )) :
+?>
+<div class="error">
+		<?=$this->escape ( $this->error );?>
+</div>
+
+<?php endif;
+?>
+
+<div id="main">
+<div class="span-18">
+
+
+ <? //render the default footer
+echo $this->render ( 'partials/tab_nav_user_profile.phtml' );?>
+
+
+<?php
+//Zend_Debug::dump($this->ad);
+//Zend_Debug::dump($this->paginator);
+
+
+if ($this->ad): ?>
+
+
+       <?php foreach ($this->paginator as $key => $val): ?>
+        <div class="ad_excerpt">
+		
+	 
+	
+           <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+           <?=$this->escape($val['title']) ?></a></h4>
+
+            <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
+           
+
+
+            <a href="/<?=$this->lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['username']) ?></a>
+            </span>
+           
+           
+	   
+	   <div><?php echo $this->escape($val['body']) ?></div>
+	   
+	   
+	   
+        </div>
+        
+        <?php endforeach; ?>
+
+
+
+<?php else: ?>
+
+    <p><h3><?=$this->translate ( 'No ads to display for this location.');?></h3></p>
+
+<?php endif;?>
+
+
+<?php echo $this->paginationControl($this->paginator, 'Sliding', 'partials/paginator_ads.phtml'); ?>
+
+
+
+
+</div> <!-- /div ads -->
+
+
+
+</div> <!-- /main -->
+
+<?=$this->render ( 'partials/html_footer.phtml' );?>
+
+

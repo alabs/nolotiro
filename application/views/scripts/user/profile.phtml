@@ -28,11 +28,10 @@ if (isset ( $this->error )) :
 <div id="main">
 <div class="span-18">
 
-<ul id="tabnav">
-	<li class="tab1"><a href="index.html"><?=$this->translate('profile');?></a></li>
-	<li class="tab2"><a href="index2.html"><?=$this->translate('ads');?></a></li>
 
-</ul>
+ <? //render the default footer
+echo $this->render ( 'partials/tab_nav_user_profile.phtml' );?>
+
 
 <?=var_dump($this->theuser);?>
     <div class="user_profile">

@@ -61,6 +61,28 @@ class AdController extends Zend_Controller_Action {
 
 	}
 
+
+
+        public function listuserAction(){
+
+               $id = $this->_request->getParam ( 'id' );
+               $model = $this->_getModel ();
+
+               $this->view->ad = $model->getAdUserlist($id);
+
+               //paginator
+		$page = $this->_getParam('page');
+		$paginator = Zend_Paginator::factory($this->view->ad);
+		$paginator->setDefaultScrollingStyle('Elastic');
+		$paginator->setItemCountPerPage(10);
+		$paginator->setCurrentPageNumber($page);
+
+		$this->view->paginator=$paginator;
+
+
+        }
+
+
 	public function showAction() {
 
 		$id = $this->_request->getParam ( 'id' );
@@ -70,6 +92,8 @@ class AdController extends Zend_Controller_Action {
 		$this->view->ad = $model->getAd( $id );
 		$this->view->comments = $model->getComments( $id );
 
+                
+                $this->view->woeidName =  $this->_helper->woeid->name($this->view->ad['woeid_code'] , $this->lang);
 
 		//if user logged in, show the comment form, if not show the login link
 		$auth = Zend_Auth::getInstance ();

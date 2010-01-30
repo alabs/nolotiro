@@ -4,8 +4,7 @@ $this->page_title = $this->translate ( 'View ad' ) . $this->ad['title'].' - nolo
 
 $locale = Zend_Registry::get ( "Zend_Locale" );
 $this->lang = $locale->getLanguage ();
-$aNamespace = new Zend_Session_Namespace('Nolotiro');
-				
+
 
 
 //render common HTML header
@@ -15,7 +14,7 @@ echo $this->render ( 'partials/html_header.phtml' );
 <div id="default_header_section">
 <h5>
 <a href="/<?=$this->lang ?>/ad/list/woeid/<?=$this->ad['woeid_code'].'/ad_type/'.$this->ad['type']?>">
-           <?=$aNamespace->locationName.' > '. $this->translate($this->ad['type']) ?></a>
+           <?=$this->woeidName.' > '. $this->translate($this->ad['type']) ?></a>
 </h5>
 <h3><?=$this->ad['title'] ?>
 </h3>

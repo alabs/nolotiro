@@ -85,7 +85,7 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 	 * Fetch the comments of an ad
 	 * 
 	 * @param  int|string $id 
-	 * @return null|Zend_Db_Table_Row_Abstract
+	 * @return  array
 	 */
 	public function getComments($id) {
 		$id = ( int ) $id;
@@ -128,6 +128,26 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		
 	}
 
+
+        /**
+	 * Fetch a list of ads where id_owner user matches
+	 *
+	 * @param  int $woeid
+	 * @return array
+	 */
+	public function getAdUserlist($id) {
+		$id = ( int ) $id;
+
+		$table = new Model_Ad ( );
+
+                $select = $table->select ()->where ( 'user_owner = ?', $id );
+                $select->order('date_created DESC');
+                
+		$result = $table->fetchAll ( $select )->toArray ();
+
+		return $result;
+
+	}
 	
 	
 }

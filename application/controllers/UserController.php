@@ -139,13 +139,13 @@ class UserController extends Zend_Controller_Action {
 		$user_id = $this->_request->getParam ( 'id' );
 		
 		$model = $this->_getModel ();
-		
-		$this->view->theuser = $model->fetchUser($user_id);
-		
-		
+                $modelarray = $model->fetchUser($user_id);
                 
-		
-		
+                //lets overwrite the password and token values to assure not passed to the view ever!
+                unset ($modelarray['password']);
+                unset ($modelarray['token']);
+
+		$this->view->theuser = $modelarray;
 		
 	}
 	
