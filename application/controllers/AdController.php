@@ -25,6 +25,10 @@ class AdController extends Zend_Controller_Action {
 
 
 
+                $aNamespace = new Zend_Session_Namespace('Nolotiro');
+		$this->location = $aNamespace->location;
+
+
 	}
 
 	/**
@@ -42,6 +46,8 @@ class AdController extends Zend_Controller_Action {
 		$this->view->ad = $model->getAdList($woeid, $ad_type);
 
                 $this->view->woeidName =  $this->_helper->woeid->name($woeid,$this->lang);
+
+                //var_dump($this->view->woeidName);
 
 		//set the location name reg var from the woeid helper
 		$aNamespace = new Zend_Session_Namespace('Nolotiro');
@@ -90,27 +96,39 @@ class AdController extends Zend_Controller_Action {
 		$model = $this->_getModel ();
 
 		$this->view->ad = $model->getAd( $id );
-		$this->view->comments = $model->getComments( $id );
 
-                
-                $this->view->woeidName =  $this->_helper->woeid->name($this->view->ad['woeid_code'] , $this->lang);
+              
 
-		//if user logged in, show the comment form, if not show the login link
-		$auth = Zend_Auth::getInstance ();
-		if (! $auth->hasIdentity ()) {
-			
-                       
-                        $this->view->createcomment ='<a href="/' . $this->lang . '/auth/login">' . $this->view->translate ( 'login to post a comment' ) . '</a> ';
-                
-		} else {
-			require_once APPLICATION_PATH . '/forms/Comment.php';
-                        $form = new Form_Comment();
+                if ($this->view->ad != null){ // if the id ad exists then render the ad and comments
 
-                        $form->setAction('/'.$this->lang .'/comment/create/ad_id/'.$id);
+                        $this->view->comments = $model->getComments( $id );
 
-                        
-                        $this->view->createcomment = $form;
-		}
+
+                        $this->view->woeidName =  $this->_helper->woeid->name($this->view->ad['woeid_code'] , $this->lang);
+
+                        //if user logged in, show the comment form, if not show the login link
+                        $auth = Zend_Auth::getInstance ();
+                        if (! $auth->hasIdentity ()) {
+
+
+                                $this->view->createcomment ='<a href="/' . $this->lang . '/auth/login">' . $this->view->translate ( 'login to post a comment' ) . '</a> ';
+
+                        } else {
+                                require_once APPLICATION_PATH . '/forms/Comment.php';
+                                $form = new Form_Comment();
+
+                                $form->setAction('/'.$this->lang .'/comment/create/ad_id/'.$id);
+
+
+                                $this->view->createcomment = $form;
+                        }
+
+                } else {
+
+                     $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'This ad does not exist or may have been deleted!' ) );
+		     $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+                }
+
 
 	}
 
@@ -193,8 +211,8 @@ class AdController extends Zend_Controller_Action {
 					//get woeid to assign to this ad
 					//the location its stored at session location value
 					//(setted by default on bootstrap to Madrid woeid number)
-					$aNamespace = new Zend_Session_Namespace('Nolotiro');
-					$formulario ['woeid_code'] = $aNamespace->location;
+					
+					$formulario ['woeid_code'] = $this->location;
 
 
 					$model = $this->_getModel ();
@@ -202,7 +220,7 @@ class AdController extends Zend_Controller_Action {
 
 					//Zend_Debug::dump ( $formulario );
                                         $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad published succesfully!' ) );
-					$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+					$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
 
 				}
 			}

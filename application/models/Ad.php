@@ -55,7 +55,7 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 	 * Fetch an individual entry
 	 * 
 	 * @param  int|string $id 
-	 * @return null|Zend_Db_Table_Row_Abstract
+	 * @return array
 	 */
 	public function getAd($id) {
 		$id = ( int ) $id;
@@ -68,7 +68,7 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		$select->where ( 'a.id = ?', $id );
 		
 		if (!$table->fetchRow ( $select )) {
-			throw new Exception ( "I can not find row $id" ,404);
+			$result =  null;
 			
 		} else {
 		    
@@ -89,12 +89,16 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 	 */
 	public function getComments($id) {
 		$id = ( int ) $id;
-		
+
+                if (!$id){
+
 		$table = new Model_Ad ( );
 		$select = $table->select ()->where ( 'id = ?', $id );
 		
 		$result = $table->fetchRow ( $select )->findDependentRowset('Comment')->toArray ();
-		
+
+
+                }
 		return $result;
 		
 	}

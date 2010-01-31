@@ -156,7 +156,7 @@ class LocationController extends Zend_Controller_Action {
 
 				//parse the location value
 				$values = explode("*", $formulario['location'][0]);
-
+                                
 
 				$aNamespace = new Zend_Session_Namespace('Nolotiro');
 				$aNamespace->location = $values[0];//woeid
