@@ -71,6 +71,12 @@ class Model_User
 		$select = $table->select ()->where ( 'token = ?', $token );
 		return $table->fetchRow ( $select );
 	}
+
+        public function checkIsLocked($id) {
+		$table = $this->getTable ();
+		$select = $table->select ()->where ( 'id = ?', $id );
+		return $table->fetchRow ( $select )->locked;
+	}
 	
 	/**
 	 * Fetch an individual entry

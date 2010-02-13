@@ -29,6 +29,12 @@ $autoloader->registerNamespace ( array ('Zend_', 'Nolotiro_' ) );
 $config = new Zend_Config_Ini ( NOLOTIRO_PATH_ROOT . '/config/nolotiro.ini', 'dev' );
 Zend_Registry::set ( 'config', $config );
 
+//Setup the ddbb
+$dbAdapter = Zend_Db::factory ( $config->database );
+Zend_Db_Table_Abstract::setDefaultAdapter ( $dbAdapter );
+
+
+
 // Start Session
 Zend_Session::start();
 $session = new Zend_Session_Namespace ( 'Nolotiro' );
@@ -61,16 +67,35 @@ Zend_Registry::set ( 'session', $session );
         APPLICATION_PATH .'/controllers/helpers');
 
 
-//Setup the ddbb
-$dbAdapter = Zend_Db::factory ( $config->database );
-Zend_Db_Table_Abstract::setDefaultAdapter ( $dbAdapter );
-
 //Setup the registry
 $registry = Zend_Registry::getInstance ();
 $registry->configuration = $config;
 $registry->dbAdapter = $dbAdapter;
 
-unset ( $dbAdapter, $registry, $config, $session );
+
+// setup application authentication
+$auth = Zend_Auth::getInstance();
+$auth->setStorage(new Zend_Auth_Storage_Session());
+
+
+////if user is locked kill the session
+// TODO move this piece of shit-code to the user controller when the admin user locked action will be created
+if ($auth->hasIdentity()){
+    $files = new Zend_Db_Table('users');
+    $id_lamer = $auth->getIdentity()->id;
+    $query = "SELECT locked FROM users WHERE id = ".$id_lamer;
+    $result = $files->getAdapter()->query($query)->fetch();
+
+    if ($result['locked'] == 1) {
+       Zend_Session::destroy();
+       echo 'your nolotiro.org account has been locked';
+       die ();
+    }
+
+}
+
+
+unset ( $dbAdapter, $registry, $config, $session, $auth );
 
 // Set up the front controller and dispatch
 try {

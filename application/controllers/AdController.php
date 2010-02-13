@@ -95,12 +95,13 @@ class AdController extends Zend_Controller_Action {
 
 		$model = $this->_getModel ();
 
-		$this->view->ad = $model->getAd( $id );
+		$this->view->ad = $model->getAd( (int)$id );
 
               
 
                 if ($this->view->ad != null){ // if the id ad exists then render the ad and comments
 
+                       var_dump($this->view->ad);
                         $this->view->comments = $model->getComments( $id );
 
 
