@@ -397,3 +397,8 @@ background: #fff;
 #superbox .close a span{color:#fff;}
 #superbox .nextprev a{float:left;margin-right:5px;padding:0 5px;line-height:20px;background:#333;cursor:pointer;color:#fff;}
 #superbox .nextprev .disabled{background:#ccc;cursor:default;}
+
+
+.xdebug-var-dump{
+    clear: both;
+}

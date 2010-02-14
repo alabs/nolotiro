@@ -291,7 +291,7 @@ class UserController extends Zend_Controller_Action {
 			$validatetoken = $model->validateToken ( $token );
 			
 			$validatetoken = $validatetoken->toArray ();
-			Zend_Debug::dump ( $validatetoken );
+			//Zend_Debug::dump ( $validatetoken );
 			
 			if ($validatetoken !== NULL) {
 				//OK

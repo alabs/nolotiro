@@ -9,7 +9,7 @@
 class Model_Ad extends Zend_Db_Table_Abstract  {
 	protected $_name = 'ads';
 	protected $_primary = "id";
-	protected $_dependentTables = array('comments');
+	protected $_dependentTables = array('comments', 'users');
 
     
 	/** Model_Table_Page */
@@ -58,7 +58,7 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 	 * @return array
 	 */
 	public function getAd($id) {
-		$id = ( int ) $id;
+		$id = ( int )$id;
 		
 		$table = new Model_Ad ( );
 		$select = $table->select()->setIntegrityCheck(false);
@@ -72,9 +72,8 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 			
 		} else {
 		    
-		    
 		    $result = $table->fetchRow ( $select )->toArray ();
-			
+                    
 		}
 		
 		return $result;
@@ -88,17 +87,17 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 	 * @return  array
 	 */
 	public function getComments($id) {
-		$id = ( int ) $id;
+                    $id = ( int ) $id;
+                
+                    if ($id){
 
-                if (!$id){
+                    $comments = new Zend_Db_Table('comments');
+                    $query = "SELECT comments.* as c, users.username  FROM comments,users WHERE comments.ads_id = ".$id." AND comments.user_owner = users.id ";
+                    $result = $comments->getAdapter()->query($query)->fetchAll();
 
-		$table = new Model_Ad ( );
-		$select = $table->select ()->where ( 'id = ?', $id );
-		
-		$result = $table->fetchRow ( $select )->findDependentRowset('Comment')->toArray ();
+                    var_dump($result);
 
-
-                }
+                    }
 		return $result;
 		
 	}
