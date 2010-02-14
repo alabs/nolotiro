@@ -71,10 +71,17 @@ class AdController extends Zend_Controller_Action {
 
         public function listuserAction(){
 
-               $id = $this->_request->getParam ( 'id' );
-               $model = $this->_getModel ();
+               $id = (int)$this->_request->getParam ( 'id' );
 
-               $this->view->ad = $model->getAdUserlist($id);
+               if ($id == null){
+                  $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'this url does not exist' ) );
+		  $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+               }
+
+
+              $model = $this->_getModel ();
+
+                $this->view->ad = $model->getAdUserlist($id);
 
                //paginator
 		$page = $this->_getParam('page');
@@ -85,6 +92,13 @@ class AdController extends Zend_Controller_Action {
 
 		$this->view->paginator=$paginator;
 
+               
+                require_once APPLICATION_PATH . '/models/User.php';
+                $this->user = new Model_User();
+
+                $this->view->user = $this->user->fetchUser($id);
+
+                
 
         }
 

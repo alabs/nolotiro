@@ -86,8 +86,17 @@ class Model_User
 	public function fetchUser($id) {
 		$table = $this->getTable ();
 		$select = $table->select ()->where ( 'id = ?', $id );
-		// see reasoning in fetchEntries() as to why we return only an array
-		return $table->fetchRow ( $select )->toArray ();
+
+                if ($select != null) {
+                    
+		$result = $table->fetchRow ( $select );
+
+                } else {
+                    $result = null;
+                }
+
+
+                return $result;
 	}
 
 }

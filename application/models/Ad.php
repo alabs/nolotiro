@@ -96,6 +96,7 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
                     $result = $comments->getAdapter()->query($query)->fetchAll();
 
                     }
+                    
 		return $result;
 		
 	}
@@ -137,18 +138,23 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 	 * @return array
 	 */
 	public function getAdUserlist($id) {
-		$id = ( int ) $id;
 
-		$table = new Model_Ad ( );
+                    $id = ( int ) $id;
 
-                $select = $table->select ()->where ( 'user_owner = ?', $id );
-                $select->order('date_created DESC');
-                
-		$result = $table->fetchAll ( $select )->toArray ();
+                    $table = new Model_Ad ( );
+                    $select = $table->select ()->where ( 'user_owner = ?', $id );
+                    $select->order('date_created DESC');
+                    $result = $table->fetchAll ( $select )->toArray ();
 
-		return $result;
 
-	}
+                    $ads_user = new Zend_Db_Table('ads');
+                    $query = "SELECT ads.id as ad_id,ads.title,ads.body,ads.date_created, users.username,users.id   FROM ads,users
+                        WHERE ads.user_owner = ".$id." AND users.id = ".$id." ORDER BY date_created DESC" ;
+                   return $result = $ads_user->getAdapter()->query($query)->fetchAll();
+
+                   
+
+        }
 	
 	
 }
