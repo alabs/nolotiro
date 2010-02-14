@@ -92,10 +92,8 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
                     if ($id){
 
                     $comments = new Zend_Db_Table('comments');
-                    $query = "SELECT comments.* as c, users.username  FROM comments,users WHERE comments.ads_id = ".$id." AND comments.user_owner = users.id ";
+                    $query = "SELECT comments.* , users.username  FROM comments,users WHERE comments.ads_id = ".$id." AND comments.user_owner = users.id ";
                     $result = $comments->getAdapter()->query($query)->fetchAll();
-
-                    var_dump($result);
 
                     }
 		return $result;

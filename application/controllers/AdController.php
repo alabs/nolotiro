@@ -100,10 +100,7 @@ class AdController extends Zend_Controller_Action {
 
                 if ($this->view->ad != null){ // if the id ad exists then render the ad and comments
 
-                       //var_dump($this->view->ad);
                         $this->view->comments = $model->getComments( $id );
-                        //var_dump($this->view->comments);
-
                         $this->view->woeidName =  $this->_helper->woeid->name($this->view->ad['woeid_code'] , $this->lang);
 
                         //if user logged in, show the comment form, if not show the login link
