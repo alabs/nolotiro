@@ -40,10 +40,6 @@ if (count ( $this->mensajes ) > 0) {
 <div class="span-18">
 
 <?php
-//Zend_Debug::dump($this->ad);
-//Zend_Debug::dump($this->paginator);
-
-
 if ($this->ad): ?>
 
 
@@ -83,8 +79,15 @@ if ($this->ad): ?>
 
 
 <?php else: ?>
+    <div class="no_results">
+    <h3><?=$this->translate ( 'No ads to display for this location.');?></h3>
+    <h5><?=$this->translate ( 'You could try one of these things:');?></h5>
+        <h5>1. <?=$this->translate ( 'Be the first to').' ';?>
+            <a href="/<?=$this->lang?>/ad/create"><?=$this->translate ('post an ad on this location.');?></a></h5>
+        <h5>2. <?=$this->translate ( 'Try to change the location to another city bigger near you.');?></h5>
+        <h5>3. <?=$this->translate ( 'Our autosuggest system (based on your IP) says you are located near:').' '.$this->suggestIP;?></h5>
 
-    <p><h3><?=$this->translate ( 'No ads to display for this location.');?></h3></p>
+    </div>
 
 <?php endif;?>
 

@@ -38,6 +38,7 @@ Zend_Db_Table_Abstract::setDefaultAdapter ( $dbAdapter );
 // Start Session
 Zend_Session::start();
 $session = new Zend_Session_Namespace ( 'Nolotiro' );
+$session->setExpirationSeconds(86400); //TODO now is one day, set one week if the option "remember me" on login form is checked
 Zend_Registry::set ( 'session', $session );
 
 

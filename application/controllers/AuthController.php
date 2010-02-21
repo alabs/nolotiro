@@ -16,6 +16,10 @@ class AuthController extends Zend_Controller_Action {
                 $aNamespace = new Zend_Session_Namespace('Nolotiro');
 		$this->location = $aNamespace->location;
 
+                $this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
+		$this->view->mensajes = $this->_flashMessenger->getMessages ();
+
+
 	}
 	
 	/**

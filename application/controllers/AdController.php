@@ -47,11 +47,15 @@ class AdController extends Zend_Controller_Action {
 
                 $this->view->woeidName =  $this->_helper->woeid->name($woeid,$this->lang);
 
-                //var_dump($this->view->woeidName);
+                
+                if (empty ($this->view->ad)) {
+                    $this->view->suggestIP =  $this->_helper->getLocationGeoIP->suggest();
+                }
 
+                
 		//set the location name reg var from the woeid helper
 		$aNamespace = new Zend_Session_Namespace('Nolotiro');
-		Zend_Registry::set ( 'session', $session );
+		//Zend_Registry::set ( 'session', $session );
 		$aNamespace->locationName = $this->view->woeidName;
                 //var_dump($aNamespace->locationName);
 
@@ -164,8 +168,12 @@ class AdController extends Zend_Controller_Action {
 			$request = $this->getRequest ();
 			$form = $this->_getAdEditForm ();
 
+                         $this->view->woeidName =  $this->_helper->woeid->name($this->location , $this->lang);
+
+                         
 			// check to see if this action has been POST'ed to
 			if ($this->getRequest ()->isPost ()) {
+
 
 				// now check to see if the form submitted exists, and
 				// if the values passed in are valid for this form
@@ -181,17 +189,18 @@ class AdController extends Zend_Controller_Action {
 					  
 					 }
 					 
-					
-			
-					//strip html tags to title
-					$formulario['title'] = strip_tags($formulario['title']);
 
-					//anti hoygan to title
+                                        // Create a filter chain and add filters to title and body against xss, etc
+                                        $f = new Zend_Filter();
+                                        $f->addFilter(new Zend_Filter_StripTags());
+                                                    //->addFilter(new Zend_Filter_HtmlEntities());
+
+                                        $formulario['title'] = $f->filter ( $formulario['title'] );
+                                        $formulario['body'] = $f->filter ( $formulario['body'] );
+
+					//anti HOYGAN to title
 					//dont use strtolower because dont convert utf8 properly . ej: á é ó ...
 					$formulario['title'] = ucfirst(mb_convert_case($formulario['title'], MB_CASE_LOWER, "UTF-8"));
-
-					//strip html tags to body
-					$formulario['body'] = strip_tags($formulario['body']);
 
 					//anti hoygan to body
 					$split=explode(". ", $formulario['body']);

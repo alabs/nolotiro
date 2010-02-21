@@ -110,7 +110,7 @@
 #ad/create
 "Create a new ad";"Crea un nuevo anuncio"
 "Choose:";"Elige:"
-"To publish your ad, please, insert the data required below";"Para publicar tu anuncio, por favor, introduce estos datos"
+"Please, fill this form to publish your ad";"Para publicar tu anuncio, por favor, introduce estos datos"
 "i give...";"regalo..."
 "i want...";"quiero..."
 "Title of your ad:";"Título de tu anuncio:"
@@ -127,6 +127,11 @@
 "Previous";"Anterior"
 "Next";"Siguiente"
 
+
+#user profile
+"Ads list";"Lista de anuncios"
+"profile";"perfil"
+"ads";"anuncios"
 
 #format date string (date php)
 "l dS \o\f F Y H:i:s";" d \d\e\l m \d\e Y \, H:i:s"

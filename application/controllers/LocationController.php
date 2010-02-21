@@ -26,26 +26,14 @@ class LocationController extends Zend_Controller_Action {
 
 
 
-
 	public function changeAction(){
 		$request = $this->getRequest();
 		$form = $this->_getLocationChangeForm();
 		
-		
-		//get the ip of the ad publisher
-                    if (getenv(HTTP_X_FORWARDED_FOR)) {
-                        $ip = getenv(HTTP_X_FORWARDED_FOR);
-                    } else {
-                        $ip = getenv(REMOTE_ADDR);
-                    }
-
-		$this->getLocationGeoIP($ip);
-		// check to see if this action has been POST'ed to
 		if ($this->getRequest ()->isPost ()) {
 
 
 			if ($form->isValid ( $request->getPost () )) {
-
 
 				$formulario = $form->getValues ();
 
@@ -55,20 +43,13 @@ class LocationController extends Zend_Controller_Action {
 				$aNamespace = new Zend_Session_Namespace('Nolotiro');
 				$aNamespace->locationTemp = $formulario['location'];
 
-				
-
 				$this->_redirect ( '/'.$this->lang.'/location/change2' );
 				
-				
-
-
 			}
-
 
                 }
 		// assign the form to the view
 		$this->view->form = $form;
-
 
 	}
 
@@ -163,10 +144,7 @@ class LocationController extends Zend_Controller_Action {
 
 				$name = $item->name.', '.$item->admin1.', '.$item->country;
 
-
-
 				$aNamespace->locationName = $values[1];//location name
-
 
 				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Location changed successfully to:' )
 				.' '.$values[1]);
@@ -182,9 +160,7 @@ class LocationController extends Zend_Controller_Action {
 
 	public function getYahooGeoWoeidList($locationtemp,$lang,$town){
 
-
              //lets use memcached to not waste yahoo geo api requests
-
             // configure caching backend strategy
             $oBackend = new Zend_Cache_Backend_Memcached(
                     array(
@@ -217,7 +193,7 @@ class LocationController extends Zend_Controller_Action {
 
                 $appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
 		$htmlString = "http://where.yahooapis.com/v1/places\$and(.q(".
-                urlencode($locationtemp)."),.type(".$town."));count=20?appid=".$appid."&lang=".$lang;
+                urlencode($locationtemp)."),.type(".$town."));count=30?appid=".$appid."&lang=".$lang;
 
 		$xml = simplexml_load_file($htmlString);
 
@@ -260,29 +236,6 @@ class LocationController extends Zend_Controller_Action {
 		return $form;
 	}
 
-
-
-
-	public function getLocationGeoIP($IP){
-
-		require_once ( NOLOTIRO_PATH_ROOT . '/library/GeoIP/geoipcity.inc' );
-
-
-		$gi = geoip_open("/usr/local/share/GeoIP/GeoLiteCity.dat",GEOIP_STANDARD);
-
-	        $record = geoip_record_by_addr($gi,$IP);
-	        print $record->country_name . "\n";
-	        //print $record->region . " " . $GEOIP_REGION_NAME[$record->country_code][$record->region] . "\n";
-	        print $GEOIP_REGION_NAME[$record->country_code][$record->region];
-	        print $record->city . "\n";
-	
-		var_dump($record);
-
-		geoip_close($gi);
-
-
-
-	}
 
 
 }

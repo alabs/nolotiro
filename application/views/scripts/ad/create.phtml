@@ -10,7 +10,10 @@ echo $this->render ( 'partials/html_header.phtml' );
 ?>
 
 <div id="default_header_section">
-<h3><?=$this->translate ( 'Create a new ad' );?></h3>
+<h3><?=$this->translate ( 'Create a new ad' ).' - '.$this->woeidName;?></h3>
+
+<b><a  href='/<?=$this->lang?>/location/change'><?=$this->translate ( 'change location' );?></a></b>
+
 </div>
 
 <?php
