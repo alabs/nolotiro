@@ -259,8 +259,8 @@ class UserController extends Zend_Controller_Action {
 		srand ( ( double ) microtime () * 1000000 );
 		$i = 0;
 		while ( $i <= 6 ) {
-			$num = rand () % 33;
-			$pass .= substr ( $salt, $num, 1 );
+			$num = mt_rand() %33;
+                        $pass .= substr ( $salt, $num, 1 );
 			$i ++;
 		}
 		
