@@ -256,7 +256,7 @@ class UserController extends Zend_Controller_Action {
 	 */
 	protected function _generatePassword() {
 		$salt = "abcdefghjkmnpqrstuvwxyz123456789";
-		srand ( ( double ) microtime () * 1000000 );
+		mt_srand( ( double ) microtime () * 1000000 );
 		$i = 0;
 		while ( $i <= 6 ) {
 			$num = mt_rand() %33;
