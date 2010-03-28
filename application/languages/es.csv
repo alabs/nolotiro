@@ -14,7 +14,6 @@
 "give";"regalo"
 "want";"quiero"
 "Create new ad";"Crear nuevo anuncio"
-"No ads to display for this location.";"No hay anuncios para esta ubicación."
 "Posted on ";"Publicado el "
 "by user ";"por el usuario "
 
@@ -75,7 +74,9 @@
 "Choose a username:";"Elige un nombre de usuario:"
 "Choose a password (5 or more characters):";"Elige una contraseña (5 o mas caracteres):"
 "Register";"Regístrate"
+"'%value%' is no valid email address in the basic format local-part@hostname";"'%value%' no es una dirección de correo válida"
 "'%value%' has not only alphabetic and digit characters";"'%value%' contiene carácteres no válidos (usa solo letras y números)"
+"'%hostname%' is no valid hostname for email address '%value%'";"'%hostname%' no es un nombre de dominio válido"
 "By sending this form, you are indicating that you have read, understood, and agree to nolotiro's <a href='/en/page/user-agreement'>user agreement</a> and <a href='/en/page/privacy'>privacy policy.</a>";"Enviando este formulario, admites haber leido, comprendido, y estás conforme con las <a href='/es/page/user-agreement'>condiciones de uso</a> y la <a href='/es/page/privacy'>política de privacidad</a> de nolotiro.org."
 "Check your inbox email to finish the register process";"Comprueba tu correo para terminar el proceso de registro"
 ", confirm your email";", confirma tu email"
@@ -118,7 +119,13 @@
 "Allowed format files: gif, jpg, png. Max:1Mb Size";"Formatos permitidos: gif, jpg, png. Max:1Mb de tamaño."
 "Select an image file for your ad (optional).";"Selecciona una imagen para tu anuncio (opcional)."
 "Ad published succesfully!";"¡Tu anuncio ha sido publicado con éxito!"
+"No ads to display for this location.";"No hay anuncios para esta ubicación."
+"You could try one of these things:";"Puedes probar alguna de estas cosas:"
 
+"Be the first to";"Se el primero en"
+"post an ad on this location.";"publicar un anuncio en esta ciudad."
+"Try to change the location to another city bigger near you.";"Prueba a cambiar la ciudad por una mas grande que esté cerca de tu ubicación."
+"Our autosuggest system (based on your IP) says you are located near:";"Nuestro sistema de sugerencia de ubicación (basado en tu IP) dice que estas cerca de:"
 
 #comment
 "Comment published succesfully!";"Tu comentario se ha publicado con éxito."
@@ -132,6 +139,7 @@
 "Ads list";"Lista de anuncios"
 "profile";"perfil"
 "ads";"anuncios"
+"User profile";"Perfil de usuario"
 
 #format date string (date php)
 "l dS \o\f F Y H:i:s";" d \d\e\l m \d\e Y \, H:i:s"

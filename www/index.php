@@ -35,35 +35,6 @@ Zend_Db_Table_Abstract::setDefaultAdapter ( $dbAdapter );
 
 
 
-// Start Session
-Zend_Session::start();
-$session = new Zend_Session_Namespace ( 'Nolotiro' );
-$session->setExpirationSeconds(86400); //TODO now is one day, set one week if the option "remember me" on login form is checked
-Zend_Registry::set ( 'session', $session );
-
-
-        $aNamespace->location = $woeid;
-        //set the default values to show if the session is empty
-        // Start Session is in the bootstrap
-
-        if (!isset($session->location) || ($session->location == null)) {
-            // if location is not setted , set the Madrid woeid
-           $session->location = 766273;
-           setcookie ( 'location', 766273, null, '/' );
-        }
-
-//        if (!isset($session->locationName) || ($session->locationName == null)) {
-//            // if location is not setted , set the Madrid woeid
-//           //$session->locationName = 'Madrid, Comunidad de Madrid, España';
-//        }
-
-
-        if (!isset($session->ad_type)) {
-            // if ad_type is not setted , set the 'give' status to show the ads on home
-           $session->ad_type = 'give';
-        }
-
-
  Zend_Controller_Action_HelperBroker::addPath(
         APPLICATION_PATH .'/controllers/helpers');
 
@@ -94,6 +65,49 @@ if ($auth->hasIdentity()){
     }
 
 }
+
+
+
+
+// Start Session
+//Zend_Session::rememberMe(86400);
+
+$session = new Zend_Session_Namespace ( 'Nolotiro' );
+//$session->setExpirationSeconds(86400); //TODO now is one day, set one week if the option "remember me" on login form is checked
+
+
+
+        $aNamespace->location = $woeid;
+        //set the default values to show if the session is empty
+        // Start Session is in the bootstrap
+
+        if (!isset($session->location) || ($session->location == null)) {
+            // if location is not setted , set the Madrid woeid
+           $session->location = 766273;
+           setcookie ( 'location', 766273, null, '/' );
+        }
+
+
+
+        if (!isset($session->ad_type)) {
+            // if ad_type is not setted , set the 'give' status to show the ads on home
+           $session->ad_type = 'give';
+        }
+
+Zend_Registry::set ( 'session', $session );
+Zend_Session::start();
+
+//$config = array(
+//    'name' => 'session',
+//    'primary' => 'id',
+//    'modifiedColumn' => 'modified',
+//    'dataColumn' => 'data',
+//    'lifetimeColumn' => 'lifetime'
+//);
+//
+//Zend_Session::setSaveHandler(new
+//                Zend_Session_SaveHandler_DbTable($config));
+//Zend_Session::start();
 
 
 unset ( $dbAdapter, $registry, $config, $session, $auth );

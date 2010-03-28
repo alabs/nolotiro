@@ -12,14 +12,13 @@ class Zend_Controller_Action_Helper_GetLocationGeoIP extends Zend_Controller_Act
 
 		require_once ( NOLOTIRO_PATH_ROOT . '/library/GeoIP/geoipcity.inc' );
 
-                //get the ip of the ad publisher
-//                if (getenv(HTTP_X_FORWARDED_FOR)) {
-//                    $ip = getenv(HTTP_X_FORWARDED_FOR);
-//                } else {
-//                    $ip = getenv(REMOTE_ADDR);
-//                }
+                if (getenv(HTTP_X_FORWARDED_FOR)) {
+                    $ip = getenv(HTTP_X_FORWARDED_FOR);
+                } else {
+                    $ip = getenv(REMOTE_ADDR);
+                }
 
-                $ip = '77.228.26.220';
+               // $ip = '8.8.4.4';
 
 		$gi = geoip_open("/usr/local/share/GeoIP/GeoLiteCity.dat",GEOIP_STANDARD);
 	        $record = geoip_record_by_addr($gi,$ip);
