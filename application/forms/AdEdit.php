@@ -24,7 +24,7 @@ class Form_AdEdit extends Zend_Form {
 			'validators' => array(
 			'Extension' => array(false, 'jpg,jpeg,bmp,gif,png'),
 			'Size' => array('min' => 1, 'max' => 1000000),
-			'IsImage' => array( 'image/bmp', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/png')
+			'IsImage' => array( 'image/bmp', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png')
 			)
 			));
 
