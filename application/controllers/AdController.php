@@ -59,6 +59,8 @@ class AdController extends Zend_Controller_Action {
 		$aNamespace->locationName = $this->view->woeidName;
                 //var_dump($aNamespace->locationName);
 
+                $this->view->page_title .= $this->view->woeidName;
+
 		//paginator
 		$page = $this->_getParam('page');
 		$paginator = Zend_Paginator::factory($this->view->ad);
@@ -120,6 +122,10 @@ class AdController extends Zend_Controller_Action {
 
                         $this->view->comments = $model->getComments( $id );
                         $this->view->woeidName =  $this->_helper->woeid->name($this->view->ad['woeid_code'] , $this->lang);
+
+                        
+                        $this->view->page_title .= $this->view->woeidName .' | '. $this->view->ad['title'];
+
 
                         //if user logged in, show the comment form, if not show the login link
                         $auth = Zend_Auth::getInstance ();
