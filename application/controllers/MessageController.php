@@ -44,25 +44,18 @@ class MessageController extends Zend_Controller_Action {
                         //Zend_Debug::dump($aNamespace->redir);
                         $this->_redirect ( $this->lang.'/auth/login' );
 
-
                 }
 
-		// check to see if this action has been POST'ed to
 		if ($this->getRequest ()->isPost ()) {
 
-			// now check to see if the form submitted exists, and
-			// if the values passed in are valid for this form
 			if ($form->isValid ( $request->getPost () )) {
 
 				// collect the data from the user
 				$f = new Zend_Filter_StripTags ( );
-				$data['email'] = $f->filter ( $this->_request->getPost ( 'email' ) ); //TODO get the email  sender user  from ddbb
                                 $data['subject'] = $f->filter ( $this->_request->getPost ( 'subject' ) );
 				$data['body'] = $f->filter ( $this->_request->getPost ( 'body' ) );
+                                
 
-
-                                //TODO keep the message in messages ddbb table here, make model
-                                //get the ip of the ad publisher
 					if (getenv(HTTP_X_FORWARDED_FOR)) {
 					    $data['ip'] = getenv(HTTP_X_FORWARDED_FOR);
 					} else {
@@ -78,12 +71,12 @@ class MessageController extends Zend_Controller_Action {
 					$data['date_created'] = date("Y-m-d H:i:s", time() );
 
 
-				//get the username if its nolotiro user
-				//$user_info = $this->view->user->username;
+                                //get the email of the receiver user
 
-                                //keep the message into ddbb
-                                $modelMessage = $this->_getModelMessage();
-				$modelMessage->save ( $data );
+                                $data['email'] = $this->_getModelMessage()->getEmailUser($id_user_to);
+
+                                //save the message into ddbb
+                                $modelMessage = $this->_getModelMessage()->save($data);
 
 
 
@@ -91,12 +84,12 @@ class MessageController extends Zend_Controller_Action {
 
                                 $data['body'] = $data['subject'] .'<br/>'. $data['body'].'<br/>';
                                 $data['body'] .= '-------------------------------------------<br/>';
-                                $data['body'] .= $this->view->translate('This is a private message sent from nolotiro.org');
+                                $data['body'] .= $this->view->translate('This is an automated notification. Please, don\'t reply  at this email address.');
                                 
 				$mail->setBodyHtml( $data['body'] );
-				$mail->setFrom ( $email );
-				$mail->addTo ( 'daniel.remeseiro@gmail.com', 'Daniel Remeseiro' ); //TODO get the user receiver email from ddbb
-				$mail->setSubject ( '[nolotiro.org] - '.$this->view->translate('private message from user ') . $data['subject'] ); //TODO translate and add the senders user name
+				$mail->setFrom ( $this->view->translate('noreply@nolotiro.org' ), $this->view->translate('noreply@nolotiro.org' ));
+				$mail->addTo ( $data['email'] );
+				$mail->setSubject ( '[nolotiro.org] - '.$this->view->translate('You have new message from user ') . $data['user_from'] );
 				$mail->send ();
 
 				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Message sent successfully!' ) );
