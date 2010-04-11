@@ -36,6 +36,10 @@ class IndexController extends Zend_Controller_Action {
 		$woeid = $aNamespace->location;
 		$ad_type = $aNamespace->ad_type;
 
+                if(!$woeid){
+                    $woeid = 766273; // madrid, spain by default
+                }
+
                 
 		$this->_redirect('/'.$this->view->lang.'/woeid/'.$woeid.'/give');
 	}
