@@ -12,12 +12,10 @@ class IndexController extends Zend_Controller_Action {
 	 *
 	 */
 	public function init() {
-		//parent::init ();
+		
 		
 		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
-		
-		//$this->view->baseUrl = $this->_request->getBaseUrl();
-		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
+
 		$this->view->user = Zend_Auth::getInstance ()->getIdentity ();
 
                 $locale = Zend_Registry::get ( "Zend_Locale" );
@@ -29,7 +27,10 @@ class IndexController extends Zend_Controller_Action {
 	
 	public function indexAction() {
 		
-		
+                //$request = $this->getRequest ();
+                $this->view->lang =  $this->_helper->checklang->check();
+
+
 		//redir to the list of ads of woeid + ad_type session stored , ad controller
 		
 		$aNamespace = new Zend_Session_Namespace('Nolotiro');

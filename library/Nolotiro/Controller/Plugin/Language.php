@@ -30,6 +30,7 @@ class Nolotiro_Controller_Plugin_Language extends Zend_Controller_Plugin_Abstrac
                         if(!$_COOKIE['lang']){
                                setcookie ( 'lang', 'en' , null, '/' );
                                $language = 'en';
+                               
 
                         }
 

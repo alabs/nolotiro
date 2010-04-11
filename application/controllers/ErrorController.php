@@ -15,6 +15,10 @@ class ErrorController extends Zend_Controller_Action
 
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
+
+                 $this->view->lang =  $this->_helper->checklang->check();
+                 $this->_redirect('/'.$this->view->lang.'/');
+
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
 
