@@ -3,9 +3,6 @@
  * contact  page
  */
 $this->page_title = $this->translate ( 'Contact form' ) . ' - nolotiro.com';
-// Render common HTML header
-echo $this->render ( 'partials/html_header.phtml' );
-
 ?>
 
 <div id="default_header_section">
@@ -38,4 +35,3 @@ if (isset ( $this->error )) :
 </div>
 
 </div>
-<?=$this->render ( 'partials/html_footer.phtml' );?>

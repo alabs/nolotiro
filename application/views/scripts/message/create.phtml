@@ -1,13 +1,3 @@
-<?php
-/**
- * contact  page
- */
-$this->page_title = $this->translate ( 'New private message' ) . ' - nolotiro.com';
-// Render common HTML header
-echo $this->render ( 'partials/html_header.phtml' );
-
-?>
-
 <div id="default_header_section">
 <h3><?=$this->translate ( 'New private message to user:' );?></h3>
 </div>
@@ -38,4 +28,3 @@ if (isset ( $this->error )) :
 </div>
 
 </div>
-<?=$this->render ( 'partials/html_footer.phtml' );?>

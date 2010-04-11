@@ -18,7 +18,7 @@ class UserController extends Zend_Controller_Action {
 		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
 		
 		$locale = Zend_Registry::get ( "Zend_Locale" );
-		$this->lang = $locale->getLanguage ();
+		$this->view->lang = $locale->getLanguage ();
 
                 $aNamespace = new Zend_Session_Namespace('Nolotiro');
 		$this->location = $aNamespace->location;
@@ -119,7 +119,7 @@ class UserController extends Zend_Controller_Action {
 					
 					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Check your inbox email to finish the register process' ) );
 					
-					$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+					$this->_redirect ( '/'.$this->view->lang.'/woeid/'.$this->location.'/give' );
 
 
 				}
@@ -140,7 +140,7 @@ class UserController extends Zend_Controller_Action {
 
                  if ($user_id == null){
                   $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'this user does not exist' ) );
-		  $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+		  $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
                }
 
 
@@ -238,7 +238,7 @@ class UserController extends Zend_Controller_Action {
 					
 					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Check your inbox email to get your new password' ) );
 					
-					$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+					$this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
 
 				}
 			
@@ -315,7 +315,7 @@ class UserController extends Zend_Controller_Action {
 				$this->session->logged_in = false;
 				$this->session->username = false;
 				
-				$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+				$this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
 
 			} else {
 				// just redirect to index, dont tell anything to badboys
@@ -325,7 +325,7 @@ class UserController extends Zend_Controller_Action {
 		
 		} else {
 			$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Sorry, register url no valid or expired.' ) );
-			$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+			$this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
 		}
 	
 	}

@@ -7,11 +7,9 @@
 class LocationController extends Zend_Controller_Action {
 
 	public function init() {
-		parent::init ();
-		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
-
+		
 		$locale = Zend_Registry::get ( "Zend_Locale" );
-		$this->lang = $locale->getLanguage ();
+		$this->view->lang = $locale->getLanguage ();
 
                
                 
@@ -43,7 +41,7 @@ class LocationController extends Zend_Controller_Action {
 				$aNamespace = new Zend_Session_Namespace('Nolotiro');
 				$aNamespace->locationTemp = $formulario['location'];
 
-				$this->_redirect ( '/'.$this->lang.'/location/change2' );
+				$this->_redirect ( '/'.$this->view->lang.'/location/change2' );
 				
 			}
 
@@ -60,7 +58,7 @@ class LocationController extends Zend_Controller_Action {
 
                 
 		$town =$this->view->translate('Town');
-		$places = $this->getYahooGeoWoeidList($locationtemp, $this->lang, $town);
+		$places = $this->getYahooGeoWoeidList($locationtemp, $this->view->lang, $town);
 
 		//var_dump($places);
                 
@@ -68,7 +66,7 @@ class LocationController extends Zend_Controller_Action {
 		if ($places === false) {
 			$this->_helper->_flashMessenger->addMessage (
 				$this->view->translate ( 'I can not connect to Yahoo geo service, sorry!'));
-                                $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+                                $this->_redirect ( '/'.$this->view->lang.'/woeid/'.$aNamespace->location.'/give' );
 			
 		}
 
@@ -77,7 +75,7 @@ class LocationController extends Zend_Controller_Action {
 					
 			$this->_helper->_flashMessenger->addMessage (
 				$this->view->translate ( 'No location found named:') .'  "'. $locationtemp .'"');
-                                $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+                                $this->_redirect ( '/'.$this->view->lang.'/woeid/'.$aNamespace->location.'/give' );
 		
 		}
 
@@ -149,7 +147,7 @@ class LocationController extends Zend_Controller_Action {
 				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Location changed successfully to:' )
 				.' '.$values[1]);
 
-				$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$values[0].'/ad_type/give' );
+				$this->_redirect ( '/'.$this->view->lang.'/woeid/'.$values[0].'/give' );
 
 			}
 		}

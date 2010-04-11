@@ -1,16 +1,3 @@
-<?php
-echo '<?xml version="1.0" encoding="UTF-8" ?>';
-
-//TODO merge header and footer on a main template
-$locale = Zend_Registry::get ( "Zend_Locale" );
-$lang = $locale->getLanguage ();
-
-
-
-echo $this->render ( 'partials/html_header.phtml' );
-
-?>
-
 <div id="default_header_section">
 <h3><?=$this->translate ( 'Choose your' ).' "'.ucwords($this->locationtemp)."\"";?></h3>
 </div>
@@ -60,5 +47,3 @@ if (isset ( $this->error )) :
 </div>
 
 </div>
-
-<?=$this->render ( 'partials/html_footer.phtml' );?>

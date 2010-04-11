@@ -2,11 +2,6 @@
 //register page
 $this->page_title = $this->translate ( 'Forgot your password?' ) . ' - nolotiro.com';
 
-$locale = Zend_Registry::get ( "Zend_Locale" );
-$this->lang = $locale->getLanguage ();
-
-//render common HTML header
-echo $this->render ( 'partials/html_header.phtml' );
 ?>
 
 <div id="default_header_section">
@@ -41,7 +36,3 @@ if (isset ( $this->error )) :
 
 </div>
 
-
-<? //render the default footer
-echo $this->render ( 'partials/html_footer.phtml' );
-?>

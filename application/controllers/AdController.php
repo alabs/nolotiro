@@ -18,6 +18,7 @@ class AdController extends Zend_Controller_Action {
 
 		$locale = Zend_Registry::get ( "Zend_Locale" );
 		$this->lang = $locale->getLanguage ();
+                $this->view->lang = $locale->getLanguage ();
 
                 ///
 		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
@@ -81,7 +82,7 @@ class AdController extends Zend_Controller_Action {
 
                if ($id == null){
                   $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'this url does not exist' ) );
-		  $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+		  $this->_redirect ( '/'.$this->lang.'/woeid/'.$this->location.'/give' );
                }
 
 
@@ -147,7 +148,7 @@ class AdController extends Zend_Controller_Action {
                 } else {
 
                      $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'This ad does not exist or may have been deleted!' ) );
-		     $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+		     $this->_redirect ( '/'.$this->lang.'/woeid/'.$this->location.'/give' );
                 }
 
 
@@ -246,7 +247,7 @@ class AdController extends Zend_Controller_Action {
 
 					//Zend_Debug::dump ( $formulario );
                                         $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad published succesfully!' ) );
-					$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+					$this->_redirect ( '/'.$this->lang.'/woeid/'.$this->location.'/give' );
 
 				}
 			}
@@ -282,7 +283,7 @@ class AdController extends Zend_Controller_Action {
 
 	protected function _createThumbnail($file,$x,$y){
 
-		require_once ( NOLOTIRO_PATH_ROOT . '/library/SimpleImage.php' );
+		require_once ( NOLOTIRO_PATH . '/library/SimpleImage.php' );
 	
 		$file_ext = substr(strrchr($file,'.'),1);
 		$fileuniquename = md5(uniqid(mktime())).'.'.$file_ext;
@@ -291,11 +292,11 @@ class AdController extends Zend_Controller_Action {
 		$image->load('/tmp/'.$file);
 		
 		//save original to right place
-		$image->save( NOLOTIRO_PATH_ROOT.'/www/images/uploads/ads/original/'.$fileuniquename);
+		$image->save( NOLOTIRO_PATH .'/www/images/uploads/ads/original/'.$fileuniquename);
 		
 		//save thumb 100 
 		$image->resizeToWidth($x);
-		$image->save( NOLOTIRO_PATH_ROOT.'/www/images/uploads/ads/100/'.$fileuniquename);
+		$image->save( NOLOTIRO_PATH .'/www/images/uploads/ads/100/'.$fileuniquename);
 		
 		return $fileuniquename;
 	}

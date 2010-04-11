@@ -1,16 +1,6 @@
-<?php
-$locale = Zend_Registry::get ( "Zend_Locale" );
-$this->lang = $locale->getLanguage ();
-
-
-
-//render common HTML header
-echo $this->render ( 'partials/html_header.phtml' );
-?>
-
 <div id="default_header_section">
 <h5>
-<a href="/<?=$this->lang ?>/ad/list/woeid/<?=$this->ad['woeid_code'].'/ad_type/'.$this->ad['type']?>">
+<a href="/<?=$this->lang ?>/woeid/<?=$this->ad['woeid_code'].'/'.$this->ad['type']?>">
            <?=$this->woeidName.' > '. $this->translate($this->ad['type']) ?></a>
 </h5>
 <h3><?=$this->ad['title'] ?>
@@ -127,7 +117,3 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </div>
 <!-- end of google adsense block -->
-
-<? //render the default footer
-echo $this->render ( 'partials/html_footer.phtml' );
-?>

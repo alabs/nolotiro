@@ -53,7 +53,10 @@ class AuthController extends Zend_Controller_Action {
 				
 				//DDBB validation
 				// setup Zend_Auth adapter for a database table
-				$dbAdapter = Zend_Registry::get ( 'dbAdapter' );
+
+                                $readConf = new Zend_Config_Ini( APPLICATION_PATH . '/config/nolotiro.ini' , 'production'  );
+                                $dbAdapter = $dbAdapter = Zend_Db::factory ($readConf->resources->db);
+
 				$authAdapter = new Zend_Auth_Adapter_DbTable ( $dbAdapter );
 				$authAdapter->setTableName ( 'users' );
 				$authAdapter->setIdentityColumn ( 'email' );
@@ -93,7 +96,7 @@ class AuthController extends Zend_Controller_Action {
 					}else {
 					
 					  //if redir empty goto main home ads and set the welcome logged in message
-					 $this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+					 $this->_redirect ( '/'.$this->lang.'/woeid/'.$this->location.'/give' );
 					}
 					
 					

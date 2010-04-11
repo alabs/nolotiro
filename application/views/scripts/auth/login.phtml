@@ -7,8 +7,6 @@ $locale = Zend_Registry::get ( "Zend_Locale" );
 $this->lang = $locale->getLanguage ();
 
 $this->page_title = $this->translate ( 'Login' ) . ' - nolotiro.com';
-// Render common HTML header
-echo $this->render ( 'partials/html_header.phtml' );
 
 ?>
 
@@ -48,4 +46,3 @@ if (isset ( $this->error )) :
 <div><!-- <img alt="demo banner" src="/images/banner_dummy300x250.jpg"> -->
 </div>
 </div>
-<?=$this->render ( 'partials/html_footer.phtml' );?>

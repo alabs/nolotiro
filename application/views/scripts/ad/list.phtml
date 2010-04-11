@@ -1,5 +1,3 @@
-<?=$this->render ( 'partials/html_header.phtml' );?>
-
 <div id="location_header_section">
 <h3>
 <?php
@@ -12,9 +10,9 @@ echo $this->woeidName;
 
 
 <span class="give-want">
-<a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/ad/list/woeid/<?=$this->woeid?>/ad_type/give'><?=$this->translate ( 'give' );?></a>
+<a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/woeid/<?=$this->woeid?>/give'><?=$this->translate ( 'give' );?></a>
 &nbsp;
-<a class="<?=(preg_match("/want/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/ad/list/woeid/<?=$this->woeid?>/ad_type/want'><?=$this->translate ( 'want' );?></a>
+<a class="<?=(preg_match("/want/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/woeid/<?=$this->woeid?>/want'><?=$this->translate ( 'want' );?></a>
 </span>
 
 
@@ -119,7 +117,5 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 
 </div> <!-- /main -->
-
-<?=$this->render ( 'partials/html_footer.phtml' );?>
 
 

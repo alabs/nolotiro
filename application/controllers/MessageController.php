@@ -93,7 +93,7 @@ class MessageController extends Zend_Controller_Action {
 				$mail->send ();
 
 				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Message sent successfully!' ) );
-				$this->_redirect ( '/'.$this->lang.'/ad/list/woeid/'.$this->aNamespace->location.'/ad_type/give' );
+				$this->_redirect ( '/'.$this->lang.'/woeid/'.$this->aNamespace->location.'/give' );
 
 			}
 		}

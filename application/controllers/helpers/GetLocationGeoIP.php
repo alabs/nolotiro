@@ -10,7 +10,7 @@ class Zend_Controller_Action_Helper_GetLocationGeoIP extends Zend_Controller_Act
 
          function suggest(){
 
-		require_once ( NOLOTIRO_PATH_ROOT . '/library/GeoIP/geoipcity.inc' );
+		require_once ( NOLOTIRO_PATH . '/library/GeoIP/geoipcity.inc' );
 
                 if (getenv(HTTP_X_FORWARDED_FOR)) {
                     $ip = getenv(HTTP_X_FORWARDED_FOR);

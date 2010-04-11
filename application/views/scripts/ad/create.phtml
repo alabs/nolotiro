@@ -1,14 +1,3 @@
-<?php
-//create new ad page
-$this->page_title = $this->translate ( 'Create a new ad' ) . ' - nolotiro.com';
-
-$locale = Zend_Registry::get ( "Zend_Locale" );
-$this->lang = $locale->getLanguage ();
-
-//render common HTML header
-echo $this->render ( 'partials/html_header.phtml' );
-?>
-
 <div id="default_header_section">
 <h3><?=$this->translate ( 'Create a new ad' ).' - '.$this->woeidName;?></h3>
 
@@ -39,7 +28,3 @@ if (isset ( $this->error )) :
 
 
 </div>
-
-<? //render the default footer
-echo $this->render ( 'partials/html_footer.phtml' );
-?>
