@@ -185,9 +185,10 @@ class LocationController extends Zend_Controller_Action {
 
             //locationtemp normalize spaces and characters not allowed (ñ) by memcached to create the item name
             $locationtempHash = md5($locationtemp );
-           
 
-            if (!$cache->test($locationtempHash.$lang) ){
+            $cachetest = $cache->test($locationtempHash.$lang);
+
+            if ( $cachetest == false ){
 
                 $appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
 		$htmlString = "http://where.yahooapis.com/v1/places\$and(.q(".

@@ -120,6 +120,9 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		$select->joinInner(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
 		$select->where('a.woeid_code = ?', $woeid);
 		$select->where('a.type = ?', $ad_type);
+                //dont list not available items
+                $select->where('a.status != ?', 'not_available');
+
 		
 		$select->order('a.date_created DESC');		
 		

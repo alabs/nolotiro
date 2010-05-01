@@ -27,7 +27,7 @@ class Zend_Controller_Action_Helper_Woeid extends Zend_Controller_Action_Helper_
                     array(
                             'caching' => true,
                             'cache_id_prefix' => 'woeidName',
-                            'logging' => FALSE,
+                            'logging' => false,
                             'write_control' => true,
                             'automatic_serialization' => true,
                             'ignore_user_abort' => true
@@ -38,8 +38,10 @@ class Zend_Controller_Action_Helper_Woeid extends Zend_Controller_Action_Helper_
 
              //locationtemp normalize spaces and characters not allowed (ñ) by memcached to create the item name
             $woeidHash = md5($woeid );
-            
-            if (!$cache->test($woeidHash.$lang) ){
+
+            $cachetest = $cache->test($woeidHash.$lang);
+
+            if ($cachetest == false ){
                         $appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
                         $htmlString = 'http://where.yahooapis.com/v1/place/'.$woeid.'?appid='.$appid.'&lang='.$lang;
 
@@ -53,7 +55,7 @@ class Zend_Controller_Action_Helper_Woeid extends Zend_Controller_Action_Helper_
 
                         $name = $cache->load($woeidHash.$lang);
                         //$name .= ' *cached!';
-                }
+                        }
             
            return $name;
                

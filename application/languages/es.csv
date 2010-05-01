@@ -17,6 +17,7 @@
 "Posted on ";"Publicado el "
 "by user ";"por el usuario "
 
+
 ﻿#header
 #"no lo tiro, te lo doy (sin condiciones)";"no lo tiro, te lo doy (sin condiciones)"
 "new user";"nuevo usuario"
@@ -127,7 +128,19 @@
 "Try to change the location to another city bigger near you.";"Prueba a cambiar la ciudad por una mas grande que esté cerca de tu ubicación."
 "Our autosuggest system (based on your IP) says you are located near:";"Nuestro sistema de sugerencia de ubicación (basado en tu IP) dice que estas cerca de:"
 
+"Click to enlarge photo";"Click para agrandar foto"
+"available";"disponible"
+"booked";"reservado"
+"not_available";"no disponible"
+
+"Send a private message";"Enviar mensaje privado"
+
+
 #comment
+"Create a new comment";"Escribe un comentario"
+"Comments";"Comentarios"
+"Your comment:";"Tu comentario:"
+"Write something!";"¡Escribe algo!"
 "Comment published succesfully!";"Tu comentario se ha publicado con éxito."
 
 #paginator
