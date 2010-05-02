@@ -96,23 +96,23 @@ a.actual {
 
 .ad_status{
     display: inline-block;
+    color: #fff;
     padding: 3px;
+    font-weight: bold;
     font-size: 11px;
     border: 0px;
+    margin-right: 4px;
 }
 
 .available{
-    color: #fff;
-    background-color: #264409;
+    background-color: #19AF13;
 }
 
 .booked{
-    color: #fff;
     background-color: #DF7401;
 }
 
-.not_available{
-    color: #fff;
+.delivered{
     background-color: red;
 }
 
@@ -147,6 +147,7 @@ a.actual {
 
 	font-size: 1.3em;
 	font-weight: bold;
+        margin-bottom: 6px;
 }
 
 .ad_excerpt:hover{

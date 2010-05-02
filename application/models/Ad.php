@@ -16,23 +16,6 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 	protected $_table;
 	
 	
-	public function addAd($body, $title) {
-
-		$data = array ('body' => $body, 'title' => $title );
-		$this->insert ( $data );
-	}
-	function updateAd($id, $body, $title) {
-		$data = array ('body' => $body, 'title' => $title );
-		$this->update ( $data, 'id = ' . ( int ) $id );
-	}
-	function deleteAd($id) {
-		$this->delete ( 'id =' . ( int ) $id );
-	}
-
-
-
-	
-	
 	
 	/**
 	 * Save a new entry
@@ -40,7 +23,7 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 	 * @param  array $data 
 	 * @return int|string
 	 */
-	public function save(array $data) {
+	public function createAd(array $data) {
 		$table = new Model_Ad ();
 		$fields = $table->info ( Zend_Db_Table_Abstract::COLS );
 		foreach ( $data as $field => $value ) {
@@ -50,7 +33,25 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		}
 		return $table->insert ( $data );
 	}
-	
+
+
+
+
+	public function updateAd($id, $title,$body, $type, $status) {
+		$data = array ( 'title' => $title, 'body' => $body, 'type' => $type, 'status' => $status );
+		$this->update ( $data, 'id = ' . ( int ) $id );
+	}
+
+
+
+	function deleteAd($id) {
+		$this->delete ( 'id =' . ( int ) $id );
+	}
+
+
+
+
+
 	/**
 	 * Fetch an individual entry
 	 * 
@@ -79,7 +80,10 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		return $result;
 		
 	}
-	
+
+
+
+
 	/**
 	 * Fetch the comments of an ad
 	 * 
@@ -121,7 +125,7 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		$select->where('a.woeid_code = ?', $woeid);
 		$select->where('a.type = ?', $ad_type);
                 //dont list not available items
-                $select->where('a.status != ?', 'not_available');
+                $select->where('a.status != ?', 'delivered');
 
 		
 		$select->order('a.date_created DESC');		

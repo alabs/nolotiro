@@ -172,9 +172,11 @@ class AdController extends Zend_Controller_Action {
 		} else {
 
 			$request = $this->getRequest ();
-			$form = $this->_getAdEditForm ();
+                        require_once APPLICATION_PATH . '/forms/AdEdit.php';
+                        $form = new Form_AdEdit ( );
 
-                         $this->view->woeidName =  $this->_helper->woeid->name($this->location , $this->lang);
+                        $this->view->form = $form;
+                        $this->view->woeidName =  $this->_helper->woeid->name($this->location , $this->lang);
 
                          
 			// check to see if this action has been POST'ed to
@@ -188,7 +190,7 @@ class AdController extends Zend_Controller_Action {
 					$formulario = $form->getValues ();
 
 					//create thumbnail if image exists
-					 if ($formulario['photo'] !== null){
+					 if (!empty ($formulario['photo']) ){
 						
 					  $photobrut = $formulario['photo'];
 					  $formulario['photo'] = $this->_createThumbnail($photobrut,'100','90');
@@ -242,7 +244,7 @@ class AdController extends Zend_Controller_Action {
 
 
 					$model = $this->_getModel ();
-					$model->save ( $formulario );
+					$model->createAd ( $formulario );
 
 					//Zend_Debug::dump ( $formulario );
                                         $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad published succesfully!' ) );
@@ -255,32 +257,74 @@ class AdController extends Zend_Controller_Action {
 	}
 
 	public function editAction() {
-		$request = $this->getRequest ();
-		$form = $this->_getAdEditForm ();
 
-		// check to see if this action has been POST'ed to
+                require_once APPLICATION_PATH . '/forms/AdEdit.php';
+		$form = new Form_AdEdit ( );
+                $form->submit->setLabel('Save');
+
+                $form->addElement ( 'select', 'status', array (
+                'order'=>'1',
+		'label' => 'Status:', 'required' => true,
+		// 'attribs' => array ('status' => 'status', 'status' => 'status' ),
+		 'multioptions' => array ('available' => 'available', 'booked' => 'booked', 'delivered' => 'delivered' ) ) );
+
+
+                $this->view->form = $form;
+
+		
 		if ($this->getRequest ()->isPost ()) {
 
-			// now check to see if the form submitted exists, and
-			// if the values passed in are valid for this form
-			if ($form->isValid ( $request->getPost () )) {
+			    $formData = $this->getRequest()->getPost();
+                            if ($form->isValid($formData)) {
+                                 $id = (int)$this->getRequest()->getParam('id');
+                                 
+                                 $title = $form->getValue('title');
+                                 $body = $form->getValue('body');
+                                 $type = $form->getValue('type');
+                                 $status = $form->getValue('status');
+                                 $photo = $form->getValue('photo');
 
-				// since we now know the form validated, we can now
-				// start integrating that data submitted via the form
-				// into our model
-				$formulario = $form->getValues ();
-				Zend_Debug::dump ( $formulario );
+                                  if ( !empty($photo) ){
 
-			}
+					  $photobrut = $photo;
+					  $photo = $this->_createThumbnail($photobrut,'100','90');
+
+					 }
+
+                                $model = $this->_getModel ();
+				$model->updateAd ( $id, $title, $body, $type, $status );
+                                var_dump($id, $title, $body, $type, $status );
+
+                                $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad edited succesfully!' ) );
+				$this->_redirect ( '/'.$this->lang.'/ad/show/id/'.$id );
+
+                            } else {
+                                 $form->populate($formData);
+                                 Zend_Debug::dump($formData);
+                            }
+                            
+                        } else {
+                            $id = $this->_getParam('id', 0);
+                            if ($id > 0) {
+                                 $ad = new Model_Ad();
+                                 $form->populate($ad->getAd($id));
+                            }
+
+			
 		}
+
 	}
+
+
+
+
 
 	/*
 	 *_createThumbnail uses resize class
 	 *
 	 */
 
-	protected function _createThumbnail($file,$x,$y){
+	protected function _createThumbnail( $file,$x,$y){
 
 		require_once ( NOLOTIRO_PATH . '/library/SimpleImage.php' );
 	
@@ -301,18 +345,6 @@ class AdController extends Zend_Controller_Action {
 	}
 
 
-	/**
-	 *
-	 * @return Form_AdEdit
-	 */
-	protected function _getAdEditForm() {
-		require_once APPLICATION_PATH . '/forms/AdEdit.php';
-		$form = new Form_AdEdit ( );
-
-		// assign the form to the view
-		$this->view->form = $form;
-		return $form;
-	}
 
 	public function deleteAction() {
 

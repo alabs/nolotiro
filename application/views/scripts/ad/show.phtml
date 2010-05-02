@@ -23,11 +23,15 @@ if (count ( $this->mensajes ) > 0) {
 <div class="span-15">
 
 
-<?php 
-//Zend_Debug::dump($this->ad);
+<?php
+// if you are the ad owner or admin, then show edit link
+$auth = Zend_Auth::getInstance ();
+if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
 
-if ($this->ad): ?>
 
+<a href="/<?=$this->lang ?>/ad/edit/id/<?=$this->ad['id'] ?>"><?=$this->translate('Edit this ad') ?></a>
+
+<?php endif;?>
 
        
         <div class="ad_excerpt_show">
@@ -51,18 +55,14 @@ if ($this->ad): ?>
 	   
 	   
 	   
-        </div>
+        
         
        
  
 <a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'] ?>"><?=$this->translate('Send a private message') ?></a>
+</div>
 
 
-<?php else: ?>
-
-    <p><h3><?=$this->translate ( 'This ad does not exists.');?></h3></p>
-
-<?php endif;?>
 
 <div class="ad_comments">
 <h5><?=$this->translate ( 'Comments');?></h5>

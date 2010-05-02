@@ -9,29 +9,38 @@ class Form_AdEdit extends Zend_Form {
 	public function init() {
 		
 		//set multipart to upload images
-		$this->setAttrib('enctype', 'multipart/form-data');
-		
-		// set the method for the display form to POST
+		$this->setAttrib('enctype', 'multipart/form-data');	
 		$this->setMethod ( 'post' );
 
-		//upload image stuff
-		$this->addElement('file', 'photo', array(
-			
-			'label' => 'Select an image file for your ad (optional).',
-			'required' => false,
-			'setDestination' => (NOLOTIRO_PATH. '/www/images/uploads/'),
-			'description' => 'Allowed format files: gif, jpg, png. Max:1Mb Size',
-			'validators' => array(
-			'Extension' => array(false, 'jpg,jpeg,bmp,gif,png'),
-			'Size' => array('min' => 1, 'max' => 1000000),
-			'IsImage' => array( false,'image/bmp', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png')
-			)
-			));
+		//upload photo
+//                $photo = $this->createElement('file', 'photo');
+//
+//                $photo->setOrder(0);
+//                $photo->setLabel('Select an image file for your ad (optional).');
+//                $photo->setDescription( 'Allowed format files: gif, jpg, png. Max size:1Mb');
+//                $photo->setRequired(false);
+//                $photo->setDestination( '/tmp/');
+//                $photo->setMaxFileSize(1048576);
+//                // ensure only 1 file
+//                $photo->addValidator('Count', false, 1);
+//
+//                $photo->addValidator('Size',
+//                   array('min' => 100,
+//                         'max' => 1048576,
+//                         'bytestring' => true));
+//                $photo->addValidator('ImageSize',
+//                   array('minwidth' => 10,
+//                         'minheight' => 10,
+//                         'maxwidth' => 900,
+//                         'maxheight' => 900));
+//
+//                $photo->addValidator('Extension', false, 'jpg,jpeg,png,gif'); // only JPEG, PNG and GIFs
+//                $photo->addValidator('IsImage', false);
+//                $this->addElement($photo);
 
-                //$this->addValidator('Mimetype', false, 'image/jpg');
-		
-		$this->addElement ( 'select', 'type', array (
 
+
+                $this->addElement ( 'select', 'type', array (
 		'label' => 'Choose:', 'required' => true,
 		 'attribs' => array ('type' => 'type', 'type' => 'type' ),
 		 'multioptions' => array ('give' => 'i give...', 'want' => 'i want...' ) ) );
