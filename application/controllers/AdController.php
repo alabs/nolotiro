@@ -265,18 +265,19 @@ class AdController extends Zend_Controller_Action {
                 $form->addElement ( 'select', 'status', array (
                 'order'=>'1',
 		'label' => 'Status:', 'required' => true,
-		// 'attribs' => array ('status' => 'status', 'status' => 'status' ),
 		 'multioptions' => array ('available' => 'available', 'booked' => 'booked', 'delivered' => 'delivered' ) ) );
 
 
                 $this->view->form = $form;
 
-		
 		if ($this->getRequest ()->isPost ()) {
 
 			    $formData = $this->getRequest()->getPost();
+
+                            $id = (int)$this->getRequest()->getParam('id');
+
+
                             if ($form->isValid($formData)) {
-                                 $id = (int)$this->getRequest()->getParam('id');
                                  
                                  $title = $form->getValue('title');
                                  $body = $form->getValue('body');
@@ -290,25 +291,28 @@ class AdController extends Zend_Controller_Action {
 					  $photo = $this->_createThumbnail($photobrut,'100','90');
 
 					 }
+                                 
 
                                 $model = $this->_getModel ();
 				$model->updateAd ( $id, $title, $body, $type, $status );
-                                var_dump($id, $title, $body, $type, $status );
+                                
 
                                 $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad edited succesfully!' ) );
 				$this->_redirect ( '/'.$this->lang.'/ad/show/id/'.$id );
 
                             } else {
                                  $form->populate($formData);
+                                 var_dump($form->getErrors() );
                                  Zend_Debug::dump($formData);
-                            }
+                           }
                             
                         } else {
-                            $id = $this->_getParam('id', 0);
+                            $id = $this->_getParam('id');
                             if ($id > 0) {
                                  $ad = new Model_Ad();
                                  $form->populate($ad->getAd($id));
                             }
+
 
 			
 		}

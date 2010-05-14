@@ -14,7 +14,6 @@ class Form_AdEdit extends Zend_Form {
 
 		//upload photo
 //                $photo = $this->createElement('file', 'photo');
-//
 //                $photo->setOrder(0);
 //                $photo->setLabel('Select an image file for your ad (optional).');
 //                $photo->setDescription( 'Allowed format files: gif, jpg, png. Max size:1Mb');
@@ -41,7 +40,7 @@ class Form_AdEdit extends Zend_Form {
 
 
                 $this->addElement ( 'select', 'type', array (
-		'label' => 'Choose:', 'required' => true,
+		'label' => 'Ad type:', 'required' => true,
 		 'attribs' => array ('type' => 'type', 'type' => 'type' ),
 		 'multioptions' => array ('give' => 'i give...', 'want' => 'i want...' ) ) );
 		

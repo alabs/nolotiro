@@ -1,5 +1,5 @@
 <div id="default_header_section">
-<h3><?=$this->translate ( 'Edit ad' );?></h3>
+<h3><?=$this->translate ( 'Edit ad' ).$this->title;?></h3>
 </div>
 
 
@@ -10,8 +10,7 @@ if (isset ( $this->error )) :
 		<?=$this->escape ( $this->error );?>
 	</div>
 
-<?php endif;
-?>
+<?php endif;?>
 <div id="main">
 <div class="span-16">
 
@@ -19,7 +18,7 @@ if (isset ( $this->error )) :
 <form action="<?=$this->escape ( $this->form->getAction () )?>"
 	method="<?=$this->escape ( $this->form->getMethod () )?>">
 
-<fieldset><legend><?=$this->translate ( 'Change your ad.... blabla' );?></legend>	
+<fieldset><legend><?=$this->translate ( 'Edit your ad' );?></legend>
 
 <?=$this->form?>
 
