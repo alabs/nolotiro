@@ -28,6 +28,8 @@ if (isset ( $this->error )) :
 
 
   <ul id="tabnav">
+
+<?=$this->editprofile ?>
 	<li class="tab1"><a href="/<?=$this->lang ?>/user/profile/id/<?=$this->user[id] ?>"><?=$this->translate('profile');?></a></li>
 	<li class="tab2"><a href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[id] ?>"><?=$this->translate('ads');?></a></li>
 
@@ -37,8 +39,8 @@ if (isset ( $this->error )) :
 
 <?//=var_dump($this->user);?>
     <div class="user_profile">
-        <span><?=$this->translate('User name:').': '.$this->user['username'];?></span>
-        <span><?=$this->translate('Member since:').': '.$this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($this->user['created'])));?></span>
+        <h4><?=$this->translate('User name:').' '.$this->user['username'];?></h4>
+        <h4><?=$this->translate('Member since:').' '.$this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($this->user['created'])));?></h4>
     </div>
 
 </div>

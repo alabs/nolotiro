@@ -1,0 +1,42 @@
+<?php
+//register page
+$this->page_title = $this->translate ( 'Forgot your password?' ) . ' - nolotiro.com';
+
+?>
+
+<div id="default_header_section">
+<h3><?=$this->translate ( 'Delete your nolotiro.org account' );?></h3>
+</div>
+
+<?php
+if (isset ( $this->error )) :
+	?>
+<div class="error">
+		<?=$this->escape ( $this->error );?>
+	</div>
+
+<?php endif;
+?>
+<div id="main">
+<div class="span-16">
+
+
+<fieldset><h2><?=$this->translate('Are you sure you want to delete your nolotiro.org account?')?></h2>
+
+</legend>	
+
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+            <div>
+
+                <input type="submit" name="del"  value="Yes"  />
+                <input type="submit" name="del" value="No" />
+            </div>
+        </form>
+
+
+
+
+</fieldset>
+
+</div>
+

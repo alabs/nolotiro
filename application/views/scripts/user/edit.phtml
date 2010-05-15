@@ -1,0 +1,42 @@
+<?php
+//register page
+$this->page_title = $this->translate ( 'Register' ) . ' - nolotiro.com';
+
+$locale = Zend_Registry::get ( "Zend_Locale" );
+$this->lang = $locale->getLanguage ();
+
+?>
+
+<div id="default_header_section">
+<h3><?=$this->translate ( 'Edit your profile' );?></h3>
+</div>
+
+
+<?php
+if (isset ( $this->error )) :
+	?>
+<div class="error">
+		<?=$this->escape ( $this->error );?>
+	</div>
+
+<?php endif;
+?>
+<div id="main">
+<div class="span-16">
+
+
+<form action="<?=$this->escape ( $this->form->getAction () )?>"
+	method="<?=$this->escape ( $this->form->getMethod () )?>">
+
+<fieldset><legend><?=$this->translate ( 'Here you could change your user settings' );?></legend>
+
+<?=$this->form?>
+
+<a href="/<?=$this->lang ?>/user/delete/id/<?=$this->escape ( $this->id ); ?>" ><?=$this->translate('Delete your nolotiro.org account') ?></a>
+
+
+
+</fieldset>
+</form>
+
+</div>

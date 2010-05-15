@@ -138,21 +138,32 @@ class UserController extends Zend_Controller_Action {
         $request = $this->getRequest ();
         $user_id = (int)$this->_request->getParam ( 'id' );
 
-        if ($user_id == null) {
-            $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'this user does not exist' ) );
-            $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
-        }
-
-
 
         $model = $this->_getModel ();
         $modelarray = $model->fetchUser($user_id);
+
+        if ($modelarray == null) {
+            $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'This user does not exist' ) );
+            $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+        }
 
         //lets overwrite the password and token values to assure not passed to the view ever!
         unset ($modelarray['password']);
         unset ($modelarray['token']);
 
         $this->view->user = $modelarray;
+        $this->view->headTitle()->append( $this->view->translate ( 'User profile - ' ).$this->view->user['username'] );
+
+        $auth = Zend_Auth::getInstance ();
+
+        if (($auth->getIdentity()->id  == $this->view->user['id']) )
+        { //if is the user profile owner lets delete it
+
+            $this->view->editprofile = '
+        <li class="tab2"><a href="/'.$this->view->lang .'/user/edit/id/'.$auth->getIdentity()->id. ' ">'.$this->view->translate('edit profile').'</a></li>';
+        }
+
+
 
     }
 
@@ -213,10 +224,10 @@ class UserController extends Zend_Controller_Action {
                             . $hostname . '/'.$this->view->lang.'/user/validate/t/'  .  $mailcheck['token'] .
                             '<br /><br />'.
                             $this->view->translate('Otherwise, ignore this message.').
-                            '<br />--------------<br />' . utf8_decode ( $this->view->translate ( 'The nolotiro.org team.' ) ) );
+                            '<br />_______________<br />' . utf8_decode ( $this->view->translate ( 'The nolotiro.org team.' ) ) );
 
-                    //$mail->setFrom ( 'noreply@nolotiro.org', 'nolotiro.org' );
-                    $mail->setFrom ( 'noreply@nolotiro', 'nolotiro.org' );
+                    $mail->setFrom ( 'noreply@nolotiro.org', 'nolotiro.org' );
+                    //$mail->setFrom ( 'noreply@nolotiro', 'nolotiro.org' );
 
                     $mail->addTo ( $mailcheck ['email'] );
                     $mail->setSubject ( utf8_decode ( $this->view->translate ( 'restore your nolotiro.org  account' ) ) );
@@ -325,9 +336,102 @@ class UserController extends Zend_Controller_Action {
         } else {
             $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Sorry, register url no valid or expired.' ) );
             $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+            return ;
         }
 
     }
+
+
+
+    public function editAction()
+    {
+
+        $this->view->headTitle()->append( $this->view->translate ( 'Edit your profile' ) );
+
+        $id = $this->view->id = (int)$this->getRequest()->getParam('id');
+
+        $auth = Zend_Auth::getInstance ();
+        $model = $this->_getModel ();
+        $user = $model->fetchUser( $id )->id;
+
+
+        if (($auth->getIdentity()->id  == $user) )
+        { //if is the user profile owner lets edit
+
+            require_once APPLICATION_PATH . '/forms/UserEdit.php';
+            $form = new Form_UserEdit ( );
+            $form->submit->setLabel('Save profile');
+            $this->view->form = $form;
+
+
+
+            if ($this->getRequest ()->isPost ())
+            {
+
+                $formData = $this->getRequest()->getPost();
+                if ($form->isValid($formData))
+                {
+
+
+                    //chekusername if exists, dont let change it
+                    $checkuser = $model->checkUsername ( $form->getValue('username') );
+
+                    if ( !is_null($checkuser) and ($checkuser['username'] != $auth->getIdentity()->username) )
+                    {
+                        $this->view = $this->initView ();
+                        $this->view->error = $this->view->translate ( 'This username is taken. Please choose another one.' );
+                        return;
+                    }
+
+
+                    $data['id'] = $id;
+                    $data['username'] = $form->getValue('username');
+                    
+
+                    if ($form->getValue('password') )
+                    {
+                        $data['password'] = md5( trim( $form->getValue('password') ) );
+                    }
+
+                    $model = $this->_getModel ();
+                    $model->update ( $data );
+
+                    //update the auth data stored
+                    $auth = Zend_Auth::getInstance ();
+                    $auth->getStorage()->write( (object)$data );
+
+                    $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Your profile was edited succesfully!' ) );
+                    $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+                    return ;
+
+                } else
+                {
+                    $form->populate($formData);
+
+                }
+
+            } else
+            {
+                $id = $this->_getParam('id', 0);
+                if ($id > 0)
+                {
+                    $user = new Model_User();
+                    $form->populate($user->fetchUser($id)->toArray() );
+                }
+
+
+            }
+
+        } else
+        {
+            $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'You are not allowed to view this page' ) );
+            $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+            return;
+        }
+
+    }
+
+
 
 
 
@@ -338,10 +442,10 @@ class UserController extends Zend_Controller_Action {
 
         $auth = Zend_Auth::getInstance ();
         $model = $this->_getModel ();
-        $user = $model->fetchUser( $id )->IdUser;
+        $user = $model->fetchUser( $id )->id;
 
 
-        if (($auth->getIdentity()->IdUser  == $user) ) { //if is the user profile owner lets delete it
+        if (($auth->getIdentity()->id  == $user) ) { //if is the user profile owner lets delete it
 
             if ($this->getRequest()->isPost()) {
                 $del = $this->getRequest()->getPost('del');
@@ -357,12 +461,12 @@ class UserController extends Zend_Controller_Action {
                     $this->session->logged_in = false;
                     $this->session->username = false;
                     $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Your account has been deleted.' ) );
-                    $this->_redirect ( '/' );
+                    $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
                     return ;
 
                 } else {
-                    $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Nice to hear that' ) );
-                    $this->_redirect ( '/' );
+                    $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Nice to hear that :-)' ) );
+                    $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
                     return ;
                 }
 
@@ -374,8 +478,8 @@ class UserController extends Zend_Controller_Action {
         } else {
 
             $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'You are not allowed to view this page' ) );
-            $this->_redirect ( '/' );
-            exit ();
+            $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+            return ;
         }
     }
 
