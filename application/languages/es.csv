@@ -73,6 +73,9 @@
 "(If you already are a registered user, please";"(Si ya eres un usuario registrado, por favor"
 "login here";"accede aquí"
 "Choose a username:";"Elige un nombre de usuario:"
+"Choose your password:";"Elige tu contraseña:"
+"Insert your password (yep, again):";"Introduce tu contraseña (si, otra vez):"
+"The passwords entered do not match. ";"Las contraseñas no son iguales"
 "Choose a password (5 or more characters):";"Elige una contraseña (5 o mas caracteres):"
 "Register";"Regístrate"
 "'%value%' is no valid email address in the basic format local-part@hostname";"'%value%' no es una dirección de correo válida"
@@ -120,7 +123,7 @@
 "Are you sure you want to delete your nolotiro.org account?";"¿Estás seguro de querer eliminar tu cuenta de nolotiro.org?"
 "Nice to hear that :-)";"Nos alegramos por ello :-)"
 "Your account has been deleted.";"Tu cuenta ha sido eliminada"
-
+"This user does not have ads yet";"Este usuario no tiene anuncios todavía"
 
 #super lightbox
 "Close";"Cerrar"
@@ -133,6 +136,8 @@
 #ad/create
 "Create a new ad";"Crea un nuevo anuncio"
 "Edit your ad";"Edita tu anuncio"
+"Edit ad";"Edita tu anuncio"
+"Edit this ad";"Edita este anuncio"
 "Ad type:";"Tipo de anuncio:"
 "Status:";"Estado:"
 "Please, fill this form to publish your ad";"Para publicar tu anuncio, por favor, introduce estos datos"
@@ -140,7 +145,8 @@
 "i want...";"quiero..."
 "Title of your ad:";"Título de tu anuncio:"
 "Ad body:";"Cuerpo del anuncio:"
-"Allowed format files: gif, jpg, png. Max:1Mb Size";"Formatos permitidos: gif, jpg, png. Max:1Mb de tamaño."
+"Allowed format files: gif, jpg, png. Max size:1Mb";"Formatos permitidos: gif, jpg, png. Max:1Mb de tamaño."
+"Save";"Guardar"
 "Select an image file for your ad (optional).";"Selecciona una imagen para tu anuncio (opcional)."
 "Ad published succesfully!";"¡Tu anuncio ha sido publicado con éxito!"
 "No ads to display for this location.";"No hay anuncios para esta ubicación."

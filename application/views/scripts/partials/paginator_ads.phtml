@@ -1,8 +1,4 @@
-<!--
-See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
--->
-
-<?php if ($this->pageCount): ?>
+<?php if ($this->pageCount > 1): ?>
 <div class="pagination">
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>

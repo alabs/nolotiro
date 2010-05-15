@@ -34,9 +34,7 @@ if (count ( $this->mensajes ) > 0) {
 
 <div class="span-18">
 
-<?php
-if ($this->ad): ?>
-
+<?php if ($this->ad): ?>
 
        <?php foreach ($this->paginator as $key => $val): ?>
         <div class="ad_excerpt">
@@ -87,15 +85,14 @@ if ($this->ad): ?>
 
 <?php endif;?>
 
-
+    
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'partials/paginator_ads.phtml'); ?>
 
 
+</div> 
 
-
-</div> <!-- /div ads -->
 
 <div class="google_ads">
 <!-- google adsense block -->

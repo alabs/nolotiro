@@ -15,14 +15,13 @@ class Form_UserRegister extends Zend_Form {
 		
 		$this->addElement ( 'text', 'email', array ('label' => 'Your email:', 'required' => true, 'filters' => array ('StringTrim' ), 'validators' => array ('EmailAddress' ) ) );
 		
-		//        $this->addElement('password', 'password', array(
-		//                'filters' => array('StringTrim'),
-		//                'validators' => array(
-		//                array('StringLength', false, array(5, 20)),
-		//                ),
-		//                'required' => true,
-		//                'label' => 'Choose a password (5 or more characters):',
-		//                ));
+
+                $this->addElement ( 'password', 'password1', array ('filters' => array ('StringTrim' ), 'validators' => array (array ('StringLength', false, array (5, 20 ) ) ), 'required' => true,
+                    'label' => 'Choose your password:' ) );
+
+                $this->addElement ( 'password', 'password2', array ('filters' => array ('StringTrim' ), 'validators' => array (array ('StringLength', false, array (5, 20 ) ) ), 'required' => true,
+                    'label' => 'Insert your password (yep, again):' ) );
+
 		
 
 		$this->addElement ( 'text', 'username', array ('label' => 'Choose a username:', 'filters' => array ('StringTrim', 'StringToLower' ), 'validators' => array ('alnum', array ('regex', false, array ('/^[a-z]/i' ) ), array ('StringLength', false, array (3, 20 ) ) ), 'required' => true )
