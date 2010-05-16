@@ -135,7 +135,19 @@ class LocationController extends Zend_Controller_Action {
 
 				//parse the location value
 				$values = explode("*", $formulario['location'][0]);
-                                
+
+
+                                //if the user is logged then update the woeid value, if not just update the session location value
+                                $auth = Zend_Auth::getInstance ();
+                                if ($auth->hasIdentity ()) {
+
+                                     require_once APPLICATION_PATH . '/models/User.php';
+                                    $model = new Model_User();
+                                    $data['id'] = $auth->getIdentity()->id;
+                                    $data['woeid'] = $values[0];
+                                    $userUpdateLocation = $model->update($data);
+
+                                }
 
 				$aNamespace = new Zend_Session_Namespace('Nolotiro');
 				$aNamespace->location = $values[0];//woeid

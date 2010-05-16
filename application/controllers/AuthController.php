@@ -7,9 +7,7 @@
 class AuthController extends Zend_Controller_Action {
 	public function init() {
 
-                //parent::init ();
-		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
-
+                
 		$locale = Zend_Registry::get ( "Zend_Locale" );
 		$this->lang = $locale->getLanguage ();
 
@@ -18,7 +16,6 @@ class AuthController extends Zend_Controller_Action {
 
                 $this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
 		$this->view->mensajes = $this->_flashMessenger->getMessages ();
-
 
 	}
 	
@@ -80,10 +77,14 @@ class AuthController extends Zend_Controller_Action {
 					// system. (Not the password though!)
 					$data = $authAdapter->getResultRowObject ( null, 'password' );
 					$auth->getStorage ()->write ( $data );
-					
-					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'You are now logged in, ' ) . $username );
-					
-					
+
+
+                                        $woeid =  $this->_helper->CheckWoeidUser->checkUserLogged( $auth->getIdentity()->id );
+
+
+
+					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Welcome, ' ) . $auth->getIdentity()->username );
+
 					//check the redir value if setted
 					$aNamespace = new Zend_Session_Namespace('Nolotiro');
 					$redir = $aNamespace->redir;
@@ -96,7 +97,7 @@ class AuthController extends Zend_Controller_Action {
 					}else {
 					
 					  //if redir empty goto main home ads and set the welcome logged in message
-					 $this->_redirect ( '/'.$this->lang.'/woeid/'.$this->location.'/give' );
+					 $this->_redirect ( '/'.$this->lang.'/woeid/'.$woeid.'/give' );
 					}
 					
 					

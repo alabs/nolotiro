@@ -39,7 +39,7 @@ class Model_User {
 
     public function update(array $data) {
         $table = $this->getTable ();
-        $where = $table->getAdapter ()->quoteInto ( 'id= ?', $data ['id'] );
+        $where = $table->getAdapter ()->quoteInto ( 'id= ?', (int)$data ['id'] );
         $table->update ( $data, $where );
 
     }
@@ -70,9 +70,18 @@ class Model_User {
 
     public function checkIsLocked($id) {
         $table = $this->getTable ();
-        $select = $table->select ()->where ( 'id = ?', $id );
+        $select = $table->select ()->where ( 'id = ?', (int) $id );
         return $table->fetchRow ( $select )->locked;
     }
+
+
+    public function checkWoeidUser($id) {
+        $table = $this->getTable ();
+        $select = $table->select ('woeide')->where ( 'id = ?', (int) $id );
+       return $table->fetchRow ( $select )->woeid;
+    }
+
+   
 
     /**
      * Fetch an individual entry

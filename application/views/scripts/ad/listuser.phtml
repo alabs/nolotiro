@@ -33,6 +33,7 @@ if ($this->ad != null): ?>
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['ad_id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
+            <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
             <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
             </span>
            

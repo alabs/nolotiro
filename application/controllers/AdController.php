@@ -55,9 +55,7 @@ class AdController extends Zend_Controller_Action {
                 
 		//set the location name reg var from the woeid helper
 		$aNamespace = new Zend_Session_Namespace('Nolotiro');
-		//Zend_Registry::set ( 'session', $session );
 		$aNamespace->locationName = $this->view->woeidName;
-                //var_dump($aNamespace->locationName);
 
                 $this->view->page_title .= $this->view->woeidName;
 
