@@ -7,11 +7,8 @@
 class LocationController extends Zend_Controller_Action {
 
 	public function init() {
-		
-		$locale = Zend_Registry::get ( "Zend_Locale" );
-		$this->view->lang = $locale->getLanguage ();
 
-               
+             $this->lang = $this->view->lang =  $this->_helper->checklang->check();
                 
 	}
 

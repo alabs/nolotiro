@@ -10,22 +10,11 @@
 
 class CommentController extends Zend_Controller_Action {
 	
-	/**
-	 * Overriding the init method to also load the session from the registry
-	 *
-	 */
-	public function init() {
-		parent::init ();
-			
-		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
-		
-		//$this->view->baseUrl = $this->_request->getBaseUrl();
-		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
-		
-		$locale = Zend_Registry::get ( "Zend_Locale" );
-		$this->lang = $locale->getLanguage ();
-
 	
+	public function init() {
+		
+		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
+		$this->lang = $this->view->lang =  $this->_helper->checklang->check();
 	
 	}
 	

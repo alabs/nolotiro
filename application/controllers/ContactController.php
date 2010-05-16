@@ -6,14 +6,8 @@
 
 class ContactController extends Zend_Controller_Action {
 	public function init() {
-		$this->initView ();
-		//$this->view->baseUrl = $this->_request->getBaseUrl();
-		$this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
-
-
-                $locale = Zend_Registry::get ( "Zend_Locale" );
-		$this->lang = $locale->getLanguage ();
-
+		
+                $this->lang = $this->view->lang =  $this->_helper->checklang->check();
                 $this->aNamespace = new Zend_Session_Namespace('Nolotiro');
 
 

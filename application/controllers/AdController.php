@@ -11,13 +11,7 @@
 class AdController extends Zend_Controller_Action {
 
 	
-	public function init() {	
-		// Overriding the init method to also load the session from the registry
-		parent::init ();
-		
-//		$locale = Zend_Registry::get ( "Zend_Locale" );
-//		$this->lang = $locale->getLanguage ();
-//                $this->view->lang = $locale->getLanguage ();
+	public function init() {		
 
                 $this->lang = $this->view->lang =  $this->_helper->checklang->check();
 

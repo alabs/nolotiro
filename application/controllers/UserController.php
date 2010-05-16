@@ -9,17 +9,10 @@ class UserController extends Zend_Controller_Action {
     protected $session = null;
     protected $_model;
 
-    /**
-     *
-     *
-     */
+    
     public function init() {
-        parent::init ();
-        $this->view->baseUrl = Zend_Controller_Front::getParam ( $route );
-
-        $locale = Zend_Registry::get ( "Zend_Locale" );
-        $this->view->lang = $locale->getLanguage ();
-
+        
+        $this->lang = $this->view->lang =  $this->_helper->checklang->check();
         $aNamespace = new Zend_Session_Namespace('Nolotiro');
         $this->location = $aNamespace->location;
 

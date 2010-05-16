@@ -1,11 +1,4 @@
-<?php
-//register page
-$this->page_title = $this->translate ( 'Register' ) . ' - nolotiro.com';
-
-$locale = Zend_Registry::get ( "Zend_Locale" );
-$this->lang = $locale->getLanguage ();
-
-?>
+<?php $this->page_title = $this->translate ( 'Register' ) ; ?>
 
 <div id="default_header_section">
 <h3><?=$this->translate ( 'New user' );?></h3>

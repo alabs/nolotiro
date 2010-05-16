@@ -8,8 +8,7 @@ class AuthController extends Zend_Controller_Action {
 	public function init() {
 
                 
-		$locale = Zend_Registry::get ( "Zend_Locale" );
-		$this->lang = $locale->getLanguage ();
+		 $this->lang = $this->view->lang =  $this->_helper->checklang->check();
 
                 $aNamespace = new Zend_Session_Namespace('Nolotiro');
 		$this->location = $aNamespace->location;
