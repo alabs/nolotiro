@@ -18,17 +18,6 @@ class Zend_Controller_Action_Helper_CheckWoeidUser extends Zend_Controller_Actio
               $aNamespace->location = $woeid;
 
 
-//              $woeid = $_COOKIE['woeid'];
-//
-//                if ( $woeid == null){
-//
-//
-//
-//
-//
-//
-//
-//                }
 
                 return $woeid;
 

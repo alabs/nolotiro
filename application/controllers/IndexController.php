@@ -18,10 +18,12 @@ class IndexController extends Zend_Controller_Action {
 
 		$this->view->user = Zend_Auth::getInstance ()->getIdentity ();
 
-                $locale = Zend_Registry::get ( "Zend_Locale" );
-		$this->lang = $locale->getLanguage ();
-                $this->view->lang = $locale->getLanguage ();
-		
+                $this->lang = $this->view->lang =  $this->_helper->checklang->check();
+
+//                $locale = Zend_Registry::get ( "Zend_Locale" );
+//		$this->lang = $locale->getLanguage ();
+//                $this->view->lang = $locale->getLanguage ();
+//
 	
 	}
 	

@@ -82,8 +82,7 @@ class AuthController extends Zend_Controller_Action {
                                         $woeid =  $this->_helper->CheckWoeidUser->checkUserLogged( $auth->getIdentity()->id );
 
 
-
-					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Welcome, ' ) . $auth->getIdentity()->username );
+					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Welcome,' ) .' '. $auth->getIdentity()->username );
 
 					//check the redir value if setted
 					$aNamespace = new Zend_Session_Namespace('Nolotiro');

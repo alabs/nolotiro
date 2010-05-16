@@ -1,141 +1,132 @@
 <?=$this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-<title><?='nolotiro.org | '.$this->page_title?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?= $this->headTitle()->setPrefix('nolotiro.org') ?>
-<meta name="copyright" content="daniel remeseiro" />
-<meta name="DC.Title"
-	content="<?=isset ( $this->page_title ) ? $this->page_title : 'nolotiro.org'?>" />
-<meta name="robots" content="index,follow" />
+    <head>
+        <title><?='nolotiro.org | '.$this->page_title?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?= $this->headTitle()->setPrefix('nolotiro.org') ?>
+        <meta name="copyright" content="daniel remeseiro" />
+        <meta name="DC.Title"
+              content="<?=isset ( $this->page_title ) ? $this->page_title : 'nolotiro.org'?>" />
+        <meta name="robots" content="index,follow" />
 
-<link rel="icon" href="<?=$this->baseUrl?>/favicon.ico" type="image/x-icon" />
-<?=$this->headLink()->appendStylesheet('/css/common.css') ?>
-<link rel="stylesheet" href="<?$this->baseUrl?>/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+        <link rel="icon" href="<?=$this->baseUrl?>/favicon.ico" type="image/x-icon" />
+        <?=$this->headLink()->appendStylesheet('/css/common.css') ?>
+        <link rel="stylesheet" href="<?$this->baseUrl?>/css/blueprint/screen.css" type="text/css" media="screen, projection" />
 
-<!--[if IE]>
-    <link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection" />
-<![endif]-->
-<script src="<?$this->baseUrl?>/js/jquery.min.js" type="text/javascript"></script>
-<script src="<?$this->baseUrl?>/js/site_lang.js" type="text/javascript"></script>
-<script src="<?$this->baseUrl?>/js/jquery.superbox-min.js" type="text/javascript"></script>
-<script type="text/javascript">
-		$(function(){
-			$.superbox.settings = {
-				closeTxt: "<?=$this->translate ( 'Close' )?>",
-				loadTxt: "<?=$this->translate ( 'Loading' )?>...",
-				nextTxt: "<?=$this->translate ( 'Next' )?>",
-				prevTxt: "<?=$this->translate ( 'Previous' )?>"
-			};
-			$.superbox();
-		});
-	</script>
+        <!--[if IE]>
+            <link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection" />
+        <![endif]-->
+        <script src="<?$this->baseUrl?>/js/jquery.min.js" type="text/javascript"></script>
+        <script src="<?$this->baseUrl?>/js/site_lang.js" type="text/javascript"></script>
+        <script src="<?$this->baseUrl?>/js/jquery.superbox-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(function(){
+                $.superbox.settings = {
+                    closeTxt: "<?=$this->translate ( 'Close' )?>",
+                    loadTxt: "<?=$this->translate ( 'Loading' )?>...",
+                    nextTxt: "<?=$this->translate ( 'Next' )?>",
+                    prevTxt: "<?=$this->translate ( 'Previous' )?>"
+                };
+                $.superbox();
+            });
+        </script>
+    </head>
 
-</head>
-<? //=flush();?>
+    <body>
 
-<body>
+        <div class="container">
 
-<div class="container">
-
-<div id="header">
-<?php
-$locale = Zend_Registry::get ( "Zend_Locale" );
-$this->lang = $locale->getLanguage ();
-?>
-
-
-<div class="user_login_box">
-<?php
-
-$auth = Zend_Auth::getInstance ();
-
-if (! $auth->hasIdentity ()) {
-
-	echo '<a href="/' .  $this->lang . '/user/register">' . $this->translate ( 'new user' ) . '</a> ' .
-	$this->translate ( 'or' ) . ' ';
-	echo '<a href="/'  . $this->lang . '/auth/login">' . $this->translate ( 'login' ) . '</a>';
-} else {
-	$auth_username = $auth->getIdentity()->username;
-	$auth_userid = $auth->getIdentity()->id;
-
-
-	echo $this->translate ( 'hello,' ) . '<b>&nbsp;<a href="/' .
-	$this->lang . '/user/profile/id/' . $this->escape ( $auth_userid ) . '">' . $this->escape ( $auth_username ) . '</a></b> | ' . '<a href="/' . $this->lang . '/auth/logout">' .
-                $this->translate ( 'logout' ) . '</a>';
-}
-
-?>
+            <div id="header">
 
 
 
-<span class="select_language_box">
-<select	name="site_language_code_select" id="site_language_code_select">
-	<option <?=$this->lang == 'en' ? 'selected="selected"' : '';?>
-		value="<?=$this->baseUrl . 'en'?>" id="en">English</option>
-	<option <?=$this->lang == 'es' ? 'selected="selected"' : '';?>
-		value="<?=$this->baseUrl . 'es'?>" id="es">Español</option>
-</select>
-</span>
-</div>
+                <div class="user_login_box">
+                    <?php
+
+                    $auth = Zend_Auth::getInstance ();
+
+                    if (! $auth->hasIdentity ()) {
+
+                        echo '<a href="/' .  $this->lang . '/user/register">' . $this->translate ( 'new user' ) . '</a> ' .
+                                $this->translate ( 'or' ) . ' ';
+                        echo '<a href="/'  . $this->lang . '/auth/login">' . $this->translate ( 'login' ) . '</a>';
+                    } else {
+                        $auth_username = $auth->getIdentity()->username;
+                        $auth_userid = $auth->getIdentity()->id;
 
 
-<h1 id="site-name"><a href="/<?=$this->lang?>"
-	title="nolotiro.org home"><img
-	src="/images/nolotiro_logo.png"
-	alt="Nolotiro.org logo" id="logo" /> nolotiro.org</a></h1>
-<h2 id='site-slogan'><?=$this->translate ( 'no lo tiro, te lo doy (sin condiciones)' )?></h2>
+                        echo $this->translate ( 'hello,' ) . '<b>&nbsp;<a href="/' .
+                                $this->lang . '/user/profile/id/' . $this->escape ( $auth_userid ) . '">' . $this->escape ( $auth_username ) . '</a></b> | ' . '<a href="/' . $this->lang . '/auth/logout">' .
+                                $this->translate ( 'logout' ) . '</a>';
+                    }
 
-<div class="ad_create_tab">
-<a  href="/<?=$this->lang.'/ad/create' ?>"><?='+ '.$this->translate ('Create new ad')?></a>
-</div>
-
-</div>
-
-
-         <?=$this->layout()->content ?>
-
-
-<div id="footer">
-
-    <div class="links-right">
-    <a href='/<?=$this->lang?>/page/about'><?=$this->translate ( 'about' );?></a>
-    | <a href='/<?=$this->lang?>/page/faqs'><?=$this->translate ( 'faqs' );?></a>
-     | <a href='/blog'>blog</a> | <a href='http://twitter.com/nolotiro'>twitter</a>
-    | <a href='http://www.facebook.com/group.php?gid=38263634418'><?=$this->translate ( 'facebook group' );?></a>
-    </div>
+                    ?>
 
 
 
-  <div id="info" class="innerWrap clearfix">
-        <p>
-            <?=$this->translate ( 'nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.' );?>
-        </p>
-    </div>
+                    <span class="select_language_box">
+                        <select	name="site_language_code_select" id="site_language_code_select">
+                            <option <?=$this->lang == 'en' ? 'selected="selected"' : '';?>
+                                value="<?=$this->baseUrl . 'en'?>" id="en">English</option>
+                            <option <?=$this->lang == 'es' ? 'selected="selected"' : '';?>
+                                value="<?=$this->baseUrl . 'es'?>" id="es">Español</option>
+                        </select>
+                    </span>
+                </div>
 
 
-  <div  class="links-left">
+                <h1 id="site-name"><a href="/<?=$this->lang?>"
+                                      title="nolotiro.org home"><img
+                            src="/images/nolotiro_logo.png"
+                            alt="Nolotiro.org logo" id="logo" /> nolotiro.org</a></h1>
+                <h2 id='site-slogan'><?=$this->translate ( 'no lo tiro, te lo doy (sin condiciones)' )?></h2>
 
-    <a href="/<?=$this->lang?>/page/terms"><?=$this->translate ( 'terms of use' );?></a> |
-    <a href="/<?=$this->lang?>/page/privacy"><?=$this->translate ( 'privacy policy' );?></a> |
-    <a href="http://bitbucket.org/jipipayo/nolotiro/"><?=$this->translate ( 'developers' );?></a> |
-    <a href='/<?=$this->lang?>/contact'><?=$this->translate ( 'contact' );?></a>
-  </div>
+                <div class="ad_create_tab">
+                    <a  href="/<?=$this->lang.'/ad/create' ?>"><?='+ '.$this->translate ('Create new ad')?></a>
+                </div>
 
-
-
-</div>
-
-</div>
-
-<script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
-<script type="text/javascript">var pageTracker = _gat._getTracker("UA-141609-7");pageTracker._initData();pageTracker._trackPageview();</script>
+            </div>
 
 
-</body>
+            <?=$this->layout()->content ?>
+
+
+            <div id="footer">
+
+                <div class="links-right">
+                    <a href='/<?=$this->lang?>/page/about'><?=$this->translate ( 'about' );?></a>
+                    | <a href='/<?=$this->lang?>/page/faqs'><?=$this->translate ( 'faqs' );?></a>
+                    | <a href='/blog'>blog</a> | <a href='http://twitter.com/nolotiro'>twitter</a>
+                    | <a href='http://www.facebook.com/group.php?gid=38263634418'><?=$this->translate ( 'facebook group' );?></a>
+                </div>
+
+
+
+                <div id="info" class="innerWrap clearfix">
+                    <p>
+                        <?=$this->translate ( 'nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.' );?>
+                    </p>
+                </div>
+
+
+                <div  class="links-left">
+
+                    <a href="/<?=$this->lang?>/page/terms"><?=$this->translate ( 'terms of use' );?></a> |
+                    <a href="/<?=$this->lang?>/page/privacy"><?=$this->translate ( 'privacy policy' );?></a> |
+                    <a href="http://bitbucket.org/jipipayo/nolotiro/"><?=$this->translate ( 'developers' );?></a> |
+                    <a href='/<?=$this->lang?>/contact'><?=$this->translate ( 'contact' );?></a>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
+        <script type="text/javascript">var pageTracker = _gat._getTracker("UA-141609-7");pageTracker._initData();pageTracker._trackPageview();</script>
+
+
+    </body>
 </html>
-
-<?php //echo Zend_Version::VERSION; ?>
-
-

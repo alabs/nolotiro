@@ -36,16 +36,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 
         $front = Zend_Controller_Front::getInstance();
-        $front->registerPlugin ( new Nolotiro_Controller_Plugin_Language() );
+        //$front->registerPlugin ( new Nolotiro_Controller_Plugin_Language() );
 
 
         //set the routers
         $router = $front->getRouter ();
 
         
-        $routeWoeid = new Zend_Controller_Router_Route( ':language/woeid/:woeid/:ad_type/*', array( 'language' => $_COOKIE['lang'], 'controller' => 'ad', 'action' => 'list') );
+        $routeWoeid = new Zend_Controller_Router_Route( ':language/woeid/:woeid/:ad_type/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'list') );
         //setting the language route url (the default also)
-        $routeLang = new Zend_Controller_Router_Route ( ':language/:controller/:action/*', array ( $_COOKIE['lang'], 'controller' => 'index', 'action' => 'index' ) );
+        $routeLang = new Zend_Controller_Router_Route ( ':language/:controller/:action/*', array ( 'language' => null, 'controller' => 'index', 'action' => 'index' ) );
 
 
         $router->addRoute ( 'default', $routeLang );//important, put the default route first!
