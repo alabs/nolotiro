@@ -77,7 +77,7 @@ class Model_User {
 
     public function checkWoeidUser($id) {
         $table = $this->getTable ();
-        $select = $table->select ('woeide')->where ( 'id = ?', (int) $id );
+        $select = $table->select ('woeid')->where ( 'id = ?', (int) $id );
        return $table->fetchRow ( $select )->woeid;
     }
 
@@ -103,6 +103,14 @@ class Model_User {
 
         return $result;
     }
+
+     public function fetchUserByUsername($username)
+    {
+        $table = $this->getTable ();
+        return $table->fetchRow(  $table->select()->where( 'username = ?', $username ) );
+    }
+
+
 
     public function deleteUser($id) {
         $table = $this->getTable ();

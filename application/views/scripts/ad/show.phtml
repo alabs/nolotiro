@@ -47,31 +47,18 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
            <span class="ad_status <?=$this->ad['status'] ?>"><?=$this->translate($this->ad['status']) ?></span>
            <span class="ad_date"><?=$this->translate('Posted on '). $this->ad['date_created'] ?>
             <?=$this->translate('by user ') ?> 
-            <a href="/<?=$this->lang ?>/user/profile/id/<?=$this->ad['user_owner'] ?>"><?=$this->ad['username'] ?></a>
+            <a href="/<?=$this->lang ?>/profile/<?=$this->ad['username'] ?>"><?=$this->ad['username'] ?></a>
             </span>
             
            <br>
            <span><?php echo $this->ad['body'] ?></span>
 	   
-	   
-	   
-        
-        
-       
- 
 <a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'] ?>"><?=$this->translate('Send a private message') ?></a>
 </div>
 
-
-
 <div class="ad_comments">
 <h5><?=$this->translate ( 'Comments');?></h5>
-<?
-
-//comments
-//Zend_Debug::dump($this->comments);
-if ($this->comments): ?>
-
+<? if ($this->comments): ?>
 
        <?php foreach ($this->comments as $key => $val): ?>
         <div class="ad_comment">
@@ -79,30 +66,20 @@ if ($this->comments): ?>
            <?=$this->escape($val['title']) ?></a></h4>
            
            <span class="ad_date"><?=$this->translate('Posted on '). $this->escape($val['date_created']) ?>
-            <?=$this->translate('by user ') ?> 
-            
-           
-            <a href="/<?=$this->lang ?>/user/profile/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['username']) ?></a>
+            <?=$this->translate('by user ') ?>            
+                <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>
             </span>
            <br>
            <span><?php echo $this->escape($val['body']) ?></span>
         </div>
         
         <?php endforeach; ?>
-
-
-
 <?php endif;?>
-
         <div class="ad_comment_form">
         <?=$this->createcomment?>
         </div>
-
-
-
 </div>
 </div>
-
 <!-- google adsense block -->
 <div class="google_ads">
 <script type="text/javascript"><!--

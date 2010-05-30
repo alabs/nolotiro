@@ -130,13 +130,16 @@ class UserController extends Zend_Controller_Action {
     public function profileAction() {
 
         $request = $this->getRequest ();
-        $user_id = (int)$this->_request->getParam ( 'id' );
+        //$user_id = (int)$this->_request->getParam ( 'id' );
+        $username = (string)$this->_request->getParam ( 'username' );
 
 
         $model = $this->_getModel ();
-        $modelarray = $model->fetchUser($user_id);
+        $modelarray = $model->fetchUserByUsername($username);
 
-        if ($modelarray == null) {
+        $this->view->user = $modelarray;
+
+        if ($this->view->user == null) {
             $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'This user does not exist' ) );
             $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
         }
@@ -145,7 +148,7 @@ class UserController extends Zend_Controller_Action {
         unset ($modelarray['password']);
         unset ($modelarray['token']);
 
-        $this->view->user = $modelarray;
+        
         $this->view->headTitle()->append( $this->view->translate ( 'User profile - ' ).$this->view->user['username'] );
 
         $auth = Zend_Auth::getInstance ();

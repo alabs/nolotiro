@@ -1,68 +1,38 @@
-
 <div id="default_header_section">
-<h3><?=$this->translate ( 'Ads list' ).'  -  '.$this->user[username];?></h3>
-
+<h3><?=$this->translate ( 'Ads list' ).'  -  '.$this->escape( $this->user[username] );?></h3>
 </div>
-
-
 
 <div id="main">
 <div class="span-18">
-
-
  <ul id="tabnav">
-	<li ><a href="/<?=$this->lang ?>/user/profile/id/<?=$this->user[id] ?>"><?=$this->translate('profile');?></a></li>
-	<li id="tab_active"><a href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[id] ?>"><?=$this->translate('ads');?></a></li>
-
+	<li ><a href="/<?=$this->lang ?>/profile/<?=$this->escape( $this->user[username]) ?>"><?=$this->translate('profile');?></a></li>
+	<li id="tab_active"><a href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[username] ?>"><?=$this->translate('ads');?></a></li>
 </ul>
-
-
 <?php
 //Zend_Debug::dump($this->ad);
 //Zend_Debug::dump($this->paginator);
 
-
 if ($this->ad != null): ?>
-
 
        <?php foreach ($this->paginator as $key => $val): ?>
         <div class="ad_excerpt">
-		
-	 
-	
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['ad_id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
             <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
             <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
             </span>
-           
-           
-	   
 	   <div><?php echo $this->escape($val['body']) ?></div>
-	   
-	   
-	   
         </div>
-        
         <?php endforeach; ?>
 
 
-
 <?php else: ?>
-
     <h4><?=$this->translate ( 'This user does not have ads yet');?></h4>
-
 <?php endif;?>
-
 
 <?php echo $this->paginationControl($this->paginator, 'Sliding', 'partials/paginator_ads.phtml'); ?>
 
-
-
-
 </div> <!-- /div ads -->
 
-
 </div> <!-- /main -->
-

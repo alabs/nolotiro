@@ -3,11 +3,12 @@
 class Zend_Controller_Action_Helper_Checklang extends Zend_Controller_Action_Helper_Abstract {
 
 
-         function init()
-    {
-        $this->lang = $this->getRequest()->getParam("language");
-        if ($this->lang == null)
-        {
+    function init() {
+
+//        var_dump( $this->getRequest()->getParam('language') );
+//        die ();
+        $this->lang = $this->getRequest()->getParam('language');
+        if ($this->lang == null) {
             $auth = Zend_Auth::getInstance();
             if ($auth->hasIdentity()) $this->lang = $auth->getIdentity()->lang;
         }
@@ -33,11 +34,9 @@ class Zend_Controller_Action_Helper_Checklang extends Zend_Controller_Action_Hel
         }
     }
 
-    function check(){;
+    function check() {
         return $this->lang;
     }
-
-
 
 
 }
