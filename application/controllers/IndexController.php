@@ -12,24 +12,15 @@ class IndexController extends Zend_Controller_Action {
 		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
 		$this->view->user = Zend_Auth::getInstance ()->getIdentity ();
                 $this->lang = $this->view->lang =  $this->_helper->checklang->check();
+                $this->location = $this->_helper->checklocation->check();
 
 
 	}
 	
 	public function indexAction() {
 
-		//redir to the list of ads of woeid + ad_type session stored , ad controller
-		
-		$aNamespace = new Zend_Session_Namespace('Nolotiro');
-		$woeid = $aNamespace->location;
-		$ad_type = $aNamespace->ad_type;
-
-                if(!$woeid){
-                    $woeid = 766273; // madrid, spain by default
-                }
-
                 
-		$this->_redirect('/'.$this->view->lang.'/woeid/'.$woeid.'/give');
+		$this->_redirect('/'.$this->view->lang.'/woeid/'.$this->location.'/give');
 	}
 	
 	

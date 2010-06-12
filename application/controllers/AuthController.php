@@ -1,17 +1,11 @@
 <?php
-/**
- * AuthController
- *  
- */
 
 class AuthController extends Zend_Controller_Action {
-	public function init() {
 
-                
-		 $this->lang = $this->view->lang =  $this->_helper->checklang->check();
+    public function init() {
 
-                $aNamespace = new Zend_Session_Namespace('Nolotiro');
-		$this->location = $aNamespace->location;
+		$this->lang = $this->view->lang =  $this->_helper->checklang->check();
+                $this->location = $this->_helper->checklocation->check();
 
                 $this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
 		$this->view->mensajes = $this->_flashMessenger->getMessages ();
@@ -77,9 +71,7 @@ class AuthController extends Zend_Controller_Action {
 					$data = $authAdapter->getResultRowObject ( null, 'password' );
 					$auth->getStorage ()->write ( $data );
 
-
                                         $woeid =  $this->_helper->CheckWoeidUser->checkUserLogged( $auth->getIdentity()->id );
-
 
 					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Welcome,' ) .' '. $auth->getIdentity()->username );
 

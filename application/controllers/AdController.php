@@ -15,11 +15,8 @@ class AdController extends Zend_Controller_Action {
 
                 $this->lang = $this->view->lang =  $this->_helper->checklang->check();
 
-                ///
 		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
 		$this->view->mensajes = $this->_flashMessenger->getMessages ();
-
-
 
                 $aNamespace = new Zend_Session_Namespace('Nolotiro');
 		$this->location = $aNamespace->location;

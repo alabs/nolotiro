@@ -6,15 +6,12 @@
 
 class UserController extends Zend_Controller_Action {
 
-    protected $session = null;
-    protected $_model;
-
+    
     
     public function init() {
         
         $this->lang = $this->view->lang =  $this->_helper->checklang->check();
-        $aNamespace = new Zend_Session_Namespace('Nolotiro');
-        $this->location = $aNamespace->location;
+        $this->location = $this->_helper->checklocation->check();
 
     }
 
@@ -104,7 +101,7 @@ class UserController extends Zend_Controller_Action {
                     $mail = new Zend_Mail ( );
                     $mail->setBodyHtml ( $this->view->translate ( 'Please, click on this url to finish your register process:<br />' )
                             . $hostname . $this->view->translate ( '/en/user/validate/t/' ) . $token .
-                            '<br /><br />________________<br />' . utf8_decode ( $this->view->translate ( 'The nolotiro.org team.' ) ) );
+                            '<br /><br />__<br />' . utf8_decode ( $this->view->translate ( 'The nolotiro.org team.' ) ) );
                     $mail->setFrom ( 'noreply@nolotiro.org', 'nolotiro.org' );
 
                     $mail->addTo($formulario['email']);
@@ -221,13 +218,12 @@ class UserController extends Zend_Controller_Action {
                             . $hostname . '/'.$this->view->lang.'/user/validate/t/'  .  $mailcheck['token'] .
                             '<br /><br />'.
                             $this->view->translate('Otherwise, ignore this message.').
-                            '<br />_______________<br />' . utf8_decode ( $this->view->translate ( 'The nolotiro.org team.' ) ) );
+                            '<br />__<br />' . utf8_decode ( $this->view->translate ( 'The nolotiro.org team.' ) ) );
 
                     $mail->setFrom ( 'noreply@nolotiro.org', 'nolotiro.org' );
-                    //$mail->setFrom ( 'noreply@nolotiro', 'nolotiro.org' );
 
                     $mail->addTo ( $mailcheck ['email'] );
-                    $mail->setSubject ( utf8_decode ( $this->view->translate ( 'restore your nolotiro.org  account' ) ) );
+                    $mail->setSubject ( utf8_decode ( $this->view->translate ( 'Restore your nolotiro.org  account' ) ) );
                     $mail->send ();
 
                     $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Check your inbox email to restore your nolotiro.org account' ) );
@@ -291,10 +287,12 @@ class UserController extends Zend_Controller_Action {
             $model = $this->_getModel ();
             $validatetoken = $model->validateToken ( $token );
 
-            $validatetoken = $validatetoken->toArray ();
+            
             //Zend_Debug::dump ( $validatetoken );
 
             if ($validatetoken !== NULL) {
+
+                $validatetoken = $validatetoken->toArray ();
 
                 //first kill previous session or data from client
                 //kill the user logged in (if exists)
@@ -326,13 +324,15 @@ class UserController extends Zend_Controller_Action {
 
             } else {
                 
-                throw new Zend_Controller_Action_Exception ( 'This token does not exist', 404 );
+               $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Sorry, register url no valid or expired.' ) );
+               $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+                return ;
 
             }
 
         } else {
             $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Sorry, register url no valid or expired.' ) );
-            $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$aNamespace->location.'/ad_type/give' );
+            $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
             return ;
         }
 

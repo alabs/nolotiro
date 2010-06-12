@@ -148,6 +148,7 @@ class LocationController extends Zend_Controller_Action {
 
 				$aNamespace = new Zend_Session_Namespace('Nolotiro');
 				$aNamespace->location = $values[0];//woeid
+                                setcookie ( 'location', $values[0], null, '/' );
 
 				$name = $item->name.', '.$item->admin1.', '.$item->country;
 
@@ -156,6 +157,7 @@ class LocationController extends Zend_Controller_Action {
 				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Location changed successfully to:' )
 				.' '.$values[1]);
 
+                                
 				$this->_redirect ( '/'.$this->view->lang.'/woeid/'.$values[0].'/give' );
 
 			}
