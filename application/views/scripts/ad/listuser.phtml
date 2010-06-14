@@ -4,14 +4,14 @@
 
 <div id="main">
 <div class="span-18">
- <ul id="tabnav">
-	<li ><a href="/<?=$this->lang ?>/profile/<?=$this->escape( $this->user[username]) ?>"><?=$this->translate('profile');?></a></li>
-	<li id="tab_active"><a href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[username] ?>"><?=$this->translate('ads');?></a></li>
-</ul>
-<?php
-//Zend_Debug::dump($this->ad);
-//Zend_Debug::dump($this->paginator);
 
+<ul id="tabnav">
+        <?=$this->editprofile ?>
+	<li ><a   id="<?=(preg_match("/profile/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/profile/<?=$this->user[username] ?>"><?=$this->translate('profile');?></a></li>
+	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[id] ?>"><?=$this->translate('ads');?></a></li>
+</ul>
+
+<?php
 if ($this->ad != null): ?>
 
        <?php foreach ($this->paginator as $key => $val): ?>

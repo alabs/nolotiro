@@ -154,7 +154,7 @@ class UserController extends Zend_Controller_Action {
         { //if is the user profile owner lets delete it
 
             $this->view->editprofile = '
-        <li class="tab2"><a href="/'.$this->view->lang .'/user/edit/id/'.$auth->getIdentity()->id. ' ">'.$this->view->translate('edit profile').'</a></li>';
+        <li ><a href="/'.$this->view->lang .'/user/edit/id/'.$auth->getIdentity()->id. ' ">'.$this->view->translate('edit profile').'</a></li>';
         }
 
 

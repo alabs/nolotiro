@@ -163,8 +163,12 @@
 "booked";"reservado"
 "delivered";"entregado"
 
-"Send a private message";"Enviar mensaje privado"
+"Interested?";"¿Te interesa?"
+"Send a private message to the owner";"Envía un mensaje privado al anunciante"
+"Share this ad:";"Comparte este anuncio:"
 
+"New private message to user";"Nuevo mensaje privado para el usuario"
+"Subject:";"Tema"
 
 #comment
 "Create a new comment";"Escribe un comentario"

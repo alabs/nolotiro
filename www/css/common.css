@@ -42,6 +42,12 @@ a.actual {
 	padding-right: 6px;
 }
 
+.user_profile h4{
+    
+    font-size: 14px;
+    padding: 5px;
+}
+
 .select_language_box {
 
 	margin-top: -0.4em;
@@ -176,6 +182,15 @@ a.actual {
 }
 
 
+.sharelinks{
+    position: relative;
+    top: 10px;
+    clear: right;
+    text-align: right;
+    font-size: 11px;
+    margin-bottom: 15px;
+}
+
 .ad_comments{
         padding-left: 18px;
         margin-bottom: 80px;
@@ -259,7 +274,7 @@ a.actual {
 }
 
 .success {
-	background: #E6EFC2;
+	background: #FFF;
 	color: #264409;
 	border-color: #C6D880;
 }
@@ -408,23 +423,24 @@ ul#tabnav li {
 display: inline;
 }
 
-li#tab_active {
-    background-color: #cfc ;
-}
 
 
 ul#tabnav li a { 
 padding: 3px 10px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
 border: 1px solid #ddd; /* set border COLOR as desired; usually matches border color specified in #tabnav */
-background-color: #fff; /* set unselected tab background color as desired */
-color: #666; /* set unselected tab link color as desired */
+/*background-color: #fff;*/ /* set unselected tab background color as desired */
+/*color: #000;*/ /* set unselected tab link color as desired */
 margin-right: 0px; /* set additional spacing between tabs as desired */
 text-decoration: none;
 border-bottom: none;
 }
 
 ul#tabnav a:hover { 
-background: #cfc;
+    color: #000!important;
+}
+
+a#tab_active {
+    color: #000!important;
 }
 
 /* end css tabs */
