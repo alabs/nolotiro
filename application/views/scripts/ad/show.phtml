@@ -66,7 +66,8 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
 <a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'] ?>"><?=$this->translate('Send a private message to the owner') ?></a>
 </div>
 
-<? if ($this->comments AND $this->ad['comments_enabled']): ?>
+<? if ($this->ad['comments_enabled'] ): ?>
+    <? if ($this->comments ): ?>
 <div class="ad_comments">
 <h5><?=$this->translate ( 'Comments');?></h5>
 
@@ -85,12 +86,18 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
         </div>
         
         <?php endforeach; ?>
+<?php endif;?>
+
+
 <div class="ad_comment_form">
         <?=$this->createcomment?>
         </div>
 </div>
+
 <?php endif;?>
-        
+
+
+
 
 </div>
 <!-- google adsense block -->
