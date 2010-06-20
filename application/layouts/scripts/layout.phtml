@@ -32,15 +32,9 @@
             });
         </script>
     </head>
-
     <body>
-
         <div class="container">
-
             <div id="header">
-
-
-
                 <div class="user_login_box">
                     <?php
 
@@ -63,8 +57,6 @@
 
                     ?>
 
-
-
                     <span class="select_language_box">
                         <select	name="site_language_code_select" id="site_language_code_select">
                             <option <?=$this->lang == 'en' ? 'selected="selected"' : '';?>
@@ -75,25 +67,19 @@
                     </span>
                 </div>
 
-
                 <h1 id="site-name"><a href="/"
                                       title="nolotiro.org home"><img
                             src="/images/nolotiro_logo.png"
                             alt="Nolotiro.org logo" id="logo" /> nolotiro.org</a></h1>
                 <h2 id='site-slogan'><?=$this->translate ( 'no lo tiro, te lo doy (sin condiciones)' )?></h2>
-
                 <div class="ad_create_tab">
                     <a  href="/<?=$this->lang.'/ad/create' ?>"><?='+ '.$this->translate ('Create new ad')?></a>
                 </div>
-
             </div>
-
 
             <?=$this->layout()->content ?>
 
-
             <div id="footer">
-
                 <div class="links-right">
                     <a href='/<?=$this->lang?>/page/about'><?=$this->translate ( 'about' );?></a>
                     | <a href='/<?=$this->lang?>/page/faqs'><?=$this->translate ( 'faqs' );?></a>
@@ -101,32 +87,21 @@
                     | <a href='http://www.facebook.com/group.php?gid=38263634418'><?=$this->translate ( 'facebook group' );?></a>
                 </div>
 
-
-
                 <div id="info" class="innerWrap clearfix">
                     <p>
                         <?=$this->translate ( 'nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.' );?>
                     </p>
                 </div>
-
-
                 <div  class="links-left">
-
                     <a href="/<?=$this->lang?>/page/terms"><?=$this->translate ( 'terms of use' );?></a> |
                     <a href="/<?=$this->lang?>/page/privacy"><?=$this->translate ( 'privacy policy' );?></a> |
-                    <a href="http://bitbucket.org/jipipayo/nolotiro/"><?=$this->translate ( 'developers' );?></a> |
+                    <a href="http://code.google.com/p/nolotiro/"><?=$this->translate ( 'developers' );?></a> |
                     <a href='/<?=$this->lang?>/contact'><?=$this->translate ( 'contact' );?></a>
                 </div>
-
-
-
             </div>
-
         </div>
-
         <script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
         <script type="text/javascript">var pageTracker = _gat._getTracker("UA-141609-7");pageTracker._initData();pageTracker._trackPageview();</script>
-
-
     </body>
 </html>
+<?//=Zend_Version::VERSION;?>
