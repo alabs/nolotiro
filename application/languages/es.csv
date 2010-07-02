@@ -135,6 +135,7 @@
 
 
 #ad/create
+"This ad does not exist or may have been deleted!";"Ese anuncio no existe o ha sido borrado."
 "Create a new ad";"Crea un nuevo anuncio"
 "Edit your ad";"Edita tu anuncio"
 "Edit ad";"Edita tu anuncio"
@@ -150,8 +151,11 @@
 "Save";"Guardar"
 "Select an image file for your ad (optional).";"Selecciona una imagen para tu anuncio (opcional)."
 "Ad published succesfully!";"¡Tu anuncio ha sido publicado con éxito!"
+"Ad edited succesfully!";"¡Tu anuncio ha sido editado con éxito!"
+
 "No ads to display for this location.";"No hay anuncios para esta ubicación."
 "You could try one of these things:";"Puedes probar alguna de estas cosas:"
+"Allow public comments";"Permitir comentarios públicos"
 
 "Be the first to";"Se el primero en"
 "post an ad on this location.";"publicar un anuncio en esta ciudad."

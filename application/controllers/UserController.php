@@ -223,7 +223,7 @@ class UserController extends Zend_Controller_Action {
                     $mail->setFrom ( 'noreply@nolotiro.org', 'nolotiro.org' );
 
                     $mail->addTo ( $mailcheck ['email'] );
-                    $mail->setSubject ( utf8_decode ( $this->view->translate ( 'Restore your nolotiro.org  account' ) ) );
+                    $mail->setSubject ( utf8_decode ( $this->view->translate ( 'Restore your nolotiro.org account' ) ) );
                     $mail->send ();
 
                     $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Check your inbox email to restore your nolotiro.org account' ) );

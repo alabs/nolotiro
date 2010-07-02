@@ -145,8 +145,6 @@ class AdController extends Zend_Controller_Action {
 
 	public function createAction() {
 
-	
-
 		//first we check if user is logged, if not redir to login
 		$auth = Zend_Auth::getInstance ();
 		if (! $auth->hasIdentity ()) {
@@ -158,23 +156,18 @@ class AdController extends Zend_Controller_Action {
 			//Zend_Debug::dump($aNamespace->redir);
 			$this->_redirect ( $this->lang.'/auth/login' );
 
-
 		} else {
 
 			$request = $this->getRequest ();
-                        require_once APPLICATION_PATH . '/forms/AdEdit.php';
+                        require_once APPLICATION_PATH . '/forms/AdCreate.php';
                         $form = new Form_AdEdit ( );
 
                         $this->view->form = $form;
                         $this->view->woeidName =  $this->_helper->woeid->name($this->location , $this->lang);
 
-                         
-			// check to see if this action has been POST'ed to
+                        
 			if ($this->getRequest ()->isPost ()) {
 
-
-				// now check to see if the form submitted exists, and
-				// if the values passed in are valid for this form
 				if ($form->isValid ( $request->getPost () )) {
 
 					$formulario = $form->getValues ();
@@ -259,6 +252,7 @@ class AdController extends Zend_Controller_Action {
 
 
                 $this->view->form = $form;
+                $this->view->page_title .= $this->view->translate('Edit your ad');
 
 		if ($this->getRequest ()->isPost ()) {
 

@@ -1,6 +1,8 @@
 <?php
 /**
  * @author dani remeseiro
+ * @license Affero GPL License Version 3
+ * @link http://www.gnu.org/licenses/agpl.html
  */
 
 
