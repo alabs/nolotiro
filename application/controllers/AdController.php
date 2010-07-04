@@ -241,6 +241,34 @@ class AdController extends Zend_Controller_Action {
 
 	public function editAction() {
 
+               //check if user logged in
+                $auth = Zend_Auth::getInstance ();
+                $user = new Model_User;
+                 
+                if ($auth->hasIdentity()){
+                     //if user owner allow edit and show delete ad link , if not redir not allowed
+                    
+                     var_dump( (bool) $user->fetchUser($auth->getIdentity()->id) );
+
+                    if ( !(bool)$user->fetchUser($auth->getIdentity()->id) )
+                    {
+                      
+                     $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'You are not allowed to do that!' ) );
+		     $this->_redirect ( '/'.$this->lang.'/woeid/'.$this->location.'/give' );
+                        
+                    }
+
+                } else {
+
+                   $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'You are not allowed to do that!' ) );
+		   $this->_redirect ( '/'.$this->lang.'/woeid/'.$this->location.'/give' );
+
+                }
+
+                $this->view->deletead = '
+                    <a href="/'.$this->view->lang .'/ad/delete/id/'.$this->_getParam('id'). ' ">'.$this->view->translate('delete this ad').'</a>';
+			
+
                 require_once APPLICATION_PATH . '/forms/AdEdit.php';
 		$form = new Form_AdEdit ( );
                 $form->submit->setLabel('Save');
@@ -286,8 +314,9 @@ class AdController extends Zend_Controller_Action {
 
                             } else {
                                  $form->populate($formData);
-                                 var_dump($form->getErrors() );
-                                 Zend_Debug::dump($formData);
+                                  
+//                                 var_dump($form->getErrors() );
+//                                 Zend_Debug::dump($formData);
                            }
                             
                         } else {
@@ -297,9 +326,10 @@ class AdController extends Zend_Controller_Action {
                                  $form->populate($ad->getAd($id));
                             }
 
+                           
+		       }
 
-			
-		}
+                 
 
 	}
 
@@ -334,9 +364,56 @@ class AdController extends Zend_Controller_Action {
 
 
 
-	public function deleteAction() {
+	  public function deleteAction() {
+                $this->view->headTitle()->append( $this->view->translate ( 'Delete your profile' ) );
 
-	}
+                $id = (int)$this->getRequest()->getParam('id');
+                $auth = Zend_Auth::getInstance ();
+
+                if ($auth->hasIdentity()){
+
+                    $umodel = new Model_User();
+                    $user = $umodel->fetchUser( $auth->getIdentity()->id );
+                } else {
+
+                    $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'You are not allowed to view this page' ) );
+                    $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+                    return ;
+
+                }
+
+                if (($auth->getIdentity()->id  == $user) ) { //if is the user profile owner lets delete it
+
+                    if ($this->getRequest()->isPost()) {
+                        $del = $this->getRequest()->getPost('del');
+                        if ($del == 'Yes') {
+                            //delete user, and all his content
+                            $admodel = new Model_Ad();
+                            $admodel->deleteAd($id);
+
+                            $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad deleted successfully.' ) );
+                            $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+                            return ;
+
+                        } else {
+                            $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Nice to hear that :-)' ) );
+                            $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+                            return ;
+                        }
+
+                    } else {
+                        $id = $this->_getParam('id', 0);
+
+                    }
+
+                } else {
+
+                    $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'You are not allowed to view this page' ) );
+                    $this->_redirect ( '/'.$this->view->lang.'/ad/list/woeid/'.$this->location.'/ad_type/give' );
+                    return ;
+                }
+    }
+
 
 	/**
 	 * _getModel() is a protected utility method for this controller.

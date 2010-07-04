@@ -173,6 +173,10 @@
 
 "New private message to user";"Nuevo mensaje privado para el usuario"
 "Subject:";"Tema"
+"delete this ad";"borrar anuncio"
+"Delete ad";"Borrar anuncio"
+"Are you sure you want to delete this ad?";"¿Seguro que quieres borrar este anuncio?"
+"Ad deleted successfully.";"El anuncio ha sido eliminado."
 
 #comment
 "Create a new comment";"Escribe un comentario"
