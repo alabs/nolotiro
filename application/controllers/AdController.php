@@ -23,10 +23,7 @@ class AdController extends Zend_Controller_Action {
 
 	}
 
-	/**
-	 * The default action - show a list where woeid and ad type
-	 * Get the woeid and the ad_type from the session reg
-	 */
+	
 	public function listAction() {
 
 		$woeid = $this->_request->getParam ( 'woeid' );
@@ -60,6 +57,26 @@ class AdController extends Zend_Controller_Action {
 	
 		$this->view->paginator=$paginator;		
 
+	}
+
+
+	public function listallAction() {
+
+		$model = new Model_Ad();
+
+                $this->view->woeid = $woeid;
+		$this->view->ad = $model->getAdListAll();
+
+                $this->view->page_title .= $this->view->translate('All the ads');
+
+		//paginator
+		$page = $this->_getParam('page');
+		$paginator = Zend_Paginator::factory($this->view->ad);
+		$paginator->setDefaultScrollingStyle('Elastic');
+		$paginator->setItemCountPerPage(10);
+		$paginator->setCurrentPageNumber($page);
+
+		$this->view->paginator=$paginator;
 
 	}
 
@@ -76,8 +93,7 @@ class AdController extends Zend_Controller_Action {
 
 
               $model = $this->_getModel ();
-
-                $this->view->ad = $model->getAdUserlist($id);
+              $this->view->ad = $model->getAdUserlist($id);
 
                //paginator
 		$page = $this->_getParam('page');
@@ -94,42 +110,31 @@ class AdController extends Zend_Controller_Action {
 
                 $this->view->user = $this->user->fetchUser($id);
 
-                
-
         }
 
 
 	public function showAction() {
 
 		$id = $this->_request->getParam ( 'id' );
-
 		$model = $this->_getModel ();
 		$this->view->ad = $model->getAd( $id );
-
-              
 
                 if ($this->view->ad != null){ // if the id ad exists then render the ad and comments
 
                         $this->view->comments = $model->getComments( $id );
                         $this->view->woeidName =  $this->_helper->woeid->name($this->view->ad['woeid_code'] , $this->lang);
-
-                        
                         $this->view->page_title .= $this->view->woeidName .' | '. $this->view->ad['title'];
-
 
                         //if user logged in, show the comment form, if not show the login link
                         $auth = Zend_Auth::getInstance ();
                         if (! $auth->hasIdentity ()) {
-
 
                                 $this->view->createcomment ='<a href="/' . $this->lang . '/auth/login">' . $this->view->translate ( 'login to post a comment' ) . '</a> ';
 
                         } else {
                                 require_once APPLICATION_PATH . '/forms/Comment.php';
                                 $form = new Form_Comment();
-
                                 $form->setAction('/'.$this->lang .'/comment/create/ad_id/'.$id);
-
 
                                 $this->view->createcomment = $form;
                         }
@@ -291,11 +296,20 @@ class AdController extends Zend_Controller_Action {
 
                             if ($form->isValid($formData)) {
                                  
-                                 $title = $form->getValue('title');
-                                 $body = $form->getValue('body');
-                                 $type = $form->getValue('type');
+                                  //set filter againts xss and nasty things
+                                  $f = new Zend_Filter();
+                                  $f->addFilter(new Zend_Filter_StripTags());
+                                                    
+
+                                        $title = $f->filter ( $form->getValue('title'));
+                                        $body = $f->filter ( $form->getValue('body'));
+                                        $type = $f->filter ( $form->getValue('type'));
+
                                  $status = $form->getValue('status');
                                  $photo = $form->getValue('photo');
+                                 $comments_enabled = $form->getValue('comments_enabled');
+
+
 
                                   if ( !empty($photo) ){
 
@@ -306,7 +320,7 @@ class AdController extends Zend_Controller_Action {
                                  
 
                                 $model = $this->_getModel ();
-				$model->updateAd ( $id, $title, $body, $type, $status );
+				$model->updateAd ( $id, $title, $body, $type, $status, $comments_enabled );
                                 
 
                                 $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Ad edited succesfully!' ) );

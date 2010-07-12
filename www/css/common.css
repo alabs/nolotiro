@@ -1,3 +1,10 @@
+html input[type="text"], input[type="password"], input[type="submit"]{
+    border: 1px solid #666;
+    font-size: 1.1em;
+    padding: 4px;
+}
+
+
 a:link {
 	color: #00ACCF;
 	text-decoration: none;

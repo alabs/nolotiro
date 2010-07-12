@@ -1,0 +1,109 @@
+<div id="location_header_section">
+<h3>
+<?=$this->translate('All the ads'); ?>
+</h3>
+
+
+<span class="give-want">
+<a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/woeid/<?=$this->woeid?>/give'><?=$this->translate ( 'give' );?></a>
+&nbsp;
+<a class="<?=(preg_match("/want/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/woeid/<?=$this->woeid?>/want'><?=$this->translate ( 'want' );?></a>
+</span>
+
+</div>
+
+
+<?php
+if (count ( $this->mensajes ) > 0) {
+	echo '<div class="success">';
+	foreach ( $this->mensajes as $msg ) {
+		echo $msg . '<br>';
+	}
+	echo '</div>';
+}
+?>
+
+<div id="main">
+
+<div class="span-18">
+
+<?php if ($this->ad): ?>
+
+       <?php foreach ($this->paginator as $key => $val): ?>
+        <div class="ad_excerpt">
+		
+	  <?php
+	   if ($val['photo'] !== null){
+		      echo '<div class="ad_list_image">
+		      <a href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->escape($val['title']).' ">
+		      <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
+		      $this->escape($val['photo']).'" /></a></div>';
+		      
+	   }
+	   ?>
+	
+           <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+           <?=$this->escape($val['title']) ?></a></h4>
+
+           <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
+            <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
+            <?=$this->translate('by user ') ?>
+
+
+            <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>
+            </span>
+           
+           
+	   
+	   <div><?php echo $this->escape($val['body']) ?></div>
+	   
+	   
+	   
+        </div>
+        
+        <?php endforeach; ?>
+
+
+
+<?php else: ?>
+    <div class="no_results">
+    <h3><?=$this->translate ( 'No ads to display for this location.');?></h3>
+    <h5><?=$this->translate ( 'You could try one of these things:');?></h5>
+        <h5>1. <?=$this->translate ( 'Be the first to').' ';?>
+            <a href="/<?=$this->lang?>/ad/create"><?=$this->translate ('post an ad on this location.');?></a></h5>
+        <h5>2. <?=$this->translate ( 'Try to change the location to another city bigger near you.');?></h5>
+        <h5>3. <?=$this->translate ( 'Our autosuggest system (based on your IP) says you are located near:').' '.$this->suggestIP;?></h5>
+
+    </div>
+
+<?php endif;?>
+
+    
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'partials/paginator_ads.phtml'); ?>
+
+
+</div> 
+
+
+<div class="google_ads">
+<!-- google adsense block -->
+<script type="text/javascript"><!--
+google_ad_client = "pub-7190437604389924";
+/* 160x600, creado 9/01/10 */
+google_ad_slot = "9535564204";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<!-- end  of google adsense block -->
+</div>
+
+
+</div> <!-- /main -->
+
+

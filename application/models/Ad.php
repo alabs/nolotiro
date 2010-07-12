@@ -37,9 +37,10 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 
 
 
-	public function updateAd($id, $title,$body, $type, $status) {
-		$data = array ( 'title' => $title, 'body' => $body, 'type' => $type, 'status' => $status );
+	public function updateAd( $id, $title, $body, $type, $status, $comments_enabled ) {
+		$data = array ( 'title' => $title, 'body' => $body, 'type' => $type, 'status' => $status, 'comments_enabled' => $comments_enabled );
 		$this->update ( $data, 'id = ' . ( int ) $id );
+
 	}
 
 
@@ -139,6 +140,30 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		
 		return $result;
 		
+	}
+
+
+        public function getAdListAll() {
+		$table = new Model_Ad ( );
+		$select = $table->select()->setIntegrityCheck(false);
+		$select->from(array('a' => 'ads'), array('a.*' ));
+		$select->joinInner(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
+                //show only if user is active and not blocked
+                $select->where('u.active = ?', 1);
+                $select->where('u.locked = ?', 0);
+
+
+                //dont list not available items
+                //$select->where('a.status != ?', 'delivered');
+
+
+		$select->order('a.date_created DESC');
+
+		$result = $table->fetchAll ( $select )->toArray ();
+
+
+		return $result;
+
 	}
 
 
