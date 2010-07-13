@@ -1,10 +1,10 @@
 <?php
 
 /**
- * This is the AdEdit form.   
+ * This is the AdCreate form.
  */
 
-class Form_AdEdit extends Zend_Form {
+class Form_AdCreate extends Zend_Form {
 	
 	public function init() {
 		

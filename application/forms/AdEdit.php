@@ -1,9 +1,4 @@
 <?php
-
-/**
- * This is the AdEdit form.   
- */
-
 class Form_AdEdit extends Zend_Form {
 	
 	public function init() {
@@ -12,6 +7,31 @@ class Form_AdEdit extends Zend_Form {
 		$this->setAttrib('enctype', 'multipart/form-data');	
 		$this->setMethod ( 'post' );
 
+
+                //upload photo
+                $photonew = $this->createElement('file', 'photo');
+                $photonew->setOrder(0);
+                $photonew->setLabel('Select an image file for your ad (optional).');
+                $photonew->setDescription( 'Allowed format files: gif, jpg, png. Max size:1Mb');
+                $photonew->setRequired(false);
+                $photonew->setDestination( '/tmp/');
+                $photonew->setMaxFileSize(1048576);
+                // ensure only 1 file
+                $photonew->addValidator('Count', false, 1);
+
+                $photonew->addValidator('Size',
+                   array('min' => 100,
+                         'max' => 1048576,
+                         'bytestring' => true));
+                $photonew->addValidator('ImageSize',
+                   array('minwidth' => 10,
+                         'minheight' => 10,
+                         'maxwidth' => 900,
+                         'maxheight' => 900));
+
+                $photonew->addValidator('Extension', false, 'jpg,jpeg,png,gif'); // only JPEG, PNG and GIFs
+                $photonew->addValidator('IsImage', false);
+                $this->addElement($photonew);
 
                 $this->addElement ( 'select', 'type', array (
 		'label' => 'Ad type:', 'required' => true,
@@ -44,6 +64,6 @@ class Form_AdEdit extends Zend_Form {
 
 
 		// add the submit button
-		$this->addElement ( 'submit', 'submit', array ('label' => 'Send' ) );
+		$this->addElement ( 'submit', 'submit', array ('label' => 'Save' ) );
 	}
 }

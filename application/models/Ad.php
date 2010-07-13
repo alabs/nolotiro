@@ -37,15 +37,29 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 
 
 
-	public function updateAd( $id, $title, $body, $type, $status, $comments_enabled ) {
-		$data = array ( 'title' => $title, 'body' => $body, 'type' => $type, 'status' => $status, 'comments_enabled' => $comments_enabled );
-		$this->update ( $data, 'id = ' . ( int ) $id );
+//	public function updateAd( $id, $title, $body, $type, $photo, $status, $comments_enabled ) {
+//		$data = array ( 'title' => $title, 'body' => $body, 'type' => $type, 'photo' => $photo, 'status' => $status, 'comments_enabled' => $comments_enabled );
+//		$this->update ( $data, 'id = ' . ( int ) $id );
+//
+//	}
 
-	}
+    public function updateAd(array $data, $id){
+
+        $table = new Model_Ad ();
+		$fields = $table->info ( Zend_Db_Table_Abstract::COLS );
+		foreach ( $data as $field => $value ) {
+			if (! in_array ( $field, $fields )) {
+				unset ( $data [$field] );
+			}
+		}
+		return $table->update($data,  'id = ' . ( int ) $id);
+
+
+    }
 
 
 
-	function deleteAd($id) {
+    function deleteAd($id) {
 		$this->delete ( 'id =' . ( int ) $id );
 	}
 
