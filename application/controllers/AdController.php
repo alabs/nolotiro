@@ -24,6 +24,14 @@ class AdController extends Zend_Controller_Action {
         $woeid = $this->_request->getParam('woeid');
         $ad_type = $this->_request->getParam('ad_type');
 
+        if ($ad_type == 'give') {
+            $this->view->page_title .= $this->view->translate('give') . ' | ';
+        }
+
+        if ($ad_type == 'want') {
+            $this->view->page_title .= $this->view->translate('want') . ' | ';
+        }
+
         $model = $this->_getModel();
 
         $this->view->woeid = $woeid;
@@ -108,6 +116,15 @@ class AdController extends Zend_Controller_Action {
         $this->view->ad = $model->getAd($id);
 
         if ($this->view->ad != null) { // if the id ad exists then render the ad and comments
+
+            if ($this->view->ad['type'] == 'give') {
+                $this->view->page_title .= $this->view->translate('give') . ' | ';
+            }
+
+             if ($this->view->ad['type'] == 'want') {
+                $this->view->page_title .= $this->view->translate('want') . ' | ';
+            }
+
             $this->view->comments = $model->getComments($id);
             $this->view->woeidName = $this->_helper->woeid->name($this->view->ad['woeid_code'], $this->lang);
             $this->view->page_title .= $this->view->woeidName . ' | ' . $this->view->ad['title'];
@@ -308,8 +325,22 @@ class AdController extends Zend_Controller_Action {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad edited succesfully!'));
                 $this->_redirect('/' . $this->lang . '/ad/show/id/' . $id);
             } else {
-                $form->populate($formData);
 
+                $id = $this->_getParam('id');
+                 $ad = new Model_Ad();
+
+                $advalues = $ad->getAd($id);
+                // if photo not empty then show and let change it
+
+                $current_photo = $advalues['photo'];
+
+                if ($current_photo) {
+
+                    $this->view->current_photo = ' <img alt="' . $title . '" src="/images/uploads/ads/100/' . $current_photo . '" />';
+
+                }
+
+                $form->populate($formData);
             }
         } else {
             $id = $this->_getParam('id');

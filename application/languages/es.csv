@@ -33,6 +33,8 @@
 "contact";"contacto"
 "terms of use";"términos de uso"
 "privacy policy";"política de privacidad"
+"All the ads";"Todos los anuncios"
+"all the ads";"todos los anuncios"
 "facebook group";"grupo en facebook"
 #footer excerpt
 "nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.";"nolotiro.org es un sitio web donde puedes regalar las cosas que ya no quieres o ya no necesitas para que las recoja otra gente a la que puede servirle o serle de mucha utilidad."
@@ -169,8 +171,9 @@
 
 "Interested?";"¿Te interesa?"
 "Send a private message to the owner";"Envía un mensaje privado al anunciante"
+"send a private message";"envía un mensaje privado"
 "Share this ad:";"Comparte este anuncio:"
-
+"This is an automated notification. Please, don\'t reply  at this email address.";"Este es un mensaje automático. Por favor, no respondas a esta dirección de email."
 "New private message to user";"Nuevo mensaje privado para el usuario"
 "Subject:";"Tema"
 "delete this ad";"borrar anuncio"

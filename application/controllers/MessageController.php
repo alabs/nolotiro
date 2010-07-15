@@ -8,7 +8,7 @@ class MessageController extends Zend_Controller_Action {
     public function init() {
 
         $this->lang = $this->view->lang =  $this->_helper->checklang->check();
-        $this->aNamespace = new Zend_Session_Namespace('Nolotiro');
+        $this->location = $this->_helper->checklocation->check();
 
         $this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
         $this->view->mensajes = $this->_flashMessenger->getMessages ();
@@ -22,8 +22,15 @@ class MessageController extends Zend_Controller_Action {
 
 
     public function createAction() {
+
+        $this->view->page_title .=  $this->view->translate('send a private message') ;
         $request = $this->getRequest ();
         $id_user_to = $this->_request->getParam ( 'id_user_to' );
+
+
+        $model_user = new Model_User();
+        $this->view->user_to = $model_user->fetchUser($id_user_to)->username;
+       
 
         $form = $this->_getNewMessageForm ();
 
@@ -65,30 +72,27 @@ class MessageController extends Zend_Controller_Action {
                 //TODO to use the Zend Date object to adapt the time to the locale user zone
                 $data['date_created'] = date("Y-m-d H:i:s", time() );
 
-
                 //get the email of the receiver user
-
                 $data['email'] = $this->_getModelMessage()->getEmailUser($id_user_to);
 
                 //save the message into ddbb
                 $modelMessage = $this->_getModelMessage()->save($data);
 
 
-
                 $mail = new Zend_Mail ('utf-8' );
 
                 $data['body'] = $data['subject'] .'<br/>'. $data['body'].'<br/>';
-                $data['body'] .= '-------------------------------------------<br/>';
+                $data['body'] .= '---------<br/>';
                 $data['body'] .= $this->view->translate('This is an automated notification. Please, don\'t reply  at this email address.');
 
                 $mail->setBodyHtml( $data['body'] );
-                $mail->setFrom ( $this->view->translate('noreply@nolotiro.org' ), $this->view->translate('noreply@nolotiro.org' ));
+                $mail->setFrom ( 'noreply@nolotiro.org', 'nolotiro.org' );
                 $mail->addTo ( $data['email'] );
                 $mail->setSubject ( '[nolotiro.org] - '.$this->view->translate('You have new message from user ') . $data['user_from'] );
                 $mail->send ();
 
                 $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Message sent successfully!' ) );
-                $this->_redirect ( '/'.$this->lang.'/woeid/'.$this->aNamespace->location.'/give' );
+                $this->_redirect ( '/'.$this->lang.'/woeid/'.$this->location.'/give' );
 
             }
         }

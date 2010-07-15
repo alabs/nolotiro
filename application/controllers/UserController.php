@@ -447,11 +447,9 @@ class UserController extends Zend_Controller_Action {
             if ($this->getRequest()->isPost()) {
                 $del = $this->getRequest()->getPost('del');
                 if ($del == 'Yes') {
-                    //delete user, and all his content
+                    //delete user
                     $model->deleteUser($id);
 //                    $model->deleteUserComments($id);
-//                    $model->deleteUserCommentsVotes($id);
-//                    $model->deleteUserVotes($id);
 
                     //kill the session and go home
                     Zend_Auth::getInstance ()->clearIdentity ();

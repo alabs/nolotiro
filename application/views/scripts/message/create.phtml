@@ -1,5 +1,5 @@
 <div id="default_header_section">
-<h3><?=$this->translate ( 'New private message to user:' );?></h3>
+<h3><?=$this->translate ( 'New private message to user' ). ' ' . $this->user_to ;?></h3>
 </div>
 
 <?php
@@ -18,11 +18,10 @@ if (isset ( $this->error )) :
 <form action="<?=$this->escape ( $this->form->getAction () )?>"
 	method="<?=$this->escape ( $this->form->getMethod () )?>">
 <fieldset><legend><?=$this->translate ( 'Please, write your message' );?></legend>
-      
+	
+	<?=$this->form?>
 		
-		<?=$this->form?>
-		
-	</fieldset>
+</fieldset>
 </form>
 
 </div>
