@@ -17,6 +17,8 @@ class AdController extends Zend_Controller_Action {
         $this->view->mensajes = $this->_flashMessenger->getMessages();
 
         $this->location = $this->_helper->checklocation->check();
+        $this->view->checkMessages  = $this->_helper->checkMessages->check();
+
     }
 
     public function listAction() {

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author Dani Remeseiro
+ * @license http://www.gnu.org/licenses/agpl-3.0.html
+ * 
+ */
 
 class AuthController extends Zend_Controller_Action {
 

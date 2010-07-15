@@ -1,6 +1,7 @@
 <?php
 /**
- * LocationController
+ * @author Dani Remeseiro
+ * @license http://www.gnu.org/licenses/agpl-3.0.html
  *
  */
 
@@ -9,6 +10,7 @@ class LocationController extends Zend_Controller_Action {
 	public function init() {
 
              $this->lang = $this->view->lang =  $this->_helper->checklang->check();
+             $this->view->checkMessages  = $this->_helper->checkMessages->check();
                 
 	}
 
@@ -16,9 +18,6 @@ class LocationController extends Zend_Controller_Action {
         public function indexAction(){
              $this->_redirect ( '/' );
         }
-
-
-
 
 
 	public function changeAction(){
