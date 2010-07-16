@@ -19,9 +19,12 @@ class AdController extends Zend_Controller_Action {
         $this->location = $this->_helper->checklocation->check();
         $this->view->checkMessages  = $this->_helper->checkMessages->check();
 
+
     }
 
     public function listAction() {
+
+         
 
         $woeid = $this->_request->getParam('woeid');
         $ad_type = $this->_request->getParam('ad_type');
