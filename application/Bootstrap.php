@@ -8,6 +8,15 @@
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+    protected function _initMetadataCache()
+    {
+        $cache = Zend_Cache::factory('Core', 'File',
+                array('automatic_serialization' => true),
+                array('cache_dir' => '/tmp'));
+        Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
+    }
+
+
     protected function _initDoctype()
     {
         $this->bootstrap('view');

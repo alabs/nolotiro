@@ -44,6 +44,20 @@ class Model_Message extends Zend_Db_Table_Abstract {
         return $result;
     }
 
+
+    public function listMessagesUser($id) {
+
+        $id = (int) $id;
+        $table = new Model_Message();
+        $select = $table->select()->where('user_to = ?', $id);
+        
+        $result = $table->fetchAll ( $select )->toArray ();
+
+        return $result;
+    }
+
+
+
     public function checkMessagesUser($id) {
 
         $id = (int) $id;

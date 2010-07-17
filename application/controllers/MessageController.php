@@ -104,10 +104,27 @@ class MessageController extends Zend_Controller_Action {
 
     public function listAction() {
 
+
+        $auth = Zend_Auth::getInstance ();
+        if ($auth->hasIdentity()) {
+
+                $modelM = new Model_Message();
+                $this->view->listmessages = $modelM->listMessagesUser($auth->getIdentity()->id);
+
+               
+                 //paginator
+                $page = $this->_getParam('page');
+                $paginator = Zend_Paginator::factory($this->view->listmessages);
+                $paginator->setDefaultScrollingStyle('Elastic');
+                $paginator->setItemCountPerPage(10);
+                $paginator->setCurrentPageNumber($page);
+
+                $this->view->paginator = $paginator;
+
     }
 
     
-
+    }
 
 
 
