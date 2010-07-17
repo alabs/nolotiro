@@ -11,6 +11,8 @@ class MessageController extends Zend_Controller_Action {
 
         $this->lang = $this->view->lang =  $this->_helper->checklang->check();
         $this->location = $this->_helper->checklocation->check();
+        $this->view->checkMessages  = $this->_helper->checkMessages->check();
+
 
         $this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
         $this->view->mensajes = $this->_flashMessenger->getMessages ();
@@ -105,8 +107,18 @@ class MessageController extends Zend_Controller_Action {
     public function listAction() {
 
 
+         //first we check if user is logged, if not redir to login
         $auth = Zend_Auth::getInstance ();
-        if ($auth->hasIdentity()) {
+        if (! $auth->hasIdentity ()) {
+
+            //keep this url in zend session to redir after login
+            $aNamespace = new Zend_Session_Namespace('Nolotiro');
+            $aNamespace->redir = $this->lang.'/message/list';
+
+            //Zend_Debug::dump($aNamespace->redir);
+            $this->_redirect ( $this->lang.'/auth/login' );
+
+        } else { // if is user auth go to show messages list
 
                 $modelM = new Model_Message();
                 $this->view->listmessages = $modelM->listMessagesUser($auth->getIdentity()->id);

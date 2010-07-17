@@ -1,7 +1,7 @@
 <?php $this->page_title = $this->translate ( 'User profile' ).'  -  '.$this->user['username'] ;?>
 
 <div id="default_header_section">
-<h3><?=$this->translate ( 'User profile' ).'  -  '.$this->user['username'];?></h3>
+<h3><?=$this->translate ( 'Messages list' ).'  -  '.$this->user['username'];?></h3>
 </div>
 
 <?php
@@ -25,34 +25,58 @@ if (isset ( $this->error )) :
 
     <div class="user_profile">
 
-        <?php var_dump($this->listmessages) ?>
+        <?php //Zend_Debug::dump($this->listmessages) ?>
     
 <?php if ($this->listmessages): ?>
 
        <?php foreach ($this->paginator as $key => $val): ?>
         <div class="message_excerpt">
 
+            <h4>
+                <a href="/<?=$this->lang ?>/message/show/id/<?=$this->escape($val['id']) ?>">
+           <?=$this->escape($val['subject']) ?>
 
+                 <?php
+                    if ($val['readed'] == 0) {
+
+                        echo '<img alt="'.$this->translate('unreaded').'" src="/images/icons/ico_email.gif" />';
+                    } ?>
+
+                </a></h4>
+
+          
+            <span class="ad_date"><?=$this->translate('Sent '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
+            <?=$this->translate('from user') ?>
+
+
+            <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>
+            </span>
         </div>
 
-
-
         <?php endforeach; ?>
-
         <?php endif; ?>
-
-
     </div>
-
 
 
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'partials/paginator_ads.phtml'); ?>
-
-
-
 </div>
 
 
 
+<div class="google_ads">
+<!-- google adsense block -->
+<script type="text/javascript"><!--
+google_ad_client = "pub-7190437604389924";
+/* 160x600, creado 9/01/10 */
+google_ad_slot = "9535564204";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<!-- end  of google adsense block -->
+</div>

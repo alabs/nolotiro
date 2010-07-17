@@ -145,6 +145,8 @@ a.actual {
 	padding-right:18px;
 	padding-top:0;
 }
+
+
 .ad_excerpt{
 	float:left;
 	border-bottom: 1px solid #ddd;
@@ -168,6 +170,31 @@ a.actual {
 	background-color:#FFFFCC;
 	
 }
+
+.message_excerpt{
+	float:left;
+	border-bottom: 1px solid #ddd;
+	width: 100% !important;
+	padding-left: 18px;
+	padding-right: 18px;
+	padding-bottom:14px;
+	padding-top:14px;
+	margin:0;
+
+}
+
+.message_excerpt h4{
+
+	font-size: 1.3em;
+	font-weight: bold;
+        margin-bottom: 6px;
+}
+
+.message_excerpt:hover{
+	background-color:#FFFFCC;
+
+}
+
 .ad_date{
 	color:#666;
 	font-size: 0.9em;
