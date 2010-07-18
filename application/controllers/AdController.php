@@ -1,5 +1,4 @@
 <?php
-
 /**
  * AdController
  *
@@ -12,19 +11,14 @@ class AdController extends Zend_Controller_Action {
     public function init() {
 
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
-
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->mensajes = $this->_flashMessenger->getMessages();
-
         $this->location = $this->_helper->checklocation->check();
         $this->view->checkMessages  = $this->_helper->checkMessages->check();
-
 
     }
 
     public function listAction() {
-
-         
 
         $woeid = $this->_request->getParam('woeid');
         $ad_type = $this->_request->getParam('ad_type');
@@ -41,19 +35,15 @@ class AdController extends Zend_Controller_Action {
 
         $this->view->woeid = $woeid;
         $this->view->ad = $model->getAdList($woeid, $ad_type);
-
         $this->view->woeidName = $this->_helper->woeid->name($woeid, $this->lang);
-
 
         if (empty($this->view->ad)) {
             $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
         }
 
-
         //set the location name reg var from the woeid helper
         $aNamespace = new Zend_Session_Namespace('Nolotiro');
         $aNamespace->locationName = $this->view->woeidName;
-
         $this->view->page_title .= $this->view->woeidName;
 
         //paginator
@@ -72,7 +62,6 @@ class AdController extends Zend_Controller_Action {
 
         $this->view->woeid = $woeid;
         $this->view->ad = $model->getAdListAll();
-
         $this->view->page_title .= $this->view->translate('All the ads');
 
         //paginator
@@ -233,11 +222,9 @@ class AdController extends Zend_Controller_Action {
 
                     $formulario ['woeid_code'] = $this->location;
 
-
                     $model = $this->_getModel();
                     $model->createAd($formulario);
 
-                    //Zend_Debug::dump ( $formulario );
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad published succesfully!'));
                     $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
                 }
@@ -300,13 +287,9 @@ class AdController extends Zend_Controller_Action {
                 $f = new Zend_Filter();
                 $f->addFilter(new Zend_Filter_StripTags());
 
-
                 $data['title'] = $f->filter($formulario['title']);
                 $data['body'] = $f->filter($formulario['body']);
                 $data['type'] = $f->filter($formulario['type']);
-
-               
-
 
                 //create thumbnail if image exists
                 if ($formulario['photo']) {
@@ -318,14 +301,11 @@ class AdController extends Zend_Controller_Action {
                 }
 
 
-                $data['status'] = $formulario['status'];
-               
+                $data['status'] = $formulario['status'];               
                 $data['comments_enabled'] = $formulario['comments_enabled'];
-
 
                 $model = $this->_getModel();
                 $model->updateAd( $data, $id);
-
 
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad edited succesfully!'));
                 $this->_redirect('/' . $this->lang . '/ad/show/id/' . $id);
@@ -336,13 +316,9 @@ class AdController extends Zend_Controller_Action {
 
                 $advalues = $ad->getAd($id);
                 // if photo not empty then show and let change it
-
                 $current_photo = $advalues['photo'];
-
                 if ($current_photo) {
-
                     $this->view->current_photo = ' <img alt="' . $title . '" src="/images/uploads/ads/100/' . $current_photo . '" />';
-
                 }
 
                 $form->populate($formData);
@@ -358,16 +334,11 @@ class AdController extends Zend_Controller_Action {
                 $current_photo = $advalues['photo'];
 
                 if ($current_photo) {
-
                     $this->view->current_photo = ' <img alt="' . $title . '" src="/images/uploads/ads/100/' . $current_photo . '" />';
-                
                 }
-
-
                 $form->populate($ad->getAd($id));
             }
         }
-
         
     }
 

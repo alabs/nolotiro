@@ -29,6 +29,14 @@ class AuthController extends Zend_Controller_Action {
 	 * 
 	 */
 	public function loginAction() {
+
+
+                //if the user is logged already redir to home
+                $auth = Zend_Auth::getInstance ();
+                 if ($auth->hasIdentity()) {
+                     $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+                 }
+
 		$request = $this->getRequest ();
 		$form = $this->_getUserLoginForm ();
 		

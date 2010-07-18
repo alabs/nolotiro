@@ -35,8 +35,8 @@ if (isset ( $this->error )) :
            <?=$this->escape($val['subject']) ?> </a></h4>
 
           
-            <span class="ad_date"><?=$this->translate('Sent '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
-            <?=$this->translate('from user') ?>
+            <span class="ad_date"><?=$this->translate('Sent'). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
+            <?=$this->translate('to user') ?>
 
 
             <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>

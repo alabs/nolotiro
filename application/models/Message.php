@@ -45,16 +45,28 @@ class Model_Message extends Zend_Db_Table_Abstract {
     }
 
 
+    public function getMessage($id) {
+
+        $id = (int) $id;
+        $table = new Model_Message();
+        $select = $table->select()->where('id = ?', $id);	
+        $result = $table->fetchRow( $select )->toArray ();
+
+        return $result;
+    }
+
+
     public function getMessagesUserReceived($id) {
 
         $id = (int) $id;
         $table = new Model_Message();
         $select = $table->select()->where('user_to = ?', $id);
-        $select->order('date_created DESC');	
+        $select->order('date_created DESC');
         $result = $table->fetchAll ( $select )->toArray ();
 
         return $result;
     }
+
 
 
     public function getMessagesUserSent($id) {

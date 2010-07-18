@@ -174,6 +174,56 @@ class MessageController extends Zend_Controller_Action {
     }
 
 
+    public function showAction(){
+
+
+        $id = $this->_request->getParam('id');
+        $model = $this->_getModelMessage();
+        $this->view->message = $model->getMessage($id);
+
+        $auth = Zend_Auth::getInstance ();
+         if ($auth->hasIdentity()) { //not the owner of the message, go to hell
+            
+            if ($auth->getIdentity()->id != $this->view->message['user_to']) {
+                $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to do that!'));
+                $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+            }
+        } else { //maybe the owner , but not logged, redir to login
+
+            //keep this url in zend session to redir after login
+            $aNamespace = new Zend_Session_Namespace('Nolotiro');
+            $aNamespace->redir = $this->lang.'/message/show/' . $id;
+            $this->_redirect ( $this->lang.'/auth/login' );
+        }
+
+
+        //**********************
+        if ($this->view->message != null) { // if the id ad exists then render the ad and comments
+            $this->view->page_title .=  ' | ' . $this->view->ad['subject'];
+
+            //if user logged in, show the comment form, if not show the login link
+            
+            if (!$auth->hasIdentity()) {
+
+                $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
+            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+            } else {
+
+                
+
+
+                require_once APPLICATION_PATH . '/forms/Comment.php';
+                $form = new Form_Comment();
+                $form->setAction('/' . $this->lang . '/comment/create/ad_id/' . $id);
+
+                $this->view->createcomment = $form;
+            }
+        } else {
+
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('This message does not exist or may have been deleted!'));
+            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+        }
+    }
 
 
     /**

@@ -28,9 +28,16 @@ class UserController extends Zend_Controller_Action {
      * register - register a new user into the nolotiro database
      */
     public function registerAction() {
+
+         //if the user is logged already redir to home
+                $auth = Zend_Auth::getInstance ();
+                 if ($auth->hasIdentity()) {
+                     $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+                 }
+
+
         $request = $this->getRequest();
         $form = $this->_getUserRegisterForm();
-
 
         if ($this->getRequest()->isPost()) {
 
@@ -48,9 +55,6 @@ class UserController extends Zend_Controller_Action {
                     $view->error .= $this->view->translate('The  passwords entered do not match.');
                 }
 
-
-
-
                 $model = $this->_getModel();
 
                 //check user email and nick if exists
@@ -64,8 +68,6 @@ class UserController extends Zend_Controller_Action {
                     $view->error = $this->view->translate('You can not use your email as username. Please,
 									      choose other username');
                 }
-
-
 
                 if ($checkemail !== NULL) {
                     $view = $this->initView();
@@ -158,6 +160,13 @@ class UserController extends Zend_Controller_Action {
      *
      */
     public function forgotAction() {
+
+         //if the user is logged already redir to home
+                $auth = Zend_Auth::getInstance ();
+                 if ($auth->hasIdentity()) {
+                     $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+                 }
+
         $request = $this->getRequest();
         $form = $this->_getUserForgotForm();
 

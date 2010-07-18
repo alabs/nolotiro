@@ -1,0 +1,75 @@
+<div id="default_header_section">
+<h5>
+<?=$this->translate('message sent from user') ?>
+</h5>
+<h3><?=$this->message['subject'] ?></h3>
+</div>
+
+
+<?
+if (count ( $this->mensajes ) > 0) {
+	echo '<div class="success">';
+	foreach ( $this->mensajes as $msg ) {
+		echo $msg . '<br>';
+	}
+	echo '</div>';
+}
+?>
+
+
+<div id="main">
+<div class="span-15">
+
+
+<?php
+// if you are the ad owner or admin, then show edit link
+$auth = Zend_Auth::getInstance ();
+if ($this->message['user_to'] == $auth->getIdentity()->id): ?>
+
+
+<a href="/<?=$this->lang ?>/ad/edit/id/<?=$this->ad['id'] ?>"><?=$this->translate('Delete this message') ?></a>
+
+<?php endif;?>
+
+       
+        <div class="ad_excerpt_show">
+           <span class="ad_date"><?=$this->translate('Posted on '). $this->message['date_created'] ?>
+            <?=$this->translate('by user ') ?> 
+            <a href="/<?=$this->lang ?>/profile/<?=$this->ad['username'] ?>"><?=$this->ad['username'] ?></a>
+            </span>
+            
+           <br>
+           <span><?php echo $this->message['body'] ?></span>
+
+
+         
+	   <?=$this->translate('Interested?') ?>&nbsp;
+<a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'] ?>"><?=$this->translate('Send a private message to the owner') ?></a>
+</div>
+
+
+
+<div class="ad_comment_form">
+        <?=$this->createcomment?>
+        </div>
+
+
+
+
+
+</div>
+<!-- google adsense block -->
+<div class="google_ads">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7190437604389924";
+/* 300x250, creado 9/01/10 */
+google_ad_slot = "7269761465";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<!-- end of google adsense block -->
