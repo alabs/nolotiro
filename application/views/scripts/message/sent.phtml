@@ -1,7 +1,7 @@
-<?php $this->page_title = $this->translate ( 'User profile' ).'  -  '.$this->user['username'] ;?>
+<?php $this->page_title = $this->translate ( 'Messages sent' ) ;?>
 
 <div id="default_header_section">
-<h3><?=$this->translate ( 'Messages list' ).'  -  '.$this->user['username'];?></h3>
+<h3><?=$this->translate ( 'Messages sent' );?></h3>
 </div>
 
 <?php
@@ -18,15 +18,13 @@ if (isset ( $this->error )) :
 
 <ul id="tabnav">
         <?=$this->editprofile ?>
-	<li ><a   id="<?=(preg_match("/profile/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/profile/<?=$this->user[username] ?>"><?=$this->translate('profile');?></a></li>
-	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[id] ?>"><?=$this->translate('ads');?></a></li>
+	<li ><a   id="<?=(preg_match("/received/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/message/received"><?=$this->translate('received');?></a></li>
+	<li ><a  id="<?=(preg_match("/sent/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/message/sent"><?=$this->translate('sent');?></a></li>
 </ul>
 
 
     <div class="user_profile">
 
-        <?php //Zend_Debug::dump($this->listmessages) ?>
-    
 <?php if ($this->listmessages): ?>
 
        <?php foreach ($this->paginator as $key => $val): ?>
@@ -34,15 +32,7 @@ if (isset ( $this->error )) :
 
             <h4>
                 <a href="/<?=$this->lang ?>/message/show/id/<?=$this->escape($val['id']) ?>">
-           <?=$this->escape($val['subject']) ?>
-
-                 <?php
-                    if ($val['readed'] == 0) {
-
-                        echo '<img alt="'.$this->translate('unreaded').'" src="/images/icons/ico_email.gif" />';
-                    } ?>
-
-                </a></h4>
+           <?=$this->escape($val['subject']) ?> </a></h4>
 
           
             <span class="ad_date"><?=$this->translate('Sent '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>

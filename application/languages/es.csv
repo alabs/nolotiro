@@ -169,13 +169,22 @@
 "booked";"reservado"
 "delivered";"entregado"
 
+#message
+"received";"recibidos"
+"sent";"enviados"
+"Sent";"Enviado el"
+"from user";"de usuario"
+"Messages received";"Mensajes recibidos"
+"Messages sent";"Mensajes enviados"
 "Interested?";"¿Te interesa?"
+"You have a new message from user";"Tienes un nuevo mensaje del usuario"
+
 "Send a private message to the owner";"Envía un mensaje privado al anunciante"
 "send a private message";"envía un mensaje privado"
 "You have";"Tienes"
 "new messages";"nuevos mensajes"
 "Share this ad:";"Comparte este anuncio:"
-"This is an automated notification. Please, don\'t reply  at this email address.";"Este es un mensaje automático. Por favor, no respondas a esta dirección de email."
+"This is an automated notification. Please, don't reply  at this email address.";"Este es un mensaje automático. Por favor, no respondas a esta dirección de email."
 "New private message to user";"Nuevo mensaje privado para el usuario"
 "Subject:";"Tema"
 "delete this ad";"borrar anuncio"

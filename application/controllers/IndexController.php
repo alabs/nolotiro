@@ -18,7 +18,7 @@ class IndexController extends Zend_Controller_Action {
 
                 if ($this->view->checkMessages > 0) {
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('You have'). ' '.
-                            '<b><a href="/'.$this->view->lang.'/message/list">'. $this->view->translate('new messages'). ' (' .$this->view->checkMessages . ')</a></b>'  );
+                            '<b><a href="/'.$this->view->lang.'/message/received">'. $this->view->translate('new messages'). ' (' .$this->view->checkMessages . ')</a></b>'  );
                 }
 
 	}

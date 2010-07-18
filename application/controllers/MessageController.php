@@ -16,6 +16,12 @@ class MessageController extends Zend_Controller_Action {
 
         $this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
         $this->view->mensajes = $this->_flashMessenger->getMessages ();
+
+        if ($this->view->checkMessages > 0) {
+                    $this->_helper->_flashMessenger->addMessage($this->view->translate('You have'). ' '.
+                            '<b><a href="/'.$this->view->lang.'/message/received">'. $this->view->translate('new messages'). ' (' .$this->view->checkMessages . ')</a></b>'  );
+                }
+
     }
 
 
@@ -92,7 +98,7 @@ class MessageController extends Zend_Controller_Action {
                 $mail->setBodyHtml( $data['body'] );
                 $mail->setFrom ( 'noreply@nolotiro.org', 'nolotiro.org' );
                 $mail->addTo ( $data['email'] );
-                $mail->setSubject ( '[nolotiro.org] - '.$this->view->translate('You have new message from user ') . $data['user_from'] );
+                $mail->setSubject ( '[nolotiro.org] - '.$this->view->translate('You have a new message from user'). ' ' . $data['user_from'] );
                 $mail->send ();
 
                 $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Message sent successfully!' ) );
@@ -104,7 +110,7 @@ class MessageController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
-    public function listAction() {
+    public function receivedAction() {
 
 
          //first we check if user is logged, if not redir to login
@@ -113,15 +119,13 @@ class MessageController extends Zend_Controller_Action {
 
             //keep this url in zend session to redir after login
             $aNamespace = new Zend_Session_Namespace('Nolotiro');
-            $aNamespace->redir = $this->lang.'/message/list';
-
-            //Zend_Debug::dump($aNamespace->redir);
+            $aNamespace->redir = $this->lang.'/message/received';
             $this->_redirect ( $this->lang.'/auth/login' );
 
-        } else { // if is user auth go to show messages list
+        } else { // if is user auth go to show received messages list
 
                 $modelM = new Model_Message();
-                $this->view->listmessages = $modelM->listMessagesUser($auth->getIdentity()->id);
+                $this->view->listmessages = $modelM->getMessagesUserReceived($auth->getIdentity()->id);
 
                
                  //paginator
@@ -133,9 +137,40 @@ class MessageController extends Zend_Controller_Action {
 
                 $this->view->paginator = $paginator;
 
+        }
+
     }
 
-    
+
+     public function sentAction() {
+
+
+         //first we check if user is logged, if not redir to login
+        $auth = Zend_Auth::getInstance ();
+        if (! $auth->hasIdentity ()) {
+
+            //keep this url in zend session to redir after login
+            $aNamespace = new Zend_Session_Namespace('Nolotiro');
+            $aNamespace->redir = $this->lang.'/message/sent';
+            $this->_redirect ( $this->lang.'/auth/login' );
+
+        } else { // if is user auth go to show received messages list
+
+                $modelM = new Model_Message();
+                $this->view->listmessages = $modelM->getMessagesUserSent($auth->getIdentity()->id);
+
+
+                 //paginator
+                $page = $this->_getParam('page');
+                $paginator = Zend_Paginator::factory($this->view->listmessages);
+                $paginator->setDefaultScrollingStyle('Elastic');
+                $paginator->setItemCountPerPage(10);
+                $paginator->setCurrentPageNumber($page);
+
+                $this->view->paginator = $paginator;
+
+        }
+
     }
 
 
@@ -143,7 +178,7 @@ class MessageController extends Zend_Controller_Action {
 
     /**
      *
-     * @return New_Message
+     * @return New_Message form
      */
     protected function _getNewMessageForm() {
         require_once APPLICATION_PATH . '/forms/Message.php';
