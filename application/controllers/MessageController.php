@@ -88,7 +88,7 @@ class MessageController extends Zend_Controller_Action {
 
                 $data['body'] = $data['subject'] . '<br/>' . $data['body'] . '<br/>';
                 $data['body'] .= $this->view->translate('Go to this url to reply this message:') .'<br/>'.
-                       '<a href="'.$hostname.'/'.$this->lang. ' /message/received" ' .$hostname .'/'. $this->lang . '/message/received';
+                       '<a href="'.$hostname.'/'.$this->lang. ' /message/received"> ' .$hostname .'/'. $this->lang . '/message/received </a>';
                 $data['body'] .= '<br>---------<br/>';
                 $data['body'] .= $this->view->translate('This is an automated notification. Please, don\'t reply  at this email address.');
 
