@@ -212,7 +212,7 @@ class UserController extends Zend_Controller_Action {
 
                     $mail = new Zend_Mail ( );
                     $mail->setBodyHtml($this->view->translate('Somebody , probably you, wants to restore your nolotiro access. Click on this url to restore your nolotiro account:') . '<br />'
-                            . $hostname . '/' . $this->view->lang . '/user/validate/t/' . $mailcheck['token'] .
+                           .'<a href="'.$hostname. '/'. $this->view->lang . '/user/validate/t/'.$mailcheck['token'] .' >" '. $hostname . '/' . $this->view->lang . '/user/validate/t/' . $mailcheck['token'] .'</a>' .
                             '<br /><br />' .
                             $this->view->translate('Otherwise, ignore this message.') .
                             '<br />__<br />' . utf8_decode($this->view->translate('The nolotiro.org team.')));
