@@ -103,8 +103,8 @@ class UserController extends Zend_Controller_Action {
 
                     $mail = new Zend_Mail ( );
                     $mail->setBodyHtml($this->view->translate('Please, click on this url to finish your register process:<br />')
-                            . $hostname . $this->view->translate('/en/user/validate/t/') . $token .
-                            '<br /><br />__<br />' . utf8_decode($this->view->translate('The nolotiro.org team.')));
+                          .'<a href="'.$hostname.$this->view->translate('/en/user/validate/t/').$token.'">'  . $hostname . $this->view->translate('/en/user/validate/t/') . $token .'</a>'.
+                            '<br /><br />---------<br />' . utf8_decode($this->view->translate('The nolotiro.org team.')));
                     $mail->setFrom('noreply@nolotiro.org', 'nolotiro.org');
 
                     $mail->addTo($formulario['email']);
