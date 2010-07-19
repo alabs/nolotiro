@@ -84,9 +84,11 @@ class MessageController extends Zend_Controller_Action {
 
 
                 $mail = new Zend_Mail('utf-8');
+                $hostname = 'http://' . $this->getRequest()->getHttpHost();
 
                 $data['body'] = $data['subject'] . '<br/>' . $data['body'] . '<br/>';
-                $data['body'] .= '---------<br/>';
+                $data['body'] .= $this->view->translate('Go to this url to reply this message:') .'<br/>'.$hostname .'/'. $this->lang . '/message/received';
+                $data['body'] .= '<br>---------<br/>';
                 $data['body'] .= $this->view->translate('This is an automated notification. Please, don\'t reply  at this email address.');
 
                 $mail->setBodyHtml($data['body']);

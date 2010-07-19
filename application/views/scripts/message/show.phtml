@@ -5,7 +5,6 @@
 <h3><?=$this->message['subject'] ?></h3>
 </div>
 
-
 <?
 if (count ( $this->mensajes ) > 0) {
 	echo '<div class="success">';
@@ -15,7 +14,6 @@ if (count ( $this->mensajes ) > 0) {
 	echo '</div>';
 }
 ?>
-
 
 <div id="main">
 <div class="span-15">
@@ -27,15 +25,15 @@ $auth = Zend_Auth::getInstance ();
 if ($this->message['user_to'] == $auth->getIdentity()->id): ?>
 
 
-<a href="/<?=$this->lang ?>/ad/edit/id/<?=$this->ad['id'] ?>"><?=$this->translate('Delete this message') ?></a>
+<a href="/<?=$this->lang ?>/message/delete/id/<?=$this->message['id'] ?>"><?=$this->translate('Delete this message') ?></a>
 
 <?php endif;?>
 
        
         <div class="ad_excerpt_show">
-           <span class="ad_date"><?=$this->translate('Posted on '). $this->message['date_created'] ?>
+           <span class="ad_date"><?=$this->translate('Sent'). ' ' .$this->message['date_created'] ?>
             <?=$this->translate('by user ') ?> 
-            <a href="/<?=$this->lang ?>/profile/<?=$this->ad['username'] ?>"><?=$this->ad['username'] ?></a>
+            <a href="/<?=$this->lang ?>/profile/<?=$this->message['user_from'] ?>"><?=$this->message['user_from'] ?></a>
             </span>
             
            <br>
