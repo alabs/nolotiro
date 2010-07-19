@@ -47,8 +47,6 @@ class MessageController extends Zend_Controller_Action {
             //keep this url in zend session to redir after login
             $aNamespace = new Zend_Session_Namespace('Nolotiro');
             $aNamespace->redir = $this->lang . '/message/create/id_user_to/' . $id_user_to;
-
-            //Zend_Debug::dump($aNamespace->redir);
             $this->_redirect($this->lang . '/auth/login');
         }
 
@@ -189,8 +187,8 @@ class MessageController extends Zend_Controller_Action {
             $this->view->page_title .= $this->view->message['subject'];
 
             $form = $this->_getNewMessageForm();
-            $form->setAction('/' . $this->lang . '/comment/create/ad_id/' . $id);
-            $this->view->createcomment = $form;
+            $form->setAction('/' . $this->lang . '/message/create/id_user_to/' . $this->view->message['user_to']);
+            $this->view->createreply = $form;
         } else {
 
             $this->_helper->_flashMessenger->addMessage($this->view->translate('This message does not exist or may have been deleted!'));

@@ -4,7 +4,6 @@
 </h5>
 <h3><?=$this->message['subject'] ?></h3>
 </div>
-
 <?
 if (count ( $this->mensajes ) > 0) {
 	echo '<div class="success">';
@@ -14,38 +13,30 @@ if (count ( $this->mensajes ) > 0) {
 	echo '</div>';
 }
 ?>
-
 <div id="main">
 <div class="span-15">
-
 
 <?php
 // if you are the ad owner or admin, then show edit link
 $auth = Zend_Auth::getInstance ();
 if ($this->message['user_to'] == $auth->getIdentity()->id): ?>
-
-
-<a href="/<?=$this->lang ?>/message/delete/id/<?=$this->message['id'] ?>"><?=$this->translate('Delete this message') ?></a>
-
+    <a href="/<?=$this->lang ?>/message/delete/id/<?=$this->message['id'] ?>"><?=$this->translate('Delete this message') ?></a>
 <?php endif;?>
 
-       
         <div class="ad_excerpt_show">
            <span class="ad_date"><?=$this->translate('Sent'). ' ' .$this->message['date_created'] ?>
             <?=$this->translate('by user ') ?> 
             <a href="/<?=$this->lang ?>/profile/<?=$this->message['user_from'] ?>"><?=$this->message['user_from'] ?></a>
             </span>
-            
-           <br>
+           <br />
            <span><?php echo $this->message['body'] ?></span>
-
 </div>
 
 
-
 <div class="ad_comment_form">
-        <?=$this->createcomment?>
-        </div>
+    <h5><?=$this->translate('Reply to this message') ;?></h5>
+        <?=$this->createreply ?>
+</div>
 
 
 
