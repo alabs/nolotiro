@@ -187,7 +187,8 @@ class MessageController extends Zend_Controller_Action {
             $this->view->page_title .= $this->view->message['subject'];
 
             $form = $this->_getNewMessageForm();
-            $form->setAction('/' . $this->lang . '/message/create/id_user_to/' . $this->view->message['user_to']);
+           
+            $form->setAction('/' . $this->lang . '/message/create/id_user_to/' . $this->view->message['user_from']);
             $this->view->createreply = $form;
         } else {
 
