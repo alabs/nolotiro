@@ -77,6 +77,10 @@ class MessageController extends Zend_Controller_Action {
                 //get the email of the receiver user
                 $data['email'] = $this->_getModelMessage()->getEmailUser($id_user_to);
 
+                //get the username of the sender
+                $musername_from = new Model_User();
+                $username_from = $musername_from->fetchUser($data['user_from'])->toArray();
+
                 //save the message into ddbb
                 $modelMessage = $this->_getModelMessage()->save($data);
 
@@ -93,7 +97,7 @@ class MessageController extends Zend_Controller_Action {
                 $mail->setBodyHtml($data['body']);
                 $mail->setFrom('noreply@nolotiro.org', 'nolotiro.org');
                 $mail->addTo($data['email']);
-                $mail->setSubject('[nolotiro.org] - ' . $this->view->translate('You have a new message from user') . ' ' . $data['user_from']);
+                $mail->setSubject('[nolotiro.org] - ' . $this->view->translate('You have a new message from user') . ' ' . $username_from['username']);
                 $mail->send();
 
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Message sent successfully!'));
@@ -165,8 +169,8 @@ class MessageController extends Zend_Controller_Action {
         $this->view->message = $model->getMessage($id);
 
         $auth = Zend_Auth::getInstance ();
-        if ($auth->hasIdentity()) { //not the owner of the message, go to hell
-            if ($auth->getIdentity()->id != $this->view->message['user_to']) {
+        if ($auth->hasIdentity()) { //if not the sender or receiver of the message, go to hell
+            if ( ($auth->getIdentity()->id != $this->view->message['user_to'] ) and  ( $auth->getIdentity()->id != $this->view->message['user_from'] )) {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
                 $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
             }
@@ -183,6 +187,10 @@ class MessageController extends Zend_Controller_Action {
             //set to readed
             $readed = new Model_Message();
             $readed->updateMessageReaded($id);
+
+
+            $musername_from = new Model_User();
+            $this->view->username_from = $musername_from->fetchUser($this->view->message['user_from'])->toArray();
 
             $this->view->page_title .= $this->view->message['subject'];
 

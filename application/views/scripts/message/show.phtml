@@ -18,15 +18,18 @@ if (count ( $this->mensajes ) > 0) {
 
 <?php
 // if you are the ad owner or admin, then show edit link
-$auth = Zend_Auth::getInstance ();
-if ($this->message['user_to'] == $auth->getIdentity()->id): ?>
-    <a href="/<?=$this->lang ?>/message/delete/id/<?=$this->message['id'] ?>"><?=$this->translate('Delete this message') ?></a>
-<?php endif;?>
+
+//TODO, problem deleting message , just one time keeped in
+
+//$auth = Zend_Auth::getInstance ();
+//if ($this->message['user_to'] == $auth->getIdentity()->id): ?>
+    //here goes delete link
+<?php //endif;?>
 
         <div class="ad_excerpt_show">
            <span class="ad_date"><?=$this->translate('Sent'). ' ' .$this->message['date_created'] ?>
             <?=$this->translate('by user ') ?> 
-            <a href="/<?=$this->lang ?>/profile/<?=$this->message['user_from'] ?>"><?=$this->message['user_from'] ?></a>
+            <a href="/<?=$this->lang ?>/profile/<?=$this->username_from['username'] ?>"><?=$this->username_from['username'] ?></a>
             </span>
            <br />
            <span><?php echo $this->message['body'] ?></span>

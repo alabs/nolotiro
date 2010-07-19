@@ -60,7 +60,10 @@ class Model_Message extends Zend_Db_Table_Abstract {
 
         $id = (int) $id;
         $table = new Model_Message();
-        $select = $table->select()->where('user_to = ?', $id);
+        $select = $table->select()->setIntegrityCheck(false);
+	$select->from(array('m' => 'messages'), array('m.*' ));
+	$select->joinInner(array('u' => 'users'), 'm.user_from = u.id' , array('u.username'));
+        $select->where('user_to = ?', $id);
         $select->order('date_created DESC');
         $result = $table->fetchAll ( $select )->toArray ();
 
@@ -68,12 +71,14 @@ class Model_Message extends Zend_Db_Table_Abstract {
     }
 
 
-
     public function getMessagesUserSent($id) {
 
         $id = (int) $id;
         $table = new Model_Message();
-        $select = $table->select()->where('user_from = ?', $id);
+        $select = $table->select()->setIntegrityCheck(false);
+	$select->from(array('m' => 'messages'), array('m.*' ));
+	$select->joinInner(array('u' => 'users'), 'm.user_to = u.id' , array('u.username'));
+        $select->where('user_from = ?', $id);
         $select->order('date_created DESC');
         $result = $table->fetchAll ( $select )->toArray ();
 
@@ -94,10 +99,16 @@ class Model_Message extends Zend_Db_Table_Abstract {
         $id = (int) $id;
         $table = new Model_Message();
         $data['readed'] = 1;
-        return $table->update( $data,  'id = ' . ( int ) $id);
+        return $table->update( $data,  'id = ' . $id);
 
 
     }
+
+     public  function deleteMessage($id) {
+         //TODO
+		$this->delete ( 'id =' . ( int ) $id );
+	}
+
 
 }
 

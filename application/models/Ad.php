@@ -16,13 +16,6 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 	protected $_table;
 	
 	
-	
-	/**
-	 * Save a new entry
-	 * 
-	 * @param  array $data 
-	 * @return int|string
-	 */
 	public function createAd(array $data) {
 		$table = new Model_Ad ();
 		$fields = $table->info ( Zend_Db_Table_Abstract::COLS );
@@ -34,14 +27,6 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		return $table->insert ( $data );
 	}
 
-
-
-
-//	public function updateAd( $id, $title, $body, $type, $photo, $status, $comments_enabled ) {
-//		$data = array ( 'title' => $title, 'body' => $body, 'type' => $type, 'photo' => $photo, 'status' => $status, 'comments_enabled' => $comments_enabled );
-//		$this->update ( $data, 'id = ' . ( int ) $id );
-//
-//	}
 
     public function updateAd(array $data, $id){
 
@@ -59,20 +44,13 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 
 
 
-    function deleteAd($id) {
+    public  function deleteAd($id) {
 		$this->delete ( 'id =' . ( int ) $id );
 	}
 
 
 
 
-
-	/**
-	 * Fetch an individual entry
-	 * 
-	 * @param  int|string $id 
-	 * @return array
-	 */
 	public function getAd($id) {
 		$id = ( int )$id;
 		
