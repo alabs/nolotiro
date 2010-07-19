@@ -1,6 +1,6 @@
 <div id="default_header_section">
 <h5>
-<?=$this->translate('message sent from user') ?>
+    <a href="/<?=$this->lang ?>/message/received">< <?=$this->translate('back to messages received') ?></a>
 </h5>
 <h3><?=$this->message['subject'] ?></h3>
 </div>
@@ -41,10 +41,6 @@ if ($this->message['user_to'] == $auth->getIdentity()->id): ?>
            <br>
            <span><?php echo $this->message['body'] ?></span>
 
-
-         
-	   <?=$this->translate('Interested?') ?>&nbsp;
-<a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'] ?>"><?=$this->translate('Send a private message to the owner') ?></a>
 </div>
 
 

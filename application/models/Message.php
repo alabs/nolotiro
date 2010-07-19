@@ -50,7 +50,7 @@ class Model_Message extends Zend_Db_Table_Abstract {
         $id = (int) $id;
         $table = new Model_Message();
         $select = $table->select()->where('id = ?', $id);	
-        $result = $table->fetchRow( $select )->toArray ();
+        $result = $table->fetchRow( $select );
 
         return $result;
     }
@@ -87,6 +87,16 @@ class Model_Message extends Zend_Db_Table_Abstract {
         $select = $table->select()->where('user_to = ?', $id);
         $select->where('readed = ?', 0 );
         return $table->fetchAll($select)->count();
+    }
+
+    public function updateMessageReaded($id){
+
+        $id = (int) $id;
+        $table = new Model_Message();
+        $data['readed'] = 1;
+        return $table->update( $data,  'id = ' . ( int ) $id);
+
+
     }
 
 }

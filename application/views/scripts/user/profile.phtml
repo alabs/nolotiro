@@ -10,8 +10,18 @@ if (isset ( $this->error )) :
 <div class="error">
 		<?=$this->escape ( $this->error );?>
 </div>
-
 <?php endif;?>
+
+
+<?
+if (count ( $this->mensajes ) > 0) {
+	echo '<div class="success">';
+	foreach ( $this->mensajes as $msg ) {
+		echo $msg . '<br>';
+	}
+	echo '</div>';
+}
+?>
 
 <div id="main">
 <div class="span-18">

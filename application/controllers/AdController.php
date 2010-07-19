@@ -11,11 +11,16 @@ class AdController extends Zend_Controller_Action {
     public function init() {
 
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
-        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        $this->view->mensajes = $this->_flashMessenger->getMessages();
         $this->location = $this->_helper->checklocation->check();
         $this->view->checkMessages  = $this->_helper->checkMessages->check();
 
+        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        $this->view->mensajes = $this->_flashMessenger->getMessages();
+
+         if ($this->view->checkMessages > 0) {
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('You have') . ' ' .
+                    '<b><a href="/' . $this->view->lang . '/message/received">' . $this->view->translate('new messages') . ' (' . $this->view->checkMessages . ')</a></b>');
+        }
     }
 
     public function listAction() {
