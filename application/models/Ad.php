@@ -143,7 +143,8 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		$table = new Model_Ad ( );
 		$select = $table->select()->setIntegrityCheck(false);
 		$select->from(array('a' => 'ads'), array('a.*' ));
-		$select->joinInner(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
+                $select->joinLeft(array('c' => 'commentsAdCount'), 'a.id = c.id_comment' , array('c.count as comments_count'));
+		$select->join(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
                 //show only if user is active and not blocked
                 $select->where('u.active = ?', 1);
                 $select->where('u.locked = ?', 0);

@@ -59,9 +59,9 @@ if (count ( $this->mensajes ) > 0) {
 	   <div><?php echo $this->escape($val['body']) ?></div>
 	   
            <div class="ad_meta_info">
-           
+                <?php if ($val['comments_count']): ?>
                  <?=$this->escape( $val['comments_count'] == null  ? 0 : $val['comments_count'] ).' '.$this->translate('comments') ?>
-	   
+                 <?php endif;?>
            </div>
 
         </div>
