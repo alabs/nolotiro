@@ -72,6 +72,18 @@ class SimpleImage {
       $height = $this->getheight() * $ratio;
       $this->resize($width,$height);
    }
+
+     function resizeToWidthMax() {
+
+         $width = 900;
+
+         if ($this->getWidth() > 900) {
+              $ratio = $width / $this->getWidth();
+              $height = $this->getheight() * $ratio;
+              $this->resize($width,$height);
+        }
+   }
+
    function scale($scale) {
       $width = $this->getWidth() * $scale/100;
       $height = $this->getheight() * $scale/100; 
@@ -81,5 +93,8 @@ class SimpleImage {
       $new_image = imagecreatetruecolor($width, $height);
       imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
       $this->image = $new_image;   
-   }      
+   }
+
+
+
 }
