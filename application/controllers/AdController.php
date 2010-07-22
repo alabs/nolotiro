@@ -114,6 +114,19 @@ class AdController extends Zend_Controller_Action {
         $model = $this->_getModel();
         $this->view->ad = $model->getAd($id);
 
+        //lets count the comments number and update
+
+         $modelComments = new Model_Comment();
+         $this->view->checkCountAd  = $count =  $modelComments->countCommentsAd( (int)$id);
+
+         if ($this->view->checkCountAd > 0) {
+             $modelComments->updateCommentsAd($id, $count);
+         }
+
+         
+         
+          
+
         if ($this->view->ad != null) { // if the id ad exists then render the ad and comments
 
             if ($this->view->ad['type'] == 'give') {
@@ -365,6 +378,8 @@ class AdController extends Zend_Controller_Action {
         $image->load('/tmp/' . $file);
 
         //save original to right place
+        $widthmax = 900;
+        $image->resizeToWidthMax($widthmax);
         $image->save(NOLOTIRO_PATH . '/www/images/uploads/ads/original/' . $fileuniquename);
 
         //save thumb 100

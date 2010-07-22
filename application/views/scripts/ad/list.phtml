@@ -27,7 +27,10 @@ if (count ( $this->mensajes ) > 0) {
 
 <?php if ($this->ad): ?>
 
-       <?php foreach ($this->paginator as $key => $val): ?>
+       <?php
+
+//Zend_Debug::dump($this->ad);
+       foreach ($this->paginator as $key => $val): ?>
         <div class="ad_excerpt">
 		
 	  <?php
@@ -55,8 +58,12 @@ if (count ( $this->mensajes ) > 0) {
 	   
 	   <div><?php echo $this->escape($val['body']) ?></div>
 	   
+           <div class="ad_meta_info">
+           
+                 <?=$this->escape( $val['comments_count'] == null  ? 0 : $val['comments_count'] ).' '.$this->translate('comments') ?>
 	   
-	   
+           </div>
+
         </div>
         
         <?php endforeach; ?>

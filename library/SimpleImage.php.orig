@@ -73,12 +73,12 @@ class SimpleImage {
       $this->resize($width,$height);
    }
 
-     function resizeToWidthMax( $widthmax) {
+     function resizeToWidthMax($widthmax) {
 
-         if ($this->getWidth() > 900) {
+         if ($this->getWidth() > $widthmax) {
               $ratio = $widthmax / $this->getWidth();
               $height = $this->getheight() * $ratio;
-              $this->resize($widthmax,$height);
+              $this->resize($width,$height);
         }
    }
 

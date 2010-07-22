@@ -45,4 +45,37 @@ class Model_Comment  {
 		$table->update ( $data, $where );
 	
 	}
+
+
+         public function countCommentsAd($id){
+
+                if ($id){
+
+                    $table = $this->getTable ();
+
+                    $select = $table->select();
+                    $select->from($table, 'id');
+                    $select->where('ads_id = ?', (int)$id);
+                    $result = count($table->fetchAll ( $select ));
+
+                    }
+
+		return  $result;
+
+        }
+
+
+
+        public function updateCommentsAd( $id,$count){
+                $id = (int) $id;
+
+                $table = new Zend_Db_Table('commentsAdCount');
+                $sql = "INSERT INTO commentsAdCount   ( id_comment, count ) VALUES  ( ?,? )
+                            ON DUPLICATE KEY UPDATE id_comment = ?, count = ?";
+
+                $values = array("id_comment"=>$id, "count"=>$count);
+                $result = $table->getAdapter()->query($sql, array_merge(array_values($values), array_values($values)));
+
+    }
+
 }

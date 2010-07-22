@@ -52,6 +52,7 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
            <br>
            <span><?php echo $this->ad['body'] ?></span>
 
+           <div class="ad_meta_info"><?=$this->checkCountAd.' '.$this->translate('comments') ?></div>
 
            <div class="sharelinks"><?=$this->translate('Share this ad:');?>
             <a href="http://www.facebook.com/share.php?u=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'];?>">
