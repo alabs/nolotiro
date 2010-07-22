@@ -121,11 +121,7 @@ class AdController extends Zend_Controller_Action {
 
          if ($this->view->checkCountAd > 0) {
              $modelComments->updateCommentsAd($id, $count);
-         }
-
-         
-         
-          
+         }    
 
         if ($this->view->ad != null) { // if the id ad exists then render the ad and comments
 
