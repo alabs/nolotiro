@@ -19,7 +19,23 @@ class Form_UserLogin extends Zend_Form {
 		 );
 		
 		$this->addElement ( 'password', 'password', array ('filters' => array ('StringTrim' ), 'validators' => array (array ('StringLength', false, array (5, 20 ) ) ), 'required' => true, 'label' => 'Password:' ) );
-		
+
+                $checkboxDecorator = array(
+                                'ViewHelper',
+                                'Errors',
+                                array(array('data' => 'HtmlTag'), array('tag' => 'span', 'class' => 'element')),
+                                array('Label', array('tag' => 'dt'),
+                                array(array('row' => 'HtmlTag'), array('tag' => 'span')),
+                            ));
+
+                $this->addElement('checkbox', 'rememberme', array(
+                    'decorators' => $checkboxDecorator,
+                    'required' => true,
+                    'checked' =>false
+                    ));
+
+
+
 		// add the submit button
 		$this->addElement ( 'submit', 'submit', array ('label' => 'Login' ) );
 	}

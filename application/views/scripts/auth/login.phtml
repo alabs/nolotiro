@@ -33,6 +33,10 @@ if (isset ( $this->error )) :
 		
 		<?=$this->form->email?>
 		<?=$this->form->password?>
+
+                <span id="agree">
+            <?=$this->form->rememberme.$this->translate('Remember me');?>
+            </span>
 		
 		<?=$this->form->submit?>
 		<br />

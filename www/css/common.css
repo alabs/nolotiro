@@ -35,6 +35,12 @@ a.actual {
 }
 
 
+#agree {
+    display: inline;
+    line-height: 10px;
+    height: 20px;
+}
+
 
 .user_login_box {
 	margin-top: -0.4em;
@@ -225,7 +231,7 @@ a.actual {
     text-align: left;
     font-size: 11px;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     
 }
 

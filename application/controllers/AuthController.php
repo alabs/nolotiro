@@ -88,6 +88,20 @@ class AuthController extends Zend_Controller_Action {
 
 					$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Welcome,' ) .' '. $auth->getIdentity()->username );
 
+                                        //check if user wants to be remembered by 7 days
+                                        $seconds  = 60 * 60 * 24 * 7;
+
+                                        if ($this->_request->getPost ( 'rememberme' ) == "1" ) {
+                                            Zend_Session::RememberMe($seconds);
+                                        }
+                                        else {
+
+                                            Zend_Session::ForgetMe();
+                                        }
+
+                                        Zend_Session::start();
+
+
 					//check the redir value if setted
 					$aNamespace = new Zend_Session_Namespace('Nolotiro');
 					$redir = $aNamespace->redir;
