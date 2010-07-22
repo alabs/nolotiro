@@ -115,9 +115,12 @@ class AdController extends Zend_Controller_Action {
         $this->view->ad = $model->getAd($id);
 
         //lets count the comments number and update
-
          $modelComments = new Model_Comment();
          $this->view->checkCountAd  = $count =  $modelComments->countCommentsAd( (int)$id);
+         //let's increment +1 the ad view counter
+         $model->updateReadedAd($id);
+         $this->view->countReadedAd = $model->countReadedAd($id);
+        
 
          if ($this->view->checkCountAd > 0) {
              $modelComments->updateCommentsAd($id, $count);

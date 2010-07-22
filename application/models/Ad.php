@@ -115,7 +115,7 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		$select = $table->select()->setIntegrityCheck(false);
 		$select->from(array('a' => 'ads'), array('a.*' ));
                 $select->joinLeft(array('c' => 'commentsAdCount'), 'a.id = c.id_comment' , array('c.count as comments_count'));
-
+                $select->joinLeft(array('r' => 'readedAdCount'), 'a.id = r.id_ad' , array('r.counter as readings_count'));
 		$select->join(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
 
 		
@@ -144,6 +144,7 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		$select = $table->select()->setIntegrityCheck(false);
 		$select->from(array('a' => 'ads'), array('a.*' ));
                 $select->joinLeft(array('c' => 'commentsAdCount'), 'a.id = c.id_comment' , array('c.count as comments_count'));
+                $select->joinLeft(array('r' => 'readedAdCount'), 'a.id = r.id_ad' , array('r.counter as readings_count'));
 		$select->join(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
                 //show only if user is active and not blocked
                 $select->where('u.active = ?', 1);
@@ -187,7 +188,31 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 
         }
 	
-	
+
+        public function countReadedAd($id){
+
+                if ($id){
+                    $table = new Zend_Db_Table('readedAdCount');
+                    $id = (int) $id;
+                    $sql = "SELECT  counter FROM readedAdCount WHERE id_ad =  $id";
+                    $result = $table->getAdapter()->query($sql)->fetch();
+
+                    }
+
+		return  $result;
+        }
+
+
+
+        public function updateReadedAd( $id ){
+            
+                $table = new Zend_Db_Table('readedAdCount');
+                $id = (int) $id;                
+                $sql = "INSERT INTO readedAdCount   ( id_ad, counter ) VALUES  ( $id , 1 )
+                            ON DUPLICATE KEY UPDATE  counter=counter+1";
+                $result = $table->getAdapter()->query($sql)->fetch();
+    }
+
 }
 
 
