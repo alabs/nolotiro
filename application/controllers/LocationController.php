@@ -25,31 +25,39 @@ class LocationController extends Zend_Controller_Action {
         $request = $this->getRequest();
         $form = $this->_getLocationChangeForm();
 
+        $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
+
         if ($this->getRequest()->isPost()) {
 
 
             if ($form->isValid($request->getPost())) {
 
                 $formulario = $form->getValues();
-
                 //convert to lowercase and clean spaces
                 $formulario['location'] = ucfirst(mb_convert_case(trim($formulario['location']), MB_CASE_LOWER, "UTF-8"));
 
                 $aNamespace = new Zend_Session_Namespace('Nolotiro');
-                $aNamespace->locationTemp = $formulario['location'];
+                $aNamespace->__set(locationTemp, $formulario['location']);
 
                 $this->_redirect('/' . $this->view->lang . '/location/change2');
             }
         }
+        
         // assign the form to the view
         $this->view->form = $form;
     }
 
     public function change2Action() {
 
+        $request = $this->getRequest();
         $aNamespace = new Zend_Session_Namespace('Nolotiro');
         $locationtemp = $aNamespace->locationTemp;
 
+
+        //if is get overwrite the localtemp value
+        if ($_GET['location']) {
+            $locationtemp = $_GET['location'];
+        } 
 
         $town = $this->view->translate('Town');
         $places = $this->getYahooGeoWoeidList($locationtemp, $this->view->lang, $town);
@@ -70,7 +78,7 @@ class LocationController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->view->lang . '/woeid/' . $aNamespace->location . '/give');
         }
 
-        $request = $this->getRequest();
+        
         $form = $this->_getLocationChange2Form($locationtemp);
 
 

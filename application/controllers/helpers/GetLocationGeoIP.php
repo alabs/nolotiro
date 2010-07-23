@@ -18,7 +18,10 @@ class Zend_Controller_Action_Helper_GetLocationGeoIP extends Zend_Controller_Act
                     $ip = getenv(REMOTE_ADDR);
                 }
 
-               // $ip = '8.8.4.4';
+                
+                //$ip = '67.195.114.53';//yahoo slurp
+                //$ip = '66.249.71.206';//google bot
+
 
 		$gi = geoip_open("/usr/local/share/GeoIP/GeoLiteCity.dat",GEOIP_STANDARD);
 	        $record = geoip_record_by_addr($gi,$ip);
