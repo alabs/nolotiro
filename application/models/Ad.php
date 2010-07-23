@@ -145,6 +145,11 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		$select->from(array('a' => 'ads'), array('a.*' ));
                 $select->joinLeft(array('c' => 'commentsAdCount'), 'a.id = c.id_comment' , array('c.count as comments_count'));
                 $select->joinLeft(array('r' => 'readedAdCount'), 'a.id = r.id_ad' , array('r.counter as readings_count'));
+
+                //fetch woeid name
+                //TODO just testing, too slow to add in prod
+                //$select->joinLeft(array('p' => 'geoplanet_places'), 'a.woeid_code = p.woeid' , array('p.name as geo_name'));
+
 		$select->join(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
                 //show only if user is active and not blocked
                 $select->where('u.active = ?', 1);

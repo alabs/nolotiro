@@ -148,10 +148,18 @@ class UserController extends Zend_Controller_Action {
         $auth = Zend_Auth::getInstance ();
 
         if (($auth->getIdentity()->id == $this->view->user['id'])) { //if is the user profile owner lets delete it
-            $this->view->editprofile = '
+            $this->view->editprofile_tab = '
         <li ><a href="/' . $this->view->lang . '/user/edit/id/' . $auth->getIdentity()->id . ' ">' . $this->view->translate('edit profile') . '</a></li>
             <li ><a href="/' . $this->view->lang . '/message/received">' . $this->view->translate('messages') . '</a></li>';
+        } else {
+           
+           $this->view->sendmessage_tab = '
+        <a href="/'.$this->view->lang .'/message/create/id_user_to/'.$modelarray['id'].'">'.$this->view->translate('send message to'). ' ' .$username .'</a>';
+            
+         
         }
+
+
     }
 
     /**

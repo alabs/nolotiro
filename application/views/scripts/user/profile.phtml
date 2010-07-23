@@ -2,6 +2,7 @@
 
 <div id="default_header_section">
 <h3><?=$this->translate ( 'User profile' ).'  -  '.$this->user['username'];?></h3>
+<?=$this->sendmessage_tab; ?>
 </div>
 
 <?php
@@ -27,9 +28,10 @@ if (count ( $this->mensajes ) > 0) {
 <div class="span-18">
 
 <ul id="tabnav">
-        <?=$this->editprofile ?>
+        <?=$this->editprofile_tab; ?>
 	<li ><a   id="<?=(preg_match("/profile/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/profile/<?=$this->user[username] ?>"><?=$this->translate('profile');?></a></li>
 	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[id] ?>"><?=$this->translate('ads');?></a></li>
+        
 </ul>
 
 
