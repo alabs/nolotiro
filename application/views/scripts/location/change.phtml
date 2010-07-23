@@ -2,14 +2,19 @@
 <h3><?=$this->translate ( 'Change your location' );?></h3>
 </div>
 
+
 <?php
+if (count ( $this->mensajes ) > 0) {
+	echo '<div class="success">';
+	foreach ( $this->mensajes as $msg ) {
+		echo $msg . '<br>';
+	}
+	echo '</div>';
+}
+?>
 
-//$aNamespace = new Zend_Session_Namespace('Nolotiro');
-//echo 'location actual = '.$aNamespace->location;
 
-
-
-
+<?php
 if (isset ( $this->error )) :
 	?>
 <div class="error">

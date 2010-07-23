@@ -46,6 +46,14 @@ class AdController extends Zend_Controller_Action {
             $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
         }
 
+        
+        //TODO , this sucks, do a better way to not show invalid woeids or null
+        if ( (empty ($woeid) ) || ($woeid < 10) || ($woeid == 29370606) ) { //29370606 españa town
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('This location is not a valid town. Please, try again.'));
+            $this->_redirect('/' . $this->lang . '/location/change');
+        }
+
+
         //set the location name reg var from the woeid helper
         $aNamespace = new Zend_Session_Namespace('Nolotiro');
         $aNamespace->locationName = $this->view->woeidName;

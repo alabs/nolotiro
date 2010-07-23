@@ -11,6 +11,10 @@ class LocationController extends Zend_Controller_Action {
 
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
         $this->view->checkMessages = $this->_helper->checkMessages->check();
+
+        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        $this->view->mensajes = $this->_flashMessenger->getMessages();
+
     }
 
     public function indexAction() {
