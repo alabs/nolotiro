@@ -55,7 +55,7 @@ if (count ( $this->mensajes ) > 0) {
            
            
 	   
-	   <div><?php echo $this->escape($val['body']) ?></div>
+	   <div><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></div>
 	   
            <div class="ad_meta_info">
                <?php if ($val['readings_count']): ?>

@@ -4,6 +4,9 @@ html input[type="text"], input[type="password"], input[type="submit"]{
     padding: 4px;
 }
 
+html img{
+    vertical-align: middle;
+}
 
 a:link {
 	color: #00ACCF;
