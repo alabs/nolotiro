@@ -13,9 +13,15 @@ class AdController extends Zend_Controller_Action {
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
         $this->location = $this->_helper->checklocation->check();
         $this->view->checkMessages  = $this->_helper->checkMessages->check();
-
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->mensajes = $this->_flashMessenger->getMessages();
+
+
+         //check if user is locked
+        $locked = $this->_helper->checkLockedUser->check();
+        if ($locked == 1) {
+            $this->_redirect('/' . $this->view->lang . '/auth/logout');
+        }
 
          if ($this->view->checkMessages > 0) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You have') . ' ' .

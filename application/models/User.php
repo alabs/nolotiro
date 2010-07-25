@@ -81,6 +81,11 @@ class Model_User {
        return $table->fetchRow ( $select )->woeid;
     }
 
+    public function checkLockedUser($id) {
+        $table = $this->getTable ();
+        $select = $table->select ('locked')->where ( 'id = ?', (int) $id );
+       return $table->fetchRow ( $select )->locked;
+    }
    
 
     /**
