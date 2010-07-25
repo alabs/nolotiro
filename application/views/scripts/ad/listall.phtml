@@ -40,7 +40,10 @@ if (count ( $this->mensajes ) > 0) {
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
+            <?php if ($val['type'] == 'give'): ?>
            <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
+            <?php endif;?>
+
             <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
             <?=$this->translate('by user ') ?>
 
