@@ -95,7 +95,8 @@ a.actual {
 
 .ad_create_tab {
 	position: absolute;
-	right: 15px;
+	right: 0px;
+        top: 40px;
 	
 
 }
