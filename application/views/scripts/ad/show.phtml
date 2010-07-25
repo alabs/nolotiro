@@ -43,7 +43,10 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
 	   }
 	   ?>
 
+           <?php if ($this->ad['type'] == 'give'): ?>
            <span class="ad_status <?=$this->ad['status'] ?>"><?=$this->translate($this->ad['status']) ?></span>
+           <?php endif;?>
+
            <span class="ad_date"><?=$this->translate('Posted on '). $this->ad['date_created'] ?>
             <?=$this->translate('by user ') ?> 
             <a href="/<?=$this->lang ?>/profile/<?=$this->ad['username'] ?>"><?=$this->ad['username'] ?></a>

@@ -45,7 +45,10 @@ if (count ( $this->mensajes ) > 0) {
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
+            <?php if ($val['type'] == 'give'): ?>
            <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
+           <?php endif;?>
+
             <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
             <?=$this->translate('by user ') ?>
 
@@ -58,13 +61,18 @@ if (count ( $this->mensajes ) > 0) {
 	   <div><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></div>
 	   
            <div class="ad_meta_info">
-               <?php if ($val['readings_count']): ?>
-                    <?=$val['readings_count'] . ' ' .$this->translate('readings') ?>
+               <b><a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'] ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
+               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']) ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
+
+               <?php if ($val['readings_count']): ?>&nbsp;&nbsp;
+                    <?=$val['readings_count'] . '&nbsp;&nbsp;' .$this->translate('readings') ?>
                 <?php endif;?>
 
                 <?php if ($val['comments_count']): ?>
                      <?=', '.$this->escape( $val['comments_count'] == null  ? 0 : $val['comments_count'] ).' '.$this->translate('comments') ?>
                  <?php endif;?>
+
+               
            </div>
 
         </div>
