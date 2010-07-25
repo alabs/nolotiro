@@ -41,6 +41,8 @@ class AdController extends Zend_Controller_Action {
         $this->view->woeid = $woeid;
         $this->view->ad = $model->getAdList($woeid, $ad_type);
         $this->view->woeidName = $this->_helper->woeid->name($woeid, $this->lang);
+        $short = explode(',', $this->view->woeidName);
+        $this->view->woeidNameShort = ' '. $this->view->translate('in') .' ' .$short[0];
 
         if (empty($this->view->ad)) {
             $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
