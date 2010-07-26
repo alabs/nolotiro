@@ -409,24 +409,24 @@ class AdController extends Zend_Controller_Action {
 
         $id = (int) $this->getRequest()->getParam('id');
         $auth = Zend_Auth::getInstance ();
-
-        if ($auth->hasIdentity()) {
-
-            $umodel = new Model_User();
-            $user = $umodel->fetchUser($auth->getIdentity()->id);
-        } else {
-
+        //check if user is auth
+        if ($auth->hasIdentity() == FALSE) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
             $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
             return;
         }
 
-        if (($auth->getIdentity()->id == $user)) { //if is the user profile owner lets delete it
+        $admodel = new Model_Ad();
+        $ad = $admodel->getAd($id);
+
+        if ( $auth->getIdentity()->id == $ad['user_owner']  ) {
+
+        //if is the user owner owner lets delete it
             if ($this->getRequest()->isPost()) {
                 $del = $this->getRequest()->getPost('del');
+                
                 if ($del == 'Yes') {
-                    //delete user, and all his content
-                    $admodel = new Model_Ad();
+                    //delete ad, and all his content
                     $admodel->deleteAd($id);
 
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad deleted successfully.'));
@@ -439,14 +439,16 @@ class AdController extends Zend_Controller_Action {
                 }
             } else {
                 $id = $this->_getParam('id', 0);
+            
             }
         } else {
 
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
             $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
             return;
-        }
     }
+
+}
 
     protected function _getModel() {
         if (null === $this->_model) {
