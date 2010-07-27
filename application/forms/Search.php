@@ -15,16 +15,11 @@ class Form_Search extends Zend_Form
                 'filters' => array ('StringTrim' )
                 ) );
 
-        $this->removeElement('src');
         $this->removeDecorator('HtmlTag');
         $this->removeDecorator('DtDdWrapper');
         $this->removeDecorator('dd');
 
+        $this->addElement ( 'submit', 'submit', array ('label' => 'search' ) );
 
-        // add the submit button
-        $this->addElement ( 'submit', 'submit', array (
-                'label' => 'Search',
-                'class' => 'large magenta awesome') );
     }
-
 }

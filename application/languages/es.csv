@@ -229,3 +229,9 @@
 
 #format date string (date php)
 "l dS \o\f F Y H:i:s";" d \d\e\l m \d\e Y \, H:i:s"
+
+#search
+"search";"buscar"
+"Search results for";"Resultados de búsqueda para"
+"Hey! Write something";"¡Escribe algo!"
+"Sorry, no results for search:";"Lo siento, no hay resultados para la búsqueda:"

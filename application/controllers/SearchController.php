@@ -1,35 +1,32 @@
 <?php
+class SearchController extends Zend_Controller_Action {
 
-class SearchController extends Zend_Controller_Action{
-
-    public function init() {
-        
-        $this->lang = $this->view->lang =  $this->_helper->checklang->check();
-        $this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
-        $this->view->mensajes = $this->_flashMessenger->getMessages ();
+    public function indexAction() {
 
 
+        $this->lang = $this->view->lang = $this->_helper->checklang->check();
+        $this->location = $this->_helper->checklocation->check();
+        $this->view->checkMessages  = $this->_helper->checkMessages->check();
+
+        $this->lang = $this->view->lang = $this->_helper->checklang->check();
+        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        $this->view->mensajes = $this->_flashMessenger->getMessages();
         require_once ( APPLICATION_PATH . '../../library/Sphinx/sphinxapi.php' );
-        
-        $this->tcount = 0;
+
 
         $this->cl = new SphinxClient();
-        $this->cl->SetServer( '127.0.0.1', 3312);
+        $this->cl->SetServer('127.0.0.1', 3312);
         $this->cl->SetMatchMode(SPH_MATCH_EXTENDED2);
         $this->cl->SetRankingMode(SPH_RANK_PROXIMITY);
-        $this->cl->SetFieldWeights(array('metadata' => 1, 'filename' => 10));
-        $this->cl->SetSelect("*, sum(@weight*isources*sources/fnCount) as fileWeight");
-        $this->cl->SetSortMode(SPH_SORT_EXTENDED, "@weight DESC, fnWeight DESC, isources DESC");
-        $this->cl->SetGroupBy("idfile", SPH_GROUPBY_ATTR, "fileWeight DESC, isources DESC, fnCount DESC");
-        $this->cl->SetMaxQueryTime(1000);
-    }
-
-
-    public function indexAction(){
-
+//        $this->cl->SetFieldWeights(array('metadata' => 1, 'filename' => 10));
+//        $this->cl->SetSelect("*, sum(@weight*isources*sources/fnCount) as fileWeight");
+//        $this->cl->SetSortMode(SPH_SORT_EXTENDED, "@weight DESC, fnWeight DESC, isources DESC");
+//        $this->cl->SetGroupBy("idfile", SPH_GROUPBY_ATTR, "fileWeight DESC, isources DESC, fnCount DESC");
+//        $this->cl->SetMaxQueryTime(1000);
+        //*************************************************************************************
         $qw = stripcslashes(strip_tags($this->_getParam('q')));
 
-         // Create a filter chain and add filters
+        // Create a filter chain and add filters
         $encoding = array('quotestyle' => ENT_QUOTES, 'charset' => 'UTF-8');
 
         $f = new Zend_Filter();
@@ -37,51 +34,76 @@ class SearchController extends Zend_Controller_Action{
         $f->addFilter(new Zend_Filter_StringTrim());
         $f->addFilter(new Zend_Filter_StripTags($encoding));
 
-        $q = $f->filter ( trim($qw ));
+        $q = $this->view->q = $f->filter(trim($qw));
 
         $this->view->page_title .= $this->view->translate('search');
-        $this->view->page_title .=  ' - ';
-        $this->view->page_title .=  $q;
+        $this->view->page_title .= ' - ';
+        $this->view->page_title .= $q;
 
         $this->view->headTitle()->append($qw);
 
-       
-        $form = $this->_getSearchForm();
-         if (!$q) { // check if query search is empty
 
-            $this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Hey! Write something' ) );
-            //$this->_redirect ( '/' );
-            return ;
+        $form = $this->_getSearchForm();
+        if (!$q) { // check if query search is empty
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('Hey! Write something'));
+            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+            return;
         }
 
         $form->getElement('q')->setValue(trim($q));
         $form->loadDefaultDecoratorsIsDisabled(false);
-        
-        //$form->addElement("hidden", "src", array("value"=>$src));
-        
 
-        foreach($form->getElements() as $element) {
+
+        foreach ($form->getElements() as $element) {
             $element->removeDecorator('DtDdWrapper');
             $element->removeDecorator('Label');
         }
-
-        // assign the form to the view
         $this->view->form = $form;
 
 
+        ////*****************************************
+        $result = $this->cl->Query($q, 'ads');
 
+        if ($result === false) {
+            echo "Query failed: " . $this->cl->GetLastError() . ".\n";
+        } else {
+            if ($this->cl->GetLastWarning()) {
+                echo "WARNING: " . $this->cl->GetLastWarning() . "";
+            }
 
+            $modelAd = new Model_Ad();
+
+            if (!is_null($result["matches"])) {
+                foreach ($result["matches"] as $doc => $docinfo) {
+                    $resultzs[$doc] = $modelAd->getAdforSearch($doc);
+                }
+
+//                var_dump($result['time']);
+//                var_dump($result['total_found']);
+
+                //paginator
+                $page = $this->_getParam('page');
+                $paginator = Zend_Paginator::factory($resultzs);
+                $paginator->setDefaultScrollingStyle('Elastic');
+                $paginator->setItemCountPerPage(10);
+                $paginator->setCurrentPageNumber($page);
+
+                $this->view->paginator = $paginator;
+            } else {
+                $this->_helper->_flashMessenger->addMessage($this->view->translate('Sorry, no results for search:') . ' <b>"' . $q . '"</b>');
+                $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+            }
+        }
     }
 
     /**
-         *
-         * @return Form_Search
-         */
-        protected function _getSearchForm() {
-                require_once APPLICATION_PATH . '/forms/Search.php';
-                $form = new Form_Search( );
-                return $form;
-        }
-
+     *
+     * @return Form_Search
+     */
+    protected function _getSearchForm() {
+        require_once APPLICATION_PATH . '/forms/Search.php';
+        $form = new Form_Search( );
+        return $form;
+    }
 
 }

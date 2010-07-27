@@ -74,7 +74,28 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		
 	}
 
+public function getAdforSearch($id) {
+		$id = ( int )$id;
 
+		$table = new Model_Ad ( );
+		$select = $table->select()->setIntegrityCheck(false);
+		$select->from(array('a' => 'ads'), array('a.*' ));
+		$select->joinInner(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
+
+		$select->where ( 'a.id = ?', $id );
+
+		if (!$table->fetchRow ( $select )) {
+			$result =  null;
+
+		} else {
+
+		    $result = $table->fetchRow ( $select )->toArray ();
+
+		}
+
+		return $result;
+
+	}
 
 
 	/**

@@ -54,9 +54,42 @@ a.actual {
 	border-right: 1px solid #ddd;
 	float:right;
 	right:20px;
-	padding-left: 6px;
+        padding-bottom: 3px;
+	padding-left: 8px;
 	padding-right: 6px;
 }
+
+
+
+ form.searchbox{
+
+/*    position: absolute;*/
+    display: inline-block;
+    width: auto;
+    padding-right: 20px;
+    top: 0px;
+}
+
+form.searchbox dd{
+    display: inline;
+    margin: 0;
+    
+}
+
+form.searchbox input{
+    padding: 1px;
+    font-size: 12px;
+    
+    border: 1px;
+    border-style: solid;
+    border-color: #ddd;
+    
+}
+
+form.searchbox dl{
+    margin: 0px!important;
+}
+
 
 .user_profile h4{
     
@@ -96,7 +129,7 @@ a.actual {
 .ad_create_tab {
 	position: absolute;
 	right: 0px;
-        top: 40px;
+        top: 43px;
 	
 
 }
@@ -399,6 +432,7 @@ a.actual {
  * Header Area.
  */
 h1#site-name  {
+        z-index: -130; /*below search form */
 	border: none;
 	margin-top: 0px;
 	padding-top: 10px;

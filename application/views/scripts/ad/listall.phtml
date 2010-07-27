@@ -24,7 +24,9 @@ if (count ( $this->mensajes ) > 0) {
 
 <?php if ($this->ad): ?>
 
-       <?php foreach ($this->paginator as $key => $val): ?>
+       <?php
+       //Zend_Debug::dump($this->ad);
+       foreach ($this->paginator as $key => $val): ?>
         <div class="ad_excerpt">
 		
 	  <?php
@@ -40,6 +42,7 @@ if (count ( $this->mensajes ) > 0) {
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
+            <?=$this->escape($val['woeid_name']) ?>
             <?php if ($val['type'] == 'give'): ?>
            <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
             <?php endif;?>
