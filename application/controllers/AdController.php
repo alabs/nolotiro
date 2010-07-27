@@ -81,8 +81,16 @@ class AdController extends Zend_Controller_Action {
 
         $model = new Model_Ad();
 
-        $this->view->woeid = $woeid;
-        $this->view->ad = $model->getAdListAll();
+        $ad_type = $this->_request->getParam('ad_type');
+
+        if ($ad_type == 'give') {
+            $this->view->page_title .= $this->view->translate('give') . ' | ';
+        }
+
+        if ($ad_type == 'want') {
+            $this->view->page_title .= $this->view->translate('want') . ' | ';
+        }
+        $this->view->ad = $model->getAdListAll($ad_type);
         $this->view->page_title .= $this->view->translate('All the ads');
 
         //paginator

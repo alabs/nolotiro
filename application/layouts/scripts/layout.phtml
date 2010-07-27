@@ -13,14 +13,14 @@
         <? 
         $css_num = 123;
         echo $this->headLink()->appendStylesheet('/css/common.css?num='.$css_num)?>
-        <link rel="stylesheet" href="<? $this->baseUrl ?>/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+        <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection" />
 
         <!--[if IE]>
             <link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection" />
         <![endif]-->
-        <script src="<? $this->baseUrl ?>/js/jquery.min.js" type="text/javascript"></script>
-        <script src="<? $this->baseUrl ?>/js/site_lang.js" type="text/javascript"></script>
-        <script src="<? $this->baseUrl ?>/js/jquery.superbox-min.js" type="text/javascript"></script>
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <script src="/js/site_lang.js" type="text/javascript"></script>
+        <script src="/js/jquery.superbox-min.js" type="text/javascript"></script>
         <script type="text/javascript">
             $(function(){
                 $.superbox.settings = {
@@ -115,7 +115,7 @@
                     ?>/page/faqs'><?=$this->translate('faqs');
                     ?></a>
                      | <a href='/<?=$this->lang
-                    ?>/ad/listall'><?=$this->translate('all the ads');
+                    ?>/ad/listall/ad_type/give'><?=$this->translate('all the ads');
                     ?></a>
                  </div>
 

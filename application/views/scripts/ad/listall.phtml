@@ -3,7 +3,14 @@
 <?=$this->translate('All the ads'); ?>
 </h3>
 
+<span class="give-want">
+<a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/ad/listall/ad_type/give'><?=$this->translate ( 'give' );?></a>
+&nbsp;
+<a class="<?=(preg_match("/want/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/ad/listall/ad_type/want'><?=$this->translate ( 'want' );?></a>
+</span>
 
+
+<a  href='/' < <?=$this->translate ( 'back to home page' );?></a>
 
 </div>
 

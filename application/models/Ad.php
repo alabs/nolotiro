@@ -160,7 +160,7 @@ public function getAdforSearch($id) {
 	}
 
 
-        public function getAdListAll() {
+        public function getAdListAll($ad_type ) {
 		$table = new Model_Ad ( );
 		$select = $table->select()->setIntegrityCheck(false);
 		$select->from(array('a' => 'ads'), array('a.*' ));
@@ -175,7 +175,7 @@ public function getAdforSearch($id) {
                 //show only if user is active and not blocked
                 $select->where('u.active = ?', 1);
                 $select->where('u.locked = ?', 0);
-
+                $select->where('a.type = ?', $ad_type);
 
                 //dont list not available items
                 //$select->where('a.status != ?', 'delivered');
