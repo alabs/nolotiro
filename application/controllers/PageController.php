@@ -2,13 +2,17 @@
 
 class PageController extends Zend_Controller_Action {
 
-
-
-
-
+    
 	public function tosAction() {
 
             
 	}
+
+
+        public function privacyAction() {
+
+
+	}
+
 }
 

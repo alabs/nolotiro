@@ -7,10 +7,8 @@
 class ContactController extends Zend_Controller_Action {
 	public function init() {
 		
-                $this->lang = $this->view->lang =  $this->_helper->checklang->check();
-                $this->aNamespace = new Zend_Session_Namespace('Nolotiro');
-
-
+                $this->lang = $this->view->lang = $this->_helper->checklang->check();
+                $this->location = $this->_helper->checklocation->check();
 		$this->_flashMessenger = $this->_helper->getHelper ( 'FlashMessenger' );
 		$this->view->mensajes = $this->_flashMessenger->getMessages ();
 
@@ -51,11 +49,11 @@ class ContactController extends Zend_Controller_Action {
 				$mail->send ();
 				
 				$this->_helper->_flashMessenger->addMessage ( $this->view->translate ( 'Message sent successfully!' ) );
-				$this->_redirect ( '/'.$this->lang.'/woeid/'.$this->aNamespace->location.'/give' );
+				$this->_redirect ( '/'.$this->lang.'/woeid/'.$this->location.'/give' );
 			
 			}
 		}
-		// assign the form to the view
+		
 		$this->view->form = $form;
 	
 	}
@@ -67,7 +65,6 @@ class ContactController extends Zend_Controller_Action {
 	protected function _getContactForm() {
 		require_once APPLICATION_PATH . '/forms/Contact.php';
 		$form = new Form_Contact ( );
-		//$form->setAction($this->_helper->url(''));
 		return $form;
 	}
 
