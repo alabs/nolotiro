@@ -45,7 +45,7 @@ if (count ( $this->mensajes ) > 0) {
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
-            <?php if ($val['type'] == 'give'): ?>
+            <?php if ($val['type'] == 1): ?>
            <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
            <?php endif;?>
 

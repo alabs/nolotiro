@@ -54,7 +54,7 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
 	   }
 	   ?>
 
-           <?php if ($this->ad['type'] == 'give'): ?>
+           <?php if ($this->ad['type'] == 1): ?>
            <span class="ad_status <?=$this->ad['status'] ?>"><?=$this->translate($this->ad['status']) ?></span>
            <?php endif;?>
 
