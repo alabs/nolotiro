@@ -1,9 +1,30 @@
 <div id="location_header_section">
     <h3>
-<?=$this->translate('Search results for') . ' "' . $this->escape($this->q) . '"'; ?>
+
+<?
+                if ($_GET['ad_type'] == 1) {
+                    $ad_type_txt = 'give';
+                }
+
+                if ($_GET['ad_type'] == 2) {
+                    $ad_type_txt = 'want';
+                }
+echo $this->translate('Search results for') . ' ('.$this->translate((string)$ad_type_txt).') "' . $this->escape($this->q) . '"';
+
+?>
     </h3>
 
-    <?=$this->total_count ?>
+
+<span class="give-want">
+<a class="<?=(preg_match("/ad_type=1/", $_SERVER['REQUEST_URI']))?"actual":""?>
+   " href='/<?=$this->lang?>/search/?ad_type=1&q=<?=$this->escape($this->q) ?>'><?=$this->translate ( 'give' );?></a>
+&nbsp;
+<a class="<?=(preg_match("/ad_type=2/", $_SERVER['REQUEST_URI']))?"actual":""?>
+   " href='/<?=$this->lang?>/search/?ad_type=2&q=<?=$this->escape($this->q) ?>' ><?=$this->translate ( 'want' );?></a>
+</span>
+
+
+    <?=$this->translate('Found').' '.$this->total_found. ' '.$this->translate('results in'). ' '.$this->query_time. ' '.$this->translate('seconds.') ?>
 </div>
 
 <?php
@@ -20,12 +41,17 @@ if (count($this->mensajes) > 0) {
 
     <div class="span-18">
 
-        <?php if ($this->paginator): ?>
+        <?php if ($this->search ): ?>
 
         <?php
-            //Zend_Debug::dump($this->paginator);
-            foreach ($this->paginator as $key => $val): ?>
-                <div class="ad_excerpt">
+            
+            foreach ($this->search as $key => $val):
+                    //Zend_Debug::dump($val);
+
+                    ?>
+
+
+        <div class="ad_excerpt">
 
             <?php
                 if ($val['photo'] !== null) {
@@ -42,15 +68,16 @@ if (count($this->mensajes) > 0) {
            <?=$this->escape($val['title'])
             ?></a></h4>
 
-            <?=$this->escape($val['woeid_name'])
-            ?>
-<?php if ($val['type'] == 'give'): ?>
-                <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
-                <?php endif; ?>
+            <?//=$this->escape($val['woeid_name']);?>
 
+            <?php if ($val['type'] == 1): ?>
+                <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
+            <?php endif; ?>
+
+             <?php if ($val['type']): ?>
             <span class="ad_date"><?=$this->translate('Posted on ') . $this->escape(date($this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
             <?=$this->translate('by user ') ?>
-
+            <?php endif; ?>
 
                 <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>
             </span>
@@ -60,12 +87,12 @@ if (count($this->mensajes) > 0) {
             <div><?php echo $this->escapeEmail($this->escape($val['body'])) ?></div>
 
             <div class="ad_meta_info">
-                <?php if ($val['readings_count']): ?>
-                        <?=$val['readings_count'] . ' ' . $this->translate('readings') ?>
-                <?php endif; ?>
-<?php if ($val['comments_count']): ?>
-                     <?=', ' . $this->escape($val['comments_count'] == null ? 0 : $val['comments_count']) . ' ' . $this->translate('comments') ?>
-<?php endif; ?>
+                <?php //if ($val['readings_count']): ?>
+                        <?//=$val['readings_count'] . ' ' . $this->translate('readings') ?>
+                <?php //endif; ?>
+<?php //if ($val['comments_count']): ?>
+                     <?//=', ' . $this->escape($val['comments_count'] == null ? 0 : $val['comments_count']) . ' ' . $this->translate('comments') ?>
+<?php //endif; ?>
                 </div>
 
             </div>
@@ -74,7 +101,7 @@ if (count($this->mensajes) > 0) {
 
 
 
-<?php else: ?>
+<?php else: die() ?>
                         <div class="no_results">
                             <h3><?=$this->translate('No ads to display for this location.'); ?></h3>
                             <h5><?=$this->translate('You could try one of these things:'); ?></h5>
@@ -89,7 +116,7 @@ if (count($this->mensajes) > 0) {
 
 
 <?php
-                        echo $this->paginationControl($this->paginator,
+                        echo $this->paginationControl($this->search,
                                 'Sliding',
                                 'partials/paginator_search.phtml');
 ?>

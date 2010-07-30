@@ -1,7 +1,18 @@
+<?
+               if ($this->ad['type'] == 1) {
+                    $ad_type_txt = 'give';
+                }
+
+                if ($this->ad['type'] == 2) {
+                    $ad_type_txt = 'want';
+                }
+
+?>
+
 <div id="default_header_section">
 <h5>
-<a href="/<?=$this->lang ?>/woeid/<?=$this->ad['woeid_code'].'/'.$this->ad['type']?>">
-           <?=$this->woeidName.' > '. $this->translate($this->ad['type']) ?></a>
+<a href="/<?=$this->lang ?>/woeid/<?=$this->ad['woeid_code'].'/'.$ad_type_txt?>">
+           <?=$this->woeidName.' > '. $this->translate((string)$ad_type_txt) ?></a>
 </h5>
 <h3><?=$this->ad['title'] ?></h3>
 </div>

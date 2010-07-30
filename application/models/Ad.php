@@ -74,8 +74,10 @@ class Model_Ad extends Zend_Db_Table_Abstract  {
 		
 	}
 
-public function getAdforSearch($id) {
+public function getAdforSearch($id, $ad_type) {
 		$id = ( int )$id;
+                $ad_type = (int)$ad_type;
+
 
 		$table = new Model_Ad ( );
 		$select = $table->select()->setIntegrityCheck(false);
@@ -83,13 +85,14 @@ public function getAdforSearch($id) {
 		$select->joinInner(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
 
 		$select->where ( 'a.id = ?', $id );
+                $select->where ( 'a.type = ?', $ad_type );
 
 		if (!$table->fetchRow ( $select )) {
 			$result =  null;
 
 		} else {
 
-		    $result = $table->fetchRow ( $select )->toArray ();
+		    $result = $table->fetchRow ( $select )->toArray();
 
 		}
 
@@ -130,7 +133,14 @@ public function getAdforSearch($id) {
 	public function getAdList($woeid,$ad_type) {
 		$woeid = ( int ) $woeid;
 		$ad_type = ( string ) $ad_type;
-		
+
+                if ($ad_type === 'give') {
+                    $ad_type = 1;
+                }
+
+                if ($ad_type === 'want') {
+                    $ad_type = 2;
+                }
 		
 		$table = new Model_Ad ( );
 		$select = $table->select()->setIntegrityCheck(false);
@@ -161,6 +171,15 @@ public function getAdforSearch($id) {
 
 
         public function getAdListAll($ad_type ) {
+
+                if ($ad_type === 'give') {
+                    $ad_type = 1;
+                }
+
+                if ($ad_type === 'want') {
+                    $ad_type = 2;
+                }
+
 		$table = new Model_Ad ( );
 		$select = $table->select()->setIntegrityCheck(false);
 		$select->from(array('a' => 'ads'), array('a.*' ));
