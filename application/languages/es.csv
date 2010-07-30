@@ -223,6 +223,7 @@
 #user profile
 "send message to";"enviar mensaje a"
 "Ads list";"Lista de anuncios"
+"Ad list of user";"Lista de anuncios del usuario"
 "profile";"perfil"
 "ads";"anuncios"
 "User profile";"Perfil de usuario"
@@ -235,3 +236,7 @@
 "Search results for";"Resultados de búsqueda para"
 "Hey! Write something";"¡Escribe algo!"
 "Sorry, no results for search:";"Lo siento, no hay resultados para la búsqueda:"
+"Found";"Encontrados"
+"results in";"resultados en"
+"seconds.";"segundos."
+"back to home page";"volver a la página de inicio"

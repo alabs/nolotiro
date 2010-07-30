@@ -79,7 +79,6 @@ form.searchbox dd{
 form.searchbox input{
     padding: 1px;
     font-size: 12px;
-    
     border: 1px;
     border-style: solid;
     border-color: #ddd;

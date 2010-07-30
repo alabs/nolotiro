@@ -123,6 +123,7 @@ class AdController extends Zend_Controller_Action {
         $paginator->setItemCountPerPage(10);
         $paginator->setCurrentPageNumber($page);
 
+      
         $this->view->paginator = $paginator;
 
 
@@ -130,6 +131,8 @@ class AdController extends Zend_Controller_Action {
         $this->user = new Model_User();
 
         $this->view->user = $this->user->fetchUser($id);
+
+          $this->view->page_title .= $this->view->translate('Ad list of user'). ' '.$this->view->user['username'];
     }
 
     public function showAction() {
