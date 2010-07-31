@@ -83,9 +83,15 @@ public function getAdforSearch($id, $ad_type) {
 		$select = $table->select()->setIntegrityCheck(false);
 		$select->from(array('a' => 'ads'), array('a.*' ));
 		$select->joinInner(array('u' => 'users'), 'a.user_owner = u.id' , array('u.username'));
+                $select->joinLeft(array('c' => 'commentsAdCount'), 'a.id = c.id_comment' , array('c.count as comments_count'));
+                $select->joinLeft(array('r' => 'readedAdCount'), 'a.id = r.id_ad' , array('r.counter as readings_count'));
 
 		$select->where ( 'a.id = ?', $id );
                 $select->where ( 'a.type = ?', $ad_type );
+
+                //show only if user is active and not blocked
+                $select->where('u.active = ?', 1);
+                $select->where('u.locked = ?', 0);
 
 		if (!$table->fetchRow ( $select )) {
 			$result =  null;

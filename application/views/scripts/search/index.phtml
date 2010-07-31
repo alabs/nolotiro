@@ -43,12 +43,8 @@ if (count($this->mensajes) > 0) {
 
         <?php if ($this->search ): ?>
 
-        <?php
-            
-            foreach ($this->search as $key => $val):
-                    //Zend_Debug::dump($val);
-
-                    ?>
+        <?php foreach ($this->search as $key => $val):
+                    //Zend_Debug::dump($val); ?>
 
 
         <div class="ad_excerpt">
@@ -84,15 +80,18 @@ if (count($this->mensajes) > 0) {
 
 
 
-            <div><?php echo $this->escapeEmail($this->escape($val['body'])) ?></div>
+            <div>
+                    <?php
+                    $val['body']  = preg_replace("/\b(".$this->q.")\b/i", '<b>\1</b>', $this->escape($val['body'] ) ) ;
+                    echo $this->escapeEmail($val['body']) ?></div>
 
             <div class="ad_meta_info">
-                <?php //if ($val['readings_count']): ?>
-                        <?//=$val['readings_count'] . ' ' . $this->translate('readings') ?>
-                <?php //endif; ?>
-<?php //if ($val['comments_count']): ?>
-                     <?//=', ' . $this->escape($val['comments_count'] == null ? 0 : $val['comments_count']) . ' ' . $this->translate('comments') ?>
-<?php //endif; ?>
+                <?php if ($val['readings_count']): ?>
+                        <?=$val['readings_count'] . ' ' . $this->translate('readings') ?>
+                <?php endif; ?>
+<?php if ($val['comments_count']): ?>
+                     <?=', ' . $this->escape($val['comments_count'] == null ? 0 : $val['comments_count']) . ' ' . $this->translate('comments') ?>
+<?php endif; ?>
                 </div>
 
             </div>
