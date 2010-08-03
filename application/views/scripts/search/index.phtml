@@ -74,7 +74,8 @@ if (count($this->mensajes) > 0) {
 
            ?>
 
-             <h6><a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/'.$val['type_name'] ?>"><?=$this->woeidName($val['woeid_code'], $this->lang) ?></a></h6>
+             <h6><a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/'.$val['type_name'] ?>">
+             <?=$this->woeidName($val['woeid_code'], $this->lang).' > '. $this->translate((string)$val[type_name]) ?> </a></h6>
             
 
             <?php if ($val['type'] == 1): ?>
