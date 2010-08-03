@@ -56,6 +56,7 @@ class PageController extends Zend_Controller_Action {
 
 
         public function aboutAction() {
+            $this->view->page_title .= $this->view->translate('About nolotiro.org') ;
 
 
 	}
