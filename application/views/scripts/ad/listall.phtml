@@ -45,11 +45,26 @@ if (count ( $this->mensajes ) > 0) {
 		      
 	   }
 	   ?>
-	
+
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
-            <?=$this->escape($val['woeid_name']) ?>
+           <?
+           if ($val['type'] == 1){
+
+               $val['type_name'] = 'give';
+           }
+
+           if ($val['type'] == 2){
+
+               $val['type_name'] = 'want';
+           }
+
+           ?>
+
+             <h6><a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/'.$val['type_name'] ?>"><?=$this->woeidName($val['woeid_code'], $this->lang) ?></a></h6>
+
+            
             <?php if ($val['type'] == 1): ?>
            <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
             <?php endif;?>
