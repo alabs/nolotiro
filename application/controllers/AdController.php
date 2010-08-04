@@ -54,7 +54,7 @@ class AdController extends Zend_Controller_Action {
 
 
          //add the link to the proper rss to layout
-        $this->view->headLink()->appendAlternate(  'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/rss/woeid'.$woeid.'/'.$ad_type,
+        $this->view->headLink()->appendAlternate(  'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/rss/feed/woeid/'.$woeid.'/ad_type/'.$ad_type,
                 'application/rss+xml' ,
                 $this->view->woeidName.' - '. $this->view->translate( (string)$type ));
 

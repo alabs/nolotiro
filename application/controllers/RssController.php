@@ -20,7 +20,7 @@ class RssController extends Zend_Controller_Action {
         $this->ads = $modelAd->getAdList($woeid, $ad_type);
 
         $rss['title'] = 'nolotiro.org - '. $this->_helper->woeid->name($woeid, $this->lang).'/'. $ad_type;
-        $rss['link'] = 'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/rss/woeid'.$woeid.'/'.$ad_type;
+        $rss['link'] = 'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/rss/feed/woeid/'.$woeid.'/ad_type/'.$ad_type;
         $rss['charset'] = 'utf-8';
         $rss['description'] = 'nolotiro.org - '. $this->_helper->woeid->name($woeid, $this->lang);
         //$rss['published']  = time();
