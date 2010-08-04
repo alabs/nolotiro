@@ -36,10 +36,12 @@ class AdController extends Zend_Controller_Action {
 
         if ($ad_type == 'give') {
             $this->view->page_title .= $this->view->translate('give') . ' | ';
+            $type = 'give';
         }
 
         if ($ad_type == 'want') {
             $this->view->page_title .= $this->view->translate('want') . ' | ';
+            $type = 'want';
         }
 
         $model = $this->_getModel();
@@ -49,6 +51,14 @@ class AdController extends Zend_Controller_Action {
         $this->view->woeidName = $this->_helper->woeid->name($woeid, $this->lang);
         $short = explode(',', $this->view->woeidName);
         $this->view->woeidNameShort = ' '. $this->view->translate('in') .' ' .$short[0];
+
+
+         //add the link to the proper rss to layout
+        $this->view->headLink()->appendAlternate(  'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/rss/woeid'.$woeid.'/'.$ad_type,
+                'application/rss+xml' ,
+                $this->view->woeidName.' - '. $this->view->translate( (string)$type ));
+
+
 
         if (empty($this->view->ad)) {
             $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
