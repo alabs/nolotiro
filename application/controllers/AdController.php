@@ -32,7 +32,8 @@ class AdController extends Zend_Controller_Action {
     public function listAction() {
 
         $woeid = $this->_request->getParam('woeid');
-        $ad_type = $this->_request->getParam('ad_type');
+        $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
+
 
         if ($ad_type == 'give') {
             $this->view->page_title .= $this->view->translate('give') . ' | ';

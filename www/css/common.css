@@ -116,7 +116,7 @@ form.searchbox dl{
     clear: right;
     float: right;
     right:10px;
-    margin-top:10px;
+    margin-top:-20px;
     margin-bottom: 20px;
     border: 1px;
     border-style: solid;
@@ -271,6 +271,13 @@ form.searchbox dl{
     
 }
 
+
+.rss{
+    float: left;
+    padding-left: 18px;
+    margin-bottom: 10px;
+}
+
 .sharelinks{
     position: relative;
     top: 10px;
@@ -409,7 +416,7 @@ form.searchbox dl{
         font-size: 1em;
         line-height: 1.33em;
         float: left;
-        margin-top:40px;
+        margin-top:20px;
 	padding:20px;
 	clear: both;
 	border-top: 1px solid #ddd;
@@ -478,8 +485,9 @@ h2#site-slogan {
 .pagination{
 	clear:both;
 	position:relative;
-	margin: 14px;
-	padding:6px;
+	padding-top: 4px;
+        padding-bottom: 18px;
+	padding-left: 18px;
 	font-size:1.2em;
 	text-align: left;
 }

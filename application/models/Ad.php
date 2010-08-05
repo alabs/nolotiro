@@ -136,9 +136,10 @@ public function getAdforSearch($id, $ad_type) {
 	 * @param  string $ad_type  
 	 * @return array list of ads with this params
 	 */
-	public function getAdList($woeid,$ad_type) {
+	public function getAdList($woeid,$ad_type, $limit=NULL ) {
 		$woeid = ( int ) $woeid;
 		$ad_type = ( string ) $ad_type;
+                
 
                 if ($ad_type === 'give') {
                     $ad_type = 1;
@@ -165,6 +166,9 @@ public function getAdforSearch($id, $ad_type) {
                 //dont list not available items
                 $select->where('a.status != ?', 'delivered');
 
+                if($limit != NULL){
+                    $select->limit( (int)$limit );
+                }
 		
 		$select->order('a.date_created DESC');		
 		
