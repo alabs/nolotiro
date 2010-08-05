@@ -58,7 +58,7 @@ if (count ( $this->mensajes ) > 0) {
            
            
 	   
-	   <div><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></div>
+	   <div><?php echo $this->escapePhone( $this->escape($val['body']) ) ?></div>
 	   
            <div class="ad_meta_info">
                <b><a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'] ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
@@ -95,8 +95,6 @@ if (count ( $this->mensajes ) > 0) {
 </h5>
 
 
-
-
         <h5><i>"<?=$this->translate ( 'A journey of a thousand miles starts with a single step') . '" '.
                 $this->translate('Laozi.');?></i></h5>
 
@@ -110,7 +108,16 @@ if (count ( $this->mensajes ) > 0) {
                                     'partials/paginator_ads.phtml'); ?>
 
 
+ <?php
+    echo '<div class="rss">
+		      <a href="http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/rss/feed/woeid/'.$this->woeid.'/ad_type/'.$this->ad_type.' ">
+		      <img alt="'.$this->escape($val['title']).'" src="/images/icons/rss.png" />&nbsp;'.$this->translate('Subscribe via rss to').' '.
+            $this->woeidName.' - '. $this->translate( (string)$this->ad_type ).'</a></div>';
+?>
+
+
 </div> 
+
 
 
 <div class="google_ads">
