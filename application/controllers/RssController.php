@@ -23,7 +23,9 @@ class RssController extends Zend_Controller_Action {
         $rss['link'] = 'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/rss/feed/woeid/'.$woeid.'/ad_type/'.$ad_type;
         $rss['charset'] = 'utf-8';
         $rss['description'] = 'nolotiro.org - '. $this->_helper->woeid->name($woeid, $this->lang);
-        //$rss['published']  = time();
+        $rss['language'] = $this->lang;
+        $rss['generator'] = 'nolotiro.org';
+        //$rss['published']  = date(DATE_RFC822);
 
         $rss['entries'] = array();
 
@@ -34,17 +36,16 @@ class RssController extends Zend_Controller_Action {
             $entry['link'] = 'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/ad/show/id/'.$value['id'].'/'.$value['title'];
 
             $entry['description'] = $value['body'];
-            $entry['pubDate'] = $value['date_created'];
+            $entry['pubDate'] = date( DATE_RSS ,  strtotime($value['date_created']) );
             $rss['entries'][]  = $entry;
 
+            
         }
 
-        $feedObj = Zend_Feed::importArray($rss, 'rss'); // ($rss, 'atom');
-         //$feedString = $feedObj->saveXML();
+        $feedObj = Zend_Feed::importArray($rss, 'rss');
 
         return $feedObj->send();
 
-       
     }
 
 }
