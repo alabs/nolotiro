@@ -12,6 +12,9 @@ class Zend_View_Helper_EscapeEmail{
                     //replace email by nothing
                     $string = preg_replace("/([\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+)/",  ' '  , $string);
 
+                    //replace phone numbers
+                    $string = preg_replace("/([9|6])+([0-9]{8,}\s|-?)/ ",  ' kaka' , $string); //todo fix spaces
+
         return $string;
     }
 
