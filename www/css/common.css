@@ -482,15 +482,60 @@ h2#site-slogan {
 }
 
 
-.pagination{
-	clear:both;
-	position:relative;
-	padding-top: 4px;
-        padding-bottom: 18px;
-	padding-left: 18px;
-	font-size:1.2em;
-	text-align: left;
+/*paginator  ***********/
+.pagination {
+    clear: both;
+    font-weight:  bold;
+    margin-bottom: 30px;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    display: block;
+    width: auto;
+    border:0;
+    list-style:none;
+    margin-right:2px;
 }
+
+.pagination span {
+    border:solid 1px  #00ACCF;
+    margin-right:2px;
+    text-align: center;
+    padding: 4px;
+}
+
+.pagination a{
+    text-decoration: none;
+}
+
+.pagination #current{
+    background-color:  #00ACCF;
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+}
+
+#next {
+    width: 85px;
+    display: inline-block;
+}
+
+#prev {
+    display: inline-block;
+    margin-right: 0;
+}
+
+#norm {
+    display: inline-block;
+    text-align: center;
+}
+
+.disabled{
+    border-color: #fff!important;
+    color: #666;
+    
+}
+
 
 /**
 * footer
