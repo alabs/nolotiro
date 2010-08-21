@@ -1,35 +1,33 @@
 <?php
-
-
 if ($this->pageCount > 1): ?>
 <div class="pagination">
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo '/es/search/?q='.$this->escape($_GET['q']).'&ad_type=' .$this->escape($_GET['ad_type']).'&page=' .$this->previous; ?>">
-    &lt; <?=$this->translate('Previous'); ?>
-  </a> |
+    « <?=$this->translate('Previous'); ?>
+  </a>
 <?php else: ?>
-  <span class="disabled">&lt; <?=$this->translate('Previous'); ?></span> |
+  <span class="disabled">« <?=$this->translate('Previous'); ?></span>
 <?php endif; ?>
 
 <!-- Numbered page links -->
 <?php foreach ($this->pagesInRange as $page): ?>
   <?php if ($page != $this->current): ?>
     <a href="<?php echo '/es/search/?q='.$this->escape($_GET['q']).'&ad_type=' .$this->escape($_GET['ad_type']).'&page=' .$page; ?>">
-        <?php echo $page; ?>
-    </a> |
+        <span id="norm" ><?php echo $page; ?></span>
+    </a> 
   <?php else: ?>
-    <?php echo $page; ?> |
+    <span id="current"><?php echo $page; ?></span>
   <?php endif; ?>
 <?php endforeach; ?>
 
 <!-- Next page link -->
 <?php if (isset($this->next)): ?>
   <a href="<?php echo '/es/search/?q='.$this->escape($_GET['q']).'&ad_type=' .$this->escape($_GET['ad_type']).'&page=' .$this->next; ?>">
-    <?=$this->translate('Next'); ?> &gt;
+    <?=$this->translate('Next'); ?> »
   </a>
 <?php else: ?>
-  <span class="disabled"><?=$this->translate('Next'); ?> &gt;</span>
+  <span class="disabled"><?=$this->translate('Next'); ?> »</span>
 <?php endif; ?>
 </div>
 <?php endif; ?>
