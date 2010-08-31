@@ -103,7 +103,7 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
                 <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>
             </span>
            <br>
-           <span><?php echo $this->escape($val['body']) ?></span>
+           <span><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></span>
         </div>
         
         <?php endforeach; ?>
