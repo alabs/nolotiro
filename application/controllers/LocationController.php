@@ -78,10 +78,40 @@ class LocationController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->view->lang . '/woeid/' . $aNamespace->location . '/give');
         }
 
-        
+        Zend_Debug::dump(count($places->place));
+
+        //if just one result then jump straight to change location
+        if(count($places->place) == 1){
+
+            Zend_Debug::dump($places->place);
+
+                //if the user is logged then update the woeid value in ddbb, if not just update the session location value
+                $auth = Zend_Auth::getInstance ();
+                if ($auth->hasIdentity()) {
+
+                    require_once APPLICATION_PATH . '/models/User.php';
+                    $model = new Model_User();
+                    $data['id'] = $auth->getIdentity()->id;
+                    $data['woeid'] = (int)$places->place->woeid;
+                    $userUpdateLocation = $model->update($data);
+                }
+
+                $aNamespace = new Zend_Session_Namespace('Nolotiro');
+                $aNamespace->location = (int)$places->place->woeid; //woeid
+                setcookie('location', (int)$places->place->woeid, null, '/');
+
+                $name = $places->place->name . ', ' . $places->place->admin1 . ', ' . $places->place->country;
+
+                $aNamespace->locationName = $name; //location name
+
+
+               $this->_helper->_flashMessenger->addMessage($this->view->translate('Location changed successfully to:')   . ' ' . $name);
+               $this->_redirect('/' . $this->view->lang . '/woeid/' . $places->place->woeid . '/give');
+        }
+
+
+
         $form = $this->_getLocationChange2Form($locationtemp);
-
-
         // assign the form to the view
         $this->view->locationtemp = $locationtemp;
         $this->view->places = $places;
@@ -124,7 +154,7 @@ class LocationController extends Zend_Controller_Action {
                 //parse the location value
                 $values = explode("*", $formulario['location'][0]);
 
-                //if the user is logged then update the woeid value, if not just update the session location value
+                //if the user is logged then update the woeid value in ddbb, if not just update the session location value
                 $auth = Zend_Auth::getInstance ();
                 if ($auth->hasIdentity()) {
 
