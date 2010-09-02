@@ -78,12 +78,12 @@ class LocationController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->view->lang . '/woeid/' . $aNamespace->location . '/give');
         }
 
-        Zend_Debug::dump(count($places->place));
+       
 
         //if just one result then jump straight to change location
         if(count($places->place) == 1){
 
-            Zend_Debug::dump($places->place);
+            
 
                 //if the user is logged then update the woeid value in ddbb, if not just update the session location value
                 $auth = Zend_Auth::getInstance ();
