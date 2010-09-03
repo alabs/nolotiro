@@ -8,10 +8,17 @@ class RssController extends Zend_Controller_Action {
     
     }
 
-    public function feedAction() {
+
+
+    public function preDispatch()  {
 
         $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
+        $this->_helper->layout()->disableLayout();
+
+    }
+
+
+    public function feedAction() {
 
         $woeid = $this->_request->getParam('woeid');
         $ad_type = $this->_request->getParam('ad_type');

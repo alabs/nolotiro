@@ -14,7 +14,6 @@ class LocationController extends Zend_Controller_Action {
 
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->mensajes = $this->_flashMessenger->getMessages();
-
     }
 
     public function indexAction() {
@@ -42,7 +41,7 @@ class LocationController extends Zend_Controller_Action {
                 $this->_redirect('/' . $this->view->lang . '/location/change2');
             }
         }
-        
+
         // assign the form to the view
         $this->view->form = $form;
     }
@@ -57,7 +56,7 @@ class LocationController extends Zend_Controller_Action {
         //if is get overwrite the localtemp value
         if ($_GET['location']) {
             $locationtemp = $_GET['location'];
-        } 
+        }
 
         $town = $this->view->translate('Town');
         $places = $this->getYahooGeoWoeidList($locationtemp, $this->view->lang, $town);
@@ -78,37 +77,33 @@ class LocationController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->view->lang . '/woeid/' . $aNamespace->location . '/give');
         }
 
-       
+
 
         //if just one result then jump straight to change location
-        if(count($places->place) == 1){
+        if (count($places->place) == 1) {
 
-            
+            //if the user is logged then update the woeid value in ddbb, if not just update the session location value
+            $auth = Zend_Auth::getInstance ();
+            if ($auth->hasIdentity()) {
 
-                //if the user is logged then update the woeid value in ddbb, if not just update the session location value
-                $auth = Zend_Auth::getInstance ();
-                if ($auth->hasIdentity()) {
+                require_once APPLICATION_PATH . '/models/User.php';
+                $model = new Model_User();
+                $data['id'] = $auth->getIdentity()->id;
+                $data['woeid'] = (int) $places->place->woeid;
+                $userUpdateLocation = $model->update($data);
+            }
 
-                    require_once APPLICATION_PATH . '/models/User.php';
-                    $model = new Model_User();
-                    $data['id'] = $auth->getIdentity()->id;
-                    $data['woeid'] = (int)$places->place->woeid;
-                    $userUpdateLocation = $model->update($data);
-                }
+            $aNamespace = new Zend_Session_Namespace('Nolotiro');
+            $aNamespace->location = (int) $places->place->woeid; //woeid
+            setcookie('location', (int) $places->place->woeid, null, '/');
 
-                $aNamespace = new Zend_Session_Namespace('Nolotiro');
-                $aNamespace->location = (int)$places->place->woeid; //woeid
-                setcookie('location', (int)$places->place->woeid, null, '/');
+            $name = $places->place->name . ', ' . $places->place->admin1 . ', ' . $places->place->country;
 
-                $name = $places->place->name . ', ' . $places->place->admin1 . ', ' . $places->place->country;
+            $aNamespace->locationName = $name; //location name
 
-                $aNamespace->locationName = $name; //location name
-
-
-               $this->_helper->_flashMessenger->addMessage($this->view->translate('Location changed successfully to:')   . ' ' . $name);
-               $this->_redirect('/' . $this->view->lang . '/woeid/' . $places->place->woeid . '/give');
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('Location changed successfully to:') . ' ' . $name);
+            $this->_redirect('/' . $this->view->lang . '/woeid/' . $places->place->woeid . '/give');
         }
-
 
 
         $form = $this->_getLocationChange2Form($locationtemp);
@@ -198,6 +193,8 @@ class LocationController extends Zend_Controller_Action {
         // configure caching frontend strategy
         $oFrontend = new Zend_Cache_Core(
                         array(
+                            // cache for 1 day
+                            'lifetime' => 3600*24,
                             'caching' => true,
                             'cache_id_prefix' => 'woeidList',
                             'logging' => FALSE,
@@ -236,7 +233,7 @@ class LocationController extends Zend_Controller_Action {
     }
 
     //*************************************************************
-    protected  function _serializemmp($toserialize) {
+    protected function _serializemmp($toserialize) {
         if (is_a($toserialize, "SimpleXMLElement")) {
             $stdClass = new stdClass();
             $stdClass->type = get_class($toserialize);
@@ -245,7 +242,7 @@ class LocationController extends Zend_Controller_Action {
         return serialize($stdClass);
     }
 
-    protected  function _unserializemmp($tounserialize) {
+    protected function _unserializemmp($tounserialize) {
         $tounserialize = unserialize($tounserialize);
         if (is_a($tounserialize, "stdClass")) {
             if ($tounserialize->type == "SimpleXMLElement") {
