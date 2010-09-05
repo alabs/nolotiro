@@ -11,13 +11,25 @@
 	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[id] ?>"><?=$this->translate('ads');?></a></li>
 </ul>
 
-<?php
-if ($this->ad != null): ?>
+<?php if ($this->ad != null):?>
 
        <?php foreach ($this->paginator as $key => $val): ?>
         <div class="ad_excerpt">
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['ad_id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
+
+            <?
+           if ($val['type'] == 1){
+               $val['type_name'] = 'give';
+           }
+           if ($val['type'] == 2){
+               $val['type_name'] = 'want';
+           }
+           ?>
+
+             <h6><a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/'.$val['type_name'] ?>">
+             <?=$this->woeidName($val['woeid_code'], $this->lang).' > '. $this->translate((string)$val[type_name]) ?> </a></h6>
+
 
             <?php
             if ($val['type'] == 1): ?>
@@ -26,6 +38,15 @@ if ($this->ad != null): ?>
             <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
             </span>
 	   <div><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></div>
+            <div class="ad_meta_info">
+               <?php if ($val['readings_count']): ?>
+                    <?=$val['readings_count'] . ' ' .$this->translate('readings') ?>
+                <?php endif;?>
+                <?php if ($val['comments_count']): ?>
+                 <?=', '.$this->escape( $val['comments_count'] == null  ? 0 : $val['comments_count'] ).' '.$this->translate('comments') ?>
+                 <?php endif;?>
+           </div>
+
         </div>
         <?php endforeach; ?>
 

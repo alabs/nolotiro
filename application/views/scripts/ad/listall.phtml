@@ -51,15 +51,11 @@ if (count ( $this->mensajes ) > 0) {
 
            <?
            if ($val['type'] == 1){
-
                $val['type_name'] = 'give';
            }
-
            if ($val['type'] == 2){
-
                $val['type_name'] = 'want';
            }
-
            ?>
 
            <h6><a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/'.$val['type_name'] ?>">
@@ -112,8 +108,6 @@ if (count ( $this->mensajes ) > 0) {
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'partials/paginator_ads.phtml'); ?>
-
-
 </div> 
 
 
@@ -132,8 +126,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 <!-- end  of google adsense block -->
 </div>
-
-
 
 
 </div> <!-- /main -->
