@@ -42,7 +42,7 @@ class Form_AdCreate extends Zend_Form {
                 $this->addElement ( 'select', 'type', array (
 		'label' => 'Ad type:', 'required' => true,
 		 'attribs' => array ('type' => 'type', 'type' => 'type' ),
-		 'multioptions' => array ('1' => 'i give...', '2' => 'i want...' ) ) );
+		 'multioptions' => array (''=>'please, select ad type',  '2' => 'i want...', '1' => 'i give...' ) ) );
 		
 		$this->addElement ( 'text', 'title', array ('label' => 'Title of your ad:', //'filters' => array('StringTrim', 'StringToLower'),
 		'validators' => array (array ('StringLength', false, array (10, 50 ) ) ), 'required' => true )
