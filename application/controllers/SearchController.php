@@ -8,7 +8,6 @@ class SearchController extends Zend_Controller_Action {
         $this->location = $this->_helper->checklocation->check();
         $this->view->checkMessages  = $this->_helper->checkMessages->check();
 
-        $this->lang = $this->view->lang = $this->_helper->checklang->check();
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->mensajes = $this->_flashMessenger->getMessages();
 
@@ -21,14 +20,12 @@ class SearchController extends Zend_Controller_Action {
         require_once ( APPLICATION_PATH . '../../library/Sphinx/sphinxapi.php' );
         $this->cl = new SphinxClient();
         $this->cl->SetServer('127.0.0.1', 3312);
- //       $this->cl->SetMatchMode(SPH_MATCH_EXTENDED2);
+        $this->cl->SetMatchMode(SPH_MATCH_EXTENDED2);
         $this->cl->SetRankingMode(SPH_RANK_PROXIMITY);
 
         
 //        $this->cl->SetFieldWeights(array('metadata' => 1, 'filename' => 10));
-//        $this->cl->SetSelect("*, sum(@weight*isources*sources/fnCount) as fileWeight");
-        $this->cl->SetSortMode(SPH_SORT_EXTENDED, "@weight DESC");
-//        $this->cl->SetGroupBy("idfile", SPH_GROUPBY_ATTR, "fileWeight DESC, isources DESC, fnCount DESC");
+//        $this->cl->SetSortMode(SPH_SORT_EXTENDED, "@weight DESC");
         $this->cl->SetMaxQueryTime(1000);
         //*************************************************************************************
         
