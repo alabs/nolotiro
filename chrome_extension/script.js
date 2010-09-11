@@ -59,15 +59,12 @@ function getGeo(){
 
 
 
-// Use jQuery to display useful information about our position.
+// paint the map and debug info
 function exportPosition(position) {
-    $('#georesults').html(
-        '<div id="map_canvas" style="float: right; width: 560px; height: 90px"></div>' +
-        '<p>'
-        + 'Latitude: ' + position.coords.latitude + '&nbsp;'
-        + 'Longitude: ' + position.coords.longitude 
-        + '</p>'
-        );
+    $('#georesults').html( '<div id="map_canvas" style="float: right; width: 560px; height: 90px"></div>' );
+
+    $('#debug').html( 'Lat: ' + position.coords.latitude + '&nbsp;' + 'Long: ' + position.coords.longitude );
+
     googleMapShow(
         position.coords.latitude,
         position.coords.longitude,
@@ -76,33 +73,46 @@ function exportPosition(position) {
         });
 
 
-     ////////////////////////////////////////////////////////////////////////////////////
 
-      //now lets do reverse geocoding to get the city and country name
-
-        req = new XMLHttpRequest();
-	req.open('GET',  "http://maps.google.com/maps/api/geocode/json?latlng="+ position.coords.latitude+","+position.coords.longitude +"&sensor=false" );
-	req.onload = parseJson;
-	req.send();
-
-           
+    //now lets do reverse geocoding to get the city and country name
+    req = new XMLHttpRequest();
+    req.open('GET',  "http://maps.google.com/maps/api/geocode/json?latlng="+ position.coords.latitude+","+position.coords.longitude +"&sensor=false" );
+    req.onload = parseJson1;
+    req.send();
+         
     
 }
 
 
-function parseJson()
-{
+function parseJson1(){
+     var res = JSON.parse(req.responseText);
+    $('#debug').append('<br>'+ res.results[0].formatted_address);
+}
+
+function parseJson2(){
     var res = JSON.parse(req.responseText);
-        //	tweets = res.concat(tweets);
-        $('#debug').html('<p>'+ res.toString() +'</p>');
-  
+    $('#debug').append('<br>'+ res);
+
+
+}
+
+
+function getWoeid(string){
+    
+    var query = 'SELECT woeid FROM geo.places.parent where child_woeid in (select woeid from geo.places where text=" '+ string +' ")';
+
+    req = new XMLHttpRequest();
+    req.open('GET', "http://query.yahooapis.com/v1/public/yql?q="+encodeURIComponent(query)+"&format=json&callback=cbfunc");
+    req.onload = parseJson2 ;
+    req.send();
 
 }
 
 
 
+
 function errorPosition() {
-    $('#georesults').html('<p>The page could not get your location.</p>');
+    $('#georesults').html('<p>No se pudo acceder a tu  ubicacion.</p>');
 }
 
 function googleMapShow(latitude,longitude) {
@@ -117,12 +127,12 @@ function googleMapShow(latitude,longitude) {
 
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-     var companyPos = new google.maps.LatLng(latitude,longitude);
-        var companyMarker = new google.maps.Marker({
-            position: companyPos,
-            map: map,
-            title:"Some title"
-        });
+    var companyPos = new google.maps.LatLng(latitude,longitude);
+    var companyMarker = new google.maps.Marker({
+        position: companyPos,
+        map: map,
+        title:"Some title"
+    });
 
 }
 
