@@ -1,0 +1,15 @@
+{
+  "name": "nolotiro.org",
+  "version": "0.0.1",
+  "description": "nolotiro.org es un sitio web donde puedes regalar las cosas que ya no quieres o ya no necesitas para que las recoja otra gente a la que puede servirle o serle de mucha utilidad. ",
+  "browser_action": {
+  "default_icon": "nolotiro_logo.png",
+  "popup":"popup.html"
+
+  },
+  "permissions": [ "geolocation",
+      "http://nolotiro.org/",
+      "http://ajax.googleapis.com/",
+      "http://maps.google.com/",
+      "http://query.yahooapis.com/" ]
+}
