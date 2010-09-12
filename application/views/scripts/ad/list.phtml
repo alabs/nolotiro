@@ -28,6 +28,7 @@ if (count ( $this->mensajes ) > 0) {
 <?php if ($this->ad): ?>
 
        <?php
+       $auth = Zend_Auth::getInstance ();
 
        foreach ($this->paginator as $key => $val): ?>
         <div class="ad_excerpt">
@@ -44,6 +45,20 @@ if (count ( $this->mensajes ) > 0) {
 	
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
+
+
+
+            <?php
+// if you are the ad owner or admin, then show edit link
+if ($val['user_owner'] == $auth->getIdentity()->id): ?>
+ <div>
+<a href="/<?=$this->lang ?>/ad/edit/id/<?=$this->ad['id'] ?>">
+            <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/icons/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a>
+ </div><br />
+<?php endif;?>
+
+
+
 
             <?php if ($val['type'] == 1): ?>
            <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>

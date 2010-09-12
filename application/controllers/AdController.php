@@ -307,7 +307,7 @@ class AdController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
         }
 
-        $this->view->deletead = '
+        $this->view->deletead = '<img src="/images/icons/delete_ad.png" />
                     <a href="/' . $this->view->lang . '/ad/delete/id/' . $this->_getParam('id') . ' ">' . $this->view->translate('delete this ad') . '</a>';
 
 
