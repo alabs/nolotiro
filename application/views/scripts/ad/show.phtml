@@ -39,7 +39,7 @@ $auth = Zend_Auth::getInstance ();
 if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
     <div class="edit_ad">
         <a href="/<?=$this->lang ?>/ad/edit/id/<?=$this->ad['id'] ?>">
-            <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/icons/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a></div>
+            <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a></div>
 <?php endif;?>
 
        
