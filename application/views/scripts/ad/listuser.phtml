@@ -18,6 +18,16 @@
            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['ad_id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
+             <?php
+// if you are the ad owner or admin, then show edit link
+$auth = Zend_Auth::getInstance ();
+if ($val['user_owner'] == $auth->getIdentity()->id): ?>
+ <div>
+<a href="/<?=$this->lang ?>/ad/edit/id/<?=$val['id'] ?>">
+            <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a>
+ </div><br />
+<?php endif;?>
+
             <?
            if ($val['type'] == 1){
                $val['type_name'] = 'give';
