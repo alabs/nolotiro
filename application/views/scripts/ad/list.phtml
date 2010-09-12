@@ -43,12 +43,8 @@ if (count ( $this->mensajes ) > 0) {
 	   }
 	   ?>
 	
-           <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
-           <?=$this->escape($val['title']) ?></a></h4>
 
-
-
-            <?php
+             <?php
 // if you are the ad owner or admin, then show edit link
 if ($val['user_owner'] == $auth->getIdentity()->id): ?>
  <div>
@@ -57,7 +53,8 @@ if ($val['user_owner'] == $auth->getIdentity()->id): ?>
  </div><br />
 <?php endif;?>
 
-
+            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+           <?=$this->escape($val['title']) ?></a></h4>
 
 
             <?php if ($val['type'] == 1): ?>
