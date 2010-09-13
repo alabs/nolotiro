@@ -299,9 +299,9 @@ class AdController extends Zend_Controller_Action {
 
         if ($auth->hasIdentity()) {
             //if user owner allow edit and show delete ad link , if not redir not allowed
-            var_dump( (bool) $user->fetchUser($auth->getIdentity()->id) );
-             var_dump( $user->fetchUser($auth->getIdentity()->id)->id);
-             var_dump($ad_user_owner['user_owner']);
+//            var_dump( (bool) $user->fetchUser($auth->getIdentity()->id) );
+//             var_dump( $user->fetchUser($auth->getIdentity()->id)->id);
+//             var_dump($ad_user_owner['user_owner']);
 
             if ( $user->fetchUser($auth->getIdentity()->id)->id != $ad_user_owner['user_owner'] ) {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
