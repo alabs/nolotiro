@@ -292,18 +292,25 @@ class AdController extends Zend_Controller_Action {
         //check if user logged in
         $auth = Zend_Auth::getInstance ();
         $user = new Model_User;
+        $ad = new Model_Ad();
+
+        $id = (int) $this->getRequest()->getParam('id');
+        $ad_user_owner = $ad->getAd($id);
 
         if ($auth->hasIdentity()) {
             //if user owner allow edit and show delete ad link , if not redir not allowed
-            // var_dump( (bool) $user->fetchUser($auth->getIdentity()->id) );
+            var_dump( (bool) $user->fetchUser($auth->getIdentity()->id) );
+             var_dump( $user->fetchUser($auth->getIdentity()->id)->id);
+             var_dump($ad_user_owner['user_owner']);
 
-            if (!(bool) $user->fetchUser($auth->getIdentity()->id)) {
-                $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to do that!'));
+            if ( $user->fetchUser($auth->getIdentity()->id)->id != $ad_user_owner['user_owner'] ) {
+                $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
                 $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
             }
+
         } else {
 
-            $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to do that!'));
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
         }
 
@@ -333,7 +340,7 @@ class AdController extends Zend_Controller_Action {
 
                 if ($form->isValid($formData)) {
 
-            $id = (int) $this->getRequest()->getParam('id');
+            
 
             $formulario = $form->getValues();
             //var_dump($form);
