@@ -1,7 +1,4 @@
 <?php
-/**
- * This is the New Message  form.
- */
 
 class Form_Message extends Zend_Form {
 	
@@ -10,8 +7,9 @@ class Form_Message extends Zend_Form {
 		$this->setMethod ( 'post' );
 		
 		
-                $this->addElement ( 'text', 'subject', array ('label' => 'Subject:', //'filters' => array('StringTrim', 'StringToLower'),
-		'validators' => array (array ('StringLength', false, array (10, 100 ) ) ), 'required' => true )
+                $this->addElement ( 'text', 'subject', array ('label' => 'Subject:',
+                    //'filters' => array('StringTrim', 'StringToLower'),
+		'validators' => array (array ('StringLength', false, array (4, 100 ) ) ), 'required' => true )
 
 		 );
 		

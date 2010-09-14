@@ -33,8 +33,6 @@ class MessageController extends Zend_Controller_Action {
         $this->view->page_title .= $this->view->translate('send a private message');
         $request = $this->getRequest();
         $id_user_to = $this->_request->getParam('id_user_to');
-
-
         $model_user = new Model_User();
         $this->view->user_to = $model_user->fetchUser($id_user_to)->username;
 
@@ -103,7 +101,13 @@ class MessageController extends Zend_Controller_Action {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Message sent successfully!'));
                 $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
             }
+        } else {
+            $data['subject'] = $this->_getParam('subject');
+
+            $form->populate($data);
+
         }
+
         // assign the form to the view
         $this->view->form = $form;
     }
