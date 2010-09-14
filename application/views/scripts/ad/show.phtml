@@ -83,7 +83,7 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
                 <img alt="<?=$this->translate('share on twitter');?>" src="/images/icons/ico_twitter.png" border = "0"/></a>
         </div>
 	   <?=$this->translate('Interested?') ?>&nbsp;
-<a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'] ?>"><?=$this->translate('Send a private message to the owner') ?></a>
+<a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'].'/subject/'.$this->escape($this->ad['title']) ?>"><?=$this->translate('Send a private message to the owner') ?></a>
 </div>
 
 <? if ($this->ad['comments_enabled'] ): ?>
