@@ -67,7 +67,7 @@ if (count ( $this->mensajes ) > 0) {
            
            
 	   
-	   <div><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></div>
+           <div><p><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></p></div>
 	   
            <div class="ad_meta_info">
                <b><a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->escape($val['title']) ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
