@@ -63,7 +63,7 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
             </span>
             
            <br>
-           <span><?php echo $this->escapeEmail( $this->escape($this->ad['body']) ) ?></span>
+           <p><?php echo $this->escapeEmail( $this->escape($this->ad['body']) ) ?></p>
 
 
            <div class="ad_meta_info">
@@ -75,11 +75,11 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
            </div>
 
            <div class="sharelinks"><?=$this->translate('Share this ad:');?>
-            <a href="http://www.facebook.com/share.php?u=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'];?>">
+            <a href="http://www.facebook.com/share.php?u=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->escape($this->ad['title']);?>">
                 <img alt="<?=$this->translate('share on facebook');?>" src="/images/icons/ico_facebook.gif" border = "0"/></a>
-                <a href="mailto:?subject=<?=$this->ad['title'];?>&body=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'];?>">
+                <a href="mailto:?subject=<?=$this->ad['title'];?>&body=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->escape($this->ad['title']);?>">
                 <img alt="<?=$this->translate('send by email');?>" src="/images/icons/ico_email_link.png" border = "0"/></a>
-                <a href="http://twitter.com/home?status=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'];?>">
+                <a href="http://twitter.com/home?status=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->escape($this->ad['title']);?>">
                 <img alt="<?=$this->translate('share on twitter');?>" src="/images/icons/ico_twitter.png" border = "0"/></a>
         </div>
 	   <?=$this->translate('Interested?') ?>&nbsp;

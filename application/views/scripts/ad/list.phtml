@@ -45,13 +45,13 @@ if (count ( $this->mensajes ) > 0) {
 	
 
              <?php
-// if you are the ad owner or admin, then show edit link
-if ($val['user_owner'] == $auth->getIdentity()->id): ?>
- <div>
-<a href="/<?=$this->lang ?>/ad/edit/id/<?=$val['id'] ?>">
-            <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a>
- </div><br />
-<?php endif;?>
+            // if you are the ad owner or admin, then show edit link
+            if ($val['user_owner'] == $auth->getIdentity()->id): ?>
+             <div>
+            <a href="/<?=$this->lang ?>/ad/edit/id/<?=$val['id'] ?>">
+                        <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a>
+             </div><br />
+            <?php endif;?>
 
             <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
@@ -63,8 +63,6 @@ if ($val['user_owner'] == $auth->getIdentity()->id): ?>
 
             <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
             <?=$this->translate('by user ') ?>
-
-
             <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>
             </span>
            
