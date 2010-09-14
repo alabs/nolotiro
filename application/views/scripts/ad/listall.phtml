@@ -67,15 +67,10 @@ if (count ( $this->mensajes ) > 0) {
 
             <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
             <?=$this->translate('by user ') ?>
-
-
-            <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>
+            <a href="/<?=$this->lang ?>/ad/listuser/id/<?=$val['user_owner'] ?>"><?=$this->escape($val['username']) ?></a>
             </span>
-           
-           
 	   
 	   <div><p><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></p></div>
-	   
 	   
 
             <div class="ad_meta_info">
