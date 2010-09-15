@@ -40,10 +40,16 @@ class SearchController extends Zend_Controller_Action {
         $q = $this->view->q = $f->filter(trim($qw));
 
         $this->view->page_title .= $this->view->translate('search');
-        $this->view->page_title .= ' - ';
-        $this->view->page_title .= $q;
+        $this->view->page_title .= ' - '. $q;
 
-        $this->view->headTitle()->append($qw);
+        $page = $this->_request->getParam('page');
+
+        if ($page) {
+            $this->view->page_title .= ' - '.$this->view->translate('page').' '.$page;
+
+        }
+
+        
 
 
         $form = $this->_getSearchForm();
