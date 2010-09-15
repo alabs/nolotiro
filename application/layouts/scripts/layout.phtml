@@ -1,15 +1,14 @@
 <?=$this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title><?='nolotiro.org | ' . $this->page_title?></title>
+        <title><?= $this->page_title.' | nolotiro.org'?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <?= $this->headTitle()->setPrefix('nolotiro.org')?>
         <meta name="copyright" content="daniel remeseiro" />
         <meta name="DC.Title"
               content="<?=isset($this->page_title) ? $this->page_title : 'nolotiro.org'?>" />
         <meta name="robots" content="index,follow" />
         <meta name="google-site-verification" content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk" />
-        <link rel="icon" href="<?=$this->baseUrl?>/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <?
         $this->headLink();
         $css_num = 126;
@@ -101,7 +100,7 @@
                 </div>
 
                 <h1 id="site-name"><a href="/" title="nolotiro.org home"><img src="/images/nolotiro_logo.png" alt="nolotiro.org" id="logo" /> nolotiro.org</a></h1>
-                <h2 id='site-slogan'><?=$this->translate('no lo tiro, te lo doy (sin condiciones)') ?></h2>
+                <h2 id='site-slogan'><?=$this->translate('no lo tiro, te lo regalo (sin condiciones)') ?></h2>
                             <div class="ad_create_tab">
                                 <a  href="/<?=$this->lang . '/ad/create' ?>"><?='+ ' . $this->translate('Create new ad') . $this->woeidNameShort ?></a>
                 </div>

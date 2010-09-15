@@ -36,13 +36,20 @@ class AdController extends Zend_Controller_Action {
 
 
         if ($ad_type == 'give') {
-            $this->view->page_title .= $this->view->translate('give') . ' | ';
+            $this->view->page_title .= $this->view->translate('give') . ' - ';
             $type = 'give';
         }
 
         if ($ad_type == 'want') {
-            $this->view->page_title .= $this->view->translate('want') . ' | ';
+            $this->view->page_title .= $this->view->translate('want') . ' - ';
             $type = 'want';
+        }
+
+        $page = $this->_request->getParam('page');
+
+        if ($page) {
+            $this->view->page_title .= $this->view->translate('page').' '.$page. ' - ';
+
         }
 
         $model = $this->_getModel();
@@ -95,14 +102,21 @@ class AdController extends Zend_Controller_Action {
         $ad_type = $this->_request->getParam('ad_type');
 
         if ($ad_type == 'give') {
-            $this->view->page_title .= $this->view->translate('give') . ' | ';
+            $this->view->page_title .= $this->view->translate('give') . ' - ';
         }
 
         if ($ad_type == 'want') {
-            $this->view->page_title .= $this->view->translate('want') . ' | ';
+            $this->view->page_title .= $this->view->translate('want') . ' - ';
         }
         $this->view->ad = $model->getAdListAll($ad_type);
         $this->view->page_title .= $this->view->translate('All the ads');
+
+        $page = $this->_request->getParam('page');
+
+        if ($page) {
+            $this->view->page_title .= ' - ' .$this->view->translate('page').' '.$page;
+
+        }
 
         //paginator
         $page = $this->_getParam('page');
@@ -143,7 +157,13 @@ class AdController extends Zend_Controller_Action {
 
         $this->view->user = $this->user->fetchUser($id);
 
-          $this->view->page_title .= $this->view->translate('Ad list of user'). ' '.$this->view->user['username'];
+         $this->view->page_title .= $this->view->translate('Ad list of user'). ' '.$this->view->user['username'];
+         $page = $this->_request->getParam('page');
+
+        if ($page) {
+            $this->view->page_title .= ' - '.$this->view->translate('page').' '.$page;
+
+        }
     }
 
     public function showAction() {
@@ -166,17 +186,18 @@ class AdController extends Zend_Controller_Action {
 
         if ($this->view->ad != null) { // if the id ad exists then render the ad and comments
 
-            if ($this->view->ad['type'] == 'give') {
-                $this->view->page_title .= $this->view->translate('give') . ' | ';
+            if ($this->view->ad['type'] == 1) {
+                $this->view->page_title .= $this->view->translate('give') . ' - ';
             }
 
-             if ($this->view->ad['type'] == 'want') {
-                $this->view->page_title .= $this->view->translate('want') . ' | ';
+             if ($this->view->ad['type'] == 2) {
+                $this->view->page_title .= $this->view->translate('want') . ' - ';
             }
 
             $this->view->comments = $model->getComments($id);
             $this->view->woeidName = $this->_helper->woeid->name($this->view->ad['woeid_code'], $this->lang);
-            $this->view->page_title .= $this->view->woeidName . ' | ' . $this->view->ad['title'];
+
+            $this->view->page_title .= $this->view->ad['title'].' - '.$this->view->woeidName;
 
             //if user logged in, show the comment form, if not show the login link
             $auth = Zend_Auth::getInstance ();

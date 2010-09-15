@@ -24,6 +24,8 @@ class LocationController extends Zend_Controller_Action {
         $request = $this->getRequest();
         $form = $this->_getLocationChangeForm();
 
+        $this->view->page_title .= $this->view->translate('change location');
+
         $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
 
         if ($this->getRequest()->isPost()) {
@@ -53,6 +55,7 @@ class LocationController extends Zend_Controller_Action {
         $locationtemp = $aNamespace->locationTemp;
 
 
+        $this->view->page_title .= $this->view->translate('change location');
         //if is get overwrite the localtemp value
         if ($_GET['location']) {
             $locationtemp = $_GET['location'];
