@@ -169,6 +169,8 @@ class MessageController extends Zend_Controller_Action {
     public function showAction() {
 
         $id = $this->_request->getParam('id');
+        $subject = $this->_request->getParam('subject');
+
         $model = $this->_getModelMessage();
         $this->view->message = $model->getMessage($id);
 
@@ -181,7 +183,7 @@ class MessageController extends Zend_Controller_Action {
         } else { //maybe the owner , but not logged, redir to login
             //keep this url in zend session to redir after login
             $aNamespace = new Zend_Session_Namespace('Nolotiro');
-            $aNamespace->redir = $this->lang . '/message/show/' . $id;
+            $aNamespace->redir = $this->lang . '/message/show/' . $id . '/subject/'. $subject;
             $this->_redirect($this->lang . '/auth/login');
         }
 
@@ -201,6 +203,10 @@ class MessageController extends Zend_Controller_Action {
             $form = $this->_getNewMessageForm();
            
             $form->setAction('/' . $this->lang . '/message/create/id_user_to/' . $this->view->message['user_from']);
+
+            $data['subject'] = $this->_getParam('subject');
+
+            $form->populate($data);
             $this->view->createreply = $form;
         } else {
 

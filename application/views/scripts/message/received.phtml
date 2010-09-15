@@ -33,7 +33,7 @@ if (isset ( $this->error )) :
         <div class="message_excerpt">
 
             <h4>
-                <a href="/<?=$this->lang ?>/message/show/id/<?=$this->escape($val['id']) ?>">
+                <a href="/<?=$this->lang ?>/message/show/id/<?=$this->escape($val['id']) ?>/subject/<?=$this->escape($val['subject']) ?>">
            <?=$this->escape($val['subject']) ?>
 
                  <?php
