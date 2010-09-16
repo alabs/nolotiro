@@ -1,7 +1,4 @@
 <div id="location_header_section">
-<h3>
-<?=$this->translate('All the ads'); ?>
-</h3>
 
 <span class="give-want">
 <a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/ad/listall/ad_type/give'><?=$this->translate ( 'give' );?></a>
@@ -10,7 +7,14 @@
 </span>
 
 
-<a  href='/' < <?=$this->translate ( 'back to home page' );?></a>
+    <div class="location_name">
+        <h3>
+<?=$this->translate('All the ads'); ?>
+</h3>
+        <br>
+        <a class="world_link" href='/' < <?=$this->translate ( 'back to home page' );?></a>
+</div>
+
 
 </div>
 

@@ -1,4 +1,15 @@
 <div id="location_header_section">
+
+<span class="give-want">
+<a class="<?=(preg_match("/ad_type=1/", $_SERVER['REQUEST_URI']))?"actual":""?>
+   " href='/<?=$this->lang?>/search/?ad_type=1&q=<?=$this->escape($this->q) ?>'><?=$this->translate ( 'give' );?></a>
+&nbsp;
+<a class="<?=(preg_match("/ad_type=2/", $_SERVER['REQUEST_URI']))?"actual":""?>
+   " href='/<?=$this->lang?>/search/?ad_type=2&q=<?=$this->escape($this->q) ?>' ><?=$this->translate ( 'want' );?></a>
+</span>
+
+
+    <div class="location_name">
     <h3>
 
 <?
@@ -15,16 +26,9 @@ echo $this->translate('Search results for') . ' ('.$this->translate((string)$ad_
     </h3>
 
 
-<span class="give-want">
-<a class="<?=(preg_match("/ad_type=1/", $_SERVER['REQUEST_URI']))?"actual":""?>
-   " href='/<?=$this->lang?>/search/?ad_type=1&q=<?=$this->escape($this->q) ?>'><?=$this->translate ( 'give' );?></a>
-&nbsp;
-<a class="<?=(preg_match("/ad_type=2/", $_SERVER['REQUEST_URI']))?"actual":""?>
-   " href='/<?=$this->lang?>/search/?ad_type=2&q=<?=$this->escape($this->q) ?>' ><?=$this->translate ( 'want' );?></a>
-</span>
+    <?='<br>'.$this->translate('Found').' '.$this->total_found. ' '.$this->translate('results in'). ' '.$this->query_time. ' '.$this->translate('seconds.') ?>
+</div>
 
-
-    <?=$this->translate('Found').' '.$this->total_found. ' '.$this->translate('results in'). ' '.$this->query_time. ' '.$this->translate('seconds.') ?>
 </div>
 
 <?php
