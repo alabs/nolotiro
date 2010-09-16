@@ -10,32 +10,32 @@ html img{
 }
 
 a:link {
-	color: #00ACCF;
-	text-decoration: none;
+    color: #00ACCF;
+    text-decoration: none;
 }
 
 a:visited {
-	color: #00ACCF;
-	text-decoration: none;
+    color: #00ACCF;
+    text-decoration: none;
 }
 
 a:active {
-	color: #00C7EF;
+    color: #00C7EF;
 }
 
 a:hover {
-	/*color: #FF08DE;*/
-	color: #26DAFF;
-	
+    /*color: #FF08DE;*/
+    color: #26DAFF;
+
 }
 
 
 a.actual {
 
-	/*color: #FA58F4;
+    /*color: #FA58F4;
 	text-decoration: underline;*/
-	border-bottom: solid ;
-	border-width:3px;
+    border-bottom: solid ;
+    border-width:3px;
 }
 
 
@@ -47,24 +47,24 @@ a.actual {
 
 
 .user_login_box {
-	margin-top: -0.4em;
-	font-size: 1em;
-	background-color: #FFFFCC;
-	border-bottom: 1px solid #ddd;
-	border-left: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-	float:right;
-	right:20px;
-        padding-bottom: 3px;
-	padding-left: 8px;
-	padding-right: 6px;
+    margin-top: -0.4em;
+    font-size: 1em;
+    background-color: #FFFFCC;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    float:right;
+    right:20px;
+    padding-bottom: 3px;
+    padding-left: 8px;
+    padding-right: 6px;
 }
 
 
 
- form.searchbox{
+form.searchbox{
 
-/*    position: absolute;*/
+    /*    position: absolute;*/
     display: inline-block;
     width: auto;
     padding-right: 20px;
@@ -74,7 +74,7 @@ a.actual {
 form.searchbox dd{
     display: inline;
     margin: 0;
-    
+
 }
 
 form.searchbox input{
@@ -83,7 +83,7 @@ form.searchbox input{
     border: 1px;
     border-style: solid;
     border-color: #ddd;
-    
+
 }
 
 form.searchbox dl{
@@ -92,63 +92,63 @@ form.searchbox dl{
 
 
 .user_profile h4{
-    
+
     font-size: 14px;
     padding: 5px;
 }
 
 .select_language_box {
 
-	margin-top: -0.4em;
-	padding: 4px;
+    margin-top: -0.4em;
+    padding: 4px;
 }
 
 
 .select_language_box select {
-	font-size: 0.9em;
-	font-weight: bold;
-	background-color: #fff;
+    font-size: 0.9em;
+    font-weight: bold;
+    background-color: #fff;
 
 }
 
 .google_ads{
 
-    padding: 15px;
+    padding: 10px;
     clear: right;
     float: right;
-    right:10px;
+    right:0px;
     margin-top: 10px;
     margin-bottom: 20px;
-    border: 1px;
-    border-style: solid;
-    border-color: #ddd;
+    /*    border: 1px;
+        border-style: solid;
+        border-color: #ddd;*/
     background-color: #fff;
-    
+
 }
 
 .ad_create_tab {
-	position: absolute;
-	right: 0px;
-        top: 43px;
-	
+    position: absolute;
+    right: 0px;
+    top: 43px;
+
 
 }
 
 .ad_create_tab a {
-	background:transparent url(/images/btn_new_ad.png) no-repeat scroll 100% 0;
-	height:24px;
-	overflow:hidden;
-	color:#fff;
-	font-size: 1.2em;
-	font-weight: bold;
-	border: 1px solid #ddd;
-	padding-left:10px;
-	padding-right:10px;
-	padding-top:5px;
-	padding-bottom:2px;
-	text-align:center;
-	width:auto;
-	display:block;
+    background:transparent url(/images/btn_new_ad.png) no-repeat scroll 100% 0;
+    height:24px;
+    overflow:hidden;
+    color:#fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:5px;
+    padding-bottom:2px;
+    text-align:center;
+    width:auto;
+    display:block;
 }
 
 .ad_status{
@@ -176,85 +176,85 @@ form.searchbox dl{
 
 
 .ad_list_image {
-	float:right;
-	padding-left:4px;
-	width:100px;
+    float:right;
+    padding-left:4px;
+    width:100px;
 }
 
 .no_results{
-        display: block;
-        float: left;
-        padding-left:18px;
-	padding-right:18px;
-	padding-top:0;
+    display: block;
+    float: left;
+    padding-left:18px;
+    padding-right:18px;
+    padding-top:0;
 }
 
 
 .ad_excerpt{
-	float:left;
-	border-bottom: 1px solid #ddd;
-	width: 100% !important;
-	padding-left: 18px;
-	padding-right: 18px;
-	padding-bottom:22px;
-	padding-top:14px;
-	margin:0;
+    float:left;
+    border-bottom: 1px solid #ddd;
+    width: 100% !important;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom:22px;
+    padding-top:14px;
+    margin:0;
 
 }
 
 .ad_excerpt h4{
 
-	font-size: 1.3em;
-	font-weight: bold;
-        margin-bottom: 6px;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 6px;
 }
 
 .ad_excerpt:hover{
-	background-color:#FFFFCC;
-	
+    background-color:#FFFFCC;
+
 }
 
 .message_excerpt{
-	float:left;
-	border-bottom: 1px solid #ddd;
-	width: 100% !important;
-	padding-left: 18px;
-	padding-right: 18px;
-	padding-bottom:14px;
-	padding-top:14px;
-	margin:0;
+    float:left;
+    border-bottom: 1px solid #ddd;
+    width: 100% !important;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom:14px;
+    padding-top:14px;
+    margin:0;
 
 }
 
 .message_excerpt h4{
 
-	font-size: 1.3em;
-	font-weight: bold;
-        margin-bottom: 6px;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 6px;
 }
 
 .message_excerpt:hover{
-	background-color:#FFFFCC;
+    background-color:#FFFFCC;
 
 }
 
 .ad_date{
-	color:#666;
-	font-size: 0.9em;
-	font-weight: normal;
-        padding-bottom: 5px;
+    color:#666;
+    font-size: 0.9em;
+    font-weight: normal;
+    padding-bottom: 5px;
 }
 
 .ad_excerpt_show{
-	float:left;
-        font-size: 1.2em;
-	border-bottom: 1px solid #ddd;
-	width: 100% !important;
-	padding-left: 18px;
-	padding-right: 18px;
-	padding-bottom:14px;
-	padding-top:14px;
-	margin:0;
+    float:left;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ddd;
+    width: 100% !important;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom:14px;
+    padding-top:14px;
+    margin:0;
 
 }
 
@@ -269,7 +269,7 @@ form.searchbox dl{
     font-size: 11px;
     margin-top: 10px;
     margin-bottom: 5px;
-    
+
 }
 
 .edit_ad{
@@ -292,207 +292,210 @@ form.searchbox dl{
 }
 
 .ad_comments{
-        padding-left: 18px;
-        margin-bottom: 80px;
-        
+    padding-left: 18px;
+    margin-bottom: 80px;
+
 }
 
 .ad_comment{
-	float:left;
-        font-size: 1em;
-	border-bottom: 1px dashed #ddd;
-	width: 100% !important;
-	
-	padding-right: 18px;
-	padding-bottom:18px;
-	margin-top: 14px;
+    float:left;
+    font-size: 1em;
+    border-bottom: 1px dashed #ddd;
+    width: 100% !important;
+
+    padding-right: 18px;
+    padding-bottom:18px;
+    margin-top: 14px;
 
 }
 
 .ad_comment span{
     clear: left;
     float: left;
-     padding: 5px;
+    padding: 5px;
 }
 
 
 .ad_comments h5{
-        float: left;
-	font-size: 1.2em;
-	font-weight: bold;
-        padding-top: 10px;
-        margin-bottom: 10px!important;
+    float: left;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-top: 10px;
+    margin-bottom: 10px!important;
 }
 
 
 .ad_comment_form{
-        clear: left;
-        float: left;
-        margin-bottom: 10px;
-        margin-top: 10px;
+    clear: left;
+    float: left;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 
 .location_name{
     display: inline-block;
     margin-bottom: 14px;
-   
+
 }
 
 .give-want {
-	position: relative;
-        display: inline-block;
-	width:auto;
-	float:right;
-        right: 5px;
-        text-align:center;
-	background-color: #fff;
-	font-size: 2em;
-	font-weight: bold;
-	right: 10px;
-        padding: 10px;
-	margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+    width:auto;
+    float:right;
+    right: 5px;
+    text-align:center;
+    background-color: #fff;
+    font-size: 2em;
+    font-weight: bold;
+    right: 10px;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 
 
 .errors{
-	color:red;
+    color:red;
 }
 
 
 
 .error,.notice,.success {
-	padding: .8em;
-	margin-bottom: 1em;
-	margin-top: 1em;
-	border: 1px solid #ddd;
+    padding: .8em;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    border: 1px solid #ddd;
 }
 
 .error {
-	background: #FBE3E4;
-	color: #8a1f11;
-	border-color: #FBC2C4;
+    background: #FBE3E4;
+    color: #8a1f11;
+    border-color: #FBC2C4;
 }
 
 .notice {
-	background: #FFF6BF;
-	color: #514721;
-	border-color: #FFD324;
+    background: #FFF6BF;
+    color: #514721;
+    border-color: #FFD324;
 }
 
 .success {
-	background: #FFF;
-	color: #264409;
-	border-color: #C6D880;
+    background: #FFF;
+    color: #264409;
+    border-color: #C6D880;
 }
 
 .error a {
-	color: #8a1f11;
+    color: #8a1f11;
 }
 
 .notice a {
-	color: #514721;
+    color: #514721;
 }
 
 .success a {
-	color: #264409;
+    color: #264409;
 }
 
 
 /**
  * Layout.
- */
+*/
 #header {
-	margin-top: 0px;
-	width: 100%;
-	margin-left: 0px;
-	margin-right: 20px;
-	margin-bottom: 40px;
-	position: relative;
-	text-align: left;
-	
+    margin-top: 0px;
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+    position: relative;
+    text-align: left;
+
 }
 
 #main {
-        margin: 0px;
-	padding-top: 0;
-	text-align: left;
+    margin: 0px;
+    padding-top: 0;
+    text-align: left;
 }
 
 
 
 #footer {
-        font-size: 1em;
-        line-height: 1.33em;
-        float: left;
-        margin-top:20px;
-	padding:20px;
-	clear: both;
-	border-top: 1px solid #ddd;
-        background-color: #F2F2F2;
+    font-size: 1em;
+    line-height: 1.33em;
+    float: left;
+    margin-top:20px;
+    padding:20px;
+    clear: both;
+    border-top: 1px solid #ddd;
+    background-color: #F2F2F2;
 }
 
- .links-right{
+.links-right{
     text-align: right;
     margin-bottom: 10px;
     right: 10px;
 }
 
 
- .links-left{
+.links-left{
     text-align: left;
     left: 10px;
 }
 /**
  * Header Area.
- */
+*/
 h1#site-name  {
-        z-index: -130; /*below search form */
-	border: none;
-	margin-top: 0px;
-	padding-top: 10px;
-	font-size: 3em;
-	margin-left: 74px;
+    z-index: -130; /*below search form */
+    border: none;
+    margin-top: 0px;
+    padding-top: 10px;
+    font-size: 3em;
+    margin-left: 74px;
 }
 h1#site-name img {
-	position:absolute;
-	top:16px;
-	left:20px;
+    position:absolute;
+    top:16px;
+    left:20px;
 }
 
 h2#site-slogan {
-	float:left;
-	font-size: 1em;
-	padding-top: 1px;
-	margin-left: 74px;
+    float:left;
+    font-size: 1em;
+    padding-top: 1px;
+    margin-left: 74px;
 }
 
 #location_header_section {
-        display: block;
-        
-	background-color: #E5F2FF;
-	padding-top: 10px;
-	padding-bottom: 6px;
-	padding-left: 20px;
-	border: 1px solid #ddd;
-	
+    display: block;
+
+    background-color: #E5F2FF;
+    padding-top: 15px;
+    padding-bottom: 6px;
+    padding-left: 20px;
+    border: 1px solid #ddd;
+
 }
 
-#location_header_section  a{
+.world_link {
     display: inline-block;
     font-weight: bold;
-    margin-top:  5px;
+    margin-top:  6px;
 }
 
 #default_header_section {
-        display: block;
-	background-color: #FFFFCC;
-	padding-top: 16px;
-	padding-bottom: 16px;
-	padding-left: 20px;
-	border: 1px solid #ddd;
-	
+    display: block;
+    background-color: #FFFFCC;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 20px;
+    border: 1px solid #ddd;
+
 }
 
 
@@ -547,7 +550,7 @@ h2#site-slogan {
 .disabled{
     border-color: #fff!important;
     color: #666;
-    
+
 }
 
 
@@ -556,42 +559,42 @@ h2#site-slogan {
 *
 */
 .page_footer {
-	position: absolute;
-	bottom: 20px;
-	width: 99%;
-	text-align: center;
-	clear: both;
-	font-size: 9pt;
-	color: #999;
+    position: absolute;
+    bottom: 20px;
+    width: 99%;
+    text-align: center;
+    clear: both;
+    font-size: 9pt;
+    color: #999;
 }
 
 
 /* begin css tabs */
 
 ul#tabnav { 
-text-align: left; /* set to left, right or center */
-margin: 1em 0 1em 0; /* set margins as desired */
-font-size: 14px;
-font-weight: bold;
-border-bottom: 1px solid #ddd;
-list-style-type: none;
-padding: 3px 15px 3px 15px; 
+    text-align: left; /* set to left, right or center */
+    margin: 1em 0 1em 0; /* set margins as desired */
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    list-style-type: none;
+    padding: 3px 15px 3px 15px;
 }
 
 ul#tabnav li {
-display: inline;
+    display: inline;
 }
 
 
 
 ul#tabnav li a { 
-padding: 3px 10px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
-border: 1px solid #ddd; /* set border COLOR as desired; usually matches border color specified in #tabnav */
-/*background-color: #fff;*/ /* set unselected tab background color as desired */
-/*color: #000;*/ /* set unselected tab link color as desired */
-margin-right: 0px; /* set additional spacing between tabs as desired */
-text-decoration: none;
-border-bottom: none;
+    padding: 3px 10px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+    border: 1px solid #ddd; /* set border COLOR as desired; usually matches border color specified in #tabnav */
+    /*background-color: #fff;*/ /* set unselected tab background color as desired */
+    /*color: #000;*/ /* set unselected tab link color as desired */
+    margin-right: 0px; /* set additional spacing between tabs as desired */
+    text-decoration: none;
+    border-bottom: none;
 }
 
 ul#tabnav a:hover { 
