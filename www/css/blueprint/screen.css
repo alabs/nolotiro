@@ -77,13 +77,17 @@ h2 {
 	font-size: 1em;
 	padding-left: 0.13em;
 	margin-bottom: 0.1em;
+
 }
 
 h3 {
+        display: inline;
 	font-size: 2em;
+       
 	line-height: 1;
 	font-weight: bold;
-	margin-bottom: 1em;
+	margin-bottom: 2em;
+      
 }
 
 h4 {

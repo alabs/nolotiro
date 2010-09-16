@@ -6,6 +6,7 @@ html input[type="text"], input[type="password"], input[type="submit"]{
 
 html img{
     vertical-align: middle;
+    z-index: 360;
 }
 
 a:link {
@@ -332,19 +333,25 @@ form.searchbox dl{
 }
 
 
+.location_name{
+    display: inline-block;
+    margin-bottom: 14px;
+   
+}
 
 .give-want {
 	position: relative;
+        display: inline-block;
 	width:auto;
 	float:right;
-	text-align:center;
-	border: 1px solid #ddd;
+        right: 5px;
+        text-align:center;
 	background-color: #fff;
 	font-size: 2em;
 	font-weight: bold;
 	right: 10px;
-	top:-50px;
-	padding: 14px;
+        padding: 10px;
+	margin-bottom: 10px;
 }
 
 
@@ -462,26 +469,30 @@ h2#site-slogan {
 }
 
 #location_header_section {
+        display: block;
+        
 	background-color: #E5F2FF;
 	padding-top: 10px;
 	padding-bottom: 6px;
 	padding-left: 20px;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
+	border: 1px solid #ddd;
+	
 }
 
 #location_header_section  a{
-
+    display: inline-block;
     font-weight: bold;
+    margin-top:  5px;
 }
 
 #default_header_section {
+        display: block;
 	background-color: #FFFFCC;
-	padding-top: 10px;
-	padding-bottom: 6px;
+	padding-top: 16px;
+	padding-bottom: 16px;
 	padding-left: 20px;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
+	border: 1px solid #ddd;
+	
 }
 
 

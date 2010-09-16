@@ -1,5 +1,5 @@
 <div id="location_header_section">
-<h3><?=$this->woeidName;?></h3>
+
 
 <span class="give-want">
 <a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/woeid/<?=$this->woeid?>/give'><?=$this->translate ( 'give' );?></a>
@@ -7,7 +7,15 @@
 <a class="<?=(preg_match("/want/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/woeid/<?=$this->woeid?>/want'><?=$this->translate ( 'want' );?></a>
 </span>
 
-<a  href='/<?=$this->lang?>/location/change'><?=$this->translate ( 'change location' );?></a>
+    <div class="location_name">
+    <h3><?=$this->woeidName;?></h3><br>
+    
+<a  href='/<?=$this->lang?>/location/change'>
+            <img src="/images/change_location.png" alt="change location"/>
+            <?=$this->translate ( 'change location' );?></a>
+</div>
+
+
 </div>
 
 
