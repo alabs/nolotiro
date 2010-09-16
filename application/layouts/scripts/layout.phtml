@@ -3,20 +3,22 @@
     <head>
         <title><?= $this->page_title.' | nolotiro.org'?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="copyright" content="daniel remeseiro" />
-        <meta name="DC.Title"
-              content="<?=isset($this->page_title) ? $this->page_title : 'nolotiro.org'?>" />
+        <meta name="author" content="daniel remeseiro" />
         <meta name="robots" content="index,follow" />
         <meta name="google-site-verification" content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <?
-        $this->headLink();
+        if ($this->canonicalUrl) {
+            $this->headLink(array('rel' => 'canonical','href' => $this->canonicalUrl),'APPEND');
+        }
         $css_num = 126;
-        echo $this->headLink()->appendStylesheet('/css/common.css?num='.$css_num)?>
-        <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+        $this->headLink()->appendStylesheet('/css/common.css?num='.$css_num);
+        $this->headLink()->appendStylesheet('/css/blueprint/screen.css');
+         echo $this->headLink();?>
+        
 
-        <!--[if IE]>
-            <link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection" />
+        <!--[if lt IE 7]>
+        <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
         <![endif]-->
         
 

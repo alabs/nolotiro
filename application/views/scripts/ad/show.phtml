@@ -59,7 +59,7 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
 
            <span class="ad_date"><?=$this->translate('Posted on '). $this->ad['date_created'] ?>
             <?=$this->translate('by user ') ?> 
-            <a href="/<?=$this->lang ?>/profile/<?=$this->ad['username'] ?>"><?=$this->ad['username'] ?></a>
+            <a href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->ad['user_owner'] ?>"><?=$this->ad['username'] ?></a>
             </span>
             
            <br>

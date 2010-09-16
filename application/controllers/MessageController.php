@@ -44,7 +44,7 @@ class MessageController extends Zend_Controller_Action {
 
             //keep this url in zend session to redir after login
             $aNamespace = new Zend_Session_Namespace('Nolotiro');
-            $aNamespace->redir = $this->lang . '/message/create/id_user_to/' . $id_user_to;
+            $aNamespace->redir = $this->lang . '/message/create/id_user_to/' . $id_user_to . '/subject/' . $this->_getParam('subject');
             $this->_redirect($this->lang . '/auth/login');
         }
 
