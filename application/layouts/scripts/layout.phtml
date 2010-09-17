@@ -1,45 +1,40 @@
-<?=$this->doctype() ?>
+<?= $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title><?= $this->page_title.' | nolotiro.org'?></title>
+        <title><?= $this->page_title . ' | nolotiro.org' ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="author" content="daniel remeseiro" />
         <meta name="robots" content="index,follow" />
         <meta name="google-site-verification" content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <?
+        <?php
         //set hreflang for best multilanguage indexing by crawlers
         if ($this->lang == 'es') {
-            $this->headLink(array('rel' => 'alternate', 'hreflang' => 'en', 'href' =>  str_replace('/es/', '/en/',  $_SERVER['SCRIPT_URI']) ),'APPEND');
+            $this->headLink(array('rel' => 'alternate', 'hreflang' => 'en', 'href' => str_replace('/es/', '/en/', $_SERVER['SCRIPT_URI'])), 'APPEND');
         }
 
         if ($this->lang == 'en') {
-            $this->headLink(array('rel' => 'alternate', 'hreflang' => 'es', 'href' =>  str_replace('/en/', '/es/',  $_SERVER['SCRIPT_URI']) ),'APPEND');
+            $this->headLink(array('rel' => 'alternate', 'hreflang' => 'es', 'href' => str_replace('/en/', '/es/', $_SERVER['SCRIPT_URI'])), 'APPEND');
         }
 
         if ($this->canonicalUrl) {
-            $this->headLink(array('rel' => 'canonical','href' => $this->canonicalUrl),'APPEND');
+            $this->headLink(array('rel' => 'canonical', 'href' => $this->canonicalUrl), 'APPEND');
         }
 
-
-
         $css_num = 128;
-        $this->headLink()->appendStylesheet('/css/common.css?num='.$css_num);
+        $this->headLink()->appendStylesheet('/css/common.css?num=' . $css_num);
         $this->headLink()->appendStylesheet('/css/blueprint/screen.css');
-         echo $this->headLink();?>
+        echo $this->headLink();
+        echo $this->headScript();
+        ?>
         
-
-
-        <script src="/js/jquery.min.js" type="text/javascript"></script>
-        
-        <script src="/js/jquery.superbox-min.js" type="text/javascript"></script>
         <script type="text/javascript">
             $(function(){
                 $.superbox.settings = {
-                    closeTxt: "<?=$this->translate('Close') ?>",
-                    loadTxt: "<?=$this->translate('Loading') ?>...",
-                    nextTxt: "<?=$this->translate('Next') ?>",
-                    prevTxt: "<?=$this->translate('Previous') ?>"
+                    closeTxt: "<?= $this->translate('Close') ?>",
+                    loadTxt: "<?= $this->translate('Loading') ?>...",
+                    nextTxt: "<?= $this->translate('Next') ?>",
+                    prevTxt: "<?= $this->translate('Previous') ?>"
                 };
                 $.superbox();
             });
@@ -93,78 +88,73 @@
                             <img src="/images/icons/ico_email.gif" />&nbsp;<b>' . $this->checkMessages . '</b>
                             </a> ';
                         //}
-
                         echo'| ' . '<a href="/' . $this->lang . '/auth/logout">' .
                         $this->translate('logout') . '</a>';
                     }
                     ?>
-
                 </div>
 
                 <h1 id="site-name"><a href="/" title="nolotiro.org home"><img src="/images/nolotiro_logo.png" alt="nolotiro.org" id="logo" /> nolotiro.org</a></h1>
-                <h2 id='site-slogan'><?=$this->translate('no lo tiro, te lo regalo (sin condiciones)') ?></h2>
-                            <div class="ad_create_tab">
-                                <a  href="/<?=$this->lang . '/ad/create' ?>"><?='+ ' . $this->translate('Create new ad') . $this->woeidNameShort ?></a>
+                <h2 id='site-slogan'><?= $this->translate('no lo tiro, te lo regalo (sin condiciones)') ?></h2>
+                <div class="ad_create_tab">
+                    <a  href="/<?= $this->lang . '/ad/create' ?>"><?= '+ ' . $this->translate('Create new ad') . $this->woeidNameShort ?></a>
                 </div>
             </div>
 
-            
-                    <?=$this->layout()->content ?>
+            <?= $this->layout()->content ?>
 
+                    <div id="footer">
+                        <div class="links-right">
+                            <a href='/<?= $this->lang ?>/page/about'><?= $this->translate('about'); ?></a>
+                            | <a href='/<?= $this->lang ?>/page/faqs'><?= $this->translate('faqs'); ?></a>
+                            | <a href='/<?= $this->lang ?>/ad/listall/ad_type/give'><?= $this->translate('all the ads'); ?></a>
+                            | <?= ($this->lang == 'es') ? "<a href='/en/index/setlang'>english</a>" : "<a href= '/es/index/setlang'>español</a>"; ?>
 
+                        </div>
 
-                        <div id="footer">
-                            <div class="links-right">
-                                <a href='/<?=$this->lang ?>/page/about'><?=$this->translate('about');?></a>
-                                | <a href='/<?=$this->lang ?>/page/faqs'><?=$this->translate('faqs');?></a>
-                                | <a href='/<?=$this->lang ?>/ad/listall/ad_type/give'><?=$this->translate('all the ads'); ?></a>
-                                | <?= ($this->lang == 'es')?"<a href='/en/index/setlang'>english</a>":"<a href= '/es/index/setlang'>español</a>";?>
-
-                 </div>
-
-                 <div id="info" class="innerWrap clearfix">
-                     <p>
-                         <?=$this->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
-                    ?>
+                        <div id="info" class="innerWrap clearfix">
+                            <p>
+                        <?= $this->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
+                        ?>
                     </p>
                 </div>
                 <div  class="links-left">
-                    <a href="/<?=$this->lang ?>/page/tos"><?=$this->translate('terms of use'); ?></a> |
-                    <a href="/<?=$this->lang ?>/page/privacy"><?=$this->translate('privacy policy'); ?></a> |
-                    <a href="http://code.google.com/p/nolotiro/"><?=$this->translate('developers'); ?></a> |
-                    <a href='/<?=$this->lang ?>/contact'><?=$this->translate('contact'); ?></a> |
-                    <a href='http://www.pledgie.com/campaigns/12750'><?=$this->translate('donate'); ?></a>
+                    <a href="/<?= $this->lang ?>/page/tos"><?= $this->translate('terms of use'); ?></a> |
+                    <a href="/<?= $this->lang ?>/page/privacy"><?= $this->translate('privacy policy'); ?></a> |
+                    <a href="http://code.google.com/p/nolotiro/"><?= $this->translate('developers'); ?></a> |
+                    <a href='/<?= $this->lang ?>/contact'><?= $this->translate('contact'); ?></a> |
+                    <a href='http://www.pledgie.com/campaigns/12750'><?= $this->translate('donate'); ?></a>
                 </div>
             </div>
         </div>
 
-<script type="text/javascript">
-  var uservoiceOptions = {
-    key: 'nolotiro',
-    host: 'nolotiro.uservoice.com',
-    forum: '<? if ( $this->lang == 'es') {
-                        echo '30282';
-}
+        <script type="text/javascript">
+            var uservoiceOptions = {
+                key: 'nolotiro',
+                host: 'nolotiro.uservoice.com',
+                forum: '<?
+                        if ($this->lang == 'es') {
+                            echo '30282';
+                        }
 
-if ($this->lang == 'en') {
-    echo '76487';
-}
-
-?>',
-    lang: '<?=$this->lang ?>',
-    showTab: true,
-    alignment: 'left',
-    background_color: '#999',
-    hover_color: '#00ACCF'
-  };
-  function _loadUserVoice() {
-    var s = document.createElement('script');
-    s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
-    document.getElementsByTagName('head')[0].appendChild(s);
-  }
-  _loadSuper = window.onload;
-  window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
-</script>
+                        if ($this->lang == 'en') {
+                            echo '76487';
+                        }
+                        ?>',
+                lang: '<?= $this->lang ?>',
+                showTab: true,
+                alignment: 'left',
+                background_color: '#999',
+                hover_color: '#00ACCF'
+            };
+            function _loadUserVoice() {
+                var s = document.createElement('script');
+                s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
+                document.getElementsByTagName('head')[0].appendChild(s);
+            }
+            _loadSuper = window.onload;
+            window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+        </script>
 
 
 

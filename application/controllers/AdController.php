@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AdController
  *
@@ -12,18 +13,18 @@ class AdController extends Zend_Controller_Action {
 
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
         $this->location = $this->_helper->checklocation->check();
-        $this->view->checkMessages  = $this->_helper->checkMessages->check();
+        $this->view->checkMessages = $this->_helper->checkMessages->check();
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->mensajes = $this->_flashMessenger->getMessages();
 
 
-         //check if user is locked
+        //check if user is locked
         $locked = $this->_helper->checkLockedUser->check();
         if ($locked == 1) {
             $this->_redirect('/' . $this->view->lang . '/auth/logout');
         }
 
-         if ($this->view->checkMessages > 0) {
+        if ($this->view->checkMessages > 0) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You have') . ' ' .
                     '<b><a href="/' . $this->view->lang . '/message/received">' . $this->view->translate('new messages') . ' (' . $this->view->checkMessages . ')</a></b>');
         }
@@ -48,8 +49,7 @@ class AdController extends Zend_Controller_Action {
         $page = $this->_request->getParam('page');
 
         if ($page) {
-            $this->view->page_title .= $this->view->translate('page').' '.$page. ' - ';
-
+            $this->view->page_title .= $this->view->translate('page') . ' ' . $page . ' - ';
         }
 
         $model = $this->_getModel();
@@ -58,13 +58,13 @@ class AdController extends Zend_Controller_Action {
         $this->view->ad = $model->getAdList($woeid, $ad_type);
         $this->view->woeidName = $this->_helper->woeid->name($woeid, $this->lang);
         $short = explode(',', $this->view->woeidName);
-        $this->view->woeidNameShort = ' '. $this->view->translate('in') .' ' .$short[0];
+        $this->view->woeidNameShort = ' ' . $this->view->translate('in') . ' ' . $short[0];
 
 
-         //add the link to the proper rss to layout
-        $this->view->headLink()->appendAlternate(  'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/rss/feed/woeid/'.$woeid.'/ad_type/'.$ad_type,
-                'application/rss+xml' ,
-                $this->view->woeidName.' - '. $this->view->translate( (string)$type ));
+        //add the link to the proper rss to layout
+        $this->view->headLink()->appendAlternate('http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/rss/feed/woeid/' . $woeid . '/ad_type/' . $ad_type,
+                'application/rss+xml',
+                $this->view->woeidName . ' - ' . $this->view->translate((string) $type));
 
 
 
@@ -72,9 +72,9 @@ class AdController extends Zend_Controller_Action {
             $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
         }
 
-        
+
         //TODO , this sucks, do a better way to not show invalid woeids or null
-        if ( (empty ($woeid) ) || ($woeid < 10) || ($woeid == 29370606) ) { //29370606 españa town
+        if ((empty($woeid) ) || ($woeid < 10) || ($woeid == 29370606)) { //29370606 españa town
             $this->_helper->_flashMessenger->addMessage($this->view->translate('This location is not a valid town. Please, try again.'));
             $this->_redirect('/' . $this->lang . '/location/change');
         }
@@ -114,8 +114,7 @@ class AdController extends Zend_Controller_Action {
         $page = $this->_request->getParam('page');
 
         if ($page) {
-            $this->view->page_title .= ' - ' .$this->view->translate('page').' '.$page;
-
+            $this->view->page_title .= ' - ' . $this->view->translate('page') . ' ' . $page;
         }
 
         //paginator
@@ -148,7 +147,7 @@ class AdController extends Zend_Controller_Action {
         $paginator->setItemCountPerPage(10);
         $paginator->setCurrentPageNumber($page);
 
-      
+
         $this->view->paginator = $paginator;
 
 
@@ -157,12 +156,11 @@ class AdController extends Zend_Controller_Action {
 
         $this->view->user = $this->user->fetchUser($id);
 
-         $this->view->page_title .= $this->view->translate('Ad list of user'). ' '.$this->view->user['username'];
-         $page = $this->_request->getParam('page');
+        $this->view->page_title .= $this->view->translate('Ad list of user') . ' ' . $this->view->user['username'];
+        $page = $this->_request->getParam('page');
 
         if ($page) {
-            $this->view->page_title .= ' - '.$this->view->translate('page').' '.$page;
-
+            $this->view->page_title .= ' - ' . $this->view->translate('page') . ' ' . $page;
         }
     }
 
@@ -172,36 +170,40 @@ class AdController extends Zend_Controller_Action {
         $model = $this->_getModel();
         $this->view->ad = $model->getAd($id);
 
-        //lets count the comments number and update
-         $modelComments = new Model_Comment();
-         $this->view->checkCountAd  = $count =  $modelComments->countCommentsAd( (int)$id);
-         //let's increment +1 the ad view counter
-         $model->updateReadedAd($id);
-         $this->view->countReadedAd = $model->countReadedAd($id);
-        
+        //add jquery and superbox to show modal photo window
+        $this->view->headScript()->appendFile(  '/js/jquery.min.js', 'text/javascript');
+        $this->view->headScript()->appendFile(  '/js/jquery.superbox-min.js', 'text/javascript');
 
-         if ($this->view->checkCountAd > 0) {
-             $modelComments->updateCommentsAd($id, $count);
-         }    
+
+        //lets count the comments number and update
+        $modelComments = new Model_Comment();
+        $this->view->checkCountAd = $count = $modelComments->countCommentsAd((int) $id);
+        //let's increment +1 the ad view counter
+        $model->updateReadedAd($id);
+        $this->view->countReadedAd = $model->countReadedAd($id);
+
+
+        if ($this->view->checkCountAd > 0) {
+            $modelComments->updateCommentsAd($id, $count);
+        }
 
         if ($this->view->ad != null) { // if the id ad exists then render the ad and comments
-
             if ($this->view->ad['type'] == 1) {
                 $this->view->page_title .= $this->view->translate('give') . ' - ';
             }
 
-             if ($this->view->ad['type'] == 2) {
+            if ($this->view->ad['type'] == 2) {
                 $this->view->page_title .= $this->view->translate('want') . ' - ';
             }
 
             $this->view->comments = $model->getComments($id);
             $this->view->woeidName = $this->_helper->woeid->name($this->view->ad['woeid_code'], $this->lang);
 
-            $this->view->page_title .= $this->view->ad['title'].' - '.$this->view->woeidName;
+            $this->view->page_title .= $this->view->ad['title'] . ' - ' . $this->view->woeidName;
 
 
             //add link rel canonical , better seo
-            $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/ad/show/id/'.$id .'/' .$this->view->ad['title'];
+            $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/ad/show/id/' . $id . '/' . $this->view->ad['title'];
 
             //if user logged in, show the comment form, if not show the login link
             $auth = Zend_Auth::getInstance ();
@@ -328,11 +330,10 @@ class AdController extends Zend_Controller_Action {
 //             var_dump( $user->fetchUser($auth->getIdentity()->id)->id);
 //             var_dump($ad_user_owner['user_owner']);
 
-            if ( $user->fetchUser($auth->getIdentity()->id)->id != $ad_user_owner['user_owner'] ) {
+            if ($user->fetchUser($auth->getIdentity()->id)->id != $ad_user_owner['user_owner']) {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
                 $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
             }
-
         } else {
 
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
@@ -346,7 +347,7 @@ class AdController extends Zend_Controller_Action {
         $request = $this->getRequest();
         require_once APPLICATION_PATH . '/forms/AdEdit.php';
         $form = new Form_AdEdit ( );
-        
+
 
         $form->addElement('select', 'status', array(
             'order' => '1',
@@ -358,18 +359,17 @@ class AdController extends Zend_Controller_Action {
         $this->view->page_title .= $this->view->translate('Edit your ad');
         $this->view->form = $form;
 
-       if ($this->getRequest()->isPost()) {
+        if ($this->getRequest()->isPost()) {
 
-           $formData = $this->getRequest()->getPost();
+            $formData = $this->getRequest()->getPost();
 
 
-                if ($form->isValid($formData)) {
+            if ($form->isValid($formData)) {
 
-            
 
-            $formulario = $form->getValues();
-            //var_dump($form);
 
+                $formulario = $form->getValues();
+                //var_dump($form);
                 //set filter againts xss and nasty things
                 $f = new Zend_Filter();
                 $f->addFilter(new Zend_Filter_StripTags());
@@ -383,23 +383,21 @@ class AdController extends Zend_Controller_Action {
 
                     $photobrut = $formulario['photo'];
                     $data['photo'] = $this->_createThumbnail($photobrut, '100', '90');
-
-                    
                 }
 
 
-                $data['status'] = $formulario['status'];               
+                $data['status'] = $formulario['status'];
                 $data['comments_enabled'] = $formulario['comments_enabled'];
 
                 $model = $this->_getModel();
-                $model->updateAd( $data, $id);
+                $model->updateAd($data, $id);
 
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad edited succesfully!'));
                 $this->_redirect('/' . $this->lang . '/ad/show/id/' . $id);
             } else {
 
                 $id = $this->_getParam('id');
-                 $ad = new Model_Ad();
+                $ad = new Model_Ad();
 
                 $advalues = $ad->getAd($id);
                 // if photo not empty then show and let change it
@@ -426,10 +424,7 @@ class AdController extends Zend_Controller_Action {
                 $form->populate($ad->getAd($id));
             }
         }
-        
     }
-
-
 
     /*
      * _createThumbnail uses resize class
@@ -473,12 +468,12 @@ class AdController extends Zend_Controller_Action {
         $admodel = new Model_Ad();
         $ad = $admodel->getAd($id);
 
-        if ( $auth->getIdentity()->id == $ad['user_owner']  ) {
+        if ($auth->getIdentity()->id == $ad['user_owner']) {
 
-        //if is the user owner owner lets delete it
+            //if is the user owner owner lets delete it
             if ($this->getRequest()->isPost()) {
                 $del = $this->getRequest()->getPost('del');
-                
+
                 if ($del == 'Yes') {
                     //delete ad, and all his content
                     $admodel->deleteAd($id);
@@ -493,16 +488,14 @@ class AdController extends Zend_Controller_Action {
                 }
             } else {
                 $id = $this->_getParam('id', 0);
-            
             }
         } else {
 
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
             $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
             return;
+        }
     }
-
-}
 
     protected function _getModel() {
         if (null === $this->_model) {
