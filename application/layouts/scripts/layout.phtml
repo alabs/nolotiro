@@ -8,9 +8,21 @@
         <meta name="google-site-verification" content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <?
+        //set hreflang for best multilanguage indexing by crawlers
+        if ($this->lang == 'es') {
+            $this->headLink(array('rel' => 'alternate', 'hreflang' => 'en', 'href' =>  str_replace('/es/', '/en/',  $_SERVER['SCRIPT_URI']) ),'APPEND');
+        }
+
+        if ($this->lang == 'en') {
+            $this->headLink(array('rel' => 'alternate', 'hreflang' => 'es', 'href' =>  str_replace('/en/', '/es/',  $_SERVER['SCRIPT_URI']) ),'APPEND');
+        }
+
         if ($this->canonicalUrl) {
             $this->headLink(array('rel' => 'canonical','href' => $this->canonicalUrl),'APPEND');
         }
+
+
+
         $css_num = 128;
         $this->headLink()->appendStylesheet('/css/common.css?num='.$css_num);
         $this->headLink()->appendStylesheet('/css/blueprint/screen.css');
