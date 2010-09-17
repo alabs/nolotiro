@@ -34,4 +34,48 @@ class IndexController extends Zend_Controller_Action {
         $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
     }
 
+
+    public function setlangAction()
+    {
+        $this->referer = $_SERVER['HTTP_REFERER'];
+        $lang = $this->_getParam("language");
+        $auth = Zend_Auth::getInstance();
+        if ($auth->hasIdentity())
+        {
+            $umodel = new Model_User();
+            $data = (array)$auth->getIdentity();
+            $data['lang'] = $lang;
+            $umodel->update($data);
+            $auth->getStorage()->write((object)$data);
+        }
+
+        setcookie ( "lang", $lang, null, '/' );
+
+        if ($this->hasValidReferer())
+        {
+            $new_url = explode("/", $this->referer);
+            if (count($new_url)>3 && strlen($new_url[3])>0) $new_url[3] = $lang;
+            $this->_redirect(join("/",$new_url));
+        }
+        else
+            $this->_redirect ( '/' );
+    }
+
+    function hasValidReferer()
+    {
+        if (!$this->referer) return false;
+
+        # invalid if is the same URL
+        $currentURI = $_SERVER['SCRIPT_URI'];
+        if (strcmp($this->referer, $currentURI) == 0) return false;
+
+        # invalid if is not in this site
+        $barpos = strpos($currentURI, "/", 8);
+        if (strncmp($this->referer, $currentURI, $barpos ) != 0) return false;
+
+        return true;
+    }
+
+
+
 }
