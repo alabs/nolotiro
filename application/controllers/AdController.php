@@ -46,11 +46,6 @@ class AdController extends Zend_Controller_Action {
             $type = 'want';
         }
 
-        $page = $this->_request->getParam('page');
-
-        if ($page) {
-            $this->view->page_title .= $this->view->translate('page') . ' ' . $page . ' - ';
-        }
 
         $model = $this->_getModel();
 
@@ -79,14 +74,18 @@ class AdController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->lang . '/location/change');
         }
 
-
-        //set the location name reg var from the woeid helper
+         //set the location name reg var from the woeid helper
         $aNamespace = new Zend_Session_Namespace('Nolotiro');
         $aNamespace->locationName = $this->view->woeidName;
         $this->view->page_title .= $this->view->woeidName;
 
         //paginator
         $page = $this->_getParam('page');
+
+        if ($page) {
+            $this->view->page_title .= ' - ' . $this->view->translate('page') . ' ' . $page;
+        }
+        
         $paginator = Zend_Paginator::factory($this->view->ad);
         $paginator->setDefaultScrollingStyle('Elastic');
         $paginator->setItemCountPerPage(10);
@@ -111,14 +110,12 @@ class AdController extends Zend_Controller_Action {
         $this->view->ad = $model->getAdListAll($ad_type);
         $this->view->page_title .= $this->view->translate('All the ads');
 
-        $page = $this->_request->getParam('page');
-
+        //paginator
+        $page = $this->_getParam('page');
         if ($page) {
             $this->view->page_title .= ' - ' . $this->view->translate('page') . ' ' . $page;
         }
-
-        //paginator
-        $page = $this->_getParam('page');
+        
         $paginator = Zend_Paginator::factory($this->view->ad);
         $paginator->setDefaultScrollingStyle('Elastic');
         $paginator->setItemCountPerPage(10);
@@ -142,14 +139,13 @@ class AdController extends Zend_Controller_Action {
 
         //paginator
         $page = $this->_getParam('page');
+        
         $paginator = Zend_Paginator::factory($this->view->ad);
         $paginator->setDefaultScrollingStyle('Elastic');
         $paginator->setItemCountPerPage(10);
         $paginator->setCurrentPageNumber($page);
 
-
         $this->view->paginator = $paginator;
-
 
         require_once APPLICATION_PATH . '/models/User.php';
         $this->user = new Model_User();
@@ -369,6 +365,19 @@ class AdController extends Zend_Controller_Action {
 
 
                 $formulario = $form->getValues();
+
+                 //anti HOYGAN to title
+                    //dont use strtolower because dont convert utf8 properly . ej: á é ó ...
+                    $formulario['title'] = ucfirst(mb_convert_case($formulario['title'], MB_CASE_LOWER, "UTF-8"));
+
+                    //anti hoygan to body
+                    $split = explode(". ", $formulario['body']);
+
+                    foreach ($split as $sentence) {
+                        $sentencegood = ucfirst(mb_convert_case($sentence, MB_CASE_LOWER, "UTF-8"));
+                        $formulario['body'] = str_replace($sentence, $sentencegood, $formulario['body']);
+                    }
+
                 //var_dump($form);
                 //set filter againts xss and nasty things
                 $f = new Zend_Filter();
