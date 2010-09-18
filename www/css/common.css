@@ -189,6 +189,16 @@ form.searchbox dl{
     padding-top:0;
 }
 
+.filter_status{
+    float:left;
+    border-bottom: 1px solid #ddd;
+    width: 100% !important;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom:14px;
+    margin-top: -12px;
+
+}
 
 .ad_excerpt{
     float:left;

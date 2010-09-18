@@ -32,6 +32,14 @@ if (count ( $this->mensajes ) > 0) {
 <div id="main">
 <div class="span-18">
 
+    <div class="filter_status">
+        <?=$this->partial (  'partials/filter_status_nav.phtml' , array(
+             'woeid' => $this->woeid,
+            'lang' => $this->lang,
+            'ad_type' => $this->ad_type)); ?>
+    </div>
+
+
 <?php if ($this->ad): ?>
 
        <?php

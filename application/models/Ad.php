@@ -136,7 +136,7 @@ public function getAdforSearch($id, $ad_type) {
 	 * @param  string $ad_type  
 	 * @return array list of ads with this params
 	 */
-	public function getAdList($woeid,$ad_type, $limit=NULL ) {
+	public function getAdList($woeid,$ad_type, $status=NULL, $limit=NULL ) {
 		$woeid = ( int ) $woeid;
 		$ad_type = ( string ) $ad_type;
                 
@@ -163,8 +163,16 @@ public function getAdforSearch($id, $ad_type) {
 
 		$select->where('a.woeid_code = ?', $woeid);
 		$select->where('a.type = ?', $ad_type);
-                //dont list not available items
-                $select->where('a.status != ?', 'delivered');
+
+                if($status != NULL){
+                    $select->where('a.status = ?', $status);
+                } else {
+
+                     //dont list not available items by default
+                  $select->where('a.status != ?', 'delivered');
+
+                }
+
 
                 if($limit != NULL){
                     $select->limit( (int)$limit );

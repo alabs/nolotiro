@@ -33,6 +33,7 @@ class AdController extends Zend_Controller_Action {
     public function listAction() {
 
         $woeid = $this->_request->getParam('woeid');
+        $status = $this->_request->getParam('status');
         $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
 
 
@@ -50,7 +51,7 @@ class AdController extends Zend_Controller_Action {
         $model = $this->_getModel();
 
         $this->view->woeid = $woeid;
-        $this->view->ad = $model->getAdList($woeid, $ad_type);
+        $this->view->ad = $model->getAdList($woeid, $ad_type, $status);
         $this->view->woeidName = $this->_helper->woeid->name($woeid, $this->lang);
         $short = explode(',', $this->view->woeidName);
         $this->view->woeidNameShort = ' ' . $this->view->translate('in') . ' ' . $short[0];
