@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="author" content="daniel remeseiro" />
         <meta name="robots" content="index,follow" />
+        <meta name="alexaVerifyID" content="3nRFpyasuPpTttUm-zy1QPTPlmA" />
         <meta name="google-site-verification" content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <?php
@@ -21,13 +22,13 @@
             $this->headLink(array('rel' => 'canonical', 'href' => $this->canonicalUrl), 'APPEND');
         }
 
-        $css_num = 129;
+        $css_num = 130;
         $this->headLink()->appendStylesheet('/css/common.css?num=' . $css_num);
         $this->headLink()->appendStylesheet('/css/blueprint/screen.css');
         echo $this->headLink();
         echo $this->headScript();
         ?>
-        
+
         <script type="text/javascript">
             $(function(){
                 $.superbox.settings = {
@@ -141,19 +142,19 @@
                             echo '76487';
                         }
                         ?>',
-                lang: '<?= $this->lang ?>',
-                showTab: true,
-                alignment: 'left',
-                background_color: '#999',
-                hover_color: '#00ACCF'
-            };
-            function _loadUserVoice() {
-                var s = document.createElement('script');
-                s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
-                document.getElementsByTagName('head')[0].appendChild(s);
-            }
-            _loadSuper = window.onload;
-            window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+                                lang: '<?= $this->lang ?>',
+                                showTab: true,
+                                alignment: 'left',
+                                background_color: '#999',
+                                hover_color: '#00ACCF'
+                            };
+                            function _loadUserVoice() {
+                                var s = document.createElement('script');
+                                s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
+                                document.getElementsByTagName('head')[0].appendChild(s);
+                            }
+                            _loadSuper = window.onload;
+                            window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
         </script>
 
 
