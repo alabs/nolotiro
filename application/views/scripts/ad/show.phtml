@@ -82,11 +82,14 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
                 <a href="http://twitter.com/home?status=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->escape($this->ad['title']);?>">
                 <img alt="<?=$this->translate('share on twitter');?>" src="/images/icons/ico_twitter.png" border = "0"/></a>
         </div>
+           <?php if ($this->ad['status'] != 'delivered'): ?>
 	   <?=$this->translate('Interested?') ?>&nbsp;
-<a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'].'/subject/'.$this->escape($this->ad['title']) ?>"><?=$this->translate('Send a private message to the owner') ?></a>
+<a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'].'/subject/'.$this->escape($this->ad['title'])
+        ?>"><?=$this->translate('Send a private message to the owner') ?></a>
+           <?php endif;?>
 </div>
 
-<? if ($this->ad['comments_enabled'] ): ?>
+<? if ($this->ad['comments_enabled'] && $this->ad['status'] != 'delivered' ): ?>
     <? if ($this->comments ): ?>
 <div class="ad_comments">
 <h5><?=$this->translate ( 'Comments');?></h5>
