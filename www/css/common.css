@@ -173,20 +173,23 @@ form.searchbox dl{
     padding-left:18px;
     padding-right:18px;
     padding-top:0;
+    margin-top: 10px;
 }
 
 .filter_status{
-    z-index: -20;
+    z-index: 20;
     float:left;
-    border-bottom: 1px solid #ddd;
+    
+/*    border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;*/
     width: 100% !important;
     padding-left: 18px;
     padding-right: 18px;
     padding-bottom:12px;
     padding-top: 8px;
-    margin-top: -22px;
+    margin-top: -18px;
     
 }
 
@@ -464,6 +467,7 @@ h2#site-slogan {
 }
 
 #location_header_section {
+    z-index: 100;
     display: block;
     background-color: #E5F2FF;
     padding-top: 15px;
