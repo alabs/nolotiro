@@ -111,8 +111,9 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
 <?php endif;?>
 
 
-<div class="ad_comment_form">
+
         <?php if($this->ad['status'] != 'delivered' ): ?>
+        <div class="ad_comment_form">
         <?=$this->createcomment?>
         <?php endif; ?>
         </div>
@@ -120,7 +121,7 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
 <?php endif;?>
 
 </div>
-</div>
+
 </div><!--end main -->
 <!-- google adsense block -->
 <div class="google_ads">
