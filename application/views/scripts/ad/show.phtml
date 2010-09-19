@@ -89,11 +89,10 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
            <?php endif;?>
 </div>
 
-<? if ($this->ad['comments_enabled'] && $this->ad['status'] != 'delivered' ): ?>
+<? if ($this->ad['comments_enabled'] ): ?>
     <? if ($this->comments ): ?>
 <div class="ad_comments">
 <h5><?=$this->translate ( 'Comments');?></h5>
-
 
        <?php foreach ($this->comments as $key => $val): ?>
         <div class="ad_comment">
@@ -113,7 +112,9 @@ if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
 
 
 <div class="ad_comment_form">
+        <?php if($this->ad['status'] != 'delivered' ): ?>
         <?=$this->createcomment?>
+        <?php endif; ?>
         </div>
 </div>
 
