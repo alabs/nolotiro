@@ -32,13 +32,14 @@ if (count ( $this->mensajes ) > 0) {
 <div id="main">
 <div class="span-18">
 
+    <?php if ($this->ad_type == 'give'): ?>
     <div class="filter_status">
         <?=$this->partial (  'partials/filter_status_nav.phtml' , array(
              'woeid' => $this->woeid,
             'lang' => $this->lang,
             'ad_type' => $this->ad_type)); ?>
     </div>
-
+    <?php endif;?>
 
 <?php if ($this->ad): ?>
 
@@ -53,8 +54,7 @@ if (count ( $this->mensajes ) > 0) {
 		      echo '<div class="ad_list_image">
 		      <a href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->escape($val['title']).' ">
 		      <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
-		      $this->escape($val['photo']).'" /></a></div>';
-		      
+		      $this->escape($val['photo']).'" /></a></div>';     
 	   }
 	   ?>
 	
