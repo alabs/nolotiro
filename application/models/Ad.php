@@ -167,28 +167,23 @@ public function getAdforSearch($id, $ad_type) {
                 if($status != NULL){
                     $select->where('a.status = ?', $status);
                 } else {
-
                      //dont list not available items by default
                   $select->where('a.status != ?', 'delivered');
-
                 }
-
 
                 if($limit != NULL){
                     $select->limit( (int)$limit );
                 }
 		
 		$select->order('a.date_created DESC');		
-		
 		$result = $table->fetchAll ( $select )->toArray ();
-
 		
 		return $result;
 		
 	}
 
 
-        public function getAdListAll($ad_type ) {
+        public function getAdListAll($ad_type, $status=NULL ) {
 
                 if ($ad_type === 'give') {
                     $ad_type = 1;
@@ -214,8 +209,12 @@ public function getAdforSearch($id, $ad_type) {
                 $select->where('u.locked = ?', 0);
                 $select->where('a.type = ?', $ad_type);
 
-                //dont list not available items
-                //$select->where('a.status != ?', 'delivered');
+                if($status != NULL){
+                    $select->where('a.status = ?', $status);
+                } else {
+                     //dont list not available items by default
+                  $select->where('a.status != ?', 'delivered');
+                }
 
 
 		$select->order('a.date_created DESC');

@@ -2,7 +2,7 @@
 /**
  * Bootstrap file for nolotiro V2
  *
- * @copyright Daniel Remeseiro
+ * @author Daniel Remeseiro
  *
  * All the sourcecode of this software is under GNU Affero General Public License
  * @see LICENSE file on application directory

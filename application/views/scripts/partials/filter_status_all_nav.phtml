@@ -1,0 +1,15 @@
+
+<a class="<?=(preg_match("/give$/", $_SERVER['REQUEST_URI']
+       ))?"actual":""?>" href='/<?=$this->lang?>/ad/listall/ad_type/<?=$this->ad_type?>'>
+       <?=$this->translate ( 'all' );?></a>&nbsp;&nbsp;
+
+       <a class="<?=(preg_match("/available/", $_SERVER['REQUEST_URI']
+               ))?"actual":""?>" href='/<?=$this->lang?>/ad/listall/ad_type/<?=$this->ad_type?>/status/available'>
+       <?=$this->translate ( 'available' );?></a>&nbsp;&nbsp;
+
+       <a class="<?=(preg_match("/booked/", $_SERVER['REQUEST_URI']
+               ))?"actual":""?>" href='/<?=$this->lang?>/ad/listall/ad_type/<?=$this->ad_type?>/status/booked'>
+       <?=$this->translate ( 'booked' );?></a>&nbsp;&nbsp;
+       <a class="<?=(preg_match("/delivered/", $_SERVER['REQUEST_URI']
+               ))?"actual":""?>" href='/<?=$this->lang?>/ad/listall/ad_type/<?=$this->ad_type?>/status/delivered'>
+       <?=$this->translate ( 'delivered' );?></a>&nbsp;&nbsp;

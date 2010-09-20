@@ -33,6 +33,14 @@ if (count ( $this->mensajes ) > 0) {
 
 <div class="span-18">
 
+    <?php if ($this->ad_type == 'give'): ?>
+    <div class="filter_status">
+        <?=$this->partial (  'partials/filter_status_all_nav.phtml' , array(
+            'lang' => $this->lang,
+            'ad_type' => $this->ad_type)); ?>
+    </div>
+    <?php endif;?>
+
 <?php if ($this->ad): ?>
 
        <?php

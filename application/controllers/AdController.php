@@ -49,8 +49,6 @@ class AdController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
         }
         
-
-        
         $status = $this->_request->getParam('status');
         $f = new Zend_Filter();
         $f->addFilter(new Zend_Filter_HtmlEntities());
@@ -59,7 +57,6 @@ class AdController extends Zend_Controller_Action {
         if ($status) {
             $this->view->page_title .= $this->view->translate($status) . ' - ';
         }
-
 
 
         $model = $this->_getModel();
@@ -112,16 +109,34 @@ class AdController extends Zend_Controller_Action {
 
         $model = new Model_Ad();
 
-        $ad_type = $this->_request->getParam('ad_type');
+        $ad_type = $this->view->ad_type = $this->_request->getParam('ad_type');
 
-        if ($ad_type == 'give') {
+         if ($ad_type == 'give') {
             $this->view->page_title .= $this->view->translate('give') . ' - ';
+            $type = 'give';
+        }
+        elseif ($ad_type == 'want') {
+            $this->view->page_title .= $this->view->translate('want') . ' - ';
+            $type = 'want';
+        }
+        else {
+            //dont accept other values than give/want
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('this url does not exist'));
+            $this->_redirect('/' . $this->lang . '/ad/listall/ad_type/give');
         }
 
-        if ($ad_type == 'want') {
-            $this->view->page_title .= $this->view->translate('want') . ' - ';
+
+        $status = $this->_request->getParam('status');
+        $f = new Zend_Filter();
+        $f->addFilter(new Zend_Filter_HtmlEntities());
+        $status = $f->filter($status);
+
+        if ($status) {
+            $this->view->page_title .= $this->view->translate($status) . ' - ';
         }
-        $this->view->ad = $model->getAdListAll($ad_type);
+
+
+        $this->view->ad = $model->getAdListAll($ad_type, $status);
         $this->view->page_title .= $this->view->translate('All the ads');
 
         //paginator
