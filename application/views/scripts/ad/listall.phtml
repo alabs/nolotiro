@@ -86,8 +86,12 @@ if (count ( $this->mensajes ) > 0) {
 	   
 
             <div class="ad_meta_info">
-               <b><a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->escape($val['title']) ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
-               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
+                <?php if ($val['status'] != 'delivered'): ?>
+               <b><a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->escape($val['title'])
+                   ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
+               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title'])
+                   ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
+                    <?php endif;?>
 
                <?php if ($val['readings_count']): ?>&nbsp;&nbsp;
                     <?=$val['readings_count'] . '&nbsp;&nbsp;' .$this->translate('readings') ?>
@@ -96,8 +100,6 @@ if (count ( $this->mensajes ) > 0) {
                 <?php if ($val['comments_count']): ?>
                      <?=', '.$this->escape( $val['comments_count'] == null  ? 0 : $val['comments_count'] ).' '.$this->translate('comments') ?>
                  <?php endif;?>
-
-
            </div>
 
 
