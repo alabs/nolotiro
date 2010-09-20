@@ -350,7 +350,7 @@ class UserController extends Zend_Controller_Action {
 
         $auth = Zend_Auth::getInstance ();
 
-        if (!$auth->getIdentity) {
+        if (!$auth->getIdentity()->id) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
             $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
             return;
@@ -359,7 +359,6 @@ class UserController extends Zend_Controller_Action {
         $model = $this->_getModel();
         $user = $model->fetchUser($id)->id;
 
-
         if (($auth->getIdentity()->id == $user)) { //if is the user profile owner lets edit
             require_once APPLICATION_PATH . '/forms/UserEdit.php';
             $form = new Form_UserEdit ( );
@@ -367,16 +366,12 @@ class UserController extends Zend_Controller_Action {
             $this->view->form = $form;
 
 
-
             if ($this->getRequest()->isPost()) {
-
-                $formData = $this->getRequest()->getPost();
+               $formData = $this->getRequest()->getPost();
                 if ($form->isValid($formData)) {
-
 
                     //chekusername if exists, dont let change it
                     $checkuser = $model->checkUsername($form->getValue('username'));
-
                     if (!is_null($checkuser) and ($checkuser['username'] != $auth->getIdentity()->username)) {
                         $this->view = $this->initView();
                         $this->view->error = $this->view->translate('This username is taken. Please choose another one.');
