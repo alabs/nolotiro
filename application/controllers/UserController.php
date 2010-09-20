@@ -420,6 +420,13 @@ class UserController extends Zend_Controller_Action {
         $id = (int) $this->getRequest()->getParam('id');
 
         $auth = Zend_Auth::getInstance ();
+
+         if (!$auth->getIdentity()->id) {
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
+            $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+            return;
+        }
+
         $model = $this->_getModel();
         $user = $model->fetchUser($id)->id;
 
