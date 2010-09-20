@@ -33,23 +33,36 @@ class AdController extends Zend_Controller_Action {
     public function listAction() {
 
         $woeid = $this->_request->getParam('woeid');
-        $status = $this->_request->getParam('status');
         $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
-
 
         if ($ad_type == 'give') {
             $this->view->page_title .= $this->view->translate('give') . ' - ';
             $type = 'give';
         }
-
-        if ($ad_type == 'want') {
+        elseif ($ad_type == 'want') {
             $this->view->page_title .= $this->view->translate('want') . ' - ';
             $type = 'want';
         }
+        else {
+            //dont accept other values than give/want
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('this url does not exist'));
+            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+        }
+        
+
+        
+        $status = $this->_request->getParam('status');
+        $f = new Zend_Filter();
+        $f->addFilter(new Zend_Filter_HtmlEntities());
+        $status = $f->filter($status);
+
+        if ($status) {
+            $this->view->page_title .= $this->view->translate($status) . ' - ';
+        }
+
 
 
         $model = $this->_getModel();
-
         $this->view->woeid = $woeid;
         $this->view->ad = $model->getAdList($woeid, $ad_type, $status);
         $this->view->woeidName = $this->_helper->woeid->name($woeid, $this->lang);
@@ -86,7 +99,7 @@ class AdController extends Zend_Controller_Action {
         if ($page) {
             $this->view->page_title .= ' - ' . $this->view->translate('page') . ' ' . $page;
         }
-        
+
         $paginator = Zend_Paginator::factory($this->view->ad);
         $paginator->setDefaultScrollingStyle('Elastic');
         $paginator->setItemCountPerPage(10);
