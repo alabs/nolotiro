@@ -22,12 +22,13 @@ class RssController extends Zend_Controller_Action {
 
         $woeid = $this->_request->getParam('woeid');
         $ad_type = $this->_request->getParam('ad_type');
+        $status = $this->_request->getParam('status');
 
         $modelAd = new Model_Ad();
-        $this->ads = $modelAd->getAdList($woeid, $ad_type, $status = NULL , 35);
+        $this->ads = $modelAd->getAdList($woeid, $ad_type, $status , 35);
 
-        $rss['title'] = 'nolotiro.org - '. $this->_helper->woeid->name($woeid, $this->lang).'/'. $ad_type;
-        $rss['link'] = 'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/rss/feed/woeid/'.$woeid.'/ad_type/'.$ad_type;
+        $rss['title'] = $this->view->translate($ad_type).  ' ' . $this->view->translate( (string)$status ). ' - '. $this->_helper->woeid->name($woeid, $this->lang) .' | nolotiro.org';
+        $rss['link'] = 'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/rss/feed/woeid/'.$woeid.'/ad_type/'.$ad_type . '/status/' . $status;
         $rss['charset'] = 'utf-8';
         $rss['description'] = 'nolotiro.org - '. $this->_helper->woeid->name($woeid, $this->lang);
         $rss['language'] = $this->lang;

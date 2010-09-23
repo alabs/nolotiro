@@ -49,7 +49,7 @@ class AdController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
         }
         
-        $status = $this->_request->getParam('status');
+        $this->view->status = $status = $this->_request->getParam('status');
         $f = new Zend_Filter();
         $f->addFilter(new Zend_Filter_HtmlEntities());
         $status = $f->filter($status);
@@ -68,7 +68,7 @@ class AdController extends Zend_Controller_Action {
 
 
         //add the link to the proper rss to layout
-        $this->view->headLink()->appendAlternate('http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/rss/feed/woeid/' . $woeid . '/ad_type/' . $ad_type,
+        $this->view->headLink()->appendAlternate('http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/rss/feed/woeid/' . $woeid . '/ad_type/' . $ad_type . '/status/' . $status,
                 'application/rss+xml',
                 $this->view->woeidName . ' - ' . $this->view->translate((string) $type));
 
