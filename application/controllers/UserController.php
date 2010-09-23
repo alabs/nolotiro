@@ -16,17 +16,16 @@ class UserController extends Zend_Controller_Action {
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->mensajes = $this->_flashMessenger->getMessages();
 
-         //check if user is locked
+        //check if user is locked
         $locked = $this->_helper->checkLockedUser->check();
         if ($locked == 1) {
             $this->_redirect('/' . $this->view->lang . '/auth/logout');
         }
-        
-         if ($this->view->checkMessages > 0) {
+
+        if ($this->view->checkMessages > 0) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You have') . ' ' .
                     '<b><a href="/' . $this->view->lang . '/message/received">' . $this->view->translate('new messages') . ' (' . $this->view->checkMessages . ')</a></b>');
         }
-
     }
 
     /**
@@ -43,11 +42,11 @@ class UserController extends Zend_Controller_Action {
      */
     public function registerAction() {
 
-         //if the user is logged already redir to home
-                $auth = Zend_Auth::getInstance ();
-                 if ($auth->hasIdentity()) {
-                     $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
-                 }
+        //if the user is logged already redir to home
+        $auth = Zend_Auth::getInstance ();
+        if ($auth->hasIdentity()) {
+            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+        }
 
 
         $request = $this->getRequest();
@@ -109,7 +108,7 @@ class UserController extends Zend_Controller_Action {
 
                     $mail = new Zend_Mail ( );
                     $mail->setBodyHtml($this->view->translate('Please, click on this url to finish your register process:<br />')
-                          .'<a href="'.$hostname.$this->view->translate('/en/user/validate/t/').$token.'">'  . $hostname . $this->view->translate('/en/user/validate/t/') . $token .'</a>'.
+                            . '<a href="' . $hostname . $this->view->translate('/en/user/validate/t/') . $token . '">' . $hostname . $this->view->translate('/en/user/validate/t/') . $token . '</a>' .
                             '<br /><br />---------<br />' . utf8_decode($this->view->translate('The nolotiro.org team.')));
                     $mail->setFrom('noreply@nolotiro.org', 'nolotiro.org');
 
@@ -158,14 +157,10 @@ class UserController extends Zend_Controller_Action {
         <li ><a href="/' . $this->view->lang . '/user/edit/id/' . $auth->getIdentity()->id . ' ">' . $this->view->translate('edit profile') . '</a></li>
             <li ><a href="/' . $this->view->lang . '/message/received">' . $this->view->translate('messages') . '</a></li>';
         } else {
-           
-           $this->view->sendmessage_tab = '
-        <a href="/'.$this->view->lang .'/message/create/id_user_to/'.$modelarray['id'].'">'.$this->view->translate('send message to'). ' ' .$username .'</a>';
-            
-         
+
+            $this->view->sendmessage_tab = '
+        <a href="/' . $this->view->lang . '/message/create/id_user_to/' . $modelarray['id'] . '">' . $this->view->translate('send message to') . ' ' . $username . '</a>';
         }
-
-
     }
 
     /**
@@ -184,11 +179,11 @@ class UserController extends Zend_Controller_Action {
      */
     public function forgotAction() {
 
-         //if the user is logged already redir to home
-                $auth = Zend_Auth::getInstance ();
-                 if ($auth->hasIdentity()) {
-                     $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
-                 }
+        //if the user is logged already redir to home
+        $auth = Zend_Auth::getInstance ();
+        if ($auth->hasIdentity()) {
+            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+        }
 
         $request = $this->getRequest();
         $form = $this->_getUserForgotForm();
@@ -226,7 +221,7 @@ class UserController extends Zend_Controller_Action {
 
                     $mail = new Zend_Mail ( );
                     $mail->setBodyHtml($this->view->translate('Somebody , probably you, wants to restore your nolotiro access. Click on this url to restore your nolotiro account:') . '<br />'
-                           .'<a href="'.$hostname. '/'. $this->view->lang . '/user/validate/t/'.$mailcheck['token'] .' "> '. $hostname . '/' . $this->view->lang . '/user/validate/t/' . $mailcheck['token'] .'</a>' .
+                            . '<a href="' . $hostname . '/' . $this->view->lang . '/user/validate/t/' . $mailcheck['token'] . ' "> ' . $hostname . '/' . $this->view->lang . '/user/validate/t/' . $mailcheck['token'] . '</a>' .
                             '<br /><br />' .
                             $this->view->translate('Otherwise, ignore this message.') .
                             '<br />__<br />' . utf8_decode($this->view->translate('The nolotiro.org team.')));
@@ -276,8 +271,7 @@ class UserController extends Zend_Controller_Action {
     }
 
     /**
-     * Validate - check the token generated  sent by mail by registerAction, then redirect to
-     * the logout  page (index home).
+     * Validate - check the token generated  sent by mail by registerAction, then redirect to user edit profile
      * @param t
      *
      */
@@ -287,8 +281,6 @@ class UserController extends Zend_Controller_Action {
         $this->_helper->viewRenderer->setNoRender(true);
         $token = $this->_request->getParam('t'); //the token
 
-
-
         if (!is_null($token)) {
 
             //lets check this token against ddbb
@@ -296,18 +288,14 @@ class UserController extends Zend_Controller_Action {
             $validatetoken = $model->validateToken($token);
 
 
-            //Zend_Debug::dump ( $validatetoken );
-
             if ($validatetoken !== NULL) {
 
                 $validatetoken = $validatetoken->toArray();
-
                 //first kill previous session or data from client
                 //kill the user logged in (if exists)
                 Zend_Auth::getInstance ()->clearIdentity();
                 $this->session->logged_in = false;
                 $this->session->username = false;
-
 
                 $data ['active'] = '1';
                 $data ['id'] = $validatetoken ['id'];
@@ -317,18 +305,14 @@ class UserController extends Zend_Controller_Action {
                 //update token user in ddbb
                 $model->update($data);
 
-
-                //LETS OPEN THE GATE!
+               
                 //update the auth data stored
                 $data = $model->fetchUser($validatetoken ['id']);
                 $auth = Zend_Auth::getInstance ();
                 $auth->getStorage()->write((object) $data);
 
-
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Welcome') . ' ' . $data['username']);
-
-
-                $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+                $this->_redirect('/' . $this->view->lang . '/user/edit/id/' . $data->id );
             } else {
 
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Sorry, register url no valid or expired.'));
@@ -367,7 +351,7 @@ class UserController extends Zend_Controller_Action {
 
 
             if ($this->getRequest()->isPost()) {
-               $formData = $this->getRequest()->getPost();
+                $formData = $this->getRequest()->getPost();
                 if ($form->isValid($formData)) {
 
                     //chekusername if exists, dont let change it
@@ -421,7 +405,7 @@ class UserController extends Zend_Controller_Action {
 
         $auth = Zend_Auth::getInstance ();
 
-         if (!$auth->getIdentity()->id) {
+        if (!$auth->getIdentity()->id) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
             $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
             return;
