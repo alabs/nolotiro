@@ -22,6 +22,7 @@ class AuthController extends Zend_Controller_Action {
     
     public function loginAction() {
 
+        $this->view->page_title .= $this->view->translate ( 'Login' );
 
         //if the user is logged already redir to home
         $auth = Zend_Auth::getInstance ();
@@ -37,7 +38,6 @@ class AuthController extends Zend_Controller_Action {
 
             if ($form->isValid($request->getPost())) {
 
-                // collect the data from the user
                 $f = new Zend_Filter_StripTags ( );
                 $email = $f->filter($this->_request->getPost('email'));
                 $password = $f->filter($this->_request->getPost('password'));
@@ -121,15 +121,13 @@ class AuthController extends Zend_Controller_Action {
     }
 
     /**
-     * Log out - delete user information and clear the session, then redirect to
+     * Log out - clear the session, then redirect to
      * the log in page.
      */
     public function logoutAction() {
         Zend_Auth::getInstance ()->clearIdentity();
         $this->session->logged_in = false;
         $this->session->username = false;
-
-
         $this->_redirect('/');
     }
 
