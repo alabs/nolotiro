@@ -133,7 +133,8 @@ public function getAdforSearch($id, $ad_type) {
 	 * Fetch a list of ads where woeid and ad_type matches 
 	 * 
 	 * @param  int $woeid
-	 * @param  string $ad_type  
+	 * @param  string $ad_type
+         * @param  string $status
 	 * @return array list of ads with this params
 	 */
 	public function getAdList($woeid,$ad_type, $status=NULL, $limit=NULL ) {
