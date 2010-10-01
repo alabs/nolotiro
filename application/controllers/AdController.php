@@ -158,13 +158,19 @@ class AdController extends Zend_Controller_Action {
         $id = (int) $this->_request->getParam('id');
 
         if ($id == null) {
-            $this->_helper->_flashMessenger->addMessage($this->view->translate('this url does not exist'));
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('This url does not exist'));
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
         }
 
 
         $model = $this->_getModel();
         $this->view->ad = $model->getAdUserlist($id);
+
+         if ($this->view->ad == null) {
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('This user does not exist'));
+            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+        }
+
 
         //paginator
         $page = $this->_getParam('page');

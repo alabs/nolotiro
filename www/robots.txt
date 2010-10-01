@@ -1,5 +1,6 @@
 User-agent:*
-Disallow /es/message/*
+Disallow: /es/message/*
+Disallow: /en/message/*
 
 # Please note: There are a lot of pages on this site, and there are
 # some misbehaved spiders out there that go _way_ too fast. If you're

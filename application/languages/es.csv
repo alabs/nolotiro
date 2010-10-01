@@ -103,7 +103,7 @@
 
 #user/forgot
 "Forgot your password?";"¿Olvidaste tu contraseña?"
-"Please, enter your email address. A new password will be emailed to you";"Por favor, introduce tu email y te enviaremos una contraseña nueva"
+"Please, enter your email address. A one time link access will be emailed to you and  will be able to change your password.";"Por favor, introduce tu email y te enviaremos un enlace de acceso directo para cambiar tu contraseña."
 "The email address must be the same you used to register.";"La dirección de email debe ser la misma con la que te registraste."
 "Check your inbox email to restore your nolotiro.org account";"Comprueba tu correo para recuperar el acceso a tu cuenta de nolotiro.org"
 "This email is not in our database. Please, try again.";"Ese email no está en nuestra base de datos. Por favor, intentalo de nuevo."
@@ -138,7 +138,7 @@
 "Next";"Siguiente"
 "Previous";"Anterior"
 
-"this url does not exist";"esa url no existe"
+"This url does not exist";"Esa url no existe"
 
 #ad/create
 "This ad does not exist or may have been deleted!";"Ese anuncio no existe o ha sido borrado."
