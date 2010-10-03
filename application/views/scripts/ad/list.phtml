@@ -57,7 +57,7 @@ if (count ( $this->mensajes ) > 0) {
 
              <?php
             // if you are the ad owner or admin, then show edit link
-            if ($val['user_owner'] == $auth->getIdentity()->id): ?>
+            if ( ($val['user_owner'] == $auth->getIdentity()->id)  || ($this->userRole == 1) ): ?>
              <div>
             <a href="/<?=$this->lang ?>/ad/edit/id/<?=$val['id'] ?>">
                         <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a>

@@ -36,7 +36,7 @@ if (count ( $this->mensajes ) > 0) {
 <?php
 // if you are the ad owner or admin, then show edit link
 $auth = Zend_Auth::getInstance ();
-if ($this->ad['user_owner'] == $auth->getIdentity()->id): ?>
+ if ( ($this->ad['user_owner'] == $auth->getIdentity()->id)  || ($this->userRole == 1) ): ?>
     <div class="edit_ad">
         <a href="/<?=$this->lang ?>/ad/edit/id/<?=$this->ad['id'] ?>">
             <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a></div>

@@ -32,6 +32,9 @@ class AdController extends Zend_Controller_Action {
 
     public function listAction() {
 
+        $this->view->userRole = $this->_helper->checkUserRole->check();
+        //var_dump($this->view->userRole);
+
         $woeid = $this->_request->getParam('woeid');
         $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
 
@@ -106,6 +109,9 @@ class AdController extends Zend_Controller_Action {
     }
 
     public function listallAction() {
+
+        $this->view->userRole = $this->_helper->checkUserRole->check();
+        //var_dump($this->view->userRole);
 
         $model = new Model_Ad();
 
@@ -196,6 +202,9 @@ class AdController extends Zend_Controller_Action {
     }
 
     public function showAction() {
+
+         $this->view->userRole = $this->_helper->checkUserRole->check();
+        //var_dump($this->view->userRole);
 
         $id = $this->_request->getParam('id');
         $model = $this->_getModel();
@@ -356,15 +365,20 @@ class AdController extends Zend_Controller_Action {
         $ad_user_owner = $ad->getAd($id);
 
         if ($auth->hasIdentity()) {
-            //if user owner allow edit and show delete ad link , if not redir not allowed
-//            var_dump( (bool) $user->fetchUser($auth->getIdentity()->id) );
-//             var_dump( $user->fetchUser($auth->getIdentity()->id)->id);
-//             var_dump($ad_user_owner['user_owner']);
 
-            if ($user->fetchUser($auth->getIdentity()->id)->id != $ad_user_owner['user_owner']) {
+            $this->userRole = $this->_helper->checkUserRole->check();
+            //if user owner allow edit and show delete ad link , if not redir not allowed
+
+            if ($this->userRole == 1) {
+                //bazinga!!
+            }
+            elseif ( $user->fetchUser($auth->getIdentity()->id)->id != $ad_user_owner['user_owner'] ) {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
                 $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
-            }
+            }  
+
+
+
         } else {
 
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
@@ -470,34 +484,11 @@ class AdController extends Zend_Controller_Action {
         }
     }
 
-    /*
-     * _createThumbnail uses resize class
-     *
-     */
-
-    protected function _createThumbnail($file, $x, $y) {
-
-        require_once ( NOLOTIRO_PATH . '/library/SimpleImage.php' );
-
-        $file_ext = substr(strrchr($file, '.'), 1);
-        $fileuniquename = md5(uniqid(mktime())) . '.' . $file_ext;
-
-        $image = new SimpleImage();
-        $image->load('/tmp/' . $file);
-
-        //save original to right place
-        $widthmax = 900;
-        $image->resizeToWidthMax($widthmax);
-        $image->save(NOLOTIRO_PATH . '/www/images/uploads/ads/original/' . $fileuniquename);
-
-        //save thumb 100
-        $image->resizeToWidth($x);
-        $image->save(NOLOTIRO_PATH . '/www/images/uploads/ads/100/' . $fileuniquename);
-
-        return $fileuniquename;
-    }
 
     public function deleteAction() {
+
+        $this->userRole = $this->_helper->checkUserRole->check();
+
         $this->view->headTitle()->append($this->view->translate('Delete your profile'));
 
         $id = (int) $this->getRequest()->getParam('id');
@@ -512,7 +503,8 @@ class AdController extends Zend_Controller_Action {
         $admodel = new Model_Ad();
         $ad = $admodel->getAd($id);
 
-        if ($auth->getIdentity()->id == $ad['user_owner']) {
+
+        if  (($auth->getIdentity()->id == $ad['user_owner']) || ($this->userRole == 1) ) {
 
             //if is the user owner owner lets delete it
             if ($this->getRequest()->isPost()) {
@@ -540,6 +532,36 @@ class AdController extends Zend_Controller_Action {
             return;
         }
     }
+
+
+
+    /*
+     * _createThumbnail uses resize class
+     *
+     */
+
+    protected function _createThumbnail($file, $x, $y) {
+
+        require_once ( NOLOTIRO_PATH . '/library/SimpleImage.php' );
+
+        $file_ext = substr(strrchr($file, '.'), 1);
+        $fileuniquename = md5(uniqid(mktime())) . '.' . $file_ext;
+
+        $image = new SimpleImage();
+        $image->load('/tmp/' . $file);
+
+        //save original to right place
+        $widthmax = 900;
+        $image->resizeToWidthMax($widthmax);
+        $image->save(NOLOTIRO_PATH . '/www/images/uploads/ads/original/' . $fileuniquename);
+
+        //save thumb 100
+        $image->resizeToWidth($x);
+        $image->save(NOLOTIRO_PATH . '/www/images/uploads/ads/100/' . $fileuniquename);
+
+        return $fileuniquename;
+    }
+
 
     protected function _getModel() {
         if (null === $this->_model) {
