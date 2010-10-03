@@ -377,12 +377,11 @@ class AdController extends Zend_Controller_Action {
                 $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
             }  
 
-
-
         } else {
 
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+            return;
         }
 
         $this->view->deletead = '<img src="/images/delete_ad.png" />
