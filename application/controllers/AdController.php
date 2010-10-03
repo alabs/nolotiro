@@ -168,15 +168,18 @@ class AdController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
         }
 
+        require_once APPLICATION_PATH . '/models/User.php';
+        $modelUser = new Model_User();
+        $userExists = $modelUser->fetchUser($id);
+        
 
-        $model = $this->_getModel();
-        $this->view->ad = $model->getAdUserlist($id);
-
-         if ($this->view->ad == null) {
+         if ($userExists == NULL ) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('This user does not exist'));
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
         }
 
+        $model = $this->_getModel();
+        $this->view->ad = $model->getAdUserlist($id);
 
         //paginator
         $page = $this->_getParam('page');
@@ -188,7 +191,7 @@ class AdController extends Zend_Controller_Action {
 
         $this->view->paginator = $paginator;
 
-        require_once APPLICATION_PATH . '/models/User.php';
+       
         $this->user = new Model_User();
 
         $this->view->user = $this->user->fetchUser($id);
