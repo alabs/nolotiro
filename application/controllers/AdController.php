@@ -1,5 +1,4 @@
 <?php
-
 /**
  * AdController
  *
@@ -33,8 +32,7 @@ class AdController extends Zend_Controller_Action {
     public function listAction() {
 
         $this->view->userRole = $this->_helper->checkUserRole->check();
-        //var_dump($this->view->userRole);
-
+       
         $woeid = $this->_request->getParam('woeid');
         $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
 

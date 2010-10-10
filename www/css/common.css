@@ -162,6 +162,7 @@ form.searchbox dl{
 
 
 .ad_list_image {
+    z-index: 300;
     float:right;
     padding-left:4px;
     width:100px;
@@ -238,6 +239,15 @@ form.searchbox dl{
 .message_excerpt:hover{
     background-color:#FFFFCC;
 
+}
+
+
+.delete_message{
+    display: inline-block;
+    float: right;
+    padding: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
 }
 
 .ad_date{

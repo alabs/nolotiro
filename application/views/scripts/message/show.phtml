@@ -2,7 +2,7 @@
 <h5>
     <a href="/<?=$this->lang ?>/message/received">< <?=$this->translate('back to messages received') ?></a>
 </h5>
-<h3><?=$this->message['subject'] ?></h3>
+<h3><?=$this->escape($this->message['subject']) ?></h3>
 </div>
 <?
 if (count ( $this->mensajes ) > 0) {
@@ -15,16 +15,10 @@ if (count ( $this->mensajes ) > 0) {
 ?>
 <div id="main">
 <div class="span-15">
-
-<?php
-// if you are the ad owner or admin, then show edit link
-
-//TODO, problem deleting message , just one time keeped in
-
-//$auth = Zend_Auth::getInstance ();
-//if ($this->message['user_to'] == $auth->getIdentity()->id): ?>
-    
-<?php //endif;?>
+<div class="delete_message">
+            <a href="/<?=$this->lang ?>/message/delete/id/<?=$this->escape($this->message['id']) ?>">
+                <?=$this->translate('delete this message') ?>
+            </a></div>
 
         <div class="ad_excerpt_show">
            <span class="ad_date"><?=$this->translate('Sent'). ' ' .$this->message['date_created'] ?>
@@ -32,15 +26,18 @@ if (count ( $this->mensajes ) > 0) {
             <a href="/<?=$this->lang ?>/profile/<?=$this->username_from['username'] ?>"><?=$this->username_from['username'] ?></a>
             </span>
            <br />
-           <span><?php echo $this->message['body'] ?></span>
+           <span><?php echo $this->escape($this->message['body']) ?></span>
 </div>
 
 
+<?php //don't show reply form if its a sent message 
+$auth = Zend_Auth::getInstance ();
+if ($this->message['user_to'] == $auth->getIdentity()->id): ?>
 <div class="ad_comment_form">
     <h5><?=$this->translate('Reply to this message') ;?></h5>
         <?=$this->createreply ?>
 </div>
-
+<?php endif;?>
 
 
 
@@ -61,3 +58,4 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </div>
 <!-- end of google adsense block -->
+</div>

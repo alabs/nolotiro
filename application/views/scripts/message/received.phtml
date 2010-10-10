@@ -4,14 +4,16 @@
 <h3><?=$this->translate ( 'Messages received' );?></h3>
 </div>
 
-<?php
-if (isset ( $this->error )) :
-?>
-<div class="error">
-		<?=$this->escape ( $this->error );?>
-</div>
 
-<?php endif;?>
+<?
+if (count ( $this->mensajes ) > 0) {
+	echo '<div class="success">';
+	foreach ( $this->mensajes as $msg ) {
+		echo $msg . '<br>';
+	}
+	echo '</div>';
+}
+?>
 
 <div id="main">
 <div class="span-18">
@@ -25,9 +27,9 @@ if (isset ( $this->error )) :
 
     <div class="user_profile">
 
-        <?php //Zend_Debug::dump($this->listmessages) ?>
-    
-<?php if ($this->listmessages): ?>
+<?php
+//Zend_Debug::dump($this->listmessages);
+if ($this->listmessages): ?>
 
        <?php foreach ($this->paginator as $key => $val): ?>
         <div class="message_excerpt">
@@ -51,6 +53,12 @@ if (isset ( $this->error )) :
 
             <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>
             </span>
+
+            <div class="delete_message">
+            <a href="/<?=$this->lang ?>/message/delete/id/<?=$this->escape($val['id']) ?>">
+                <?=$this->translate('delete this message') ?>
+            </a></div>
+
         </div>
 
         <?php endforeach; ?>
@@ -79,4 +87,6 @@ google_ad_height = 600;
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 <!-- end  of google adsense block -->
+</div>
+
 </div>

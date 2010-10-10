@@ -1,10 +1,10 @@
 <?php
+
 /**
  * @author Dani Remeseiro
  * @license http://www.gnu.org/licenses/agpl-3.0.html
  *
  */
-
 class MessageController extends Zend_Controller_Action {
 
     public function init() {
@@ -87,8 +87,8 @@ class MessageController extends Zend_Controller_Action {
                 $hostname = 'http://' . $this->getRequest()->getHttpHost();
 
                 $data['body'] = $data['subject'] . '<br/>' . $data['body'] . '<br/>';
-                $data['body'] .= $this->view->translate('Go to this url to reply this message:') .'<br/>'.
-                       '<a href="'.$hostname . '/' .$this->lang . '/message/received"> ' .$hostname .'/'. $this->lang . '/message/received</a>';
+                $data['body'] .= $this->view->translate('Go to this url to reply this message:') . '<br/>' .
+                        '<a href="' . $hostname . '/' . $this->lang . '/message/received"> ' . $hostname . '/' . $this->lang . '/message/received</a>';
                 $data['body'] .= '<br>---------<br/>';
                 $data['body'] .= $this->view->translate('This is an automated notification. Please, don\'t reply  at this email address.');
 
@@ -105,7 +105,6 @@ class MessageController extends Zend_Controller_Action {
             $data['subject'] = $this->_getParam('subject');
 
             $form->populate($data);
-
         }
 
         // assign the form to the view
@@ -113,8 +112,6 @@ class MessageController extends Zend_Controller_Action {
     }
 
     public function receivedAction() {
-
-
         //first we check if user is logged, if not redir to login
         $auth = Zend_Auth::getInstance ();
         if (!$auth->hasIdentity()) {
@@ -124,9 +121,12 @@ class MessageController extends Zend_Controller_Action {
             $aNamespace->redir = $this->lang . '/message/received';
             $this->_redirect($this->lang . '/auth/login');
         } else { // if is user auth go to show received messages list
+            //keep this url in zend session to redir after delete message
+            $aNamespace = new Zend_Session_Namespace('Nolotiro');
+            $aNamespace->redir = $this->view->url();
+
             $modelM = new Model_Message();
             $this->view->listmessages = $modelM->getMessagesUserReceived($auth->getIdentity()->id);
-
 
             //paginator
             $page = $this->_getParam('page');
@@ -139,9 +139,46 @@ class MessageController extends Zend_Controller_Action {
         }
     }
 
+    public function deleteAction() {
+
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout()->disableLayout();
+
+        $auth = Zend_Auth::getInstance ();
+
+        if ($auth->hasIdentity() == FALSE) {
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
+            $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+            return;
+        }
+
+
+        $data['id_user'] = $auth->getIdentity()->id;
+        $data['id_message'] = (int) $this->_request->getParam('id');
+
+        $delete_message_check = new Model_Message();
+
+
+        //check the owner to allow delete message!!
+        //two valid options : if is the user_from or is the user_to
+        if (($auth->getIdentity()->id == $delete_message_check->getMessage($data['id_message'])->user_to) ||
+                ($auth->getIdentity()->id == $delete_message_check->getMessage($data['id_message'])->user_from)) {
+
+            $delete_message = new Model_Message;
+            $delete_message->deleteMessage($data);
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('Message succesfully deleted'));
+            $aNamespace = new Zend_Session_Namespace('Nolotiro');
+            $this->_redirect($aNamespace->redir);
+        } else {
+
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
+            $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+            return;
+        }
+    }
+
+
     public function sentAction() {
-
-
         //first we check if user is logged, if not redir to login
         $auth = Zend_Auth::getInstance ();
         if (!$auth->hasIdentity()) {
@@ -150,7 +187,11 @@ class MessageController extends Zend_Controller_Action {
             $aNamespace = new Zend_Session_Namespace('Nolotiro');
             $aNamespace->redir = $this->lang . '/message/sent';
             $this->_redirect($this->lang . '/auth/login');
-        } else { // if is user auth go to show received messages list
+        } else {
+             //keep this url in zend session to redir after delete message
+            $aNamespace = new Zend_Session_Namespace('Nolotiro');
+            $aNamespace->redir = $this->view->url();
+            
             $modelM = new Model_Message();
             $this->view->listmessages = $modelM->getMessagesUserSent($auth->getIdentity()->id);
 
@@ -176,14 +217,14 @@ class MessageController extends Zend_Controller_Action {
 
         $auth = Zend_Auth::getInstance ();
         if ($auth->hasIdentity()) { //if not the sender or receiver of the message, go to hell
-            if ( ($auth->getIdentity()->id != $this->view->message['user_to'] ) and  ( $auth->getIdentity()->id != $this->view->message['user_from'] )) {
+            if (($auth->getIdentity()->id != $this->view->message['user_to'] ) and ( $auth->getIdentity()->id != $this->view->message['user_from'] )) {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
                 $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
             }
         } else { //maybe the owner , but not logged, redir to login
             //keep this url in zend session to redir after login
             $aNamespace = new Zend_Session_Namespace('Nolotiro');
-            $aNamespace->redir = $this->lang . '/message/show/' . $id . '/subject/'. $subject;
+            $aNamespace->redir = $this->lang . '/message/show/' . $id . '/subject/' . $subject;
             $this->_redirect($this->lang . '/auth/login');
         }
 
@@ -201,7 +242,7 @@ class MessageController extends Zend_Controller_Action {
             $this->view->page_title .= $this->view->message['subject'];
 
             $form = $this->_getNewMessageForm();
-           
+
             $form->setAction('/' . $this->lang . '/message/create/id_user_to/' . $this->view->message['user_from']);
 
             $data['subject'] = $this->_getParam('subject');

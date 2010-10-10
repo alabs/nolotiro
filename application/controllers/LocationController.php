@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @author Dani Remeseiro
  * @license http://www.gnu.org/licenses/agpl-3.0.html
@@ -262,14 +261,12 @@ class LocationController extends Zend_Controller_Action {
     protected function _getLocationChangeForm() {
         require_once APPLICATION_PATH . '/forms/LocationChange.php';
         $form = new Form_LocationChange();
-        //$form->setAction($this->_helper->url(''));
         return $form;
     }
 
     protected function _getLocationChange2Form($locationtemp) {
         require_once APPLICATION_PATH . '/forms/LocationChange2.php';
         $form = new Form_LocationChange2();
-        //$form->setAction($this->_helper->url(''));
         return $form;
     }
 
