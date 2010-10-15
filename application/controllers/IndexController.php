@@ -19,7 +19,9 @@ class IndexController extends Zend_Controller_Action {
 
     public function indexAction() {
 
-       //$this->view->page_title .= $this->view->translate('no lo tiro, te lo regalo (sin condiciones)');
+       $this->_helper->layout()->setLayout('home');
+       $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
+        $this->view->page_title .= $this->view->translate('no lo tiro, te lo regalo (sin condiciones)');
 
         //check if user is locked
         $locked = $this->_helper->checkLockedUser->check();
@@ -27,14 +29,19 @@ class IndexController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->view->lang . '/auth/logout');
         }
 
-
         //if user is logged the redir to proper location, if not stand on not logged home view (index)
-       // $auth = Zend_Auth::getInstance();
+       $auth = Zend_Auth::getInstance();
         
-         //if ($auth->hasIdentity()) {
+        if ($auth->hasIdentity()) {
             $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
-        //}
+        }
 
+        $modelAd = new Model_Ad();
+        $this->view->allGives = $modelAd->getAdListAllHome(1, $status);
+        $this->view->allWants = $modelAd->getAdListAllHome(2, $status);
+
+        $this->view->rankingWoeid = $modelAd->getRankingWoeid();
+         $this->view->rankingUsers = $modelAd->getRankingUsers();
         
     }
 

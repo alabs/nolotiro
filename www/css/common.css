@@ -410,6 +410,85 @@ form.searchbox dl{
 
 
 /**
+ * Home
+*/
+.home_location_change{
+     display: inline;
+    position: absolute;
+    float: left;
+    width:  600px;
+    right: 0px;
+    top: 43px;
+}
+
+.home_givewant_container{
+    display: block;
+    width: 100%;
+}
+
+.home_givewant_container h3{
+/*    padding-left: 15px;*/
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.section{
+/*    border: 1px solid #ddd;*/
+   float: left;
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+    width: 45%;
+}
+
+.home_givewant_container title{
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+
+}
+
+.home_location_change form{
+    display: inline-block;
+    padding-right: 20px;
+    width: auto;
+}
+
+.home_location_change.form dd{
+    display: inline;
+    margin: 0;
+}
+
+/*form.searchbox input{
+    padding: 1px;
+    font-size: 12px;
+    border: 1px;
+    border-style: solid;
+    border-color: #ddd;
+}*/
+
+ dl {
+    margin: 0px!important;
+}
+
+ dd {
+    margin: 0px!important;
+}
+
+
+.ad_excerpt_home{
+    float:left;
+    padding-top:14px;
+    margin:0;
+}
+
+.ad_excerpt_home h4{
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+
+/**
  * Layout.
 */
 #header {

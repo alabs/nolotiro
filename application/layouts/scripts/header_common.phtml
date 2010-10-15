@@ -1,0 +1,54 @@
+<?=$this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title><?= $this->page_title . ' | nolotiro.org' ?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="author" content="daniel remeseiro" />
+        <meta name="robots" content="index,follow" />
+        <meta name="alexaVerifyID" content="3nRFpyasuPpTttUm-zy1QPTPlmA" />
+        <meta name="google-site-verification" content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <?php
+        //set hreflang for best multilanguage indexing by crawlers
+        if ($this->lang == 'es') {
+            $this->headLink(array('rel' => 'alternate', 'hreflang' => 'en', 'href' => str_replace('/es/', '/en/', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        }
+
+        if ($this->lang == 'en') {
+            $this->headLink(array('rel' => 'alternate', 'hreflang' => 'es', 'href' => str_replace('/en/', '/es/', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        }
+
+        if ($this->canonicalUrl) {
+            $this->headLink(array('rel' => 'canonical', 'href' => $this->canonicalUrl), 'APPEND');
+        }
+
+        $css_num = 130;
+        $this->headLink()->appendStylesheet('/css/common.css?num=' . $css_num);
+        $this->headLink()->appendStylesheet('/css/blueprint/screen.css');
+        echo $this->headLink();
+        echo $this->headScript();
+        ?>
+
+        <script type="text/javascript">
+            $(function(){
+                $.superbox.settings = {
+                    closeTxt: "<?= $this->translate('Close') ?>",
+                    loadTxt: "<?= $this->translate('Loading') ?>...",
+                    nextTxt: "<?= $this->translate('Next') ?>",
+                    prevTxt: "<?= $this->translate('Previous') ?>"
+                };
+                $.superbox();
+            });
+        </script>
+
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-141609-7']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>

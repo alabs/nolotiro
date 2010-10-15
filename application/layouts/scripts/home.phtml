@@ -4,18 +4,6 @@
             <div id="header">
                 <div class="user_login_box">
                     <?php
-                    //search form
-                    require_once APPLICATION_PATH . '/forms/Search.php';
-                    $form = new Form_Search( );
-
-                    $form->setAction('/' . $this->lang . '/search/');
-                    $form->loadDefaultDecoratorsIsDisabled(false);
-                    foreach ($form->getElements() as $element) {
-                        $element->removeDecorator('DtDdWrapper');
-                        $element->removeDecorator('Label');
-                    }
-                    echo $form;
-
                     $auth = Zend_Auth::getInstance ();
                     if (!$auth->hasIdentity()) {
 
@@ -44,12 +32,33 @@
 
                 <h1 id="site-name"><a href="/" title="nolotiro.org home"><img src="/images/nolotiro_logo.png" alt="nolotiro.org" id="logo" /> nolotiro.org</a></h1>
                 <h2 id='site-slogan'><?= $this->translate('no lo tiro, te lo regalo (sin condiciones)') ?></h2>
-                <div class="ad_create_tab">
-                    <a  href="/<?= $this->lang . '/ad/create' ?>"><?= '+ ' . $this->translate('Create new ad') . $this->woeidNameShort ?></a>
+
+                 <div class="home_location_change">
+                    <?php
+                    //location change form
+                    require_once APPLICATION_PATH . '/forms/LocationChange.php';
+                    $form = new Form_LocationChange;
+                    $form->setAction('/' . $this->lang . '/location/change');
+                    $form->loadDefaultDecoratorsIsDisabled(false);
+                    foreach ($form->getElements() as $element) {
+                        $element->removeDecorator('DtDdWrapper');
+                        $element->removeDecorator('Label');
+                    }
+                    //echo $form;
+                    ?>
+
+
+                    <div class="home_autosuggest">
+                     <?php echo $this->translate ( 'Our autosuggest system (based on your IP) says you are located near:').' '.
+                        '<br /><b><a href="/'.$this->lang.'/location/change2/?location='.$this->escape($this->suggestIP).'" > '.$this->suggestIP .'</a></b>';?>
+
+                    </div>
                 </div>
+
+
             </div>
 
-            <?= $this->layout()->content ?>
+            <?php echo $this->layout()->content ?>
 
                     <div id="footer">
                         <div class="links-right">
