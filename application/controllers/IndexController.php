@@ -38,10 +38,9 @@ class IndexController extends Zend_Controller_Action {
 
         $modelAd = new Model_Ad();
         $this->view->allGives = $modelAd->getAdListAllHome(1, $status);
-        $this->view->allWants = $modelAd->getAdListAllHome(2, $status);
 
         $this->view->rankingWoeid = $modelAd->getRankingWoeid();
-         $this->view->rankingUsers = $modelAd->getRankingUsers();
+        $this->view->rankingUsers = $modelAd->getRankingUsers();
         
     }
 
