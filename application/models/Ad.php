@@ -210,7 +210,7 @@ class Model_Ad extends Zend_Db_Table_Abstract {
     }
 
 
-    public function getRankingUsers( $limit=30){
+    public function getRankingUsers( $limit=40){
 
         $table = new Zend_Db_Table('ads');
         $query = "SELECT ads.user_owner, users.username AS user_name, COUNT(ads.id) AS ads_count FROM ads, users WHERE type = 1 AND
