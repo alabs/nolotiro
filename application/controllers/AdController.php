@@ -500,7 +500,7 @@ class AdController extends Zend_Controller_Action {
             return;
         }
 
-        $admodel = new Model_Ad();
+        $admodel = $this->_getModel();
         $ad = $admodel->getAd($id);
 
 

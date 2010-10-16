@@ -26,7 +26,8 @@ class Model_Ad extends Zend_Db_Table_Abstract {
     }
 
     public function deleteAd($id) {
-        $this->delete('id =' . (int) $id);
+        $table = new Zend_Db_Table('ads');
+        return $table->delete('id =' . (int) $id);
     }
 
     public function getAd($id) {
