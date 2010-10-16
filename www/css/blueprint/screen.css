@@ -81,12 +81,11 @@ h2 {
 }
 
 h3 {
-        display: inline;
+        
 	font-size: 2em;
-       
 	line-height: 1;
 	font-weight: bold;
-	margin-bottom: 2em;
+	padding-left: 0px;
       
 }
 

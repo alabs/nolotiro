@@ -1,13 +1,10 @@
 <div id="main">
-<div class="home_givewant_container">
-
     <div class="section">
         <h3><?php echo $this->translate('last gifts published');?></h3>
             <?php if ($this->allGives): ?>
                    <?php
                    foreach ($this->allGives as $key => $val): ?>
                     <div class="ad_excerpt_home">
-
                       <?php
                        if ($val['photo'] !== null){
                                   echo '<div class="ad_list_image">
@@ -65,8 +62,10 @@
                     <?php endforeach; ?>
        <?php endif;?>
 
-        <br>
+        </div>
+        <div class="section">
         <h3><?php echo $this->translate('most generous users');?></h3>
+        <br>
         <?php if ($this->rankingUsers): ?>
                    <?php  foreach ($this->rankingUsers as $key => $val): ?>
         <div >
@@ -79,11 +78,7 @@
        <?php endif;?>
 
     </div>
-    
 
-</div>  <!-- /home_givewant_container -->
-
-    
 
 </div> <!-- /main -->
 

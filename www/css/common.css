@@ -413,7 +413,7 @@ form.searchbox dl{
  * Home
 */
 .home_location_change{
-     display: inline;
+    display: inline;
     position: absolute;
     float: left;
     width:  600px;
@@ -421,32 +421,18 @@ form.searchbox dl{
     top: 43px;
 }
 
-.home_givewant_container{
-    display: block;
-    width: 100%;
-}
 
-.home_givewant_container h3{
-/*    padding-left: 15px;*/
-    margin-bottom: 15px;
-    margin-top: 15px;
-}
 
 .section{
 /*    border: 1px solid #ddd;*/
-   float: left;
+    float: left;
     position: relative;
     display: inline-block;
-    padding: 20px;
-    width: 45%;
+    padding: 10px;
+    width: 300px;
 }
 
-.home_givewant_container title{
-    display: block;
-    font-size: 2em;
-    font-weight: bold;
 
-}
 
 .home_location_change form{
     display: inline-block;
@@ -459,13 +445,7 @@ form.searchbox dl{
     margin: 0;
 }
 
-/*form.searchbox input{
-    padding: 1px;
-    font-size: 12px;
-    border: 1px;
-    border-style: solid;
-    border-color: #ddd;
-}*/
+
 
  dl {
     margin: 0px!important;
@@ -505,6 +485,7 @@ form.searchbox dl{
 #main {
     margin: 0px;
     padding-top: 0;
+     width: 100%;
     text-align: left;
 }
 
