@@ -422,14 +422,32 @@ form.searchbox dl{
 }
 
 
+.section_users{
+/*    border: 1px solid #ddd;*/
+    float: left;
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    width: 180px;
+}
 
-.section{
+.section_locations{
 /*    border: 1px solid #ddd;*/
     float: left;
     position: relative;
     display: inline-block;
     padding: 10px;
     width: 300px;
+}
+
+
+.section_ads{
+/*    border: 1px solid #ddd;*/
+    float: left;
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    width: 390px;
 }
 
 
