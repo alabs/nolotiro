@@ -21,7 +21,7 @@ class IndexController extends Zend_Controller_Action {
 
        $this->_helper->layout()->setLayout('home');
        $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
-        $this->view->page_title .= $this->view->translate('no lo tiro, te lo regalo (sin condiciones)');
+       $this->view->page_title .= $this->view->translate('no lo tiro, te lo regalo (sin condiciones)');
 
         //check if user is locked
         $locked = $this->_helper->checkLockedUser->check();

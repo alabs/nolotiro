@@ -23,8 +23,8 @@ class Zend_Controller_Action_Helper_Woeid extends Zend_Controller_Action_Helper_
         // configure caching frontend strategy
         $oFrontend = new Zend_Cache_Core(
                         array(
-                            // cache for 1 day
-                            'lifetime' => 3600 * 24,
+                            // cache for 7 days
+                            'lifetime' => 3600 * 24 * 7,
                             'caching' => true,
                             'cache_id_prefix' => 'woeidName',
                             'logging' => false,
