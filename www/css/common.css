@@ -212,6 +212,19 @@ form.searchbox dl{
     margin-bottom: 6px;
 }
 
+
+.ad_excerpt_title{
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.ad_excerpt_woeid{
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
 .ad_excerpt:hover{
     background-color:#FFFFCC;
 
@@ -275,12 +288,11 @@ form.searchbox dl{
     position: relative;
     display: block;
     padding: 3px;
-    top: 10px;
     clear: left;
     text-align: left;
     font-size: 11px;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin-top: 5px;
+   
 
 }
 

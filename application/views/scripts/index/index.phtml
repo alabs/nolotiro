@@ -22,11 +22,11 @@
                          </div><br />
                         <?php endif;?>
 
-                       <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
-                       <?=$this->escape($val['title']) ?></a></h4>
+                         <div class="ad_excerpt_title"><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+                       <?=$this->escape($val['title']) ?></a></div>
 
-                       <h6><a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/give' ?>">
-                         <?=$this->woeidName($val['woeid_code'], $this->lang).' > '. $this->translate('give') ?> </a></h6>
+                      <div class="ad_excerpt_woeid"><a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/give' ?>">
+                         <?=$this->woeidName($val['woeid_code'], $this->lang).' > '. $this->translate('give') ?> </a></div>
 
                         <?php if ($val['type'] == 1): ?>
                        <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
@@ -38,10 +38,30 @@
                         </span>
 
                        <div><p><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></p></div>
+
+
+                        <div class="ad_meta_info">
+                <?php if ($val['status'] != 'delivered'): ?>
+               <b><a rel="nofollow" href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->escape($val['title'])
+                   ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
+               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title'])
+                   ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
+                    <?php endif;?>
+
+               <?php if ($val['readings_count']): ?>&nbsp;&nbsp;
+                    <?=$val['readings_count'] . '&nbsp;&nbsp;' .$this->translate('readings') ?>
+                <?php endif;?>
+
+                <?php if ($val['comments_count']): ?>
+                     <?=', '.$this->escape( $val['comments_count'] == null  ? 0 : $val['comments_count'] ).' '.$this->translate('comments') ?>
+                 <?php endif;?>
+           </div>
+
                     </div>
 
                     <?php endforeach; ?>
 
+        <b><a href="/<?php echo $this->lang ?>/ad/listall/ad_type/give/page/2"><?php echo $this->translate('view more ads')?> > </a></b>
                 <?php endif;?>
     </div>
 

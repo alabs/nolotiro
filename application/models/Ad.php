@@ -160,7 +160,7 @@ class Model_Ad extends Zend_Db_Table_Abstract {
         $select->joinLeft(array('c' => 'commentsAdCount'), 'a.id = c.id_comment', array('c.count as comments_count'));
         $select->joinLeft(array('r' => 'readedAdCount'), 'a.id = r.id_ad', array('r.counter as readings_count'));
         $select->join(array('u' => 'users'), 'a.user_owner = u.id', array('u.username'));
-        //show only if user is active and not blocked
+        //show only if user is active and not locked
         $select->where('u.active = ?', 1);
         $select->where('u.locked = ?', 0);
         $select->where('a.type = ?', $ad_type);
@@ -183,8 +183,10 @@ class Model_Ad extends Zend_Db_Table_Abstract {
         $table = new Zend_Db_Table('ads');
         $select = $table->select()->setIntegrityCheck(false);
         $select->from(array('a' => 'ads'), array('a.*'));
+        $select->joinLeft(array('c' => 'commentsAdCount'), 'a.id = c.id_comment', array('c.count as comments_count'));
+        $select->joinLeft(array('r' => 'readedAdCount'), 'a.id = r.id_ad', array('r.counter as readings_count'));
         $select->join(array('u' => 'users'), 'a.user_owner = u.id', array('u.username'));
-        //show only if user is active and not blocked
+        //show only if user is active and not locked
         $select->where('u.active = ?', 1);
         $select->where('u.locked = ?', 0);
         $select->where('a.type = ?', $ad_type);
