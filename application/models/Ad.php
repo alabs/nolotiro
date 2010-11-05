@@ -39,7 +39,7 @@ class Model_Ad extends Zend_Db_Table_Abstract {
         $select->joinInner(array('u' => 'users'), 'a.user_owner = u.id', array('u.username'));
         $select->where('a.id = ?', $id);
 
-        return $table->fetchRow($select);
+        return $table->fetchRow($select)->toArray();
     }
 
     public function getAdforSearch($id, $ad_type) {
