@@ -6,9 +6,6 @@
  * @package    ZFDebug_Controller
  * @subpackage Plugins
  * @author Daniel Remeseiro
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- *
  */
 
 /**
@@ -74,12 +71,6 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Xhprof extends Zend_Controller_Plug
         $panel = '<h4>XHprof</h4>';
          if (function_exists('xhprof_enable')) {
         $panel .= $this->link_profiler;
-//        $panel .= 'Controller: ' . round(($this->_memory['postDispatch']-$this->_memory['preDispatch'])/1024,2) .'K<br />';
-//        if (isset($this->_memory['user']) && count($this->_memory['user'])) {
-//            foreach ($this->_memory['user'] as $key => $value) {
-//                $panel .= $key.': '.round($value/1024).'K<br />';
-//            }
-//        }
          }
         return $panel;
     }
@@ -102,7 +93,12 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Xhprof extends Zend_Controller_Plug
             // Fatal error: Class 'XHProfRuns_Default' not found
             include_once '/usr/local/lib/xhprof_lib/utils/xhprof_lib.php';
             include_once '/usr/local/lib/xhprof_lib/utils/xhprof_runs.php';
-            xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
+
+            // do not profile builtin functions
+            xhprof_enable(XHPROF_FLAGS_NO_BUILTINS + XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY );
+
+            //profile with builtin functions
+            //xhprof_enable( XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY );
         }
     }
 
@@ -115,8 +111,7 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Xhprof extends Zend_Controller_Plug
     public function postDispatch(Zend_Controller_Request_Abstract $request)
     {
         if (function_exists('xhprof_enable')) {
-            //$this->_memory['postDispatch'] = memory_get_peak_usage();
-
+           
             $profiler_namespace = 'myapp';  // namespace for your application
             $xhprof_data = xhprof_disable();
             $xhprof_runs = new XHProfRuns_Default();
