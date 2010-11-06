@@ -24,13 +24,9 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Xhprof extends Zend_Controller_Plug
      */
     protected $_identifier = 'xhprof';
 
+    
     /**
-     * @var array
-     */
-    protected $_memory = array();
-
-    /**
-     * Creating time plugin
+     * Creating xhprof plugin
      * @return void
      */
     public function __construct()
@@ -112,13 +108,13 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Xhprof extends Zend_Controller_Plug
     {
         if (function_exists('xhprof_enable')) {
            
-            $profiler_namespace = 'myapp';  // namespace for your application
+            $profiler_namespace = 'nolotiro';  // namespace for your application
             $xhprof_data = xhprof_disable();
             $xhprof_runs = new XHProfRuns_Default();
             $run_id = $xhprof_runs->save_run($xhprof_data, $profiler_namespace);
 
             // url to the XHProf UI libraries (change the host name and path)
-            $profiler_url = sprintf('http://nolotiro.dev/xhprof/xhprof_html/index.php?run=%s&source=%s', $run_id, $profiler_namespace);
+            $profiler_url = sprintf('/xhprof/xhprof_html/index.php?run=%s&source=%s', $run_id, $profiler_namespace);
             $this->link_profiler = '<a href="'. $profiler_url .'" target="_blank">Profiler output</a>';
 
 
