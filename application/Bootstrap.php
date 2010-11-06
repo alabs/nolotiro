@@ -53,7 +53,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                             'Memory',
                             'Time',
                             'Registry',
-                            'Exception')
+                            'Exception',
+                            'Xhprof')
             );
 
             if ($this->hasPluginResource('db'))
