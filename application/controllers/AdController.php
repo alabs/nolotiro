@@ -60,7 +60,7 @@ class AdController extends Zend_Controller_Action {
         }
 
 
-        $model = $this->_getModel();
+        $model = new Model_Ad();
         $this->view->woeid = $woeid;
         $this->view->ad = $model->getAdList($woeid, $ad_type, $status);
         $this->view->woeidName = $this->_helper->woeid->name($woeid, $this->lang);
@@ -176,7 +176,7 @@ class AdController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
         }
 
-        $model = $this->_getModel();
+        $model = new Model_Ad();
         $this->view->ad = $model->getAdUserlist($id);
 
         //paginator
@@ -208,7 +208,7 @@ class AdController extends Zend_Controller_Action {
         //var_dump($this->view->userRole);
 
         $id = $this->_request->getParam('id');
-        $model = $this->_getModel();
+        $model = new Model_Ad();
         $this->view->ad = $model->getAd($id);
 
         //add jquery and superbox to show modal photo window
@@ -345,7 +345,7 @@ class AdController extends Zend_Controller_Action {
 
                     $formulario ['woeid_code'] = $this->location;
 
-                    $model = $this->_getModel();
+                    $model = new Model_Ad();
                     $model->createAd($formulario);
 
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad published succesfully!'));
@@ -447,7 +447,7 @@ class AdController extends Zend_Controller_Action {
                 $data['status'] = $formulario['status'];
                 $data['comments_enabled'] = $formulario['comments_enabled'];
 
-                $model = $this->_getModel();
+                $model = new Model_Ad();
                 $model->updateAd($data, $id);
 
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad edited succesfully!'));
@@ -500,7 +500,7 @@ class AdController extends Zend_Controller_Action {
             return;
         }
 
-        $admodel = $this->_getModel();
+        $admodel = new Model_Ad();
         $ad = $admodel->getAd($id);
 
 
@@ -563,13 +563,5 @@ class AdController extends Zend_Controller_Action {
     }
 
 
-    protected function _getModel() {
-        if (null === $this->_model) {
-
-            require_once APPLICATION_PATH . '/models/Ad.php';
-            $this->_model = new Model_Ad ( );
-        }
-        return $this->_model;
-    }
 
 }

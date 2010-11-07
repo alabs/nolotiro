@@ -68,7 +68,7 @@ class UserController extends Zend_Controller_Action {
                     $view->error .= $this->view->translate('The  passwords entered do not match.');
                 }
 
-                $model = $this->_getModel();
+                $model = new Model_User();
 
                 //check user email and nick if exists
                 $checkemail = $model->checkEmail($formulario ['email']);
@@ -133,7 +133,7 @@ class UserController extends Zend_Controller_Action {
         $username = (string) $this->_request->getParam('username');
 
 
-        $model = $this->_getModel();
+        $model = new Model_User();
         $modelarray = $model->fetchUserByUsername($username);
 
         $this->view->user = $modelarray;
@@ -196,7 +196,7 @@ class UserController extends Zend_Controller_Action {
                 $f = new Zend_Filter_StripTags ( );
                 $email = $f->filter($this->_request->getPost('email'));
 
-                $model = $this->_getModel();
+                $model = new Model_User();
                 $mailcheck = $model->checkEmail($email);
 
                 if ($mailcheck == NULL) {
@@ -284,7 +284,7 @@ class UserController extends Zend_Controller_Action {
         if (!is_null($token)) {
 
             //lets check this token against ddbb
-            $model = $this->_getModel();
+            $model = new Model_User();
             $validatetoken = $model->validateToken($token);
 
 
@@ -340,7 +340,7 @@ class UserController extends Zend_Controller_Action {
             return;
         }
 
-        $model = $this->_getModel();
+        $model = new Model_User();
         $user = $model->fetchUser($id)->id;
 
         if (($auth->getIdentity()->id == $user)) { //if is the user profile owner lets edit
@@ -371,7 +371,7 @@ class UserController extends Zend_Controller_Action {
                         $data['password'] = md5(trim($form->getValue('password')));
                     }
 
-                    $model = $this->_getModel();
+                    
                     $model->update($data);
 
                     //update the auth data stored
@@ -411,7 +411,7 @@ class UserController extends Zend_Controller_Action {
             return;
         }
 
-        $model = $this->_getModel();
+        $model = new Model_User();
         $user = $model->fetchUser($id)->id;
 
 
@@ -445,13 +445,5 @@ class UserController extends Zend_Controller_Action {
         }
     }
 
-    protected function _getModel() {
-        if (null === $this->_model) {
-
-            require_once APPLICATION_PATH . '/models/User.php';
-            $this->_model = new Model_User ( );
-        }
-        return $this->_model;
-    }
 
 }
