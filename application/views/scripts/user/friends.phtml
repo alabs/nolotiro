@@ -1,0 +1,50 @@
+<?php $this->page_title = $this->translate ( 'User profile' ).'  -  '.$this->user['username'] ;?>
+
+<div id="default_header_section">
+<h3><?=$this->translate ( 'User profile' ).'  -  '.$this->user['username'];?></h3>
+<?=$this->sendmessage_tab; ?>
+</div>
+
+<?php
+if (isset ( $this->error )) :
+?>
+<div class="error">
+		<?=$this->escape ( $this->error );?>
+</div>
+<?php endif;?>
+
+
+<?
+if (count ( $this->mensajes ) > 0) {
+	echo '<div class="success">';
+	foreach ( $this->mensajes as $msg ) {
+		echo $msg . '<br>';
+	}
+	echo '</div>';
+}
+?>
+
+<div id="main">
+<div class="span-18">
+
+<ul id="tabnav">
+        <?=$this->editprofile_tab; ?>
+	<li ><a   id="<?=(preg_match("/profile/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/profile/<?=$this->user[username] ?>"><?=$this->translate('profile');?></a></li>
+	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[id] ?>"><?=$this->translate('ads');?></a></li>
+        
+</ul>
+
+
+    <?
+    var_dump($this->friendlist);
+    ?>
+
+    <div class="user_profile">
+        <h4><?=$this->translate('User name:').' '.$this->user['username'];?></h4>
+        <h4><?=$this->translate('Member since:').' '.$this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($this->user['created'])));?></h4>
+    </div>
+
+</div>
+
+
+

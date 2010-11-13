@@ -56,11 +56,10 @@
                      <?=', '.$this->escape( $val['comments_count'] == null  ? 0 : $val['comments_count'] ).' '.$this->translate('comments') ?>
                  <?php endif;?>
            </div>
-
                     </div>
 
                     <?php endforeach; ?>
-
+        <br />
         <b><a href="/<?php echo $this->lang ?>/ad/listall/ad_type/give/page/2"><?php echo $this->translate('view more ads')?> > </a></b>
                 <?php endif;?>
     </div>
@@ -69,17 +68,18 @@
     <div class="section_locations">
         <h3><?php echo $this->translate('most generous cities');?></h3>
         <br>
+
         <?php
         //Zend_Debug::dump($this->rankingWoeid);
         if ($this->rankingWoeid): ?>
+        <ul>
                    <?php  foreach ($this->rankingWoeid as $key => $val): ?>
-        <div >
-            <h6>
+            <li>
                 <a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/give' ?>">
                          <?=$this->woeidName($val['woeid_code'], $this->lang) . ' (' .$val['ads_count']. ')'?> </a>
-            </h6>
-            </div>
+            </li>
                     <?php endforeach; ?>
+            </ul>
        <?php endif;?>
 
         </div>
@@ -87,14 +87,14 @@
         <h3><?php echo $this->translate('most generous users');?></h3>
         <br>
         <?php if ($this->rankingUsers): ?>
+        <ul>
                    <?php  foreach ($this->rankingUsers as $key => $val): ?>
-        <div >
-            <h6>
+            <li>
                 <a href="/<?=$this->lang.'/ad/listuser/id/'.$val['user_owner'] ?>">
                          <?=$val['user_name'] . ' (' .$val['ads_count']. ')'?> </a>
-            </h6>
-            </div>
+            </li>
                     <?php endforeach; ?>
+            </ul>
        <?php endif;?>
 
     </div>

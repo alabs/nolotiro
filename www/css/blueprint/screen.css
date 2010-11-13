@@ -176,19 +176,27 @@ pre,code,tt {
 }
 
 li ul,li ol {
-	margin: 0 1.5em;
+/*	margin: 0 1.5em;*/
+       
 }
 
-ul,ol {
-	margin: 0 1.5em 1.5em 1.5em;
+li a{
+     font-weight: bold;
+     
 }
+
+li {
+    margin-bottom: 4px;
+}
+
 
 ul {
-	list-style-type: disc;
+	list-style-type: none;
+
 }
 
 ol {
-	list-style-type: decimal;
+	list-style-type: none;
 }
 
 dl {
