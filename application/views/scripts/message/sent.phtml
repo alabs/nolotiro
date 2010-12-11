@@ -43,10 +43,16 @@ if (count ( $this->mensajes ) > 0) {
             <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>
             </span>
 
+            <div class="delete_message">
+            <a href="/<?=$this->lang ?>/message/show/id/<?=$this->escape($val['id']) ?>">
+                <?=$this->translate('read this message') ?>
+            </a></div>
+            
              <div class="delete_message">
             <a href="/<?=$this->lang ?>/message/delete/id/<?=$this->escape($val['id']) ?>">
                 <?=$this->translate('delete this message') ?>
             </a></div>
+            
 
         </div>
 

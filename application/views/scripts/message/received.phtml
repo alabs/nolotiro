@@ -55,6 +55,11 @@ if ($this->listmessages): ?>
             </span>
 
             <div class="delete_message">
+            <a href="/<?=$this->lang ?>/message/show/id/<?=$this->escape($val['id']) ?>">
+                <?=$this->translate('read this message') ?>
+            </a></div>
+
+             <div class="delete_message">
             <a href="/<?=$this->lang ?>/message/delete/id/<?=$this->escape($val['id']) ?>">
                 <?=$this->translate('delete this message') ?>
             </a></div>
