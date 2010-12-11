@@ -93,10 +93,20 @@ class Model_Message extends Zend_Db_Table_Abstract {
     public function checkMessagesUser($id) {
 
         $id = (int) $id;
-        $table = new Model_Message();
-        $select = $table->select()->where('user_to = ?', $id);
-        $select->where('readed = ?', 0);
+        $table = new Zend_Db_Table('messages');
+        $select = $table->select()->setIntegrityCheck(false);
+        $select->from(array('m' => 'messages'), array('m.*'));
+
+        $select->joinLeft(array('d' => 'messages_deleted'), 'm.user_to = d.id_user and m.id = d.id_message' ,  'd.id_message' );
+        $select->where('id_message IS NULL');
+        
+        $select->where('m.user_to = ?', $id);
+        $select->where('m.readed = ?', 0);
+
+        
+
         return $table->fetchAll($select)->count();
+        // return $table->fetchAll($select);
     }
 
     public function updateMessageReaded($id) {
