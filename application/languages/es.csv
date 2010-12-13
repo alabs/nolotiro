@@ -179,6 +179,15 @@
 "delivered";"entregado"
 "all";"todos"
 
+#friends
+"User successfully removed from your friends list";"El usuario  ha sido eliminado de tu lista de amigos"
+"User successfully added to your friends list";"El usuario ha sido añadido a tu lista de amigos"
+"add";"añadir a"
+"to your friends list";"en tu lista de amigos"
+"remove";"eliminar a"
+"from your friends list";"de tu lista de amigos"
+"Friends list:";"Lista de amigos:"
+
 #message
 "received";"recibidos"
 "sent";"enviados"

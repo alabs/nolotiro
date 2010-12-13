@@ -106,7 +106,7 @@ class Model_Message extends Zend_Db_Table_Abstract {
         
 
         return $table->fetchAll($select)->count();
-        // return $table->fetchAll($select);
+        
     }
 
     public function updateMessageReaded($id) {

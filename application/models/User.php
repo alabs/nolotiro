@@ -1,25 +1,12 @@
 <?php
 /**
- * Nolotiro_User - a model class representing a single user
+ * Model_User - a model class representing a single user
  *
  * This is the DbTable class for the users table.
  *
  * */
 class Model_User {
-    /** Model_Table_User */
-    protected $_table;
-    
-    /**
-     * Retrieve table object
-     * @return Model_User_Table
-     * */
-    public function getTable() {
-        if (null === $this->_table) {
-            require_once APPLICATION_PATH . '/models/DbTable/User.php';
-            $this->_table = new Model_DbTable_User ( );
-        }
-        return $this->_table;
-    }
+   
 
     /**
      *	 * Save a new entry
@@ -27,7 +14,7 @@ class Model_User {
      * * @return int|string
      * */
     public function save(array $data) {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         $fields = $table->info ( Zend_Db_Table_Abstract::COLS );
         foreach ( $data as $field => $value ) {
             if (! in_array ( $field, $fields )) {
@@ -38,51 +25,51 @@ class Model_User {
     }
 
     public function update(array $data) {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         $where = $table->getAdapter ()->quoteInto ( 'id= ?', (int)$data ['id'] );
         $table->update ( $data, $where );
 
     }
 
     public function checkEmail($email) {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         $select = $table->select ()->where ( 'email = ?', $email );
         return $table->fetchRow ( $select );
     }
 
     public function checkUsername($username) {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         $select = $table->select ()->where ( 'username = ?', $username );
         return $table->fetchRow ( $select );
     }
 
     public function getToken($email) {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         $select = $table->select ()->where ( 'email = ?', $email );
         return $table->fetchRow ( $select )->token;
     }
 
     public function validateToken($token) {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         $select = $table->select ()->where ( 'token = ?', $token );
         return $table->fetchRow ( $select );
     }
 
     public function checkIsLocked($id) {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         $select = $table->select ()->where ( 'id = ?', (int) $id );
         return $table->fetchRow ( $select )->locked;
     }
 
 
     public function checkWoeidUser($id) {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         $select = $table->select ('woeid')->where ( 'id = ?', (int) $id );
        return $table->fetchRow ( $select )->woeid;
     }
 
     public function checkLockedUser($id) {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         $select = $table->select ('locked')->where ( 'id = ?', (int) $id );
        return $table->fetchRow ( $select )->locked;
     }
@@ -94,7 +81,7 @@ class Model_User {
      * @return null|Zend_Db_Table_Row_Abstract
      */
     public function fetchUser($id) {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         $select = $table->select ()->where ( 'id = ?', $id );
 
         if ($select != null) {
@@ -111,15 +98,75 @@ class Model_User {
 
      public function fetchUserByUsername($username)
     {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         return $table->fetchRow(  $table->select()->where( 'username = ?', $username ) );
     }
 
 
 
     public function deleteUser($id) {
-        $table = $this->getTable ();
+        $table = new Zend_Db_Table('users');
         $table->delete('id =' . (int)$id);
+    }
+
+
+    //friends area
+
+    public function checkIfisMyFriend( $id_user, $id_friend ){
+        $id = (int)$id;
+
+        $table = new Zend_Db_Table('friends');
+        $select = $table->select()->setIntegrityCheck(false);
+
+        $select->where ( 'id_user = ?', $id_user );
+        $select->where ( 'id_friend = ?', $id_friend );
+        return $table->fetchRow ( $select );
+
+    }
+
+
+
+    public function fetchUserFriends($id){
+        $id = (int)$id;
+        $table = new Zend_Db_Table('friends');
+        $select = $table->select()->setIntegrityCheck(false);
+
+        $select->from(array('f' => 'friends'), array('f.id_friend'));
+        $select->where ('f.id_user = ?', $id);
+        $select->joinInner(array('u' => 'users'), 'f.id_friend = u.id', array('u.username'));
+
+        return $table->fetchAll($select)->toArray();
+
+    }
+
+
+    public function addUserFriend($id_user, $id_friend){
+
+        $id_user = (int)$id_user;
+        $id_friend = (int)$id_friend;
+
+        $table = new Zend_Db_Table('friends');
+        $sql = "INSERT INTO friends   ( id_user, id_friend ) VALUES  ( $id_user , $id_friend )
+                            ON DUPLICATE KEY UPDATE  id_user=id_user";
+        return $table->getAdapter()->query($sql)->fetch();
+
+    }
+
+
+    public function deleteUserFriend($id_user, $id_friend){
+
+        $id_user = (int)$id_user;
+        $id_friend = (int)$id_friend;
+
+        $db = Zend_Db_Table::getDefaultAdapter();
+
+        $where = array();
+        $where[] = $db->quoteInto('id_user = ?', $id_user);
+        $where[] = $db->quoteInto('id_friend = ?', $id_friend);
+
+
+        $db->delete('friends',$where);
+        
     }
 
 

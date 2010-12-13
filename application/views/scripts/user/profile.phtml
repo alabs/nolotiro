@@ -2,7 +2,8 @@
 
 <div id="default_header_section">
 <h3><?=$this->translate ( 'User profile' ).'  -  '.$this->user['username'];?></h3>
-<?=$this->sendmessage_tab; ?>
+<?=$this->sendmessage_tab; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?=$this->friend_link; ?>
 </div>
 
 <?php
@@ -38,9 +39,31 @@ if (count ( $this->mensajes ) > 0) {
     <div class="user_profile">
         <h4><?=$this->translate('User name:').' '.$this->user['username'];?></h4>
         <h4><?=$this->translate('Member since:').' '.$this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($this->user['created'])));?></h4>
+
+     <?php if ($this->friendlist):
+            //var_dump($this->friendlist);
+            echo '<div><h4>' . $this->translate('Friends list:'). '</h4>';
+
+     ?>
+
+
+         <?php
+       foreach ($this->friendlist as $key => $val):
+
+       echo  '<a href=" '. '/' . $this->lang . '/profile/' .  $val['username'] . ' ">' . $val['username'] . '</a><br>';
+               ?>
+
+        <?php endforeach; ?>
+
+        <?php
+        echo '</div>';
+        endif; ?>
+
+       
+
     </div>
 
 </div>
 
-
+</div>
 

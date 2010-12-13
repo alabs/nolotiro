@@ -136,7 +136,10 @@ class UserController extends Zend_Controller_Action {
         $model = new Model_User();
         $modelarray = $model->fetchUserByUsername($username);
 
+        
         $this->view->user = $modelarray;
+
+        $this->view->friendlist = $model->fetchUserFriends($modelarray->id);
 
         if ($this->view->user == null) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('This user does not exist'));
@@ -159,9 +162,123 @@ class UserController extends Zend_Controller_Action {
         } else {
 
             $this->view->sendmessage_tab = '
-        <a href="/' . $this->view->lang . '/message/create/id_user_to/' . $modelarray['id'] . '">' . $this->view->translate('send message to') . ' ' . $username . '</a>';
+        <a class="world_link" href="/' . $this->view->lang . '/message/create/id_user_to/' . $modelarray['id'] . '">' . $this->view->translate('send message to') . ' ' . $username . '
+            <img src="/images/email_send.png" alt="send a message"/></a>';
+
+
+            //check if this user is friend or not to paint proper link
+            $checkFriendship = $model->checkIfisMyFriend($auth->getIdentity()->id, $modelarray->id);
+
+             if ( (bool)$checkFriendship == false) {
+
+                 $this->view->friend_link = '
+                <a class="world_link" href="/' . $this->view->lang . '/user/addfriend/id/' . $modelarray['id'] . '">' . $this->view->translate('add') . ' ' . $username .
+                    ' '. $this->view->translate('to your friends list'). '
+            <img src="/images/friend_add.png" alt="send a message"/></a>';
+                 
+             }  else {
+
+                 $this->view->friend_link = '
+                <a class="world_link" href="/' . $this->view->lang . '/user/deletefriend/id/' . $modelarray['id'] . '">' . $this->view->translate('remove') . ' ' . $username .
+                    ' '. $this->view->translate('from your friends list'). '
+            <img src="/images/friend_delete.png" alt="send a message"/></a>';
+
+             }
+
+            
+                
         }
     }
+
+
+    public function friendsAction(){
+        $request = $this->getRequest();
+        $id = (int) $this->_request->getParam('id');
+
+        
+        $model = new Model_User();
+        $this->view->friendlist = $model->fetchUserFriends($id);
+
+    }
+
+
+    public function deletefriendAction(){
+        //TODO make sure check user is auth to delete this friend!!!!!!!
+        $this->_helper->viewRenderer->setNoRender(true);
+         //check if user logged in
+        $auth = Zend_Auth::getInstance ();
+
+        $request = $this->getRequest();
+        $id_friend = (int) $this->_request->getParam('id');
+
+         $userM = new Model_User();
+         $friendName = $userM->fetchUser($id_friend)->username;
+         
+
+         if ($auth->hasIdentity() ) {
+
+             $id_user = $auth->getIdentity()->id;
+
+             $checkFriendship = $userM->checkIfisMyFriend($id_user, $id_friend);
+             //var_dump($checkFriendship);
+             //die ();
+             
+
+             //good bye my friend  :-(
+             $userM->deleteUserFriend($id_user, $id_friend);
+
+
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('User successfully removed from your friends list'));
+            $this->_redirect('/' . $this->lang . '/profile/' . $friendName );
+            return;
+
+        } else {
+
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
+            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+            return;
+        }
+
+    }
+
+    public function addfriendAction(){
+
+        $this->_helper->viewRenderer->setNoRender(true);
+         //check if user logged in
+        $auth = Zend_Auth::getInstance ();
+
+        $request = $this->getRequest();
+        $id_friend = (int) $this->_request->getParam('id');
+
+        //TODO : check if the user friend exists before insert in db
+        $userM = new Model_User();
+        $friendName = $userM->fetchUser($id_friend)->username;
+
+         if ($auth->hasIdentity() && $friendName == TRUE ) {
+             
+             $id_user = $auth->getIdentity()->id;
+
+             $userM->addUserFriend($id_user, $id_friend);
+
+
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('User successfully added to your friends list'));
+            $this->_redirect('/' . $this->lang . '/profile/' . $friendName );
+            return;
+
+        } else {
+
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
+            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+            return;
+        }
+
+
+    }
+
+
+
+
+
 
     /**
      *
