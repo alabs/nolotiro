@@ -134,14 +134,17 @@ class UserController extends Zend_Controller_Action {
         //$user_id = (int)$this->_request->getParam ( 'id' );
         $username = (string) $this->_request->getParam('username');
 
+        
 
         $model = new Model_User();
         $modelarray = $model->fetchUserByUsername($username);
 
         
+        
         $this->view->user = $modelarray;
 
         $this->view->friendlist = $model->fetchUserFriends($modelarray->id);
+        
 
         if ($this->view->user == null) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('This user does not exist'));
@@ -168,7 +171,9 @@ class UserController extends Zend_Controller_Action {
             <img src="/images/email_send.png" alt="send a message"/></a>';
 
 
-            //check if this user is friend or not to paint proper link
+              //check if this user is friend or not to paint proper link
+
+            if ($auth->getIdentity()->id == TRUE) {
             $checkFriendship = $model->checkIfisMyFriend($auth->getIdentity()->id, $modelarray->id);
 
              if ( (bool)$checkFriendship == false) {
@@ -186,6 +191,10 @@ class UserController extends Zend_Controller_Action {
             <img src="/images/friend_delete.png" alt="send a message"/></a>';
 
              }
+
+            }
+
+            
 
             
                 
