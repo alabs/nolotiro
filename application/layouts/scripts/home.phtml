@@ -47,12 +47,15 @@
                     //echo $form;
                     ?>
 
+                    
 
-                    <div class="home_autosuggest">
-                     <?php echo $this->translate ( 'Our autosuggest system (based on your IP) says you are located near:').' '.
-                        '<br /><b><a href="/'.$this->lang.'/location/change2/?location='.$this->escape($this->suggestIP).'" > '.$this->suggestIP .'</a></b>';?>
-
-                    </div>
+                    <div class="ad_create_tab ad_create_tab_home">
+                    <?php echo
+                        '<a href="/'.$this->lang.'/location/change2/?location='.$this->escape($this->suggestIP).'" > '.
+                                $this->translate('Publish new ad at').' '.$this->suggestIP .'</a>';?>
+                </div>
+                    
+                     
                 </div>
 
 
