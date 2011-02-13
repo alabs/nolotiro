@@ -1,0 +1,58 @@
+<div id="location_header_section">
+<h3>
+<?=$this->translate('Help to translate nolotiro.org to your language'); ?>
+</h3>
+    <br/>
+<a  href='/' < <?=$this->translate ( 'back to home page' );?></a>
+
+</div>
+
+
+
+<div id="main">
+
+<div class="page_text translate">
+    <?=$this->translate('translated text');?>
+<?php if (isset ( $this->error )) :?>
+<div class="error"><?=$this->escape ( $this->error );?></div>
+<?php endif;?>
+    <?php if (isset ( $this->newlang )) :?><a href="#" id="searchempty">%</a><?php endif;?>
+    <br/><?=$this->langsform?>
+<? if ($this->newlang!=null) echo '<div>'.$this->textsform.'</div>'; ?>
+</div>
+<?php if (isset ( $this->newlang )) :?>
+<script>
+    var controls = $('textarea,input[type=text]').not('[name^="safe_"]');
+    var empties = controls.filter("[value='']");
+    $("#searchempty").text(Math.round(10000-10000*empties.size()/controls.size())/100+'%');
+    $("#searchempty").click(function(event){
+        event.preventDefault();
+        var offset, docScroll, docHeight;
+        docScroll = $("html").scrollTop();
+        if (isNaN(docScroll)) docScroll=0;
+        $("html").scrollTop(docScroll);
+        winHeight = $(window).height();
+        empties = controls.filter("[value='']");
+        var c;
+        for (index = 0; index < empties.length; index++) {
+            c = $(empties[index]);
+            offset=c.offset().top;
+
+            if (offset>docScroll)
+            {
+                if (offset > winHeight/2) offset -= winHeight/2;
+                $("html, body").animate({scrollTop:offset}, 400, function() { c.focus(); });
+                break;
+            }
+        }
+        $(this).text(Math.round(10000-10000*empties.size()/controls.size())/100+'%');
+    });
+
+    $("textarea,input[type=text]").change(function(){
+        empties = controls.filter("[value='']");
+        $("#searchempty").text(Math.round(10000-10000*empties.size()/controls.size())/100+'%');
+    });
+</script>
+<?php endif;?>
+
+</div> <!-- /main -->
