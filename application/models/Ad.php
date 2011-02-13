@@ -194,7 +194,7 @@ class Model_Ad extends Zend_Db_Table_Abstract {
         $select->where('a.status != ?', 'delivered');
 
         $select->order('a.date_created DESC');
-        $select->limit(10);
+        $select->limit(20);
 
         $result = $table->fetchAll($select)->toArray();
 
