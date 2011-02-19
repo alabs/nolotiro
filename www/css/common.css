@@ -96,16 +96,19 @@ h2 {
 
 }
 
+#default_header_section h2 {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 1.5em;
+    padding-left: 0px;
+}
+
 h4 {
     line-height: 1.25;
 
 }
 
-h5 {
-    font-size: 1em;
-    font-weight: bold;
-    margin-bottom: 1.5em;
-}
+
 
 h6 {
     font-size: 1em;
