@@ -10,7 +10,7 @@
 
 
     <div class="location_name">
-    <h3>
+    <h2>
 
 <?
                 if ($_GET['ad_type'] == 1) {
@@ -23,7 +23,7 @@
 echo $this->translate('Search results for') . ' ('.$this->translate((string)$ad_type_txt).') "' . $this->escape($this->q) . '"';
 
 ?>
-    </h3>
+    </h2>
 
 
     <?='<br>'.$this->translate('Found').' '.$this->total_found. ' '.$this->translate('results in'). ' '.$this->query_time. ' '.$this->translate('seconds.') ?>

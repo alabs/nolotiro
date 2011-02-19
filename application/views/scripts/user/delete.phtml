@@ -1,5 +1,5 @@
 <div id="default_header_section">
-<h3><?=$this->translate ( 'Delete your nolotiro.org account' );?></h3>
+<h2><?=$this->translate ( 'Delete your nolotiro.org account' );?></h2>
 </div>
 
 <?php
@@ -17,8 +17,6 @@ if (isset ( $this->error )) :
 
 <fieldset><h2><?=$this->translate('Are you sure you want to delete your nolotiro.org account?')?></h2>
 
-</legend>	
-
 <form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
             <div>
 
@@ -34,3 +32,5 @@ if (isset ( $this->error )) :
 
 </div>
 
+
+</div> <!-- /main -->
