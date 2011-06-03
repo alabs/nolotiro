@@ -1,0 +1,50 @@
+<div id="default_header_section">
+<h2>
+<a href="/">
+           <?=' < '. $this->translate('back to home') ?></a>
+</h2>
+<h1><?=$this->translate('This ad does not exist or may have been deleted!') ?></h1>
+</div>
+
+
+<?
+if (count ( $this->mensajes ) > 0) {
+	echo '<div class="success">';
+	foreach ( $this->mensajes as $msg ) {
+		echo $msg . '<br>';
+	}
+	echo '</div>';
+}
+?>
+
+
+<div id="main">
+<div class="span-15">
+
+
+<script type="text/javascript">
+  var GOOG_FIXURL_LANG = '<?=$this->lang; ?>';
+  var GOOG_FIXURL_SITE = 'http://nolotiro.org';
+</script>
+<script type="text/javascript"
+  src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js">
+</script>
+
+</div>
+
+</div><!--end main -->
+<!-- google adsense block -->
+<div class="google_ads">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7190437604389924";
+/* 300x250, creado 9/01/10 */
+google_ad_slot = "7269761465";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<!-- end of google adsense block -->

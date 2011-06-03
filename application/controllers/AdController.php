@@ -46,8 +46,11 @@ class AdController extends Zend_Controller_Action {
         }
         else {
             //dont accept other values than give/want
+            $this->getResponse()->setHttpResponseCode(404);
             $this->_helper->_flashMessenger->addMessage($this->view->translate('this url does not exist'));
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+
+
         }
         
         $this->view->status = $status = $this->_request->getParam('status');
@@ -260,9 +263,24 @@ class AdController extends Zend_Controller_Action {
             }
         } else {
 
-            $this->_helper->_flashMessenger->addMessage($this->view->translate('This ad does not exist or may have been deleted!'));
-            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+
+            //get the last param to pass to 404 action
+            $urlChunks = explode('/', $_SERVER['REQUEST_URI']);
+
+            $this->_redirect('/' . $this->lang . '/ad/notfound/'.$urlChunks[sizeof($urlChunks)-1] );
+
         }
+    }
+
+
+    public function notfoundAction(){
+
+        // 404 error -- controller or action not found
+        $this->view->headTitle()->append(' - ');
+        $this->view->headTitle()->append('error 404');
+        $this->getResponse()->setHttpResponseCode(404);
+
+
     }
 
     public function createAction() {

@@ -2,3 +2,8 @@ syntax: glob
 library/Zend/*
 www/images/captcha/*
 www/images/uploads/*
+.idea/*
+.settings/*
+.project
+nbproject/*
+.buildpath
