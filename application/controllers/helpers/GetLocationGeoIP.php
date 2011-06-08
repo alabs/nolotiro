@@ -8,7 +8,7 @@
 class Zend_Controller_Action_Helper_GetLocationGeoIP extends Zend_Controller_Action_Helper_Abstract {
 
 
-         function suggest(){
+    public  function suggest(){
 
 		require_once ( NOLOTIRO_PATH . '/library/GeoIP/geoipcity.inc' );
 
@@ -31,16 +31,11 @@ class Zend_Controller_Action_Helper_GetLocationGeoIP extends Zend_Controller_Act
                 $result .= $GEOIP_REGION_NAME[$record->country_code][$record->region].', ';
                 $result .= $record->country_name;
 
-		//var_dump($result);
-
+		
 		geoip_close($gi);
 
                 return $result;
 
-
 	}
 
-       
-
 }
-

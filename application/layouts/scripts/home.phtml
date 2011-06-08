@@ -34,29 +34,23 @@
                 <div class='site-slogan'><?= $this->translate('no lo tiro, te lo regalo (sin condiciones)') ?></div>
 
                  <div class="home_location_change">
-                    <?php
-                    //location change form
-                    require_once APPLICATION_PATH . '/forms/LocationChange.php';
-                    $form = new Form_LocationChange;
-                    $form->setAction('/' . $this->lang . '/location/change');
-                    $form->loadDefaultDecoratorsIsDisabled(false);
-                    foreach ($form->getElements() as $element) {
-                        $element->removeDecorator('DtDdWrapper');
-                        $element->removeDecorator('Label');
-                    }
-                    //echo $form;
-                    ?>
 
-                    
-
+                     <?php
+                     //if not empty suggestIP paint the button...
+                     if ($this>suggestIP != ', , '):  ?>
                     <div class="ad_create_tab ad_create_tab_home">
                     <?php echo
                         '<a href="/'.$this->lang.'/location/change2/?location='.$this->escape($this->suggestIP).'" > '.
                                 $this->translate('View ads in').' '.$this->suggestIP .'</a>';?>
-                </div>
-                    
+                     </div>
+                     <?php  endif;?>
+
+                     <p class="ad_change_location_home"> <?php echo
+                        '<a href="/'.$this->lang.'/location/change'.'" > '.
+                                $this->translate('change location').' </a>';?></p>
                      
-                </div>
+                 </div>
+                
 
 
             </div>

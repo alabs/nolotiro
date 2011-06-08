@@ -640,6 +640,13 @@ form.searchbox dl{
     top: -10px;
 }
 
+
+.ad_change_location_home{
+    position: absolute;
+    right: 0px;
+    top: 20px;
+}
+
 .ad_create_tab a {
     background:transparent url(/images/btn_new_ad.png) no-repeat scroll 100% 0;
     height:24px;
