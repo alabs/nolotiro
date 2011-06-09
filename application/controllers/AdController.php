@@ -15,7 +15,7 @@ class AdController extends Zend_Controller_Action {
         $this->view->checkMessages = $this->_helper->checkMessages->check();
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->mensajes = $this->_flashMessenger->getMessages();
-
+        $this->security = $this->_helper->security->badparams();
 
         //check if user is locked
         $locked = $this->_helper->checkLockedUser->check();
