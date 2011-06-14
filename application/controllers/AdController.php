@@ -212,7 +212,46 @@ class AdController extends Zend_Controller_Action {
 
         $id = $this->_request->getParam('id');
         $model = new Model_Ad();
-        $this->view->ad = $model->getAd($id);
+
+
+        //check if the ad exists in memcached
+         $oBackend = new Zend_Cache_Backend_Memcached(
+                        array(
+                            'servers' => array(array(
+                                    'host' => '127.0.0.1',
+                                    'port' => '11211'
+                                )),
+                            'compression' => true
+                        ));
+
+        // configure caching frontend strategy
+        $oFrontend = new Zend_Cache_Core(
+                        array(
+                            // cache for 7 days
+                            'lifetime' => 3600 * 24 * 7,
+                            'caching' => true,
+                            'cache_id_prefix' => 'singleAd',
+                            'logging' => false,
+                            'write_control' => true,
+                            'automatic_serialization' => true,
+                            'ignore_user_abort' => true
+                        ));
+
+        // build a caching object
+        $cacheAd = Zend_Cache::factory($oFrontend, $oBackend);
+        $cacheTest = $cacheAd->test((int)$id);
+
+        if($cacheTest == false){ //if not exists in cache lets query to db
+            $this->view->ad = $model->getAd((int)$id);
+            $cacheAd->save($this->view->ad, (int)$id);
+
+        } else {
+            //load ad from memcached
+            $this->view->ad = $cacheAd->load((int)$id);
+        }
+
+
+
 
         //add jquery and superbox to show modal photo window
         $this->view->headScript()->appendFile(  '/js/jquery.min.js', 'text/javascript');
@@ -466,7 +505,37 @@ class AdController extends Zend_Controller_Action {
                 $data['comments_enabled'] = $formulario['comments_enabled'];
 
                 $model = new Model_Ad();
-                $model->updateAd($data, $id);
+                $model->updateAd($data, (int)$id);
+
+                //delete memcached ad if exists
+                //check if the ad exists in memcached
+                 $oBackend = new Zend_Cache_Backend_Memcached(
+                                array(
+                                    'servers' => array(array(
+                                            'host' => '127.0.0.1',
+                                            'port' => '11211'
+                                        )),
+                                    'compression' => true
+                                ));
+
+                // configure caching frontend strategy
+                $oFrontend = new Zend_Cache_Core(
+                                array(
+                                    // cache for 7 days
+                                    'lifetime' => 3600 * 24 * 7,
+                                    'caching' => true,
+                                    'cache_id_prefix' => 'singleAd',
+                                    'logging' => false,
+                                    'write_control' => true,
+                                    'automatic_serialization' => true,
+                                    'ignore_user_abort' => true
+                                ));
+
+                // build a caching object
+                $cacheAd = Zend_Cache::factory($oFrontend, $oBackend);
+
+                $cacheAd->remove((int)$id);
+
 
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad edited succesfully!'));
                 $this->_redirect('/' . $this->lang . '/ad/show/id/' . $id);
