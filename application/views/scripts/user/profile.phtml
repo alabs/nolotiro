@@ -1,9 +1,10 @@
 <?php $this->page_title = $this->translate ( 'User profile' ).'  -  '.$this->user['username'] ;?>
 
 <div id="default_header_section">
-<h2><?=$this->translate ( 'User profile' ).'  -  '.$this->user['username'];?></h2>
-<?=$this->sendmessage_tab; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<?=$this->friend_link; ?>
+<h2><?php echo $this->translate ( 'User profile' ).'  -  '.$this->user['username'];?></h2>
+<?php echo $this->sendmessage_tab; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo $this->friend_link; ?>&nbsp;&nbsp;
+
 </div>
 
 <?php
@@ -27,12 +28,12 @@ if (count ( $this->mensajes ) > 0) {
 
 <div id="main">
 <div class="span-18">
-
+<?php echo  $this->userLockLink; ?>
 <ul id="tabnav">
-        <?=$this->editprofile_tab; ?>
+    <?=$this->editprofile_tab; ?>
 	<li ><a   id="<?=(preg_match("/profile/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/profile/<?=$this->user[username] ?>"><?=$this->translate('profile');?></a></li>
 	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[id] ?>"><?=$this->translate('ads');?></a></li>
-        
+
 </ul>
 
 

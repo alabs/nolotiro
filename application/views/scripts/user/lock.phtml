@@ -1,0 +1,28 @@
+<div id="default_header_section">
+<h1><?php echo $this->translate('Admin option'). ' - ' .$this->translate ( 'Lock user' );?></h1>
+</div>
+
+<?php if (isset ( $this->error )) : ?>
+<div class="error">
+		<?=$this->escape ( $this->error );?>
+</div>
+<?php endif;?>
+
+<div id="main">
+<div class="span-16">
+
+
+<fieldset><h2><?php echo $this->translate('Are you sure you want to lock this user?')?>
+<br />"<?php echo $this->userToLock; ?>"</h2>
+    <?php  echo $this->translate('Warning: You are going to lock this user for all the system. You can do that because you are an admin user.'); ?>
+</legend>	
+
+<form action="<?php echo $this->url(array('action'=>'lock')); ?>" method="post">
+            <div>
+                <input type="submit" name="lock"  value="Yes"  />
+            </div>
+        </form>
+</fieldset>
+
+</div>
+

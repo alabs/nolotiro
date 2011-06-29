@@ -28,10 +28,7 @@ class UserController extends Zend_Controller_Action {
         }
     }
 
-    /**
-     * Default action - if logged in, go to profile. If logged out, go to register.
-     *
-     */
+
     public function indexAction() {
         //by now just redir to /
         $this->_redirect('/');
@@ -134,15 +131,12 @@ class UserController extends Zend_Controller_Action {
         //$user_id = (int)$this->_request->getParam ( 'id' );
         $username = (string) $this->_request->getParam('username');
 
-        
-
         $model = new Model_User();
         $modelarray = $model->fetchUserByUsername($username);
 
         
         
         $this->view->user = $modelarray;
-
         $this->view->friendlist = $model->fetchUserFriends($modelarray->id);
         
 
@@ -160,7 +154,7 @@ class UserController extends Zend_Controller_Action {
 
         $auth = Zend_Auth::getInstance ();
 
-        if (($auth->getIdentity()->id == $this->view->user['id'])) { //if is the user profile owner lets delete it
+        if (($auth->getIdentity()->id == $this->view->user['id'])) {
             $this->view->editprofile_tab = '
         <li ><a href="/' . $this->view->lang . '/user/edit/id/' . $auth->getIdentity()->id . ' ">' . $this->view->translate('edit profile') . '</a></li>
             <li ><a href="/' . $this->view->lang . '/message/received">' . $this->view->translate('messages') . '</a></li>';
@@ -194,7 +188,15 @@ class UserController extends Zend_Controller_Action {
 
             }
 
-            
+            //if user is admin show block user link
+
+            $this->userRole = $this->_helper->checkUserRole->check();
+
+            //only admins have access to this action
+            if ($this->userRole == 1) {
+                $this->view->userLockLink = $this->view->translate('You are admin, you can ').'
+                <a  href="/' . $this->view->lang . '/user/lock/id/' . $modelarray['id'] . '">' . $this->view->translate('lock this user') . '</a>';
+            }
 
             
                 
@@ -573,5 +575,46 @@ class UserController extends Zend_Controller_Action {
         }
     }
 
+
+    public function lockAction(){
+
+            $id = (int) $this->getRequest()->getParam('id');
+            $this->view->userRole = $this->_helper->checkUserRole->check();
+
+            //only admins have access to this action
+            if ($this->view->userRole == 1) {
+
+                $modelUser = new Model_User();
+                $this->view->userToLock =  $modelUser->fetchUser($id)->username;
+
+                if($this->view->userToLock == null){ //the user does not exists
+                        $this->_helper->_flashMessenger->addMessage($this->view->translate('This user does not exists'));
+                        $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+                }
+
+                if ($this->getRequest()->isPost()) {
+                    $lock = $this->getRequest()->getPost('lock');
+
+                    if ($lock == 'Yes') {
+                        //bye bye troll
+                        $data['locked'] = 1;
+                        $data['id'] = $id;
+                        $modelUser->update($data);
+
+                        $this->_helper->_flashMessenger->addMessage($this->view->translate('User locked successfully.'));
+                        $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+                        return;
+                    }
+
+                }
+
+            }
+            else {
+                $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
+                $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+                return;
+            }
+
+    }
 
 }

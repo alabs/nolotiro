@@ -112,7 +112,6 @@ class AdController extends Zend_Controller_Action {
     public function listallAction() {
 
         $this->view->userRole = $this->_helper->checkUserRole->check();
-        //var_dump($this->view->userRole);
 
         $model = new Model_Ad();
 
@@ -207,8 +206,7 @@ class AdController extends Zend_Controller_Action {
 
     public function showAction() {
 
-         $this->view->userRole = $this->_helper->checkUserRole->check();
-        //var_dump($this->view->userRole);
+        $this->view->userRole = $this->_helper->checkUserRole->check();
 
         $id = $this->_request->getParam('id');
         $model = new Model_Ad();
@@ -424,7 +422,9 @@ class AdController extends Zend_Controller_Action {
 
         if ($auth->hasIdentity()) {
 
-            $this->userRole = $this->_helper->checkUserRole->check();
+            $this->view->userRole = $this->_helper->checkUserRole->check();
+            var_dump($this->view->userRole);
+
             //if user owner allow edit and show delete ad link , if not redir not allowed
 
             if ($this->userRole == 1) {

@@ -133,6 +133,14 @@
 "Your account has been deleted.";"Tu cuenta ha sido eliminada"
 "This user does not have ads yet";"Este usuario no tiene anuncios todavía"
 
+
+#user/locked
+"Lock user";"Bloquear usuario"
+"User locked successfully.";"Usuario bloqueado con éxito."
+"Are you sure you want to lock this user?";"¿Estás seguro de querer bloquear a este usuario?"
+"Warning: You are going to lock this user for all the system. You can do that because you are an admin user.";"Atención: Vas a bloquear a este usuario de todo el sistema. Puedes hacerlo porque eres usuario admin/moderador."
+"You are admin, you can ";"Eres usuario moderador, puedes "
+"lock this user";"bloquear a este usuario"
 #super lightbox
 "Close";"Cerrar"
 "Loading";"Cargando"
