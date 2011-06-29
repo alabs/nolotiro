@@ -425,7 +425,7 @@ class AdController extends Zend_Controller_Action {
             $this->view->userRole = $this->_helper->checkUserRole->check();
 
             //if user owner allow edit and show delete ad link , if not redir not allowed
-            if ($this->userRole == 1) {
+            if ($this->view->userRole == 1) {
                 //bazinga!!
             }
             elseif ( $user->fetchUser($auth->getIdentity()->id)->id != $ad_user_owner['user_owner'] ) {
