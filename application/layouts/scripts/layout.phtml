@@ -50,31 +50,9 @@
                 </div>
             </div>
 
-            <?= $this->layout()->content ?>
+            <?php echo $this->layout()->content; ?>
+            <?php include_once("footer_common.phtml");?>
 
-                    <div id="footer">
-                        <div class="links-right">
-                            <a href='/<?= $this->lang ?>/page/about'><?= $this->translate('about'); ?></a>
-                            | <a href='/<?= $this->lang ?>/page/faqs'><?= $this->translate('faqs'); ?></a>
-                            | <a href='/<?= $this->lang ?>/ad/listall/ad_type/give'><?= $this->translate('all the ads'); ?></a>
-                            | <?= ($this->lang == 'es') ? "<a href='/en/index/setlang'>english</a>" : "<a href= '/es/index/setlang'>español</a>"; ?>
-
-                        </div>
-
-                        <div id="info" class="innerWrap clearfix">
-                            <p>
-                        <?= $this->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
-                        ?>
-                    </p>
-                </div>
-                <div  class="links-left">
-                    <a href="/<?= $this->lang ?>/page/tos"><?= $this->translate('terms of use'); ?></a> |
-                    <a href="/<?= $this->lang ?>/page/privacy"><?= $this->translate('privacy policy'); ?></a> |
-                    <a href="http://code.google.com/p/nolotiro/"><?= $this->translate('developers'); ?></a> |
-                    <a href='/<?= $this->lang ?>/contact'><?= $this->translate('contact'); ?></a> |
-                    <a href='http://www.pledgie.com/campaigns/12750'><?= $this->translate('donate'); ?></a>
-                </div>
-            </div>
         </div>
 
         <script type="text/javascript">
