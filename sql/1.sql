@@ -1,5 +1,6 @@
 /* this is the db initial schema */
 
+DELIMITER |
 
 CREATE TABLE `ads` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
