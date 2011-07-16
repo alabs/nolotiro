@@ -115,7 +115,6 @@ $auth = Zend_Auth::getInstance ();
            <br>
            <span><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></span>
         </div>
-        
         <?php endforeach; ?>
 <?php endif;?>
 
@@ -124,15 +123,16 @@ $auth = Zend_Auth::getInstance ();
         <?php if($this->ad['status'] != 'delivered' ): ?>
         <div class="ad_comment_form">
         <?=$this->createcomment?>
-        <?php endif; ?>
         </div>
+        <?php endif; ?>
+
 
 <?php endif;?>
 
 </div>
 
 </div><!--end main -->
-<!-- google adsense block -->
+
 <div class="google_ads">
 <script type="text/javascript"><!--
 google_ad_client = "pub-7190437604389924";
@@ -146,4 +146,3 @@ google_ad_height = 250;
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </div>
-<!-- end of google adsense block -->

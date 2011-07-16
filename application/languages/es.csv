@@ -41,7 +41,7 @@
 "donate";"donar"
 "facebook group";"grupo en facebook"
 #footer excerpt
-"nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.";"nolotiro.org es un sitio web donde puedes regalar las cosas que ya no quieres o ya no necesitas para que las recoja otra gente a la que puede servirle o serle de mucha utilidad."
+"nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.";"nolotiro.org es un sitio web donde puedes regalar y reciclar las cosas que ya no quieres o ya no necesitas para que las recoja otra gente a la que puede servirle o serle de mucha utilidad."
 
 #contact
 "'%value%' is not a valid email address in the basic format local-part@hostname";"'%value%' no es una dirección de correo válida con el formato: usuario@ejemplo.com"
@@ -338,22 +338,23 @@ NO HAY OPCIÓN DE INTERCAMBIO, esto no se basa en el trueque, ni en la compra, p
  <a href='http://www.php.net/'>PHP</a>,
  <a href='http://www.mysql.com/'>MySQL</a>,
  <a href='http://developer.yahoo.com/geo/geoplanet/'>Yahoo GeoPlanet API</a>,
-<a href='http://www.postfix.org/'>Postfix</a>,
- <a href='http://www.centos.org/'>Centos</a>,
- <a href='http://nginx.org/'>Nginx</a>, <a href='http://xcache.lighttpd.net/'>XCache</a>,
- <a href='http://linux.org'>Linux</a>, y muchos mas, tantos que sería imposible nombrarlos todos aquí.
+ <a href='http://www.postfix.org/'>Postfix</a>,
+ <a href='http://www.freebsd.org/'>FreeBsd</a>,
+ <a href='http://nginx.org/'>Nginx</a>, <a href='http://sphinxsearch.com/'>Sphinx</a>
+ , y muchos mas, tantos que sería imposible nombrarlos todos aquí.
 
 <br><br>
 <b>El código fuente de nolotiro.org es código abierto</b> y está disponible para ser utilizado (bajo licencia Affero GPL 3).<br>
-Visita la <a href='http://code.google.com/p/nolotiro'> web para desarrolladores</a> para mas detalles (en inglés).<br>
-Los colaboradores son bienvenidos, ya sea para programar o para traducir la página a otras lenguas.<b>
+Visita la <a href='https://github.com/alabs/nolotiro'> web para desarrolladores</a> para mas detalles (en inglés).<br>
+Los colaboradores son bienvenidos, ya sea para programar o para traducir la página a otras lenguas.</b>
 "
 "Privacy";"Privacidad"
 "txt_privacy";"
 nolotiro.org (en adelante sitio web) pertenece y es administrado por:<br><br>
-Daniel Remeseiro Fernández<br>
-Mira el Sol 16, 3 4<br>
-28005 Madrid, España<br>
+aLabs<br>
+Embajadores, 35 Local 6
+<br>
+28012 Madrid, España<br>
 <br><br>
 
 Pueden contactar en el formulario de contacto habilitado a tal efecto en el sitio web. El acceso al sitio web, implica la plena aceptación de la presente política de privacidad y de los términos de uso.
@@ -363,7 +364,7 @@ En relación al cumplimiento de la Ley Orgánica 15/1999, de 13 de Diciembre, de
 El término mensajes privados se refiere a que la posibilidad de acceso a dichos mensajes privados será exclusivamente entre dos usuarios, sin posibilidad por parte de terceros usuarios a acceder a dicho contenido. Sin embargo , en la base de datos los mensajes se guardan en texto plano, pudiendo ser puestos a disposición de las fuerzas de seguridad en caso de comisión de delito o de requerimiento judicial.
 <br><br>
 El usuario se abstendrá de publicar datos personales suyos o de terceros en los anuncios como pueden ser direcciones de email, teléfonos, direcciones postales, etc.
-El sitio web, tomará las medidas necesarias para la preservación de los datos personales, aun cuando el usuario ignore estos términos de privacidad. Es por eso que hemos desarrollado un filtro de emails y telefonos en los anuncios que los convierten de texto a imagen para evitar que dicha información sea recopilada por sistemas automáticos y robots de indexación.
+El sitio web, tomará las medidas necesarias para la preservación de los datos personales, aun cuando el usuario ignore estos términos de privacidad. Es por eso que hemos desarrollado un filtro de emails y telefonos en los anuncios para evitar que dicha información sea recopilada por sistemas automáticos y robots de indexación.
 Esto no exime de la última responsabilidad del usuario en cuanto a la publicación de datos personales suyos o de terceros. Y se hace solamente porque creemos que muchos usuarios no son conscientes de la importancia de la preservación de sus datos personales.
 <br><br>
 Formulario de contacto:<br>
@@ -385,6 +386,6 @@ Actualmente este sitio alberga publicidad de Google Adsense: http://www.google.c
 
 #home
 "last gifts published";"últimos regalos publicados"
-"most generous cities";"ciudades más generosas"
-"most generous users";"usuarios más generosos"
+"world's most recycling cities";"ciudades del mundo que más reciclan"
+"most active users";"usuarios más activos"
 "view more ads";"ver más anuncios"

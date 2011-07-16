@@ -596,8 +596,44 @@ class AdController extends Zend_Controller_Action {
                 $del = $this->getRequest()->getPost('del');
 
                 if ($del == 'Yes') {
-                    //delete ad, and all his content
+                    //delete ad
                     $admodel->deleteAd($id);
+
+
+                    //delete from memcached if exists in memory
+                    //check if the ad exists in memcached
+                     $oBackend = new Zend_Cache_Backend_Memcached(
+                                    array(
+                                        'servers' => array(array(
+                                                'host' => '127.0.0.1',
+                                                'port' => '11211'
+                                            )),
+                                        'compression' => true
+                                    ));
+
+                    // configure caching frontend strategy
+                    $oFrontend = new Zend_Cache_Core(
+                                    array(
+                                        // cache for 7 days
+                                        'lifetime' => 3600 * 24 * 7,
+                                        'caching' => true,
+                                        'cache_id_prefix' => 'singleAd',
+                                        'logging' => false,
+                                        'write_control' => true,
+                                        'automatic_serialization' => true,
+                                        'ignore_user_abort' => true
+                                    ));
+
+                    // build a caching object
+                    $cacheAd = Zend_Cache::factory($oFrontend, $oBackend);
+                    $cacheTest = $cacheAd->test($id);
+
+                    if($cacheTest == true){
+                        $cacheAd->remove($id);
+                    }
+
+
+                    /////
 
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad deleted successfully.'));
                     $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
