@@ -102,7 +102,7 @@ class SearchController extends Zend_Controller_Action {
                 $page = $this->_getParam('page');
                 $paginator = Zend_Paginator::factory($resultzs);
                 $paginator->setDefaultScrollingStyle('Elastic');
-                $paginator->setItemCountPerPage(10);
+                $paginator->setItemCountPerPage(20);
                 $paginator->setCurrentPageNumber($page);
 
                 $this->view->search = $paginator;

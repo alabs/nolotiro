@@ -103,7 +103,7 @@ class AdController extends Zend_Controller_Action {
 
         $paginator = Zend_Paginator::factory($this->view->ad);
         $paginator->setDefaultScrollingStyle('Elastic');
-        $paginator->setItemCountPerPage(10);
+        $paginator->setItemCountPerPage(20);
         $paginator->setCurrentPageNumber($page);
 
         $this->view->paginator = $paginator;
@@ -153,7 +153,7 @@ class AdController extends Zend_Controller_Action {
         
         $paginator = Zend_Paginator::factory($this->view->ad);
         $paginator->setDefaultScrollingStyle('Elastic');
-        $paginator->setItemCountPerPage(10);
+        $paginator->setItemCountPerPage(20);
         $paginator->setCurrentPageNumber($page);
 
         $this->view->paginator = $paginator;
@@ -186,7 +186,7 @@ class AdController extends Zend_Controller_Action {
         
         $paginator = Zend_Paginator::factory($this->view->ad);
         $paginator->setDefaultScrollingStyle('Elastic');
-        $paginator->setItemCountPerPage(10);
+        $paginator->setItemCountPerPage(20);
         $paginator->setCurrentPageNumber($page);
 
         $this->view->paginator = $paginator;
