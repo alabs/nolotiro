@@ -1,5 +1,5 @@
 *.swp
 .idea/*
 library/Zend/*
-www/images/captcha/*
+www/images/captcha/*.png
 www/images/uploads/*
