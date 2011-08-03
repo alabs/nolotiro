@@ -3,9 +3,29 @@
         <h2><?php echo $this->translate('last gifts published');?></h2>
             <?php if ($this->allGives): ?>
                    <?php
-                   foreach ($this->allGives as $key => $val): ?>
-                    <div class="ad_excerpt_home">
-                      <?php
+
+                   foreach ($this->allGives as $key => $val):?>
+
+                         <?php
+                        $count++;
+                        //print adsense banner each 4 ads
+                        if($count%4==0):
+                        ?>
+
+                        <script type="text/javascript"><!--
+                        google_ad_client = "ca-pub-5360961269901609";
+                        google_ad_slot = "4409975977";
+                        google_ad_width = 468;
+                        google_ad_height = 60;
+                        //-->
+                        </script>
+                        <script type="text/javascript"
+                        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                        </script>
+                        <?php endif ?>
+
+                       <div class="ad_excerpt_home">
+                       <?php
                        if ($val['photo'] !== null){
                                   echo '<div class="ad_list_image">
                                   <a href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->escape($val['title']).' ">

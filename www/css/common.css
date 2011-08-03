@@ -961,32 +961,29 @@ form.searchbox dl{
 
 
 .section_users{
-    /*    border: 1px solid #ddd;*/
     float: left;
     position: relative;
     display: inline-block;
     padding: 10px;
-    width: 180px;
+    width: 120px;
 }
 
 .section_locations{
-    /*    border: 1px solid #ddd;*/
     float: left;
     position: relative;
     display: inline-block;
     padding: 10px;
-    width: 310px;
+    width: 250px;
 }
 
 
 .section_ads{
-    /*    border: 1px solid #ddd;*/
     float: left;
     position: relative;
     display: inline-block;
     padding: 10px;
     padding-left: 24px;
-    width: 400px;
+    width: 468px;
 }
 
 
@@ -1016,6 +1013,7 @@ dd {
 .ad_excerpt_home{
     float:left;
     padding-top:14px;
+    padding-bottom: 10px;
     margin:0;
 }
 
