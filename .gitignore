@@ -2,4 +2,5 @@
 .idea/*
 library/Zend/*
 www/images/captcha/*.png
-www/images/uploads/*
+www/images/uploads/ads/*
+www/images/uploads/original/*
