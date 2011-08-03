@@ -36,6 +36,17 @@ class IndexController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
         }
 
+
+        //check if request is root redir to /lang
+        $langIndex = $this->_request->getParams(_requestUri);
+        var_dump($langIndex['language']);
+
+        if($langIndex['language'] == null){
+            $this->_redirect('/' . $this->view->lang );
+        }
+
+        //die();
+
         $modelAd = new Model_Ad();
         $this->view->allGives = $modelAd->getAdListAllHome(1, $status);
 
