@@ -52,7 +52,8 @@ class AdController extends Zend_Controller_Action {
 
 
         }
-        
+
+
         $this->view->status = $status = $this->_request->getParam('status');
         $f = new Zend_Filter();
         $f->addFilter(new Zend_Filter_HtmlEntities());
@@ -69,6 +70,10 @@ class AdController extends Zend_Controller_Action {
         $this->view->woeidName = $this->_helper->woeid->name($woeid, $this->lang);
         $short = explode(',', $this->view->woeidName);
         $this->view->woeidNameShort = ' ' . $this->view->translate('in') . ' ' . $short[0];
+
+        //add meta description to head
+        $this->view->metaDescription = $this->view->translate($type).' '.$this->view->woeidNameShort.'. '.$this->view->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
+
 
 
         //add the link to the proper rss to layout
@@ -150,7 +155,10 @@ class AdController extends Zend_Controller_Action {
         if ($page) {
             $this->view->page_title .= ' - ' . $this->view->translate('page') . ' ' . $page;
         }
-        
+
+        //add meta description to head
+        $this->view->metaDescription = $this->view->page_title.'. '.$this->view->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
+
         $paginator = Zend_Paginator::factory($this->view->ad);
         $paginator->setDefaultScrollingStyle('Elastic');
         $paginator->setItemCountPerPage(20);
@@ -282,6 +290,8 @@ class AdController extends Zend_Controller_Action {
 
             $this->view->page_title .= $this->view->ad['title'] . ' - ' . $this->view->woeidName;
 
+            //add meta description to head
+            $this->view->metaDescription = $this->view->page_title.'. '.$this->view->ad['body'];
 
             //add link rel canonical , better seo
             $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/ad/show/id/' . $id . '/' . $this->view->ad['title'];
@@ -299,11 +309,8 @@ class AdController extends Zend_Controller_Action {
                 $this->view->createcomment = $form;
             }
         } else {
-
-
             //get the last param to pass to 404 action
             $urlChunks = explode('/', $_SERVER['REQUEST_URI']);
-
             $this->_redirect('/' . $this->lang . '/ad/notfound/'.$urlChunks[sizeof($urlChunks)-1] );
 
         }

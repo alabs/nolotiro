@@ -1,13 +1,14 @@
-<?=$this->doctype() ?>
+<?php echo $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title><?= $this->page_title  ?></title>
+        <title><?php echo $this->page_title  ?></title>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="author" content="daniel remeseiro" />
+        <meta name="author" content="aLabs" />
         <meta name="robots" content="index,follow" />
         <meta name="alexaVerifyID" content="3nRFpyasuPpTttUm-zy1QPTPlmA" />
         <meta name="google-site-verification" content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
         <?php
         //set hreflang for best multilanguage indexing by crawlers
         if ($this->lang == 'es') {
@@ -22,8 +23,19 @@
             $this->headLink(array('rel' => 'canonical', 'href' => $this->canonicalUrl), 'APPEND');
         }
 
+        //add meta keywords
+        if ($this->metaKeywords){
+            $this->headMeta()->appendName('keywords', $this->metaKeywords);
+        }
+
+        //add meta description
+        if ($this->metaDescription){
+            $this->headMeta()->appendName('description', $this->metaDescription);
+        }
+
         $css_num = 142;
         $this->headLink()->appendStylesheet('/css/common.css?num=' . $css_num);
+        echo $this->headMeta();
         echo $this->headLink();
         echo $this->headScript();
         ?>

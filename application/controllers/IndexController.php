@@ -41,6 +41,10 @@ class IndexController extends Zend_Controller_Action {
 
         $this->view->rankingWoeid = $modelAd->getRankingWoeid($limit=170);
         $this->view->rankingUsers = $modelAd->getRankingUsers($limit=80);
+
+        //add meta description to head
+        $this->view->metaDescription = $this->view->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
+
         
     }
 
