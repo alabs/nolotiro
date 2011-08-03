@@ -30,22 +30,19 @@ class IndexController extends Zend_Controller_Action {
         }
 
         //if user is logged the redir to proper location, if not stand on not logged home view (index)
-       $auth = Zend_Auth::getInstance();
+        $auth = Zend_Auth::getInstance();
         
         if ($auth->hasIdentity()) {
             $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
         }
 
-
-        //check if request is root redir to /lang
+        //check if request is / redir to /lang
         $langIndex = $this->_request->getParams(_requestUri);
-        var_dump($langIndex['language']);
 
         if($langIndex['language'] == null){
             $this->_redirect('/' . $this->view->lang );
         }
 
-        //die();
 
         $modelAd = new Model_Ad();
         $this->view->allGives = $modelAd->getAdListAllHome(1, $status);
