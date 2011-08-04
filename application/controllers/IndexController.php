@@ -79,7 +79,8 @@ class IndexController extends Zend_Controller_Action {
         {
             $new_url = explode("/", $this->referer);
             if (count($new_url)>3 && strlen($new_url[3])>0) $new_url[3] = $lang;
-            $this->_redirect(join("/",$new_url));
+            $this->_redirect(join("/",$new_url, array('code' => 301)));
+
         }
         else
             $this->_redirect ( '/' );
