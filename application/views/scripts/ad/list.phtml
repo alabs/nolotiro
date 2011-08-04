@@ -6,11 +6,11 @@
 </span>
 
     <div class="location_name">
-    <h1><?=$this->translate ($this->ad_type).' - '.$this->woeidName;?></h1><br>
+    <h1><?php echo $this->translate ($this->ad_type).' - '.$this->woeidName;?></h1><br>
     
     <a  class="world_link" href='/<?=$this->lang?>/location/change'>
             <img src="/images/change_location.png" alt="change location"/>
-            <?=$this->translate ( 'change location' );?></a>
+            <?php echo $this->translate ( 'change location' );?></a>
     </div>
 </div>
 
@@ -64,7 +64,8 @@ if (count ( $this->mensajes ) > 0) {
              </div><br />
             <?php endif;?>
 
-            <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+            <h4><a title="<?php echo  $this->translate ($this->ad_type).' '.$this->escape($val['title']).' '.$this->translate('in')
+                                      .' '.$this->woeidName($val['woeid_code'], $this->lang);?>" href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
 

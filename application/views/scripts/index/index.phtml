@@ -27,7 +27,7 @@
                        <?php
                        if ($val['photo'] !== null){
                                   echo '<div class="ad_list_image">
-                                  <a href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->escape($val['title']).' ">
+                                  <a  href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->escape($val['title']).' ">
                                   <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
                                   $this->escape($val['photo']).'" /></a></div>';
                        }
@@ -41,11 +41,13 @@
                          </div><br />
                         <?php endif;?>
 
-                         <div class="ad_excerpt_title"><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+                         <div class="ad_excerpt_title"><a  title=" <?php echo $this->translate('give') .' '.$this->escape($val['title']).
+                                                                             ' '.$this->translate('in') .' '.$this->woeidName($val['woeid_code'], $this->lang);
+                             ?>" href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
                        <?=$this->escape($val['title']) ?></a></div>
 
-                      <div class="ad_excerpt_woeid"><a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/give' ?>">
-                         <?=$this->woeidName($val['woeid_code'], $this->lang).' > '. $this->translate('give') ?> </a></div>
+                      <div class="ad_excerpt_woeid"><a href="/<?php echo $this->lang.'/woeid/'.$val['woeid_code'].'/give' ?>">
+                         <?php echo $this->woeidName($val['woeid_code'], $this->lang).' > '. $this->translate('give') ?> </a></div>
 
                         <?php if ($val['type'] == 1): ?>
                        <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
