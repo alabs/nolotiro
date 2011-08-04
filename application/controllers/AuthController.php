@@ -22,7 +22,7 @@ class AuthController extends Zend_Controller_Action {
     
     public function loginAction() {
 
-        $this->view->page_title .= $this->view->translate ( 'Login' );
+        $this->view->page_title .= $this->view->translate ( 'To start to publish ads or send private messages access to your account' );
 
         //if the user is logged already redir to home
         $auth = Zend_Auth::getInstance ();

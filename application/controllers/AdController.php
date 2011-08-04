@@ -37,11 +37,11 @@ class AdController extends Zend_Controller_Action {
         $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
 
         if ($ad_type == 'give') {
-            $this->view->page_title .= $this->view->translate('give') . ' - ';
+            $this->view->page_title .= $this->view->translate('give') . ' ' .$this->view->translate('second hand') . ' - ';
             $type = 'give';
         }
         elseif ($ad_type == 'want') {
-            $this->view->page_title .= $this->view->translate('want') . ' - ';
+            $this->view->page_title .= $this->view->translate('want') . ' ' .$this->view->translate('second hand') . ' - ';
             $type = 'want';
         }
         else {
@@ -150,12 +150,12 @@ class AdController extends Zend_Controller_Action {
 
 
         $this->view->ad = $model->getAdListAll($ad_type, $status);
-        $this->view->page_title .= $this->view->translate('All the ads');
+        $this->view->page_title .= $this->view->translate('All the ads'). ' (' .$this->view->translate('second hand and news') . ')';
 
         //paginator
         $page = $this->_getParam('page');
         if ($page) {
-            $this->view->page_title .= ' - ' . $this->view->translate('page') . ' ' . $page;
+            $this->view->page_title .=  ' '. $this->view->translate('page') . ' ' . $page;
         }
 
         //add meta description to head
@@ -280,11 +280,11 @@ class AdController extends Zend_Controller_Action {
 
         if ($this->view->ad != null) { // if the id ad exists then render the ad and comments
             if ($this->view->ad['type'] == 1) {
-                $this->view->page_title .= $this->view->translate('give') . ' - ';
+                $this->view->page_title .= $this->view->translate('give')  . ' ' .$this->view->translate('second hand') . ' - ';
             }
 
             if ($this->view->ad['type'] == 2) {
-                $this->view->page_title .= $this->view->translate('want') . ' - ';
+                $this->view->page_title .= $this->view->translate('want') . ' ' .$this->view->translate('second hand') . ' - ';
             }
 
             $this->view->comments = $model->getComments($id);
