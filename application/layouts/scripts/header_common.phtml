@@ -1,9 +1,10 @@
 <?php echo $this->doctype(); ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->lang; ?>">
 <head>
     <title><?php echo $this->page_title  ?></title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-language" content="<?php echo $this->lang; ?>">
     <meta name="author" content="aLabs"/>
     <meta name="robots" content="index,follow"/>
     <meta name="alexaVerifyID" content="3nRFpyasuPpTttUm-zy1QPTPlmA"/>
@@ -17,11 +18,9 @@
     if ($this->lang == 'en') {
         $this->headLink(array('rel' => 'alternate', 'hreflang' => 'es', 'href' => str_replace('/en', '/es', $_SERVER['SCRIPT_URI'])), 'APPEND');
     }
-
     if ($this->canonicalUrl) {
         $this->headLink(array('rel' => 'canonical', 'href' => $this->canonicalUrl), 'APPEND');
     }
-
     //add meta keywords
     if ($this->metaKeywords) {
         $this->headMeta()->appendName('keywords', $this->metaKeywords);

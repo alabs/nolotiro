@@ -15,10 +15,7 @@ class Zend_Controller_Action_Helper_Checklang extends Zend_Controller_Action_Hel
             if ($auth->hasIdentity()) $this->lang = $auth->getIdentity()->lang;
         }
 
-        //if not try to get from cookie
-        if ($this->lang == null){
-            $this->lang = $_COOKIE['lang'];
-        }
+
 
 
         $locale = new Zend_Locale ($this->lang);
@@ -27,7 +24,7 @@ class Zend_Controller_Action_Helper_Checklang extends Zend_Controller_Action_Hel
             $locale->setLocale('es');
         }
         $this->lang = $locale->getLanguage();
-        setcookie ( 'lang', $this->lang, null, '/' );
+        
 
         $options = array('scan' => Zend_Translate::LOCALE_FILENAME);
         $translate = new Zend_Translate ('csv', NOLOTIRO_PATH . '/application/languages/', 'auto', $options);
