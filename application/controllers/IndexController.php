@@ -40,13 +40,15 @@ class IndexController extends Zend_Controller_Action {
         $langIndex = $this->_request->getParams(_requestUri);
 
         if($langIndex['language'] == null){
-            $this->_redirect('/' . $this->view->lang );
+            $this->_redirect('/' . $this->view->lang, array('code' => 301) );
         }
+
+        //add link rel canonical , better seo
+        $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang ;
 
 
         $modelAd = new Model_Ad();
-        $this->view->allGives = $modelAd->getAdListAllHome(1, $status);
-
+        $this->view->allGives = $modelAd->getAdListAllHome(1, null);
         $this->view->rankingWoeid = $modelAd->getRankingWoeid($limit=170);
         $this->view->rankingUsers = $modelAd->getRankingUsers($limit=80);
 
@@ -77,7 +79,8 @@ class IndexController extends Zend_Controller_Action {
         {
             $new_url = explode("/", $this->referer);
             if (count($new_url)>3 && strlen($new_url[3])>0) $new_url[3] = $lang;
-            $this->_redirect(join("/",$new_url));
+            $this->_redirect(join("/",$new_url, array('code' => 301)));
+
         }
         else
             $this->_redirect ( '/' );

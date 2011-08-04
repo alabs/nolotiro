@@ -15,7 +15,7 @@
 "Location:";"Ciudad:"
 "give";"regalo"
 "want";"busco"
-"Create new ad";"Crear nuevo anuncio"
+"Create new ad";"Publicar anuncio"
 "View ads in";"Ver anuncios en"
 "Posted on ";"Publicado el "
 "by user ";"por el usuario "
@@ -41,7 +41,7 @@
 "donate";"donar"
 "facebook group";"grupo en facebook"
 #footer excerpt
-"nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.";"nolotiro.org es un sitio web donde puedes regalar y reciclar las cosas que ya no quieres o ya no necesitas para que las recoja otra gente a la que puede servirle o serle de mucha utilidad."
+"nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.";"nolotiro.org es un sitio web donde regalo y busco regalos gratis: muebles, sillas, mesas, cocinas, lámparas, camas, ropa, juguetes, cunas o carros para bebes, teléfonos móviles y otras muchas cosas que ya no quieres y ya no necesitas para que las reutilicen otra gente a la que puede servirle o darle nueva vida."
 
 #contact
 "'%value%' is not a valid email address in the basic format local-part@hostname";"'%value%' no es una dirección de correo válida con el formato: usuario@ejemplo.com"
