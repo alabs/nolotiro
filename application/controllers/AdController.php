@@ -61,6 +61,8 @@ class AdController extends Zend_Controller_Action {
 
         if ($status) {
             $this->view->page_title .= $this->view->translate($status) . ' - ';
+        } else {
+            $status = 'available';
         }
 
 

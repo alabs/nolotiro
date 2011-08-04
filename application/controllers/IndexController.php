@@ -43,6 +43,9 @@ class IndexController extends Zend_Controller_Action {
             $this->_redirect('/' . $this->view->lang );
         }
 
+        //add link rel canonical , better seo
+        $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang ;
+
 
         $modelAd = new Model_Ad();
         $this->view->allGives = $modelAd->getAdListAllHome(1, $status);
