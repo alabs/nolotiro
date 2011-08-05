@@ -86,12 +86,8 @@ $auth = Zend_Auth::getInstance ();
 
 <div class="sharelinks">
 
-    <p style="text-align:left;"><?=$this->translate('Share this ad:');?></p>
+    <p style="text-align:left;margin-bottom:5px;"><?=$this->translate('Share this ad:');?></p>
            
-    <div id="facebook-button">
-    <iframe allowtransparency="true"
-           src="http://www.facebook.com/plugins/like.php?href=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->escape($this->ad['title']);?>&amp;layout=button_count&amp;show_faces=false&amp;width=110&amp;height=21&amp;action=like&amp;font=arial&amp;colorscheme=light" style="border:none; overflow:hidden; width:110px; height:21px" frameborder="0" scrolling="no"></iframe>
-   </div>
 
 <div id="google-button">
     <iframe allowtransparency="true" frameborder="0" hspace="0" id="I1_1307012621585" marginheight="0" marginwidth="0" name="I1_1307012621585" scrolling="no" src="https://plusone.google.com/u/0/_/+1/button?hl=<?=$this->lang;?>&amp;jsh=s%3Bplusone%3Agoogleapis.client%4021550740_8d71de52%2Fclient%3Bgoogleapis.proxy%4021550740_8d71de52%2Fproxy%3Bplusone%3Agoogleapis.client%3Aiframes-styles-bubble%4021550740_8d71de52%2Fbubble%3Biframes-styles-bubble!plusone%3Agoogleapis.client%4021550740_8d71de52%2Fbubble_only%3Bplusone-unsupported%4021550740_8d71de52%2Funsupported#url=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->escape($this->ad['title']);?>&amp;size=medium&amp;count=true&amp;id=I1_1307012621585&amp;parent=http://nolotiro.org&amp;rpctoken=982298531&amp;_methods=_ready%2C_close%2C_open%2C_resizeMe" style="width: 82px; height: 20px; position: static; left: 0px; top: 0px; visibility: visible; " tabindex="-1" vspace="0" width="100%"></iframe>
@@ -102,6 +98,11 @@ $auth = Zend_Auth::getInstance ();
         src="http://platform0.twitter.com/widgets/tweet_button.html?_=1309861670175&amp;count=horizontal&amp;id=twitter_tweet_button_0&amp;lang=es&amp;original_referer=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->escape($this->ad['title']);?>&amp;text=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'] .' '.$this->escape($this->ad['title']); ?>
         &amp;url=<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>&amp;via=nolotiro" allowtransparency="true" frameborder="0" scrolling="no"></iframe><script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
 </div>
+
+    <div id="facebook-button">
+    <iframe allowtransparency="true"
+           src="http://www.facebook.com/plugins/like.php?href=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->escape($this->ad['title']);?>&amp;layout=button_count&amp;show_faces=false&amp;width=110&amp;height=21&amp;action=like&amp;font=arial&amp;colorscheme=light" style="border:none; overflow:hidden; width:110px; height:21px" frameborder="0" scrolling="no"></iframe>
+   </div>
 
 
 </div>
