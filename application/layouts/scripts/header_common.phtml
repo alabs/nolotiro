@@ -6,10 +6,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="content-language" content="<?php echo $this->lang; ?>">
     <meta name="author" content="aLabs"/>
-    <meta name="robots" content="index,follow"/>
     <meta name="alexaVerifyID" content="3nRFpyasuPpTttUm-zy1QPTPlmA"/>
     <meta name="google-site-verification" content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk"/>
     <?php
+    //crawl but don't index the / page (to not appear on search engines)
+    //var_dump( $this->metaRobots );die();
+    if($this->metaRobots){
+        $this->headMeta()->appendName('robots', $this->metaRobots);
+    }
+
     //set hreflang and canonical urls for best multilanguage indexing by crawlers
     if ($this->lang == 'es') {
         $this->headLink(array('rel' => 'alternate', 'hreflang' => 'en', 'href' => str_replace('/es', '/en', $_SERVER['SCRIPT_URI'])), 'APPEND');

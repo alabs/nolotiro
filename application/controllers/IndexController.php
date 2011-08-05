@@ -37,10 +37,15 @@ class IndexController extends Zend_Controller_Action {
         }
 
         //check if request is / redir to /lang
-        $langIndex = $this->_request->getParams(_requestUri);
+        $langIndex = $this->getRequest()->getParam('language');
 
-        if($langIndex['language'] == null){
+        if($langIndex == null){
+            //add meta robots to not index the page without language param but allow follow-crawl all the rest
+            $this->view->metaRobots = 'noindex,follow';
+            //force redirect with language
             $this->_redirect('/' . $this->view->lang, array('code' => 301) );
+        } else{
+            $this->view->metaRobots = 'index,follow';
         }
 
         //add link rel canonical , better seo
@@ -51,6 +56,9 @@ class IndexController extends Zend_Controller_Action {
         $this->view->allGives = $modelAd->getAdListAllHome(1, null);
         $this->view->rankingWoeid = $modelAd->getRankingWoeid($limit=170);
         $this->view->rankingUsers = $modelAd->getRankingUsers($limit=80);
+
+
+
 
         //add meta description to head
         $this->view->metaDescription = $this->view->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
@@ -79,11 +87,11 @@ class IndexController extends Zend_Controller_Action {
         {
             $new_url = explode("/", $this->referer);
             if (count($new_url)>3 && strlen($new_url[3])>0) $new_url[3] = $lang;
-            $this->_redirect(join("/",$new_url, array('code' => 301)));
+            $this->_redirect(join("/",$new_url),  array('code' => 301));
 
         }
         else
-            $this->_redirect ( '/' );
+            $this->_redirect ( '/' , array('code' => 301));
     }
 
     function hasValidReferer()
