@@ -9,8 +9,7 @@
     <meta name="alexaVerifyID" content="3nRFpyasuPpTttUm-zy1QPTPlmA"/>
     <meta name="google-site-verification" content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk"/>
     <?php
-    //crawl but don't index the / page (to not appear on search engines)
-    //var_dump( $this->metaRobots );die();
+    //crawl but don't index the / page (to not appear on search engines, crawl /es or /en)
     if($this->metaRobots){
         $this->headMeta()->appendName('robots', $this->metaRobots);
     }
