@@ -101,7 +101,7 @@ class Model_Ad extends Zend_Db_Table_Abstract {
      * @param  string $status
      * @return array list of ads with this params
      */
-    public function getAdList($woeid, $ad_type, $status=NULL, $limit=NULL) {
+    public function getAdList($woeid, $ad_type, $status='give', $limit=NULL) {
         $woeid = (int) $woeid;
         $ad_type = (string) $ad_type;
 
