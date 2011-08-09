@@ -44,7 +44,7 @@ class RssController extends Zend_Controller_Action {
             $entry = array();
             $entry['title'] = $value['title'];
             $entry['link'] = 'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/ad/show/id/'.$value['id'].'/'.$this->view->slugTitle($value['title']);
-            $entry['description'] = $value['body'];
+            $entry['description'] = $this->view->escapeEmail($value['body']);
             $entry['lastUpdate'] = strtotime($value['date_created']);
 
             $rss['entries'][]  = $entry;
