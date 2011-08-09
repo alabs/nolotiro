@@ -3,14 +3,18 @@
 class RssController extends Zend_Controller_Action {
 
     public function init() {
+
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
+
     }
 
 
 
     public function preDispatch()  {
+
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout()->disableLayout();
+
     }
 
 
@@ -19,10 +23,6 @@ class RssController extends Zend_Controller_Action {
         $woeid = $this->_request->getParam('woeid');
         $ad_type = $this->_request->getParam('ad_type');
         $status = $this->_request->getParam('status');
-
-        if ($status == null){
-            $status = 'give';
-        }
 
         $modelAd = new Model_Ad();
         $this->ads = $modelAd->getAdList($woeid, $ad_type, $status , 35);
@@ -33,14 +33,17 @@ class RssController extends Zend_Controller_Action {
         $rss['description'] = 'nolotiro.org - '. $this->_helper->woeid->name($woeid, $this->lang);
         $rss['language'] = $this->lang;
         $rss['generator'] = 'nolotiro.org';
+
         $rss['entries'] = array();
+
+
 
 
         foreach ($this->ads as $value) {
 
             $entry = array();
             $entry['title'] = $value['title'];
-            $entry['link'] = 'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/ad/show/id/'.$value['id'].'/'.$value['title'];
+            $entry['link'] = 'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/ad/show/id/'.$value['id'].'/'.$this->view->slugTitle($value['title']);
             $entry['description'] = $value['body'];
             $entry['lastUpdate'] = strtotime($value['date_created']);
 
@@ -50,5 +53,7 @@ class RssController extends Zend_Controller_Action {
 
         $feedObj = Zend_Feed::importArray($rss, 'rss');
         return $feedObj->send();
+
     }
+
 }
