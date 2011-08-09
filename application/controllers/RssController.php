@@ -3,18 +3,14 @@
 class RssController extends Zend_Controller_Action {
 
     public function init() {
-
-        $this->lang = $this->view->lang = $this->_helper->checklang->check(); 
-    
+        $this->lang = $this->view->lang = $this->_helper->checklang->check();
     }
 
 
 
     public function preDispatch()  {
-
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout()->disableLayout();
-
     }
 
 
@@ -33,8 +29,6 @@ class RssController extends Zend_Controller_Action {
         $rss['description'] = 'nolotiro.org - '. $this->_helper->woeid->name($woeid, $this->lang);
         $rss['language'] = $this->lang;
         $rss['generator'] = 'nolotiro.org';
-        //$rss['published']  = date(DATE_RFC822);
-
         $rss['entries'] = array();
 
         foreach ($this->ads as $value) {
@@ -42,18 +36,14 @@ class RssController extends Zend_Controller_Action {
             $entry = array();
             $entry['title'] = $value['title'];
             $entry['link'] = 'http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/ad/show/id/'.$value['id'].'/'.$value['title'];
-
             $entry['description'] = $value['body'];
-            $entry['pubDate'] = date( DATE_RSS ,  strtotime($value['date_created']) );
+            $entry['lastUpdate'] = strtotime($value['date_created']);
+
             $rss['entries'][]  = $entry;
 
-            
         }
 
         $feedObj = Zend_Feed::importArray($rss, 'rss');
-
         return $feedObj->send();
-
     }
-
 }
