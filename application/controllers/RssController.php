@@ -20,6 +20,10 @@ class RssController extends Zend_Controller_Action {
         $ad_type = $this->_request->getParam('ad_type');
         $status = $this->_request->getParam('status');
 
+        if ($status == null){
+            $status = 'give';
+        }
+
         $modelAd = new Model_Ad();
         $this->ads = $modelAd->getAdList($woeid, $ad_type, $status , 35);
 
@@ -30,6 +34,7 @@ class RssController extends Zend_Controller_Action {
         $rss['language'] = $this->lang;
         $rss['generator'] = 'nolotiro.org';
         $rss['entries'] = array();
+
 
         foreach ($this->ads as $value) {
 

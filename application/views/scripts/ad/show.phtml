@@ -14,7 +14,7 @@
 <a href="/<?=$this->lang ?>/woeid/<?=$this->ad['woeid_code'].'/'.$ad_type_txt?>">
            <?=$this->woeidName.' > '. $this->translate((string)$ad_type_txt) ?></a>
 </h2>
-<h1><? echo $this->escape($this->ad['title']); ?></h1>
+<h1><?php echo $this->escape($this->ad['title']); ?></h1>
 </div>
 
 
@@ -38,20 +38,20 @@ if (count ( $this->mensajes ) > 0) {
 $auth = Zend_Auth::getInstance ();
  if ( ($this->ad['user_owner'] == $auth->getIdentity()->id)  || ($this->userRole == 1) ): ?>
     <div class="edit_ad">
-        <a href="/<?=$this->lang ?>/ad/edit/id/<?=$this->ad['id'] ?>">
-            <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a></div>
+        <a href="/<?php echo $this->lang ?>/ad/edit/id/<?php echo $this->ad['id'] ?>">
+            <img alt="<?php echo $this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?php echo $this->translate('Edit this ad') ?></a></div>
 <?php endif;?>
 
        
         <div class="ad_excerpt_show">
           
            <?php
-	   if ($this->ad['photo'] !== null){
-		      echo '<div class="ad_list_image">
-		      <a title="'.$this->translate('Click to enlarge photo').'" href="/images/uploads/ads/original/'.$this->ad['photo'].'" rel="superbox[image]">
-		      <img alt="'.$this->ad['title'].'" src="/images/uploads/ads/100/'.$this->ad['photo'].'" /></a></div>';
-	   }
-	   ?>
+               if ($this->ad['photo'] !== null){
+                      echo '<div class="ad_list_image">
+                      <a title="'.$this->translate('Click to enlarge photo').'" href="/images/uploads/ads/original/'.$this->ad['photo'].'" rel="superbox[image]">
+                      <img alt="'.$this->slugTitle($this->escape($ad['title'])).'" src="/images/uploads/ads/100/'.$this->ad['photo'].'" /></a></div>';
+               }
+	        ?>
 
            <?php if ($this->ad['type'] == 1): ?>
            <span class="ad_status <?=$this->ad['status'] ?>"><?=$this->translate($this->ad['status']) ?></span>
@@ -76,9 +76,9 @@ $auth = Zend_Auth::getInstance ();
 
 
            <?php if ($this->ad['status'] != 'delivered'): ?>
-	   <?=$this->translate('Interested?') ?>&nbsp;
-<a href="/<?=$this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'].'/subject/'.$this->escape($this->ad['title'])
-        ?>"><?=$this->translate('Send a private message to the owner') ?> <img src="/images/email_send.png" alt="send a message"/></a>
+	   <?php echo $this->translate('Interested?') ?>&nbsp;
+<a href="/<?php echo $this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'].'/subject/'.$this->slugTitle($this->escape($this->ad['title']))
+        ?>"><?php echo $this->translate('Send a private message to the owner') ?> <img src="/images/email_send.png" alt="send a message"/></a>
            <?php endif;?>
 
 
@@ -92,15 +92,15 @@ $auth = Zend_Auth::getInstance ();
     <div id="google-button">
         <!-- <iframe allowtransparency="true" frameborder="0" hspace="0" id="I1_1307012621585" marginheight="0" marginwidth="0" name="I1_1307012621585" scrolling="no" src="https://plusone.google.com/u/0/_/+1/button?hl=<?=$this->lang;?>&amp;jsh=s%3Bplusone%3Agoogleapis.client%4021550740_8d71de52%2Fclient%3Bgoogleapis.proxy%4021550740_8d71de52%2Fproxy%3Bplusone%3Agoogleapis.client%3Aiframes-styles-bubble%4021550740_8d71de52%2Fbubble%3Biframes-styles-bubble!plusone%3Agoogleapis.client%4021550740_8d71de52%2Fbubble_only%3Bplusone-unsupported%4021550740_8d71de52%2Funsupported#url=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->escape($this->ad['title']);?>&amp;size=medium&amp;count=true&amp;id=I1_1307012621585&amp;parent=http://nolotiro.org&amp;rpctoken=982298531&amp;_methods=_ready%2C_close%2C_open%2C_resizeMe" style="width: 82px; height: 20px; position: static; left: 0px; top: 0px; visibility: visible; " tabindex="-1" vspace="0" width="100%"></iframe> -->
         <!-- <g:plusone size="medium" href="<?php echo "http://nolotiro.org/" . $this->lang . "/ad/show/id/" . $this->ad['id'] . '/' . $this->escape($this->ad['title']) ?>"></g:plusone> -->
-        <g:plusone size="medium" href="<?php echo "http://nolotiro.org/" . $this->lang . "/ad/show/id/" . $this->ad['id'] . '/' . urlencode($this->escape($this->ad['title'])) ?>"></g:plusone>
+        <g:plusone size="medium" href="<?php echo "http://nolotiro.org/" . $this->lang . "/ad/show/id/" . $this->ad['id'] . '/' . urlencode($this->slugTitle($this->escape($ad['title']))) ?>"></g:plusone>
     </div>
 
     <div id="twitter-button">
-        <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.urlencode($this->escape($this->ad['title']));?>" data-text="http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'] .' '.$this->escape($this->ad['title']); ?>" data-count="horizontal" data-via="nolotiro" data-related="alabs_es" data-lang="es">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+        <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.urlencode($this->slugTitle($this->escape($this->ad['title'])));?>" data-text="http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'] .'  '.$this->escape($this->ad['title']); ?>" data-count="horizontal" data-via="nolotiro" data-related="alabs_es" data-lang="es">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
     </div>
 
     <div id="facebook-button">
-        <iframe allowtransparency="true" src="http://www.facebook.com/plugins/like.php?href=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.urlencode($this->escape($this->ad['title']));?>&amp;layout=button_count&amp;show_faces=false&amp;width=110&amp;height=21&amp;action=like&amp;font=arial&amp;colorscheme=light" style="border:none; overflow:hidden; width:110px; height:21px" frameborder="0" scrolling="no"></iframe>
+        <iframe allowtransparency="true" src="http://www.facebook.com/plugins/like.php?href=http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.urlencode($this->slugTitle($this->escape($this->ad['title'])));?>&amp;layout=button_count&amp;show_faces=false&amp;width=110&amp;height=21&amp;action=like&amp;font=arial&amp;colorscheme=light" style="border:none; overflow:hidden; width:110px; height:21px" frameborder="0" scrolling="no"></iframe>
     </div>
 
 </div>

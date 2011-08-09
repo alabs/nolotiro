@@ -27,7 +27,7 @@
                        <?php
                        if ($val['photo'] !== null){
                                   echo '<div class="ad_list_image">
-                                  <a  href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->escape($val['title']).' ">
+                                  <a  href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])).' ">
                                   <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
                                   $this->escape($val['photo']).'" /></a></div>';
                        }
@@ -36,14 +36,14 @@
                          $auth = Zend_Auth::getInstance ();
                         if ( ($val['user_owner'] == $auth->getIdentity()->id)  || ($this->userRole == 1) ): ?>
                          <div>
-                        <a href="/<?=$this->lang ?>/ad/edit/id/<?=$val['id'] ?>">
+                        <a href="/<?php echo $this->lang ?>/ad/edit/id/<?=$val['id'] ?>">
                                     <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a>
                          </div><br />
                         <?php endif;?>
 
                          <div class="ad_excerpt_title"><a  title=" <?php echo $this->translate('give') .' '.$this->escape($val['title']).
                                                                              ' '.$this->translate('in') .' '.$this->woeidName($val['woeid_code'], $this->lang);
-                             ?>" href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+                             ?>" href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])) ?>">
                        <?=$this->escape($val['title']) ?></a></div>
 
                       <div class="ad_excerpt_woeid"><a href="/<?php echo $this->lang.'/woeid/'.$val['woeid_code'].'/give' ?>">
@@ -63,9 +63,9 @@
 
                         <div class="ad_meta_info">
                 <?php if ($val['status'] != 'delivered'): ?>
-               <b><a rel="nofollow" href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->escape($val['title'])
+               <b><a rel="nofollow" href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->slugTitle($this->escape($val['title']))
                    ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
-               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title'])
+               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title']))
                    ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
                     <?php endif;?>
 
@@ -80,7 +80,7 @@
                     </div>
 
                     <?php endforeach; ?>
-        <br />
+        <br /><br />
         <b><a href="/<?php echo $this->lang ?>/ad/listall/ad_type/give/page/2"><?php echo $this->translate('view more ads')?> > </a></b>
                 <?php endif;?>
     </div>
@@ -91,7 +91,6 @@
         <br>
 
         <?php
-        //Zend_Debug::dump($this->rankingWoeid);
         if ($this->rankingWoeid): ?>
         <ul>
                    <?php  foreach ($this->rankingWoeid as $key => $val): ?>

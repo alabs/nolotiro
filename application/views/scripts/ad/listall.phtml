@@ -1,17 +1,17 @@
 <div id="location_header_section">
 
 <span class="give-want">
-<a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/ad/listall/ad_type/give'><?=$this->translate ( 'give' );?></a>
+<a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/ad/listall/ad_type/give'><?php echo $this->translate ( 'give' );?></a>
 &nbsp;
-<a class="<?=(preg_match("/want/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/ad/listall/ad_type/want'><?=$this->translate ( 'want' );?></a>
+<a class="<?=(preg_match("/want/", $_SERVER['REQUEST_URI']))?"actual":""?>" href='/<?=$this->lang?>/ad/listall/ad_type/want'><?php echo $this->translate ( 'want' );?></a>
 </span>
 
 <div class="location_name">
 <h1>
-<?=$this->translate('All the ads'); ?>
+<?php echo $this->translate('All the ads'); ?>
 </h1>
         <br>
-        <a class="world_link" href='/' < <?=$this->translate ( 'back to home page' );?></a>
+        <a class="world_link" href='/' < <?php echo $this->translate ( 'back to home page' );?></a>
 </div>
 
 
@@ -50,7 +50,7 @@ if (count ( $this->mensajes ) > 0) {
 	  <?php
 	   if ($val['photo'] !== null){
 		      echo '<div class="ad_list_image">
-		      <a href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->escape($val['title']).' ">
+		      <a href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])).' ">
 		      <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
 		      $this->escape($val['photo']).'" /></a></div>';
 		      
@@ -70,7 +70,7 @@ if (count ( $this->mensajes ) > 0) {
 
 
 
-           <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
+           <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
            <?
@@ -99,9 +99,9 @@ if (count ( $this->mensajes ) > 0) {
 
             <div class="ad_meta_info">
                 <?php if ($val['status'] != 'delivered'): ?>
-               <b><a rel="nofollow" href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->escape($val['title'])
+               <b><a rel="nofollow" href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->slugTitle($this->escape($val['title']))
                    ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
-               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title'])
+               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title']))
                    ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
                     <?php endif;?>
 

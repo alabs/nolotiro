@@ -15,7 +15,7 @@
 </div>
 
 
-<?
+<?php
 if (count ( $this->mensajes ) > 0) {
 	echo '<div class="success">';
 	foreach ( $this->mensajes as $msg ) {
@@ -48,7 +48,7 @@ if (count ( $this->mensajes ) > 0) {
 	  <?php
 	   if ($val['photo'] !== null){
 		      echo '<div class="ad_list_image">
-		      <a href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->escape($val['title']).' ">
+		      <a href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])).' ">
 		      <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
 		      $this->escape($val['photo']).'" /></a></div>';     
 	   }
@@ -65,8 +65,9 @@ if (count ( $this->mensajes ) > 0) {
             <?php endif;?>
 
             <h4><a title="<?php echo  $this->translate ($this->ad_type).' '.$this->escape($val['title']).' '.$this->translate('in')
-                                      .' '.$this->woeidName($val['woeid_code'], $this->lang);?>" href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
-           <?=$this->escape($val['title']) ?></a></h4>
+                                      .' '.$this->woeidName($val['woeid_code'], $this->lang);?>" href="/<?=$this->lang ?>/ad/show/id/<?php echo $this->escape($val['id']).'/'.
+                                                                                                                                        $this->slugTitle($this->escape($val['title'])) ?>">
+           <?php echo $this->escape($val['title']) ?></a></h4>
 
 
             <?php if ($val['type'] == 1): ?>
@@ -74,8 +75,8 @@ if (count ( $this->mensajes ) > 0) {
            <?php endif;?>
 
             <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
-            <?=$this->translate('by user ') ?>
-            <a href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->escape($val['user_owner']) ?>"><?=$this->escape($val['username']) ?></a>
+            <?php echo $this->translate('by user ') ?>
+            <a href="/<?php echo $this->lang ?>/ad/listuser/id/<?php echo $this->escape($val['user_owner']) ?>"><?php echo $this->escape($val['username']) ?></a>
             </span>
            
            
@@ -84,9 +85,9 @@ if (count ( $this->mensajes ) > 0) {
 	   
            <div class="ad_meta_info">
                <?php if ($val['status'] != 'delivered'): ?>
-               <b><a rel="nofollow" href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->escape($val['title'])
+               <b><a rel="nofollow" href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->slugTitle($this->escape($val['title']))
                        ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
-               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->escape($val['title'])
+               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title']))
                        ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
                <?php endif;?>
 
@@ -137,7 +138,7 @@ if (count ( $this->mensajes ) > 0) {
  <?php
     echo '<div class="rss">
 		      <a href="http://' . $_SERVER['HTTP_HOST'] .'/'.$this->lang.'/rss/feed/woeid/'.$this->woeid.'/ad_type/'.$this->ad_type.' ">
-		      <img alt="'.$this->escape($val['title']).'" src="/images/icons/rss.png" />&nbsp;'.$this->translate('Subscribe via rss to').' '.
+		      <img alt="'.$this->slugTitle($this->escape($val['title'])).'" src="/images/icons/rss.png" />&nbsp;'.$this->translate('Subscribe via rss to').' '.
             $this->woeidName.' - '. $this->translate( (string)$this->ad_type ).'</a></div>';
 ?>
 
