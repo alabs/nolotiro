@@ -41,9 +41,9 @@ class IndexController extends Zend_Controller_Action {
 
         if($langIndex == null){
             //add meta robots to not index the page without language param but allow follow-crawl all the rest
-            $this->view->metaRobots = 'noindex,follow';
+            //$this->view->metaRobots = 'noindex,follow';
             //force redirect with language
-            //$this->_redirect('/' . $this->view->lang, array('code' => 301) );
+            $this->_redirect('/es' , array('code' => 301) );
         } else{
             $this->view->metaRobots = 'index,follow';
         }
