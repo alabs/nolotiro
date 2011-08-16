@@ -94,7 +94,7 @@ $auth = Zend_Auth::getInstance ();
     </div>
 
     <div id="twitter-button">
-        <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->slugTitle($this->escape($this->ad['title']));?>" data-text="http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->slugTitle($this->escape($this->ad['title']));?>" data-count="horizontal" data-via="nolotiro" data-related="alabs_es" data-lang="es">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+        <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->slugTitle($this->escape($this->ad['title']));?>" data-text="http://nolotiro.org/<?=$this->lang;?>/ad/show/id/<?=$this->ad['id'].'/'.$this->slugTitle($this->escape($this->ad['title']));?>.'  '.$this->escape($this->ad['title']); ?>" data-count="horizontal" data-via="nolotiro" data-related="alabs_es" data-lang="es">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
     </div>
 
     <div id="facebook-button">
