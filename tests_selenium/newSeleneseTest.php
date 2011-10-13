@@ -1,49 +1,35 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
 /**
  * Description of newSeleneseTest
  *
- * @author dani
+ * @author dani remeseiro
  */
-class newSeleneseTest extends PHPUnit_Extensions_SeleniumTestCase {
-    
-    function setUp() {
-        $this->setBrowser("*firefox");
-        $this->setBrowserUrl("http://nolotiro/");
+class newSeleneseTest extends PHPUnit_Extensions_SeleniumTestCase
+{
+
+    protected function setUp()
+    {
+
+        $this->setBrowser('*custom /usr/lib/firefox-7.0.1/firefox -P Selenium');
+        $this->setBrowserUrl("http://nolotiro.dev/");
     }
 
-
-    function testLoginUserDani6Case(){
-    $this->open("/es/ad/list/woeid/766273/ad_type/give");
-    $this->click("link=acceder");
-    $this->waitForPageToLoad("30000");
-    $this->type("email", "daniel.remeseiro+test6@gmail.com");
-    $this->type("password", "9t4wgq");
-    $this->click("submit");
-    $this->waitForPageToLoad("30000");
-  }
-
-
-    function testChangeLocationBarcelonaCase() {
+    public function testLoginUserDani6Case()
+    {
+        $this->start();
         $this->open("/es/ad/list/woeid/766273/ad_type/give");
-        $this->click("link=cambiar ubicación");
+        $this->click("link=acceder");
         $this->waitForPageToLoad("30000");
-        $this->type("location", "barcelona");
-        $this->click("submit");
+        $this->type("email", "daniel.remeseiro+test6@gmail.com");
+        $this->type("password", "9t4wgq");
+        $this->click("xpath=//dd[@id='submit-element']/input");
         $this->waitForPageToLoad("30000");
-        $this->click("submit");
-        $this->waitForPageToLoad("30000");
+
+        $this->stop();
     }
-
-
-
 
 }
-?>
+

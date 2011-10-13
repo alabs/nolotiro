@@ -190,8 +190,7 @@ class Model_Ad extends Zend_Db_Table_Abstract {
         $select->where('u.active = ?', 1);
         $select->where('u.locked = ?', 0);
         $select->where('a.type = ?', $ad_type);
-        //dont list not available items by default
-        $select->where('a.status != ?', 'delivered');
+        $select->where('a.status = ?', 'available');
 
         $select->order('a.date_created DESC');
         $select->limit(20);
