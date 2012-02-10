@@ -45,7 +45,7 @@ class AuthController extends Zend_Controller_Action {
                 //DDBB validation
                 // setup Zend_Auth adapter for a database table
                 $readConf = new Zend_Config_Ini(APPLICATION_PATH . '/config/nolotiro.ini', 'production');
-                $dbAdapter = $dbAdapter = Zend_Db::factory($readConf->resources->db);
+                $dbAdapter = Zend_Db::factory($readConf->resources->db);
 
                 $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
                 $authAdapter->setTableName('users');
