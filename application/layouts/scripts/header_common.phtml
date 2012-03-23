@@ -41,16 +41,21 @@
     echo $this->headScript();
     ?>
     <script type="text/javascript">
-        $(function() {
-            $.superbox.settings = {
-                closeTxt: "<?= $this->translate('Close') ?>",
-                loadTxt: "<?= $this->translate('Loading') ?>...",
-                nextTxt: "<?= $this->translate('Next') ?>",
-                prevTxt: "<?= $this->translate('Previous') ?>"
-            };
-            $.superbox();
-        });
+        if (typeof jQuery == 'defined') {
+            $(function() {
+                        $.superbox.settings = {
+                            closeTxt: "<?= $this->translate('Close') ?>",
+                            loadTxt: "<?= $this->translate('Loading') ?>...",
+                            nextTxt: "<?= $this->translate('Next') ?>",
+                            prevTxt: "<?= $this->translate('Previous') ?>"
+                        };
+                        $.superbox();
+                    });
+        }
+
     </script>
+
+
     <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-141609-7']);
@@ -68,5 +73,4 @@
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
         {lang: '<?php echo $this->lang ?>'}
     </script>
-
 </head>
