@@ -42,8 +42,12 @@
                     ?>
                 </div>
 
-                <div class="site-name"><a href="/<?php echo $this->lang ?>" title="nolotiro.org home"><img src="/images/nolotiro_logo.png" alt="nolotiro.org" id="logo" /> nolotiro.org -
-                    <?=$this->woeidName  ?></a></div>
+                <div class="site-name"><a href="/<?php echo $this->lang ?>" title="nolotiro.org home"><img src="/images/nolotiro_logo.png" alt="nolotiro.org" id="logo" /> nolotiro.org -</a>
+                    <?php if($this->woeid): ?>
+                    <a href="/<?=$this->lang. '/woeid/' .$this->woeid .'/give'?>"> <?=$this->woeidName  ?></a>
+                    <?php endif ?>
+                </div>
+
                 <div class='site-slogan'><?php echo $this->translate('no lo tiro, te lo regalo (sin condiciones)') ?></div>
                 <div class="ad_create_tab">
                     <a  href="/<?= $this->lang . '/ad/create' ?>"><?= '+ ' . $this->translate('Create new ad') . $this->woeidNameShort;?></a>

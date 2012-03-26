@@ -110,16 +110,16 @@ if (count ( $this->mensajes ) > 0) {
 
 <?php else: ?>
     <div class="no_results">
-    <h3><?=$this->translate ( 'No ads to display for this location.');?></h3>
-    <h5><?=$this->translate ( 'You could try one of these things:');?></h5>
-        <h5>1. <?=$this->translate ( 'Be the first to').' ';?>
-            <a href="/<?=$this->lang?>/ad/create"><?=$this->translate ('post an ad on this location.');?></a></h5>
-        <h5>2. <?=$this->translate ( 'Try to change the location to another city bigger near you.');?></h5>
+    <h2><?=$this->translate ( 'No ads to display for this location.');?></h2>
+    <h2><?=$this->translate ( 'You could try one of these things:');?></h2><br>
+        <h2>1. <?=$this->translate ( 'Be the first to').' ';?>
+            <a href="/<?=$this->lang?>/ad/create"><?=$this->translate ('post an ad on this location.');?></a></h2><br>
+        <h2>2. <?=$this->translate ( 'Try to change the location to another city bigger near you.');?></h2><br>
 
 
-        <h5>3. <?=$this->translate ( 'Our autosuggest system (based on your IP) says you are located near:').' '.
-                        '<br /><b><a href="/'.$this->lang.'/location/change2/?location='.$this->escape($this->suggestIP).'" > '.$this->suggestIP .'</a></b>';?>
-</h5>
+        <h2>3. <?=$this->translate ( 'Our autosuggest system (based on your IP) says you are located near:').' '.
+                        '<br /><a href="/'.$this->lang.'/location/change2/?location='.$this->escape($this->suggestIP).'" > '.$this->suggestIP .'</a>';?>
+</h2><br>
 
 
         <h5><i>"<?=$this->translate ( 'A journey of a thousand miles starts with a single step') . '" '.
