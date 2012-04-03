@@ -1,8 +1,10 @@
 <?php
 
-class Model_Ad extends Zend_Db_Table_Abstract {
+class Model_Ad extends Zend_Db_Table_Abstract
+{
 
-    public function createAd(array $data) {
+    public function createAd(array $data)
+    {
         $table = new Zend_Db_Table('ads');
         $fields = $table->info(Zend_Db_Table_Abstract::COLS);
         foreach ($data as $field => $value) {
@@ -13,7 +15,8 @@ class Model_Ad extends Zend_Db_Table_Abstract {
         return $table->insert($data);
     }
 
-    public function updateAd(array $data, $id) {
+    public function updateAd(array $data, $id)
+    {
 
         $table = new Zend_Db_Table('ads');
         $fields = $table->info(Zend_Db_Table_Abstract::COLS);
@@ -22,16 +25,18 @@ class Model_Ad extends Zend_Db_Table_Abstract {
                 unset($data [$field]);
             }
         }
-        return $table->update($data, 'id = ' . (int) $id);
+        return $table->update($data, 'id = ' . (int)$id);
     }
 
-    public function deleteAd($id) {
+    public function deleteAd($id)
+    {
         $table = new Zend_Db_Table('ads');
-        return $table->delete('id =' . (int) $id);
+        return $table->delete('id =' . (int)$id);
     }
 
-    public function getAd($id) {
-        $id = (int) $id;
+    public function getAd($id)
+    {
+        $id = (int)$id;
 
         $table = new Zend_Db_Table('ads');
         $select = $table->select()->setIntegrityCheck(false);
@@ -48,9 +53,10 @@ class Model_Ad extends Zend_Db_Table_Abstract {
         return $result;
     }
 
-    public function getAdforSearch($id, $ad_type) {
-        $id = (int) $id;
-        $ad_type = (int) $ad_type;
+    public function getAdforSearch($id, $ad_type)
+    {
+        $id = (int)$id;
+        $ad_type = (int)$ad_type;
 
         $table = new Zend_Db_Table('ads');
         $select = $table->select()->setIntegrityCheck(false);
@@ -81,8 +87,9 @@ class Model_Ad extends Zend_Db_Table_Abstract {
      * @param  int|string $id
      * @return  array
      */
-    public function getComments($id) {
-        $id = (int) $id;
+    public function getComments($id)
+    {
+        $id = (int)$id;
 
         if ($id) {
             $comments = new Zend_Db_Table('comments');
@@ -101,9 +108,10 @@ class Model_Ad extends Zend_Db_Table_Abstract {
      * @param  string $status
      * @return array list of ads with this params
      */
-    public function getAdList($woeid, $ad_type, $status='give', $limit=NULL) {
-        $woeid = (int) $woeid;
-        $ad_type = (string) $ad_type;
+    public function getAdList($woeid, $ad_type, $status = 'give', $limit = NULL)
+    {
+        $woeid = (int)$woeid;
+        $ad_type = (string)$ad_type;
 
         if ($ad_type === 'give') {
             $ad_type = 1;
@@ -135,7 +143,7 @@ class Model_Ad extends Zend_Db_Table_Abstract {
         }
 
         if ($limit != NULL) {
-            $select->limit((int) $limit);
+            $select->limit((int)$limit);
         }
 
         $select->order('a.date_created DESC');
@@ -144,7 +152,8 @@ class Model_Ad extends Zend_Db_Table_Abstract {
         return $result;
     }
 
-    public function getAdListAll($ad_type, $status=NULL) {
+    public function getAdListAll($ad_type, $status = NULL)
+    {
 
         if ($ad_type === 'give') {
             $ad_type = 1;
@@ -178,7 +187,8 @@ class Model_Ad extends Zend_Db_Table_Abstract {
         return $result;
     }
 
-    public function getAdListAllHome($ad_type) {
+    public function getAdListAllHome($ad_type)
+    {
 
         $table = new Zend_Db_Table('ads');
         $select = $table->select()->setIntegrityCheck(false);
@@ -201,18 +211,20 @@ class Model_Ad extends Zend_Db_Table_Abstract {
     }
 
 
-    public function getRankingWoeid( $limit=30){
+    public function getRankingWoeid($limit = 30)
+    {
 
         $table = new Zend_Db_Table('ads');
         $query = "SELECT woeid_code, COUNT(ads.id) AS ads_count FROM ads WHERE type = 1
         GROUP BY woeid_code ORDER BY ads_count DESC LIMIT $limit;";
 
         $result = $table->getAdapter()->query($query)->fetchAll();
-         return $result;
+        return $result;
     }
 
 
-    public function getRankingUsers( $limit=40){
+    public function getRankingUsers($limit = 40)
+    {
 
         $table = new Zend_Db_Table('ads');
         $query = "SELECT ads.user_owner, users.username AS user_name, COUNT(ads.id) AS ads_count FROM ads, users WHERE type = 1 AND
@@ -220,41 +232,57 @@ class Model_Ad extends Zend_Db_Table_Abstract {
         GROUP BY ads.user_owner ORDER BY ads_count DESC LIMIT $limit;";
 
         $result = $table->getAdapter()->query($query)->fetchAll();
-         return $result;
+        return $result;
     }
 
 
-        /**
+    /**
      * Fetch a list of ads where id_owner user matches
      *
      * @param  int $woeid
      * @return object
      */
-    public function getAdUserlist($id) {
+    public function getAdUserlist($id)
+    {
         $ads_user = new Zend_Db_Table('ads');
         $query = "SELECT ads.user_owner,ads.type,ads.woeid_code,ads.id as ad_id,ads.title,ads.body, ads.type,ads.date_created, ads.status, users.username,users.id
             FROM ads,users
                         WHERE ads.user_owner = " . $id . " AND users.id = " . $id . " ORDER BY date_created DESC";
 
         $result = $ads_user->getAdapter()->query($query)->fetchAll();
-         return $result;
+        return $result;
     }
 
-    public function countReadedAd($id) {
+
+    public function getCountAdWantUser($id)
+    {
+        $ads_user = new Zend_Db_Table('ads');
+        $query = "SELECT ads.user_owner,ads.type,ads.woeid_code,ads.id as ad_id,ads.title,ads.body, ads.type,ads.date_created, ads.status, users.username,users.id
+                    FROM ads,users
+                                WHERE ads.user_owner = " . $id . " AND ads.type = 2"  . " AND users.id = " . $id ." ORDER BY date_created DESC";
+
+        $result = $ads_user->getAdapter()->query($query)->rowCount();
+        return $result;
+    }
+
+
+    public function countReadedAd($id)
+    {
 
         if ($id) {
             $table = new Zend_Db_Table('readedAdCount');
-            $id = (int) $id;
+            $id = (int)$id;
             $sql = "SELECT  counter FROM readedAdCount WHERE id_ad =  $id";
             $result = $table->getAdapter()->query($sql)->fetch();
         }
         return $result;
     }
 
-    public function updateReadedAd($id) {
+    public function updateReadedAd($id)
+    {
 
         $table = new Zend_Db_Table('readedAdCount');
-        $id = (int) $id;
+        $id = (int)$id;
         $sql = "INSERT INTO readedAdCount   ( id_ad, counter ) VALUES  ( $id , 1 )
                             ON DUPLICATE KEY UPDATE  counter=counter+1";
         $result = $table->getAdapter()->query($sql)->fetch();

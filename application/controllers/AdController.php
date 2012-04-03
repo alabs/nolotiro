@@ -1,15 +1,10 @@
 <?php
-/**
- * AdController
- *
- * @author  dani remeseiro
- * @abstract this is the Ad controller ,
- * do the crud relative to ads : create, show, edit, delete
- */
-class AdController extends Zend_Controller_Action {
 
-    public function init() {
+class AdController extends Zend_Controller_Action
+{
 
+    public function init()
+    {
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
         $this->location = $this->_helper->checklocation->check();
         $this->view->checkMessages = $this->_helper->checkMessages->check();
@@ -25,23 +20,26 @@ class AdController extends Zend_Controller_Action {
 
         if ($this->view->checkMessages > 0) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You have') . ' ' .
-                    '<b><a href="/' . $this->view->lang . '/message/received">' . $this->view->translate('new messages') . ' (' . $this->view->checkMessages . ')</a></b>');
+                '<b><a href="/' . $this->view->lang . '/message/received">' . $this->view->translate('new messages') . ' (' . $this->view->checkMessages . ')</a></b>');
         }
     }
 
-    public function listAction() {
 
+
+
+    public function listAction()
+    {
         $this->view->userRole = $this->_helper->checkUserRole->check();
-       
+
         $woeid = $this->_request->getParam('woeid');
         $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
 
         if ($ad_type == 'give') {
-            $this->view->page_title .= $this->view->translate('give') . ' ' .$this->view->translate('second hand') . ' - ';
+            $this->view->page_title .= $this->view->translate('give') . ' ' . $this->view->translate('second hand') . ' - ';
             $type = 'give';
         }
         elseif ($ad_type == 'want') {
-            $this->view->page_title .= $this->view->translate('want') . ' ' .$this->view->translate('second hand') . ' - ';
+            $this->view->page_title .= $this->view->translate('want') . ' ' . $this->view->translate('second hand') . ' - ';
             $type = 'want';
         }
         else {
@@ -74,15 +72,13 @@ class AdController extends Zend_Controller_Action {
         $this->view->woeidNameShort = ' ' . $this->view->translate('in') . ' ' . $short[0];
 
         //add meta description to head
-        $this->view->metaDescription = $this->view->translate($type).' '.$this->view->woeidNameShort.'. '.$this->view->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
-
+        $this->view->metaDescription = $this->view->translate($type) . ' ' . $this->view->woeidNameShort . '. ' . $this->view->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
 
 
         //add the link to the proper rss to layout
         $this->view->headLink()->appendAlternate('http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/rss/feed/woeid/' . $woeid . '/ad_type/' . $ad_type . '/status/' . $status,
-                'application/rss+xml',
-                $this->view->woeidName . ' - ' . $this->view->translate((string) $type));
-
+            'application/rss+xml',
+            $this->view->woeidName . ' - ' . $this->view->translate((string)$type));
 
 
         if (empty($this->view->ad)) {
@@ -91,12 +87,12 @@ class AdController extends Zend_Controller_Action {
 
 
         //TODO , this sucks, do a better way to not show invalid woeids or null
-        if ((empty($woeid) ) || ($woeid < 10) || ($woeid == 29370606)) { //29370606 españa town
+        if ((empty($woeid)) || ($woeid < 10) || ($woeid == 29370606)) { //29370606 españa town
             $this->_helper->_flashMessenger->addMessage($this->view->translate('This location is not a valid town. Please, try again.'));
             $this->_redirect('/' . $this->lang . '/location/change');
         }
 
-         //set the location name reg var from the woeid helper
+        //set the location name reg var from the woeid helper
         $aNamespace = new Zend_Session_Namespace('Nolotiro');
         $aNamespace->locationName = $this->view->woeidName;
         $this->view->page_title .= $this->view->woeidName;
@@ -116,15 +112,18 @@ class AdController extends Zend_Controller_Action {
         $this->view->paginator = $paginator;
     }
 
-    public function listallAction() {
 
+
+
+    public function listallAction()
+    {
         $this->view->userRole = $this->_helper->checkUserRole->check();
 
         $model = new Model_Ad();
 
         $ad_type = $this->view->ad_type = $this->_request->getParam('ad_type');
 
-         if ($ad_type == 'give') {
+        if ($ad_type == 'give') {
             $this->view->page_title .= $this->view->translate('give') . ' - ';
             $type = 'give';
         }
@@ -150,16 +149,16 @@ class AdController extends Zend_Controller_Action {
 
 
         $this->view->ad = $model->getAdListAll($ad_type, $status);
-        $this->view->page_title .= $this->view->translate('All the ads'). ' (' .$this->view->translate('second hand and news') . ')';
+        $this->view->page_title .= $this->view->translate('All the ads') . ' (' . $this->view->translate('second hand and news') . ')';
 
         //paginator
         $page = $this->_getParam('page');
         if ($page) {
-            $this->view->page_title .=  ' '. $this->view->translate('page') . ' ' . $page;
+            $this->view->page_title .= ' ' . $this->view->translate('page') . ' ' . $page;
         }
 
         //add meta description to head
-        $this->view->metaDescription = $this->view->page_title.'. '.$this->view->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
+        $this->view->metaDescription = $this->view->page_title . '. ' . $this->view->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
 
         $paginator = Zend_Paginator::factory($this->view->ad);
         $paginator->setDefaultScrollingStyle('Elastic');
@@ -169,9 +168,12 @@ class AdController extends Zend_Controller_Action {
         $this->view->paginator = $paginator;
     }
 
-    public function listuserAction() {
 
-        $id = (int) $this->_request->getParam('id');
+
+
+    public function listuserAction()
+    {
+        $id = (int)$this->_request->getParam('id');
 
         if ($id == null) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('This url does not exist'));
@@ -181,9 +183,9 @@ class AdController extends Zend_Controller_Action {
         require_once APPLICATION_PATH . '/models/User.php';
         $modelUser = new Model_User();
         $userExists = $modelUser->fetchUser($id);
-        
 
-         if ($userExists == NULL ) {
+
+        if ($userExists == NULL) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('This user does not exist'));
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
         }
@@ -193,7 +195,7 @@ class AdController extends Zend_Controller_Action {
 
         //paginator
         $page = $this->_getParam('page');
-        
+
         $paginator = Zend_Paginator::factory($this->view->ad);
         $paginator->setDefaultScrollingStyle('Elastic');
         $paginator->setItemCountPerPage(20);
@@ -201,7 +203,7 @@ class AdController extends Zend_Controller_Action {
 
         $this->view->paginator = $paginator;
 
-       
+
         $this->user = new Model_User();
 
         $this->view->user = $this->user->fetchUser($id);
@@ -214,42 +216,44 @@ class AdController extends Zend_Controller_Action {
         }
     }
 
-    public function showAction() {
 
+
+
+    public function showAction()
+    {
         $this->view->userRole = $this->_helper->checkUserRole->check();
-
         $id = $this->_request->getParam('id');
         $model = new Model_Ad();
 
 
         //check if the ad exists in memcached
-         $oBackend = new Zend_Cache_Backend_Memcached(
-                        array(
-                            'servers' => array(array(
-                                    'host' => '127.0.0.1',
-                                    'port' => '11211'
-                                )),
-                            'compression' => true
-                        ));
+        $oBackend = new Zend_Cache_Backend_Memcached(
+            array(
+                'servers' => array(array(
+                    'host' => '127.0.0.1',
+                    'port' => '11211'
+                )),
+                'compression' => true
+            ));
 
         // configure caching frontend strategy
         $oFrontend = new Zend_Cache_Core(
-                        array(
-                            // cache for 7 days
-                            'lifetime' => 3600 * 24 * 7,
-                            'caching' => true,
-                            'cache_id_prefix' => 'singleAd',
-                            'logging' => false,
-                            'write_control' => true,
-                            'automatic_serialization' => true,
-                            'ignore_user_abort' => true
-                        ));
+            array(
+                // cache for 7 days
+                'lifetime' => 3600 * 24 * 7,
+                'caching' => true,
+                'cache_id_prefix' => 'singleAd',
+                'logging' => false,
+                'write_control' => true,
+                'automatic_serialization' => true,
+                'ignore_user_abort' => true
+            ));
 
         // build a caching object
         $cacheAd = Zend_Cache::factory($oFrontend, $oBackend);
         $cacheTest = $cacheAd->test((int)$id);
 
-        if($cacheTest == false){ //if not exists in cache lets query to db
+        if ($cacheTest == false) { //if not exists in cache lets query to db
             $this->view->ad = $model->getAd((int)$id);
             $cacheAd->save($this->view->ad, (int)$id);
 
@@ -259,16 +263,14 @@ class AdController extends Zend_Controller_Action {
         }
 
 
-
-
         //add jquery and superbox to show modal photo window
-        $this->view->headScript()->appendFile(  '/js/jquery.min.js', 'text/javascript');
-        $this->view->headScript()->appendFile(  '/js/jquery.superbox-min.js', 'text/javascript');
+        $this->view->headScript()->appendFile('/js/jquery.min.js', 'text/javascript');
+        $this->view->headScript()->appendFile('/js/jquery.superbox-min.js', 'text/javascript');
 
 
         //lets count the comments number and update
         $modelComments = new Model_Comment();
-        $this->view->checkCountAd = $count = $modelComments->countCommentsAd((int) $id);
+        $this->view->checkCountAd = $count = $modelComments->countCommentsAd((int)$id);
         //let's increment +1 the ad view counter
         $model->updateReadedAd($id);
         $this->view->countReadedAd = $model->countReadedAd($id);
@@ -280,11 +282,11 @@ class AdController extends Zend_Controller_Action {
 
         if ($this->view->ad != null) { // if the id ad exists then render the ad and comments
             if ($this->view->ad['type'] == 1) {
-                $this->view->page_title .= $this->view->translate('give')  . ' ' .$this->view->translate('second hand') . ' - ';
+                $this->view->page_title .= $this->view->translate('give') . ' ' . $this->view->translate('second hand') . ' - ';
             }
 
             if ($this->view->ad['type'] == 2) {
-                $this->view->page_title .= $this->view->translate('want') . ' ' .$this->view->translate('second hand') . ' - ';
+                $this->view->page_title .= $this->view->translate('want') . ' ' . $this->view->translate('second hand') . ' - ';
             }
 
             $this->view->comments = $model->getComments($id);
@@ -293,13 +295,13 @@ class AdController extends Zend_Controller_Action {
             $this->view->page_title .= $this->view->ad['title'] . ' - ' . $this->view->woeidName;
 
             //add meta description to head
-            $this->view->metaDescription = $this->view->page_title.'. '.$this->view->ad['body'];
+            $this->view->metaDescription = $this->view->page_title . '. ' . $this->view->ad['body'];
 
             //add link rel canonical , better seo
             $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/ad/show/id/' . $id . '/' . $this->view->ad['title'];
 
             //if user logged in, show the comment form, if not show the login link
-            $auth = Zend_Auth::getInstance ();
+            $auth = Zend_Auth::getInstance();
             if (!$auth->hasIdentity()) {
 
                 $this->view->createcomment = '<a href="/' . $this->lang . '/auth/login">' . $this->view->translate('login to post a comment') . '</a> ';
@@ -313,57 +315,50 @@ class AdController extends Zend_Controller_Action {
         } else {
             //get the last param to pass to 404 action
             $urlChunks = explode('/', $_SERVER['REQUEST_URI']);
-            $this->_redirect('/' . $this->lang . '/ad/notfound/'.$urlChunks[sizeof($urlChunks)-1] );
+            $this->_redirect('/' . $this->lang . '/ad/notfound/' . $urlChunks[sizeof($urlChunks) - 1]);
 
         }
     }
 
 
-    public function notfoundAction(){
 
+
+    public function notfoundAction()
+    {
         // 404 error -- controller or action not found
         $this->view->headTitle()->append(' - ');
         $this->view->headTitle()->append('error 404');
         $this->getResponse()->setHttpResponseCode(404);
-
-
     }
 
-    public function createAction() {
 
+
+
+    public function createAction()
+    {
         //first we check if user is logged, if not redir to login
-        $auth = Zend_Auth::getInstance ();
+        $auth = Zend_Auth::getInstance();
         if (!$auth->hasIdentity()) {
-
             //keep this url in zend session to redir after login
             $aNamespace = new Zend_Session_Namespace('Nolotiro');
             $aNamespace->redir = $this->lang . '/ad/create';
-
-            //Zend_Debug::dump($aNamespace->redir);
             $this->_redirect($this->lang . '/auth/login');
         } else {
-
             $request = $this->getRequest();
             require_once APPLICATION_PATH . '/forms/AdCreate.php';
-            $form = new Form_AdCreate( );
-
+            $form = new Form_AdCreate();
             $this->view->form = $form;
             $this->view->woeidName = $this->_helper->woeid->name($this->location, $this->lang);
 
-
             if ($this->getRequest()->isPost()) {
-
                 if ($form->isValid($request->getPost())) {
-
                     $formulario = $form->getValues();
 
                     //create thumbnail if image exists
                     if (!empty($formulario['photo'])) {
-
                         $photobrut = $formulario['photo'];
                         $formulario['photo'] = $this->_createThumbnail($photobrut, '100', '90');
                     }
-
 
                     // Create a filter chain and add filters to title and body against xss, etc
                     $f = new Zend_Filter();
@@ -399,18 +394,30 @@ class AdController extends Zend_Controller_Action {
                     $formulario ['user_owner'] = $auth->getIdentity()->id;
 
                     //get date created
-                    //TODO to use the Zend Date object to apapt the time to the locale user zone
+                    //TODO use the Zend Date object to fetch the user locale time zone
                     $datenow = date("Y-m-d H:i:s", time());
                     $formulario ['date_created'] = $datenow;
 
                     //get woeid to assign to this ad
                     //the location its stored at session location value
                     //(setted by default on bootstrap to Madrid woeid number)
-
                     $formulario ['woeid_code'] = $this->location;
+                    $modelAd = new Model_Ad();
 
-                    $model = new Model_Ad();
-                    $model->createAd($formulario);
+
+                    //chek if this user has 5 or more quieros published
+                    if ($formulario['type'] == '2') {
+                        $countQuieros = $modelAd->getCountAdWantUser($auth->getIdentity()->id);
+
+                        if ($countQuieros >= 5) {
+                            $this->_helper->_flashMessenger->addMessage($this->view->translate('Sorry, you have 5 or more want ads, delete olders!'));
+                            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+                        }
+                    }
+
+
+                    //if ok, create the form
+                    $modelAd->createAd($formulario);
 
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad published succesfully!'));
                     $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
@@ -419,14 +426,18 @@ class AdController extends Zend_Controller_Action {
         }
     }
 
-    public function editAction() {
 
+
+
+
+    public function editAction()
+    {
         //check if user logged in
-        $auth = Zend_Auth::getInstance ();
+        $auth = Zend_Auth::getInstance();
         $user = new Model_User;
         $ad = new Model_Ad();
 
-        $id = (int) $this->getRequest()->getParam('id');
+        $id = (int)$this->getRequest()->getParam('id');
         $ad_user_owner = $ad->getAd($id);
 
         if ($auth->hasIdentity()) {
@@ -437,10 +448,10 @@ class AdController extends Zend_Controller_Action {
             if ($this->view->userRole == 1) {
                 //bazinga!!
             }
-            elseif ( $user->fetchUser($auth->getIdentity()->id)->id != $ad_user_owner['user_owner'] ) {
+            elseif ($user->fetchUser($auth->getIdentity()->id)->id != $ad_user_owner['user_owner']) {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
                 $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
-            }  
+            }
 
         } else {
 
@@ -455,14 +466,13 @@ class AdController extends Zend_Controller_Action {
 
         $request = $this->getRequest();
         require_once APPLICATION_PATH . '/forms/AdEdit.php';
-        $form = new Form_AdEdit ( );
+        $form = new Form_AdEdit ();
 
 
         $form->addElement('select', 'status', array(
             'order' => '1',
             'label' => 'Status:', 'required' => true,
             'multioptions' => array('available' => 'available', 'booked' => 'booked', 'delivered' => 'delivered')));
-
 
 
         $this->view->page_title .= $this->view->translate('Edit your ad');
@@ -474,22 +484,19 @@ class AdController extends Zend_Controller_Action {
 
 
             if ($form->isValid($formData)) {
-
-
-
                 $formulario = $form->getValues();
 
-                 //anti HOYGAN to title
-                    //dont use strtolower because dont convert utf8 properly . ej: á é ó ...
-                    $formulario['title'] = ucfirst(mb_convert_case($formulario['title'], MB_CASE_LOWER, "UTF-8"));
+                //anti HOYGAN to title
+                //dont use strtolower because dont convert utf8 properly . ej: á é ó ...
+                $formulario['title'] = ucfirst(mb_convert_case($formulario['title'], MB_CASE_LOWER, "UTF-8"));
 
-                    //anti hoygan to body
-                    $split = explode(". ", $formulario['body']);
+                //anti hoygan to body
+                $split = explode(". ", $formulario['body']);
 
-                    foreach ($split as $sentence) {
-                        $sentencegood = ucfirst(mb_convert_case($sentence, MB_CASE_LOWER, "UTF-8"));
-                        $formulario['body'] = str_replace($sentence, $sentencegood, $formulario['body']);
-                    }
+                foreach ($split as $sentence) {
+                    $sentencegood = ucfirst(mb_convert_case($sentence, MB_CASE_LOWER, "UTF-8"));
+                    $formulario['body'] = str_replace($sentence, $sentencegood, $formulario['body']);
+                }
 
                 //var_dump($form);
                 //set filter againts xss and nasty things
@@ -502,7 +509,6 @@ class AdController extends Zend_Controller_Action {
 
                 //create thumbnail if image exists
                 if ($formulario['photo']) {
-
                     $photobrut = $formulario['photo'];
                     $data['photo'] = $this->_createThumbnail($photobrut, '100', '90');
                 }
@@ -516,27 +522,27 @@ class AdController extends Zend_Controller_Action {
 
                 //delete memcached ad if exists
                 //check if the ad exists in memcached
-                 $oBackend = new Zend_Cache_Backend_Memcached(
-                                array(
-                                    'servers' => array(array(
-                                            'host' => '127.0.0.1',
-                                            'port' => '11211'
-                                        )),
-                                    'compression' => true
-                                ));
+                $oBackend = new Zend_Cache_Backend_Memcached(
+                    array(
+                        'servers' => array(array(
+                            'host' => '127.0.0.1',
+                            'port' => '11211'
+                        )),
+                        'compression' => true
+                    ));
 
                 // configure caching frontend strategy
                 $oFrontend = new Zend_Cache_Core(
-                                array(
-                                    // cache for 7 days
-                                    'lifetime' => 3600 * 24 * 7,
-                                    'caching' => true,
-                                    'cache_id_prefix' => 'singleAd',
-                                    'logging' => false,
-                                    'write_control' => true,
-                                    'automatic_serialization' => true,
-                                    'ignore_user_abort' => true
-                                ));
+                    array(
+                        // cache for 7 days
+                        'lifetime' => 3600 * 24 * 7,
+                        'caching' => true,
+                        'cache_id_prefix' => 'singleAd',
+                        'logging' => false,
+                        'write_control' => true,
+                        'automatic_serialization' => true,
+                        'ignore_user_abort' => true
+                    ));
 
                 // build a caching object
                 $cacheAd = Zend_Cache::factory($oFrontend, $oBackend);
@@ -579,14 +585,16 @@ class AdController extends Zend_Controller_Action {
     }
 
 
-    public function deleteAction() {
 
+
+
+    public function deleteAction()
+    {
         $this->userRole = $this->_helper->checkUserRole->check();
-
         $this->view->headTitle()->append($this->view->translate('Delete your profile'));
 
-        $id = (int) $this->getRequest()->getParam('id');
-        $auth = Zend_Auth::getInstance ();
+        $id = (int)$this->getRequest()->getParam('id');
+        $auth = Zend_Auth::getInstance();
         //check if user is auth
         if ($auth->hasIdentity() == FALSE) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
@@ -598,8 +606,7 @@ class AdController extends Zend_Controller_Action {
         $ad = $admodel->getAd($id);
 
 
-        if  (($auth->getIdentity()->id == $ad['user_owner']) || ($this->userRole == 1) ) {
-
+        if (($auth->getIdentity()->id == $ad['user_owner']) || ($this->userRole == 1)) {
             //if is the user owner owner lets delete it
             if ($this->getRequest()->isPost()) {
                 $del = $this->getRequest()->getPost('del');
@@ -611,33 +618,33 @@ class AdController extends Zend_Controller_Action {
 
                     //delete from memcached if exists in memory
                     //check if the ad exists in memcached
-                     $oBackend = new Zend_Cache_Backend_Memcached(
-                                    array(
-                                        'servers' => array(array(
-                                                'host' => '127.0.0.1',
-                                                'port' => '11211'
-                                            )),
-                                        'compression' => true
-                                    ));
+                    $oBackend = new Zend_Cache_Backend_Memcached(
+                        array(
+                            'servers' => array(array(
+                                'host' => '127.0.0.1',
+                                'port' => '11211'
+                            )),
+                            'compression' => true
+                        ));
 
                     // configure caching frontend strategy
                     $oFrontend = new Zend_Cache_Core(
-                                    array(
-                                        // cache for 7 days
-                                        'lifetime' => 3600 * 24 * 7,
-                                        'caching' => true,
-                                        'cache_id_prefix' => 'singleAd',
-                                        'logging' => false,
-                                        'write_control' => true,
-                                        'automatic_serialization' => true,
-                                        'ignore_user_abort' => true
-                                    ));
+                        array(
+                            // cache for 7 days
+                            'lifetime' => 3600 * 24 * 7,
+                            'caching' => true,
+                            'cache_id_prefix' => 'singleAd',
+                            'logging' => false,
+                            'write_control' => true,
+                            'automatic_serialization' => true,
+                            'ignore_user_abort' => true
+                        ));
 
                     // build a caching object
                     $cacheAd = Zend_Cache::factory($oFrontend, $oBackend);
                     $cacheTest = $cacheAd->test($id);
 
-                    if($cacheTest == true){
+                    if ($cacheTest == true) {
                         $cacheAd->remove($id);
                     }
 
@@ -664,15 +671,15 @@ class AdController extends Zend_Controller_Action {
     }
 
 
-
     /*
-     * _createThumbnail uses resize class
-     *
-     */
+    * _createThumbnail uses resize class
+    *
+    */
 
-    protected function _createThumbnail($file, $x, $y) {
+    protected function _createThumbnail($file, $x, $y)
+    {
 
-        require_once ( NOLOTIRO_PATH . '/library/SimpleImage.php' );
+        require_once (NOLOTIRO_PATH . '/library/SimpleImage.php');
 
         $file_ext = substr(strrchr($file, '.'), 1);
         $fileuniquename = md5(uniqid(mktime())) . '.' . $file_ext;
@@ -691,7 +698,6 @@ class AdController extends Zend_Controller_Action {
 
         return $fileuniquename;
     }
-
 
 
 }

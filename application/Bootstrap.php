@@ -1,6 +1,6 @@
 <?php
 /**
- * @author dani remeseiro
+ * @author one atheist
  * @license Affero GPL License Version 3
  * @link http://www.gnu.org/licenses/agpl.html
  */
@@ -27,6 +27,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //ZendX_JQuery::enableView($view);
 
     }
+
+
+    protected function _initTimeZone()
+        {
+            //TODO get the user time zone conditional from user data if logged
+            date_default_timezone_set('Europe/Madrid');
+        }
+
 
     protected function _initAutoload()
     {

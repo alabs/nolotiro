@@ -44,7 +44,7 @@
 "donate";"donar"
 "facebook group";"grupo en facebook"
 #footer excerpt
-"nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.";"nolotiro.org es un sitio web donde regalo y busco regalos gratis: muebles, sillas, sofás, bicicletas, ordenadores portálites, mesas, cocinas, lámparas, camas, ropa, juguetes, cunas o carros para bebes, teléfonos móviles y otras muchas cosas que ya no quieres y ya no necesitas para que las reutilicen otra gente a la que puede servirle o darle nueva vida."
+"nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.";"nolotiro.org es un sitio web donde regalo y busco regalos gratis: muebles, sillas, sofás, bicicletas, ordenadores portátiles, mesas, cocinas, lámparas, camas, ropa, juguetes, cunas o carros para bebes, teléfonos móviles y otras muchas cosas que ya no quieres y ya no necesitas para que las reutilicen otra gente a la que puede servirle o darle nueva vida."
 
 #contact
 "'%value%' is not a valid email address in the basic format local-part@hostname";"'%value%' no es una dirección de correo válida con el formato: usuario@ejemplo.com"
@@ -190,6 +190,7 @@
 "booked";"reservado"
 "delivered";"entregado"
 "all";"todos"
+"Sorry, you have 5 or more want ads, delete olders!";"Lo siento, tienes 5 o mas anuncios de busco, borra los mas antiguos"
 
 #friends
 "User successfully removed from your friends list";"El usuario  ha sido eliminado de tu lista de amigos"
@@ -342,7 +343,7 @@ NO HAY OPCIÓN DE INTERCAMBIO, esto no se basa en el trueque, ni en la compra, p
  <a href='http://www.mysql.com/'>MySQL</a>,
  <a href='http://developer.yahoo.com/geo/geoplanet/'>Yahoo GeoPlanet API</a>,
  <a href='http://www.postfix.org/'>Postfix</a>,
- <a href='http://www.freebsd.org/'>FreeBsd</a>,
+ <a href='http://www.debian.org/'>Debian</a>,
  <a href='http://nginx.org/'>Nginx</a>, <a href='http://sphinxsearch.com/'>Sphinx</a>
  , y muchos mas, tantos que sería imposible nombrarlos todos aquí.
 
