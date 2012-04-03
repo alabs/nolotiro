@@ -1014,7 +1014,7 @@ dd {
     float:left;
     padding-top:14px;
     padding-bottom: 10px;
-    margin:0;
+    width: 100%;
 }
 
 .ad_excerpt_home h4{
