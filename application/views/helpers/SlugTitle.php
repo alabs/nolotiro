@@ -156,6 +156,6 @@ class Zend_View_Helper_SlugTitle
 		    $string = preg_replace("/-$short-/", '-', $string);
 	    }
         
-	    return $string;
+	    return $string.'.html';
     }
 }

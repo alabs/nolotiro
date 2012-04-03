@@ -298,7 +298,7 @@ class AdController extends Zend_Controller_Action
             $this->view->metaDescription = $this->view->page_title . '. ' . $this->view->ad['body'];
 
             //add link rel canonical , better seo
-            $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/ad/show/id/' . $id . '/' . $this->view->ad['title'];
+            $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/ad/show/id/' . $id . '/' . $this->view->ad['title'] .'.html';
 
             //if user logged in, show the comment form, if not show the login link
             $auth = Zend_Auth::getInstance();
