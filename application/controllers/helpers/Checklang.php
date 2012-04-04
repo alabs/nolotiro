@@ -6,8 +6,10 @@ class Zend_Controller_Action_Helper_Checklang extends Zend_Controller_Action_Hel
 
         function init()
         {
-            Zend_Registry::set('languages', array('en'=>'English', 'es'=>'Español', 'ca'=>'Català', 'gl'=>'Galego', 'de'=>'Deustch', 'fr'=>'Français', 'pt'=>'Português', 'it'=>'Italiano'));
-            $activelangs = array('en'=>0, 'es'=>0, 'ca'=>1, 'gl'=>1, 'de'=>1, 'fr'=>1, 'pt'=>1, 'it'=>1,);
+            Zend_Registry::set('languages', array('en'=>'English', 'es'=>'Español', 'ca'=>'Català', 'gl'=>'Galego',
+                'eu'=>'Euskara', 'nl'=>'Nederlands',
+                'de'=>'Deustch', 'fr'=>'Français', 'pt'=>'Português', 'it'=>'Italiano'));
+            $activelangs = array('en'=>0, 'es'=>0, 'ca'=>1, 'gl'=>1, 'eu'=>1, 'nl'=>1,'de'=>1, 'fr'=>1, 'pt'=>1, 'it'=>1,);
             Zend_Registry::set('activelangs', $activelangs);
 
             $this->lang = $this->getRequest()->getParam("language");
