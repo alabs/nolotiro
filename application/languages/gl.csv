@@ -7,7 +7,9 @@
 "Help us to translate nolotiro.org to your language";"Axuda a traducir nolotiro.org ao teu idioma"
 "help to translate";"axuda a traducir"
 "Location changed successfully to:";"Ubicación cambiada con éxito a:"
-"Town";"Vila"
+
+#dont change town or geoapi breaks (only search by Town)
+"Town";"Town"
 "Choose your location";"Elixe a túa ubicación"
 "Choose your";"Elixe o teu / a túa"
 "I can not connect to Yahoo geo service, sorry!";"Non podo conectar ao servizo de xeolocalización de Yahoo."

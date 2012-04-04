@@ -136,7 +136,10 @@ no lo tiro, te lo regalo (sin condiciones);no lo tiro, te lo regalo (sin condici
 "Other";"Un altre"
 
 "Location changed successfully to:";"Ubicació canviada amb èxit a:"
-"Town";"Poble"
+
+
+#dont change town or geoapi breaks (only search by Town, in english)
+"Town";"Town"
 "Choose your location";"Tria la teva ubicació"
 "Choose your";"Tria la teva"
 "I can not connect to Yahoo geo service, sorry!";"No puc conectar amb el servei de geolocalització de Yahoo"

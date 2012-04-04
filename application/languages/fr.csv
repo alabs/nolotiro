@@ -1,4 +1,4 @@
-﻿#header
+﻿﻿#header
 "no lo tiro, te lo regalo (sin condiciones)";"Je ne le jette pas, je te l'offre (inconditionalement)"
 "new user";"Nouveaux membre"
 "or";"ou"
@@ -9,7 +9,7 @@
 #location
 
 #(VERY IMPORTANT TO PARSE THE XML API QUERY!)
-"Town";"Ville"
+"Town";"Town"
 "Choose your location";"Choix de votre location"
 "Choose your";"Choisis ton"
 "I can not connect to Yahoo geo service, sorry!";"Imposible de connecter sur le reseau Yahoo de géolocalisation"

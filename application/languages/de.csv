@@ -3,7 +3,7 @@
 "BetaTranslation";"This language translation is in testing phase. If you find a missing or wrong translation, please report it <a href='%s'>here</a>."
 
 
-"Help to translate nolotiro.org to your language";"Hilf uns, nolotiro.org in deine Sprache zu übersetzen"
+"Help us to translate nolotiro.org to your language";"Hilf uns, nolotiro.org in deine Sprache zu übersetzen"
 "help to translate";"Hilf bei der Übersetzung"
 "Location changed successfully to:";"Ort erfolgreich geändert"
 "Town";"Ort"
@@ -29,7 +29,7 @@
 "hello,";"Hallo,"
 "logout";"abmelden"
 "login";"einloggen"
-"To start to publish ads or send private messages access to your account";"Um eine Anzeige aufzugeben oder eine Nachricht zu senden, musst du eingeloggt sein."
+"To start to publish ads or send private messages access to your account";"Um eine Anzeige aufzugeben oder eine Nachricht zu senden, musst du eingeloggt sein"
 "second hand and news";"Zweite Hand oder neu"
 "about";"über"
 "faqs";"FAQ"
@@ -38,17 +38,17 @@
 
 
 "All the ads";"Alle Anzeigen"
-"all the ads";"Alle Anzeigen"
+"all the ads";"alle Anzeigen"
 "donate";"spenden"
 "facebook group";"Gruppe bei Facebook"
 "nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.";"Auf der Web nolotiro.org könnt ihr Sachen, die ihr nicht mehr braucht verschenken oder selbst Dinge suchen, die andere nicht mehr brauchen: Möbel, Fahrräder, Computer, Laptops, Küchen, Lampen, Kleidung, Spielzeug, Kinderwagen, Handys und vieles mehr. All dass, was du nicht mehr benutzt, was aber andere gut gebrauchen könnten."
-"'%value%' is not a valid email address in the basic format local-part@hostname";"...ist keine neue gültige E-Mail-Adresse im Format: usuario@example.com"
+"'%value%' is not a valid email address in the basic format local-part@hostname";"'%value%' ist keine neue gültige E-Mail-Adresse im Format: usuario@example.com"
 
 
 
 
-"Message sent successfully!";"Deine Nachricht wurde erfolgreich abgeschickt."
-"Value is required and can't be empty";"Dieses Feld darf nicht leer sein."
+"Message sent successfully!";"Deine Nachricht wurde erfolgreich abgeschickt"
+"Value is required and can't be empty";"Dieses Feld darf nicht leer sein"
 
 "Please, write your message";"Bitte schreib deine Nachricht!"
 "Your email:";"Deine E-Mail:"
@@ -56,7 +56,7 @@
 
 "Send";"Abschicken"
 "Contact form";"Kontaktformular"
-"Login";"einloggen"
+"Login";"Einloggen"
 "(If you are a new user, please";"(Wenn du ein neuer User bist, bitte"
 "register here";"hier anmelden"
 
@@ -65,10 +65,10 @@
 "Password:";"Passwort"
 "Forgot your password?";"Passwort vergessen?"
 
-"You are now logged in, ";"Jetzt bist du eingeloggt!"
+"You are now logged in, ";"Jetzt bist du eingeloggt, "
 "Wrong email or password, please try again";"E-Mail-Adresse oder Passwort falsch. Bitte versuch es noch einmal."
 "New user";"Neuer User"
-"Please, fill this form to be a nolotiro member";"Bitte füll dieses Formular aus, um Mitglied von nolotiro zu werden."
+"Please, fill this form to be a nolotiro member";"Bitte füll dieses Formular aus, um Mitglied von nolotiro zu werden"
 "(If you already are a registered user, please";"(Wenn du schon Mitglied bist, bitte"
 "login here";"hier anmelden"
 "Choose a username:";"Username"
