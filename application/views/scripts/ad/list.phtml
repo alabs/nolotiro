@@ -42,8 +42,6 @@ if (count($this->mensajes) > 0) {
         <?php if ($this->ad): ?>
 
         <?php
-        $auth = Zend_Auth::getInstance();
-
         foreach ($this->paginator as $key => $val): ?>
             <div class="ad_excerpt">
 
@@ -58,6 +56,7 @@ if (count($this->mensajes) > 0) {
 
 
                 <?php
+                $auth = Zend_Auth::getInstance();
                 // if you are the ad owner or admin, then show edit link
                 if (($val['user_owner'] == $auth->getIdentity()->id) || ($this->userRole == 1)): ?>
                     <div>
