@@ -94,33 +94,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initPlugins()
     {
-
         Zend_Controller_Action_HelperBroker::addPath( APPLICATION_PATH .'/controllers/helpers');
 
         $front = Zend_Controller_Front::getInstance();
-        //$front->registerPlugin ( new Nolotiro_Controller_Plugin_Language() );
-
 
         //set the routers
         $router = $front->getRouter ();
 
+         //set the language route url (the default also)
+        $routeLang = new Zend_Controller_Router_Route ( ':language/:controller/:action/*', array ('language' => null, 'controller' => 'index', 'action' => 'index') );
         $routeWoeid = new Zend_Controller_Router_Route( ':language/woeid/:woeid/:ad_type/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'list') );
-        //setting the language route url (the default also)
-        $routeLang = new Zend_Controller_Router_Route ( ':language/:controller/:action/*', array ( 'language' => null, 'controller' => 'index', 'action' => 'index' ) );
-
         //set the user profile route
         $routeProfile = new Zend_Controller_Router_Route( ':language/profile/:username', array( 'language' => null, 'controller' => 'user', 'action' => 'profile') );
-
 
         $router->addRoute ( 'default', $routeLang );//important, put the default route first!
         $router->addRoute ( 'woeid/woeid/ad_type', $routeWoeid );
         $router->addRoute ( 'profile/username', $routeProfile );
 
         $front->setRouter ( $router );
-
-         return $front;
+        return $front;
     }
-
 
 }
 

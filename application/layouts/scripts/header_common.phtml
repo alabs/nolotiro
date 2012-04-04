@@ -1,4 +1,4 @@
-<?php echo $this->doctype(); ?>
+<?php echo $this->doctype() . PHP_EOL; ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->lang; ?>">
 <head>
     <title><?php echo $this->page_title  ?></title>
@@ -13,11 +13,9 @@
     if($this->metaRobots){
         $this->headMeta()->appendName('robots', $this->metaRobots);
     }
-
     //set hreflang and canonical urls for best multilanguage indexing by crawlers
     if ($this->lang == 'es') {
         $this->headLink(array('rel' => 'alternate', 'hreflang' => 'en', 'href' => str_replace('/es', '/en', $_SERVER['SCRIPT_URI'])), 'APPEND');
-
     }
     if ($this->lang == 'en') {
         $this->headLink(array('rel' => 'alternate', 'hreflang' => 'es', 'href' => str_replace('/en', '/es', $_SERVER['SCRIPT_URI'])), 'APPEND');
@@ -33,12 +31,16 @@
     if ($this->metaDescription) {
         $this->headMeta()->appendName('description', $this->metaDescription);
     }
-
-    $css_num = 144;
+    $css_num = 24;
     $this->headLink()->appendStylesheet('/css/common.css?num=' . $css_num);
-    echo $this->headMeta();
-    echo $this->headLink();
-    echo $this->headScript();
+    ?>
+
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+
+    <?php
+    echo $this->headMeta() .PHP_EOL;
+    echo $this->headLink() . PHP_EOL;
+    echo $this->headScript() .PHP_EOL;
     ?>
     <script type="text/javascript">
         if (typeof jQuery == 'defined') {

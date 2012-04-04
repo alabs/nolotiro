@@ -1,36 +1,31 @@
-
-
 /* -----------------------------------------------------------------------
 
 
- Blueprint CSS Framework 0.8
- http://blueprintcss.org
+Blueprint CSS Framework 0.8
+http://blueprintcss.org
 
-   * Copyright (c) 2007-Present. See LICENSE for more info.
-   * See README for instructions on how to use Blueprint.
-   * For credits and origins, see AUTHORS.
-   * This is a compressed file. See the sources in the 'src' directory.
+  * Copyright (c) 2007-Present. See LICENSE for more info.
+  * See README for instructions on how to use Blueprint.
+  * For credits and origins, see AUTHORS.
+  * This is a compressed file. See the sources in the 'src' directory.
 
 ----------------------------------------------------------------------- */
 /* reset.css */
-html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,code,del,dfn,em,img,q,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td
-	{
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-weight: inherit;
-	font-style: inherit;
-	font-size: 100%;
-	font-family: inherit;
-	vertical-align: baseline;
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
 }
-
 
 html {
     margin: 0;
     padding: 0;
     border: 0;
-
 
 }
 
@@ -39,20 +34,20 @@ table {
     border-spacing: 0;
 }
 
-caption,th,td {
+caption, th, td {
     text-align: left;
     font-weight: normal;
 }
 
-table,td,th {
+table, td, th {
     vertical-align: middle;
 }
 
-blockquote:before,blockquote:after,q:before,q:after {
+blockquote:before, blockquote:after, q:before, q:after {
     content: "";
 }
 
-blockquote,q {
+blockquote, q {
     quotes: "" "";
 }
 
@@ -69,16 +64,16 @@ body {
     font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
-h1,h2,h4,h5,h6 {
+h1, h2, h4, h5, h6 {
     font-weight: normal;
     color: #111;
 }
 
 h1 {
-/*    font-size: 1.2em;
-    line-height: 1;
-    margin-bottom: 0.01em;
-    font-family: Georgia, "Times New Roman", Times, serif;*/
+    /*    font-size: 1.2em;
+line-height: 1;
+margin-bottom: 0.01em;
+font-family: Georgia, "Times New Roman", Times, serif;*/
 }
 
 h1 {
@@ -108,15 +103,13 @@ h4 {
 
 }
 
-
-
 h6 {
     font-size: 1em;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-h1 img,h2 img,h3 img,h4 img,h5 img,h6 img {
+h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {
     margin: 0;
 }
 
@@ -150,7 +143,7 @@ strong {
     font-weight: bold;
 }
 
-em,dfn {
+em, dfn {
     font-style: italic;
 }
 
@@ -158,11 +151,11 @@ dfn {
     font-weight: bold;
 }
 
-sup,sub {
+sup, sub {
     line-height: 0;
 }
 
-abbr,acronym {
+abbr, acronym {
     border-bottom: 1px dotted #666;
 }
 
@@ -180,17 +173,17 @@ pre {
     white-space: pre;
 }
 
-pre,code,tt {
+pre, code, tt {
     font: 1em 'andale mono', 'lucida console', monospace;
     line-height: 1.5;
 }
 
-li ul,li ol {
+li ul, li ol {
     /*	margin: 0 1.5em;*/
 
 }
 
-li a{
+li a {
     font-weight: bold;
 
 }
@@ -198,7 +191,6 @@ li a{
 li {
     margin-bottom: 4px;
 }
-
 
 ul {
     list-style-type: none;
@@ -234,7 +226,7 @@ thead th {
     background: #c3d9ff;
 }
 
-th,td,caption {
+th, td, caption {
     padding: 4px 10px 4px 5px;
 }
 
@@ -316,15 +308,13 @@ caption {
     margin-right: auto;
 }
 
-
-.column,div.span-1,div.span-2,div.span-3,div.span-4,div.span-5,div.span-6,div.span-7,div.span-8,div.span-9,div.span-10,div.span-11,div.span-12,div.span-13,div.span-14,div.span-15,div.span-16,div.span-17,div.span-18,div.span-19,div.span-20,div.span-21,div.span-22,div.span-23,div.span-24
-{
+.column, div.span-1, div.span-2, div.span-3, div.span-4, div.span-5, div.span-6, div.span-7, div.span-8, div.span-9, div.span-10, div.span-11, div.span-12, div.span-13, div.span-14, div.span-15, div.span-16, div.span-17, div.span-18, div.span-19, div.span-20, div.span-21, div.span-22, div.span-23, div.span-24 {
     float: left;
     margin-top: 20px;
     margin-right: 10px;
 }
 
-.last,div.last {
+.last, div.last {
     margin-right: 0;
 }
 
@@ -420,12 +410,10 @@ caption {
     width: 910px;
 }
 
-.span-24,div.span-24 {
+.span-24, div.span-24 {
     width: 950px;
     margin: 0;
 }
-
-
 
 .box {
     padding: 1.5em;
@@ -449,7 +437,7 @@ hr.space {
     color: #fff;
 }
 
-.clearfix:after,.container:after {
+.clearfix:after, .container:after {
     content: "\0020";
     display: block;
     height: 0;
@@ -458,7 +446,7 @@ hr.space {
     overflow: hidden;
 }
 
-.clearfix,.container {
+.clearfix, .container {
     display: block;
 }
 
@@ -482,16 +470,16 @@ legend {
     font-size: 1.2em;
 }
 
-input, input.text,input.title,textarea,input.file,select {
+input, input.text, input.title, textarea, input.file, select {
     margin: 0.5em 0;
     border: 1px solid #bbb;
 }
 
-input,input.text:focus,input.title:focus,textarea:focus,select:focus {
+input, input.text:focus, input.title:focus, textarea:focus, select:focus {
     border: 1px solid #666;
 }
 
-input.text,input.title {
+input.text, input.title {
     width: 300px;
     padding: 5px;
 }
@@ -506,18 +494,15 @@ textarea {
     padding: 5px;
 }
 
-
-
 /* COMMON CODEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE STARTS HERE*/
 
-
-html input[type="text"], input[type="password"], input[type="submit"]{
+html input[type="text"], input[type="password"], input[type="submit"] {
     border: 1px solid #666;
     font-size: 1.1em;
     padding: 4px;
 }
 
-html img{
+html img {
     vertical-align: middle;
     z-index: 360;
 }
@@ -541,14 +526,12 @@ a:hover {
     color: #26DAFF;
 }
 
-
 a.actual {
     /*color: #FA58F4;
 	text-decoration: underline;*/
-    border-bottom: solid ;
-    border-width:3px;
+    border-bottom: solid;
+    border-width: 3px;
 }
-
 
 #agree {
     display: inline;
@@ -556,23 +539,88 @@ a.actual {
     height: 20px;
 }
 
-
 .user_login_box {
+    position: relative;
     margin-top: -0.4em;
     font-size: 1em;
     background-color: #FFFFCC;
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
-    float:right;
-    right:20px;
+    float: right;
+    right: 100px;
     padding-bottom: 3px;
     padding-left: 8px;
     padding-right: 6px;
+    padding-top: 1px;
+    z-index: 200;
 }
 
 
-form.searchbox{
+#select_language_box {
+    position: absolute;
+    top: 0px;
+    float: right;
+    right: 0px;
+    border: 1px solid white;
+    display: inline-block;
+    height: 12px;
+    overflow: hidden;
+    vertical-align: top;
+    width: 92px;
+    padding-top: 24px;
+    z-index: 400;
+}
+
+#select_language_box:hover, .deployed_languages {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    height: auto;
+}
+
+#select_language_box a {
+    padding: 2px;
+    padding-left: 4px;
+    padding-right: 0px;
+    line-height: 16px;
+    height: 20px;
+    display: none;
+    width: 100%;
+    text-decoration: none !important;
+}
+
+
+#select_language_box img{
+    text-decoration: none !important;
+    border: 0;
+    right: 2px;
+    clear: left;
+    vertical-align: baseline;
+}
+
+#select_language_box a span.lang_name {
+    display: inline-block;
+    text-decoration: none;
+}
+
+#select_language_box:hover a, .deployed_languages a, #select_language_box .lang.active {
+    display: block;
+}
+
+#select_language_box .lang.active {
+    position: absolute;
+    top: 0px;
+}
+
+#select_language_box a:hover {
+    background-color: #999 !important;
+    text-decoration: none !important;
+    color: #fff !important;
+
+}
+
+
+form.searchbox {
     /*    position: absolute;*/
     display: inline-block;
     width: auto;
@@ -580,12 +628,12 @@ form.searchbox{
     top: 0px;
 }
 
-form.searchbox dd{
+form.searchbox dd {
     display: inline;
     margin: 0;
 }
 
-form.searchbox input{
+form.searchbox input {
     padding: 1px;
     font-size: 12px;
     border: 1px;
@@ -593,12 +641,11 @@ form.searchbox input{
     border-color: #ddd;
 }
 
-form.searchbox dl{
-    margin: 0px!important;
+form.searchbox dl {
+    margin: 0px !important;
 }
 
-
-.user_profile h4{
+.user_profile h4 {
     font-size: 14px;
     padding: 5px;
 }
@@ -608,7 +655,6 @@ form.searchbox dl{
     padding: 4px;
 }
 
-
 .select_language_box select {
     font-size: 0.9em;
     font-weight: bold;
@@ -616,12 +662,12 @@ form.searchbox dl{
 
 }
 
-.google_ads{
+.google_ads {
 
     padding: 10px;
     clear: right;
     float: right;
-    right:0px;
+    right: 0px;
     margin-top: 10px;
     margin-bottom: 20px;
     background-color: #fff;
@@ -634,37 +680,36 @@ form.searchbox dl{
     top: 43px;
 }
 
-.ad_create_tab_home{
+.ad_create_tab_home {
     position: absolute;
     right: 0px;
     top: -10px;
 }
 
-
-.ad_change_location_home{
+.ad_change_location_home {
     position: absolute;
     right: 0px;
     top: 20px;
 }
 
 .ad_create_tab a {
-    background:transparent url(/images/btn_new_ad.png) no-repeat scroll 100% 0;
-    height:24px;
-    overflow:hidden;
-    color:#fff;
+    background: transparent url(/images/btn_new_ad.png) no-repeat scroll 100% 0;
+    height: 24px;
+    overflow: hidden;
+    color: #fff;
     font-size: 1.2em;
     font-weight: bold;
     border: 1px solid #ddd;
-    padding-left:10px;
-    padding-right:10px;
-    padding-top:5px;
-    padding-bottom:2px;
-    text-align:center;
-    width:auto;
-    display:block;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    text-align: center;
+    width: auto;
+    display: block;
 }
 
-.ad_status{
+.ad_status {
     display: inline-block;
     color: #fff;
     padding: 3px;
@@ -674,38 +719,37 @@ form.searchbox dl{
     margin-right: 4px;
 }
 
-.available{
+.available {
     background-color: #19AF13;
 }
 
-.booked{
+.booked {
     background-color: #DF7401;
 }
 
-.delivered{
+.delivered {
     background-color: red;
 }
 
-
 .ad_list_image {
     z-index: 300;
-    float:right;
-    padding-left:4px;
-    width:100px;
+    float: right;
+    padding-left: 4px;
+    width: 100px;
 }
 
-.no_results{
+.no_results {
     display: block;
     float: left;
-    padding-left:18px;
-    padding-right:18px;
-    padding-top:0;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-top: 0;
     margin-top: 10px;
 }
 
-.filter_status{
+.filter_status {
     z-index: 20;
-    float:left;
+    float: left;
 
     /*    border-bottom: 1px solid #ddd;
         border-left: 1px solid #ddd;
@@ -714,74 +758,72 @@ form.searchbox dl{
     width: 100% !important;
     padding-left: 18px;
     padding-right: 18px;
-    padding-bottom:12px;
+    padding-bottom: 12px;
     padding-top: 8px;
     margin-top: -18px;
 
 }
 
-.ad_excerpt{
-    float:left;
+.ad_excerpt {
+    float: left;
     border-bottom: 1px solid #ddd;
     width: 100% !important;
     padding-left: 18px;
     padding-right: 18px;
-    padding-bottom:22px;
-    padding-top:14px;
-    margin:0;
+    padding-bottom: 22px;
+    padding-top: 14px;
+    margin: 0;
 
 }
 
-.ad_excerpt h4{
+.ad_excerpt h4 {
     font-size: 1.3em;
     font-weight: bold;
     margin-bottom: 6px;
 }
 
-
-.ad_excerpt_title{
+.ad_excerpt_title {
     font-size: 1.3em;
     font-weight: bold;
     margin-bottom: 3px;
 }
 
-.ad_excerpt_woeid{
+.ad_excerpt_woeid {
     font-size: 1em;
     font-weight: bold;
     margin-bottom: 3px;
 }
 
-.ad_excerpt:hover{
-    background-color:#FFFFCC;
+.ad_excerpt:hover {
+    background-color: #FFFFCC;
 
 }
 
-.message_excerpt{
-    float:left;
+.message_excerpt {
+    float: left;
     border-bottom: 1px solid #ddd;
     width: 100% !important;
     padding-left: 18px;
     padding-right: 18px;
-    padding-bottom:14px;
-    padding-top:14px;
-    margin:0;
+    padding-bottom: 14px;
+    padding-top: 14px;
+    margin: 0;
 
 }
 
-.message_excerpt h4{
+.message_excerpt h4 {
 
     font-size: 1.3em;
     font-weight: bold;
     margin-bottom: 6px;
 }
 
-.message_excerpt:hover{
-    background-color:#FFFFCC;
+.message_excerpt:hover {
+    background-color: #FFFFCC;
 
 }
 
-
-.delete_message{
+.delete_message {
     display: inline-block;
     float: right;
     padding: 5px;
@@ -789,28 +831,27 @@ form.searchbox dl{
     background-color: #fff;
 }
 
-.ad_date{
-    color:#666;
+.ad_date {
+    color: #666;
     font-size: 0.9em;
     font-weight: normal;
     padding-bottom: 5px;
 }
 
-.ad_excerpt_show{
-    float:left;
+.ad_excerpt_show {
+    float: left;
     font-size: 1.2em;
     border-bottom: 1px solid #ddd;
     width: 100% !important;
     padding-left: 18px;
     padding-right: 18px;
-    padding-bottom:14px;
-    padding-top:14px;
-    margin:0;
+    padding-bottom: 14px;
+    padding-top: 14px;
+    margin: 0;
 
 }
 
-
-.ad_meta_info{
+.ad_meta_info {
     position: relative;
     display: block;
     padding: 3px;
@@ -819,20 +860,19 @@ form.searchbox dl{
     font-size: 11px;
     margin-top: 5px;
 
-
 }
 
-.edit_ad{
+.edit_ad {
     padding-left: 18px;
 }
 
-.rss{
+.rss {
     float: left;
     padding-left: 18px;
     margin-bottom: 10px;
 }
 
-.sharelinks{
+.sharelinks {
     position: relative;
     top: 10px;
     clear: right;
@@ -841,48 +881,46 @@ form.searchbox dl{
     margin-bottom: 15px;
 }
 
-.ad_comments{
+.ad_comments {
     padding-left: 18px;
     margin-bottom: 80px;
 
 }
 
-.ad_comment{
-    float:left;
+.ad_comment {
+    float: left;
     font-size: 1em;
     border-bottom: 1px dashed #ddd;
     width: 100% !important;
 
     padding-right: 18px;
-    padding-bottom:18px;
+    padding-bottom: 18px;
     margin-top: 14px;
 
 }
 
-.ad_comment span{
+.ad_comment span {
     clear: left;
     float: left;
     padding: 5px;
 }
 
-
-.ad_comments h5{
+.ad_comments h5 {
     float: left;
     font-size: 1.2em;
     font-weight: bold;
     padding-top: 10px;
-    margin-bottom: 10px!important;
+    margin-bottom: 10px !important;
 }
 
-.ad_comment_form{
+.ad_comment_form {
     clear: left;
     float: left;
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
-
-.location_name{
+.location_name {
     display: inline-block;
     margin-bottom: 14px;
 }
@@ -890,10 +928,10 @@ form.searchbox dl{
 .give-want {
     position: relative;
     display: inline-block;
-    width:auto;
-    float:right;
+    width: auto;
+    float: right;
     right: 5px;
-    text-align:center;
+    text-align: center;
     background-color: #fff;
     font-size: 2em;
     font-weight: bold;
@@ -905,11 +943,11 @@ form.searchbox dl{
     margin-bottom: 10px;
 }
 
-.errors{
-    color:red;
+.errors {
+    color: red;
 }
 
-.error,.notice,.success {
+.error, .notice, .success {
     padding: .8em;
     margin-bottom: 1em;
     margin-top: 1em;
@@ -946,21 +984,19 @@ form.searchbox dl{
     color: #264409;
 }
 
-
 /**
  * Home
 */
-.home_location_change{
+.home_location_change {
     display: inline;
     position: absolute;
     float: left;
-    width:  600px;
+    width: 600px;
     right: 0px;
     top: 43px;
 }
 
-
-.section_users{
+.section_users {
     float: left;
     position: relative;
     display: inline-block;
@@ -968,7 +1004,7 @@ form.searchbox dl{
     width: 120px;
 }
 
-.section_locations{
+.section_locations {
     float: left;
     position: relative;
     display: inline-block;
@@ -976,8 +1012,7 @@ form.searchbox dl{
     width: 250px;
 }
 
-
-.section_ads{
+.section_ads {
     float: left;
     position: relative;
     display: inline-block;
@@ -986,42 +1021,36 @@ form.searchbox dl{
     width: 468px;
 }
 
-
-
-.home_location_change form{
+.home_location_change form {
     display: inline-block;
     padding-right: 20px;
     width: auto;
 }
 
-.home_location_change.form dd{
+.home_location_change.form dd {
     display: inline;
     margin: 0;
 }
 
-
-
 dl {
-    margin: 0px!important;
+    margin: 0px !important;
 }
 
 dd {
-    margin: 0px!important;
+    margin: 0px !important;
 }
 
-
-.ad_excerpt_home{
-    float:left;
-    padding-top:14px;
+.ad_excerpt_home {
+    float: left;
+    padding-top: 14px;
     padding-bottom: 10px;
     width: 100%;
 }
 
-.ad_excerpt_home h4{
+.ad_excerpt_home h4 {
     font-size: 1.4em;
     font-weight: bold;
 }
-
 
 /**
  * Layout.
@@ -1031,7 +1060,7 @@ dd {
     width: 100%;
     margin-left: 0px;
     margin-right: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 48px;
     position: relative;
     text-align: left;
 
@@ -1044,23 +1073,22 @@ dd {
     text-align: left;
 }
 
-
 #footer {
     font-size: 1em;
     line-height: 1.33em;
     float: left;
-    margin-top:20px;
-    padding:20px;
+    margin-top: 20px;
+    padding: 20px;
     clear: both;
     border-top: 1px solid #ddd;
     background-color: #F2F2F2;
 }
 
 #facebook-button, #google-button, #twitter-button {
-    float:left;
+    float: left;
     width: 85px;
     height: 30px;
-    padding-right:5px;
+    padding-right: 5px;
     margin: 4px;
 }
 
@@ -1068,39 +1096,41 @@ dd {
     margin-right: 50px;
 }
 
-.links-right{
+.links-right {
     text-align: right;
     margin-bottom: 10px;
     right: 10px;
 }
 
-
-.links-left{
+.links-left {
     text-align: left;
     left: 10px;
 }
+
 /**
  * Header Area.
 */
-.site-name  {
+.site-name {
     z-index: -130; /*below search form */
     border: none;
     margin-top: 0px;
     padding-top: 10px;
     margin-left: 74px;
+    width: 380px;
     font-size: 2em;
     line-height: 1;
     margin-bottom: 0.01em;
     font-family: Georgia, "Times New Roman", Times, serif;
 }
+
 .site-name img {
-    position:absolute;
-    top:16px;
-    left:20px;
+    position: absolute;
+    top: 16px;
+    left: 20px;
 }
 
 .site-slogan {
-    float:left;
+    float: left;
     font-size: 1em;
     padding-top: 1px;
     margin-left: 74px;
@@ -1119,7 +1149,7 @@ dd {
 .world_link {
     display: inline-block;
     font-weight: bold;
-    margin-top:  8px;
+    margin-top: 8px;
 }
 
 #default_header_section {
@@ -1131,35 +1161,34 @@ dd {
     border: 1px solid #ddd;
 }
 
-
 /*paginator  ***********/
 .pagination {
     clear: both;
-    font-weight:  bold;
+    font-weight: bold;
     margin-bottom: 30px;
     padding-top: 10px;
     text-align: center;
     font-size: 1.2em;
     display: block;
     width: auto;
-    border:0;
-    list-style:none;
-    margin-right:2px;
+    border: 0;
+    list-style: none;
+    margin-right: 2px;
 }
 
 .pagination span {
-    border:solid 1px  #00ACCF;
-    margin-right:2px;
+    border: solid 1px #00ACCF;
+    margin-right: 2px;
     text-align: center;
     padding: 4px;
 }
 
-.pagination a{
+.pagination a {
     text-decoration: none;
 }
 
-.pagination #current{
-    background-color:  #00ACCF;
+.pagination #current {
+    background-color: #00ACCF;
     display: inline-block;
     color: #fff;
     text-align: center;
@@ -1180,12 +1209,11 @@ dd {
     text-align: center;
 }
 
-.disabled{
-    border-color: #fff!important;
+.disabled {
+    border-color: #fff !important;
     color: #666;
 
 }
-
 
 /**
 * footer
@@ -1201,10 +1229,9 @@ dd {
     color: #999;
 }
 
-
 /* begin css tabs */
 
-ul#tabnav { 
+ul#tabnav {
     text-align: left; /* set to left, right or center */
     margin: 1em 0 1em 0; /* set margins as desired */
     font-size: 14px;
@@ -1218,65 +1245,169 @@ ul#tabnav li {
     display: inline;
 }
 
-
-
-ul#tabnav li a { 
+ul#tabnav li a {
     padding: 3px 10px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
     border: 1px solid #ddd; /* set border COLOR as desired; usually matches border color specified in #tabnav */
-    /*background-color: #fff;*/ /* set unselected tab background color as desired */
-    /*color: #000;*/ /* set unselected tab link color as desired */
+    /*background-color: #fff;*/
+    /* set unselected tab background color as desired */
+    /*color: #000;*/
+    /* set unselected tab link color as desired */
     margin-right: 0px; /* set additional spacing between tabs as desired */
     text-decoration: none;
     border-bottom: none;
 }
 
-ul#tabnav a:hover { 
-    color: #000!important;
+ul#tabnav a:hover {
+    color: #000 !important;
 }
 
 a#tab_active {
-    color: #000!important;
+    color: #000 !important;
 }
 
 /* end css tabs */
 
-
-
-
 /* Base Superbox Styles ******************************************************************/
-#superbox-overlay{position:fixed;top:0;left:0;z-index:9998;width:100%;height:100%;}
-#superbox-wrapper{position:fixed;z-index:9999;top:0;display:table;width:100%;height:100%;}
-#superbox-container{position:relative;display:table-cell;width:100%;height:100%;margin:0;padding:0;vertical-align:middle;}
-#superbox{margin:0 auto;padding:0;}
-#superbox-container .loading{margin:0;text-align:center;}
+#superbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    width: 100%;
+    height: 100%;
+}
+
+#superbox-wrapper {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+#superbox-container {
+    position: relative;
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+#superbox {
+    margin: 0 auto;
+    padding: 0;
+}
+
+#superbox-container .loading {
+    margin: 0;
+    text-align: center;
+}
 
 /* IE7 */
-*:first-child+html #superbox-container{position:absolute;top:50%;display:block;height:auto;}
-*:first-child+html #superbox{position:relative;top:-50%;display:block;}
+*:first-child+html #superbox-container {
+    position: absolute;
+    top: 50%;
+    display: block;
+    height: auto;
+}
+
+*:first-child+html #superbox {
+    position: relative;
+    top: -50%;
+    display: block;
+}
+
 /* IE6 - Thanks to Thickbox for IE expressions */
-* html #superbox-container{position:absolute;top:50%;display:block;height:auto;}
-* html #superbox{position:relative;top:-50%;display:block;}
-* html #superbox-overlay{position:absolute;height:expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight + 'px' : document.body.offsetHeight + 'px');}
-* html #superbox-wrapper{position:absolute;margin-top:expression(0 - parseInt(this.offsetHeight / 2) + (document.documentElement && document.documentElement.scrollTop || document.body.scrollTop) + 'px');}
+* html #superbox-container {
+    position: absolute;
+    top: 50%;
+    display: block;
+    height: auto;
+}
 
+* html #superbox {
+    position: relative;
+    top: -50%;
+    display: block;
+}
 
-#superbox-container .loading{text-align:center;font-size:40px;color:#fff;}
-#superbox{padding:10px;background:#fff;}
-#superbox-innerbox{padding:10px 0;}
-#superbox.image{text-align:center;}
+* html #superbox-overlay {
+    position: absolute;
+    height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight + 'px' : document.body.offsetHeight + 'px');
+}
+
+* html #superbox-wrapper {
+    position: absolute;
+    margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (document.documentElement && document.documentElement.scrollTop || document.body.scrollTop) + 'px');
+}
+
+#superbox-container .loading {
+    text-align: center;
+    font-size: 40px;
+    color: #fff;
+}
+
+#superbox {
+    padding: 10px;
+    background: #fff;
+}
+
+#superbox-innerbox {
+    padding: 10px 0;
+}
+
+#superbox.image {
+    text-align: center;
+}
 
 /* nolotiro Theme */
-#superbox-overlay{background:#e0e4cc;}
+#superbox-overlay {
+    background: #e0e4cc;
+}
+
 /*#superbox-overlay{background:#fff;}*/
-#superbox-container .loading{width:32px;height:32px;margin:0 auto;text-indent:-9999px;background:url(loader.gif) no-repeat 0 0;}
-#superbox .close a{float:right;padding:0 5px;line-height:20px;background:#333;cursor:pointer;}
-#superbox .close a span{color:#fff;}
-#superbox .nextprev a{float:left;margin-right:5px;padding:0 5px;line-height:20px;background:#333;cursor:pointer;color:#fff;}
-#superbox .nextprev .disabled{background:#ccc;cursor:default;}
+#superbox-container .loading {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto;
+    text-indent: -9999px;
+    background: url(loader.gif) no-repeat 0 0;
+}
 
+#superbox .close a {
+    float: right;
+    padding: 0 5px;
+    line-height: 20px;
+    background: #333;
+    cursor: pointer;
+}
 
-.xdebug-var-dump{
+#superbox .close a span {
+    color: #fff;
+}
+
+#superbox .nextprev a {
+    float: left;
+    margin-right: 5px;
+    padding: 0 5px;
+    line-height: 20px;
+    background: #333;
+    cursor: pointer;
+    color: #fff;
+}
+
+#superbox .nextprev .disabled {
+    background: #ccc;
+    cursor: default;
+}
+
+.xdebug-var-dump {
     clear: both;
     border: 1px silver solid;
     padding: 4px;
 }
+
+

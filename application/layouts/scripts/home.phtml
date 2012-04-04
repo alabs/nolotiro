@@ -1,95 +1,120 @@
-<?php include_once("header_common.phtml");?>
-    <body>
-        <div class="container">
-            <div id="header">
-                <div class="user_login_box">
-                    <?php
-                    $auth = Zend_Auth::getInstance ();
-                    if (!$auth->hasIdentity()) {
+<?php include_once("header_common.phtml"); ?>
+<body>
+<div class="container">
+    <div id="header">
 
-                        echo '<a href="/' . $this->lang . '/user/register">' . $this->translate('new user') . '</a> ' .
-                        $this->translate('or') . ' ';
-                        echo '<a href="/' . $this->lang . '/auth/login">' . $this->translate('login') . '</a>';
-                    } else {
+        <div id="select_language_box">
+            <?php
+            $langs = Zend_Registry::get("languages");
+            $activelangs = Zend_Registry::get("activelangs");
+            foreach ($langs as $lang => $name):
+                $langlink = "/$lang/index/setlang";
+                if ($activelangs[$lang] == 1) {
+                    $beta = " beta";
+                    $beta_lang = "<span class='beta_lang'></span>";
+                    if ($this->lang == $lang) $langlink = "/$lang/page/translate?lang=$lang";
+                } else {
+                    $beta = $beta_lang = "";
+                }
+                ?>
+                <a class="lang<?=($this->lang == $lang) ? " active" : ""?>" href='<?=$langlink?>'><span
+                    class="flag <?=$lang . $beta?>"></span><?=$beta_lang?><span ><img src="/images/flags/<?=$lang?>.gif" alt="<?=$name?>">
+                    &nbsp;<?=$name?>
+                   </span></a>
+                <?php endforeach;?>
+            <a href='/<?php echo $this->lang?>/page/translate'><?php echo $this->translate('Other');?>...</a>
+        </div>
 
-                        $auth_username = $auth->getIdentity()->username;
-                        $auth_userid = $auth->getIdentity()->id;
+        <div class="user_login_box">
+            <?php
+            $auth = Zend_Auth::getInstance();
+            if (!$auth->hasIdentity()) {
 
-                        echo $this->translate('hello,') . '<b>&nbsp;<a href="/' .
-                        $this->lang . '/profile/' . $this->escape($auth_username) . '">' . $this->escape($auth_username) . '</a></b> ';
+                echo '<a href="/' . $this->lang . '/user/register">' . $this->translate('new user') . '</a> ' .
+                    $this->translate('or') . ' ';
+                echo '<a href="/' . $this->lang . '/auth/login">' . $this->translate('login') . '</a>';
+            } else {
 
-                        //check messages
-                        // if ( $this->checkMessages > 0) {
-                        echo '| <a title="' . $this->translate('new messages') . '" href="/' . $this->lang . '/message/received">
+                $auth_username = $auth->getIdentity()->username;
+                $auth_userid = $auth->getIdentity()->id;
+
+                echo $this->translate('hello,') . '<b>&nbsp;<a href="/' .
+                    $this->lang . '/profile/' . $this->escape($auth_username) . '">' . $this->escape($auth_username) . '</a></b> ';
+
+                //check messages
+                // if ( $this->checkMessages > 0) {
+                echo '| <a title="' . $this->translate('new messages') . '" href="/' . $this->lang . '/message/received">
                             <img src="/images/icons/ico_email.gif" />&nbsp;<b>' . $this->checkMessages . '</b>
-                            </a> '; 
-                        //}
-                        echo'| ' . '<a href="/' . $this->lang . '/auth/logout">' .
-                        $this->translate('logout') . '</a>';
-                    }
-                    ?>
-                </div>
+                            </a> ';
+                //}
+                echo'| ' . '<a href="/' . $this->lang . '/auth/logout">' .
+                    $this->translate('logout') . '</a>';
+            }
+            ?>
+        </div>
 
-                <div class="site-name"><a href="/<?php echo $this->lang ?>" title="nolotiro.org home"><img src="/images/nolotiro_logo.png" alt="nolotiro.org" id="logo" /> nolotiro.org</a></div>
-                <div class='site-slogan'><?php echo $this->translate('no lo tiro, te lo regalo (sin condiciones)') ?></div>
 
-                 <div class="home_location_change">
+        <div class="site-name"><a href="/<?php echo $this->lang ?>" title="nolotiro.org home"><img
+            src="/images/nolotiro_logo.png" alt="nolotiro.org" id="logo"/> nolotiro.org</a></div>
+        <div class='site-slogan'><?php echo $this->translate('no lo tiro, te lo regalo (sin condiciones)') ?></div>
 
-                     <?php
-                     //if not empty suggestIP paint the button...
-                     if ($this->suggestIP != ', , '):  ?>
-                    <div class="ad_create_tab ad_create_tab_home">
+        <div class="home_location_change">
+
+            <?php
+            //if not empty suggestIP paint the button...
+            if ($this->suggestIP != ', , '):  ?>
+                <div class="ad_create_tab ad_create_tab_home">
                     <?php echo
-                        '<a href="/'.$this->lang.'/location/change2/?location='.$this->escape($this->suggestIP).'" > '.
-                                $this->translate('View ads in').' '.$this->suggestIP .'</a>';?>
-                     </div>
-                     <?php  endif;?>
+                    '<a href="/' . $this->lang . '/location/change2/?location=' . $this->escape($this->suggestIP) . '" > ' .
+                    $this->translate('View ads in') . ' ' . $this->suggestIP . '</a>';?>
+                </div>
+                <?php endif;?>
 
-                     <p class="ad_change_location_home"> <?php echo
-                        '<a href="/'.$this->lang.'/location/change'.'" > '.
-                                $this->translate('change location').' </a>';?></p>
-                     
-                 </div>
-                
-
-
-            </div>
-
-            <?php echo $this->layout()->content; ?>
-            <?php include_once("footer_common.phtml");?>
+            <p class="ad_change_location_home"> <?php echo
+                '<a href="/' . $this->lang . '/location/change' . '" > ' .
+                $this->translate('change location') . ' </a>';?></p>
 
         </div>
 
-        <script type="text/javascript">
-            var uservoiceOptions = {
-                key: 'nolotiro',
-                host: 'nolotiro.uservoice.com',
-                forum: '<?
-                        if ($this->lang == 'es') {
-                            echo '30282';
-                        }
 
-                        if ($this->lang == 'en') {
-                            echo '76487';
-                        }
-                        ?>',
-                                lang: '<?= $this->lang ?>',
-                                showTab: true,
-                                alignment: 'left',
-                                background_color: '#999',
-                                hover_color: '#00ACCF'
-                            };
-                            function _loadUserVoice() {
-                                var s = document.createElement('script');
-                                s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
-                                document.getElementsByTagName('head')[0].appendChild(s);
-                            }
-                            _loadSuper = window.onload;
-                            window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
-        </script>
+    </div>
+
+    <?php echo $this->layout()->content; ?>
+    <?php include_once("footer_common.phtml");?>
+
+</div>
+
+<script type="text/javascript">
+    var uservoiceOptions = {
+        key:'nolotiro',
+        host:'nolotiro.uservoice.com',
+        forum:'<?
+        if ($this->lang == 'es') {
+            echo '30282';
+        }
+
+        if ($this->lang == 'en') {
+            echo '76487';
+        }
+        ?>',
+        lang:'<?= $this->lang ?>',
+        showTab:true,
+        alignment:'left',
+        background_color:'#999',
+        hover_color:'#00ACCF'
+    };
+    function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
+        document.getElementsByTagName('head')[0].appendChild(s);
+    }
+    _loadSuper = window.onload;
+    window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function () {
+        _loadSuper();
+        _loadUserVoice();
+    };
+</script>
 
 
-
-    </body>
+</body>
 </html>
-<? //=Zend_Version::VERSION; ?>
