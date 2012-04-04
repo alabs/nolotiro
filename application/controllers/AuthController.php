@@ -124,15 +124,12 @@ class AuthController extends Zend_Controller_Action {
         return $form;
     }
 
-    /**
-     * Log out - clear the session, then redirect to
-     * the log in page.
-     */
+
     public function logoutAction() {
         Zend_Auth::getInstance ()->clearIdentity();
         $this->session->logged_in = false;
         $this->session->username = false;
-        $this->_redirect('/');
+        $this->_redirect('/' . $this->lang);
     }
 
 }
