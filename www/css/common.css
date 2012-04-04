@@ -696,13 +696,14 @@ form.searchbox dl {
 .ad_create_tab_home {
     position: absolute;
     right: 0px;
-    top: -10px;
+    top: 0px;
 }
 
 .ad_change_location_home {
     position: absolute;
     right: 0px;
-    top: 20px;
+    top: 35px;
+    font-weight: bold !important;
 }
 
 .ad_create_tab a {
@@ -1073,9 +1074,10 @@ dd {
     width: 100%;
     margin-left: 0px;
     margin-right: 20px;
-    margin-bottom: 48px;
+    margin-bottom: 60px;
     position: relative;
     text-align: left;
+
 
 }
 

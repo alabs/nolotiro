@@ -1,4 +1,42 @@
-"no lo tiro, te lo regalo (sin condiciones)";"no lo tiro, te lo regalo (sin condiciones) fr"
+﻿#header
+"no lo tiro, te lo regalo (sin condiciones)";"Je ne le jette pas, je te l'offre (inconditionalement)"
+"new user";"Nouveaux membre"
+"or";"ou"
+"hello,";"salut"
+"logout";"sortir"
+"login";"acceder"
+
+#location
+
+#(VERY IMPORTANT TO PARSE THE XML API QUERY!)
+"Town";"Ville"
+"Choose your location";"Choix de votre location"
+"Choose your";"Choisis ton"
+"I can not connect to Yahoo geo service, sorry!";"Imposible de connecter sur le reseau Yahoo de géolocalisation"
+"No location found named:";"On n'a pas trouver des location nommée:"
+"This location is not a valid town. Please, try again.";"Cette location n'est pas valide. S'il vous plait, essayer à nouveau."
+
+
+"change location";"changer de ville"
+"Change your location";"Change ta location"
+"Please, write your location";"S'il vous plait, changer votre location"
+"Location:";"Location:"
+"give";"Donner cadeau"
+"want";"Je veux"
+"Create new ad";"Creer une nouvelle offre"
+"View ads in";"Voir des annonces à"
+"Posted on "; "Publié le"
+"by user "; "Par le membre"
+"page";"page"
+
+
+
+#footer
+"about";"à propos de"
+"faqs";"questions frequents"
+"developers";"developpeurs"
+
+
 "translate text";"Nolotiro.org is currently available in a few languages, but you can help us to translate it to your own language. Just choose it from the following list and filling the fields with the translated texts. You don't need to fill all the fields to submit the form, any help will be very appreciated.<br/><br/>If your language is not in the list, please contact us for adding it.<br/><br/>"
 "BetaTranslation";"This language translation is in testing phase. If you find a missing or wrong translation, please report it <a href='%s'>here</a>."
 
