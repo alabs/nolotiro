@@ -2,7 +2,6 @@
 <body>
 <div class="container">
     <div id="header">
-
         <div id="select_language_box">
             <?php
             $langs = Zend_Registry::get("languages");
@@ -18,7 +17,8 @@
                 }
                 ?>
                 <a class="lang<?=($this->lang == $lang) ? " active" : ""?>" href='<?=$langlink?>'><span
-                    class="flag <?=$lang . $beta?>"></span><?=$beta_lang?><span ><img src="/images/flags/<?=$lang?>.gif" alt="<?=$name?>">
+                    class="flag <?=$lang . $beta?>"></span><?=$beta_lang?><span><img src="/images/flags/<?=$lang?>.gif"
+                                                                                     alt="<?=$name?>">
                     &nbsp;<?=$name?>
                    </span></a>
                 <?php endforeach;?>
@@ -75,9 +75,16 @@
                 $this->translate('change location') . ' </a>';?></p>
 
         </div>
-
-
     </div>
+
+
+    <?php //if beta lang show info
+                           if ($this->advices):
+                               foreach ($this->advices as $name => $advice):?>
+                               <div id="advice_<?=$name?>" class="advice"><?=$advice?></div>
+                               <?php  endforeach; endif;
+                           ?>
+
 
     <?php echo $this->layout()->content; ?>
     <?php include_once("footer_common.phtml");?>

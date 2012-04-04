@@ -80,6 +80,15 @@
         </div>
     </div>
 
+    <?php //if beta lang show info
+                       if ($this->advices):
+                           foreach ($this->advices as $name => $advice):?>
+                           <div id="advice_<?=$name?>" class="advice"><?=$advice?></div>
+                           <?php  endforeach; endif;
+                       ?>
+
+
+
     <?php echo $this->layout()->content; ?>
     <?php include_once("footer_common.phtml");?>
 

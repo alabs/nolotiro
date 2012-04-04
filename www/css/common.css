@@ -556,6 +556,21 @@ a.actual {
     z-index: 200;
 }
 
+.advice {
+    position: relative;
+    display: block;
+    background: #FFFF99;
+    font-weight: bold;
+    padding: 5px;
+    width: auto;
+    font-size: 12px;
+    clear: both;
+    margin-bottom: 10px;
+}
+
+.close_advice a{
+    color: #000;
+}
 
 #select_language_box {
     position: absolute;
@@ -589,8 +604,7 @@ a.actual {
     text-decoration: none !important;
 }
 
-
-#select_language_box img{
+#select_language_box img {
     text-decoration: none !important;
     border: 0;
     right: 2px;
@@ -618,7 +632,6 @@ a.actual {
     color: #fff !important;
 
 }
-
 
 form.searchbox {
     /*    position: absolute;*/
