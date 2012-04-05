@@ -1,4 +1,4 @@
-no lo tiro, te lo regalo (sin condiciones);no lo tiro, te lo regalo (sin condiciones)
+"no lo tiro, te lo regalo (sin condiciones)";"no lo tiro, te lo regalo (sin condiciones)"
 
 #main layout
 "About";"Quant a"
@@ -31,7 +31,7 @@ no lo tiro, te lo regalo (sin condiciones);no lo tiro, te lo regalo (sin condici
 "User profile";"Perfil d'usuari"
 "Choose your password:";"Tria la teva contrasenya"
 "Insert your password (yep, again):";"Torna a escriure la contrasenya (sí, un altre cop):"
-"Please, fill this form to be a Foofind registered member:";"Si us plau, omple aquest formulari per ser usuari registrat de Foofind:"
+"Please, fill this form to be a nolotiro.org registered member:";"Si us plau, omple aquest formulari per ser usuari registrat de nolotiro.org:"
 "Nickname:";"Àlies:"
 "Edit your profile";"Modifica el teu perfil"
 "Your profile was edited succesfully!";"S'ha modificat el teu perfil!"
@@ -46,7 +46,7 @@ no lo tiro, te lo regalo (sin condiciones);no lo tiro, te lo regalo (sin condici
 "(If you are a new user, please";"(Si ets un nou usuari, si us plau"
 "register here";"registra't aquí"
 "Choose a nickname:";"Tria un àlies:"
-"Please, fill this form to be a Foofind registered member.";"Si us plau, omple aquest formulari per ser un usuari de Foofind."
+"Please, fill this form to be a nolotiro registered member.";"Si us plau, omple aquest formulari per ser un usuari de nolotiro.org."
 "User login";"Accedir"
 "Remember me";"Recorda'm"
 "Your location:";"La teva ubicació:"
@@ -60,7 +60,7 @@ no lo tiro, te lo regalo (sin condiciones);no lo tiro, te lo regalo (sin condici
 "Password:";"Contrasenya:"
 "'%password%' is less than 5 characters long";"%password% té menys de 5 caràcters"
 "The passwords entered do not match.";"Les contrasenyes no coincideixen."
-"Are you sure you want to delete your foofind account?";"Estàs segur de voler eliminar el teu compte de foofind?"
+"Are you sure you want to delete your nolotiro account?";"Estàs segur de voler eliminar el teu compte de nolotiro?"
 "Yes";"Sí"
 "Your account has been deleted.";"El teu compte ha estat eliminat."
 "Nice to hear that";"Ens n'alegrem"
@@ -68,22 +68,21 @@ no lo tiro, te lo regalo (sin condiciones);no lo tiro, te lo regalo (sin condici
 "edit profile";"editar perfil"
 "User name:";"Nom usuari:"
 "Member since:";"Membre des de:"
-"Last 5 comments:";"Darrers 5 comentaris:"
 "Location:";"Ubicació:"
-"Delete your Foofind account";"Eliminar el teu compte de Foofind"
+"Delete your nolotiro account";"Eliminar el teu compte de nolotiro"
 "Forgot your password?";"Has oblidat la teva contrasenya ?"
 "Wrong email or password, please try again";"Adreça de correu o contrasenya errònia. Prova-ho de nou"
 "Welcome";"Benvingut"
 "Please, click on this url to finish your register process:";"Si us plau, fes click en aquest enllaç per completar el teu procés de registre:"
 "Sorry, this token does not exist or has been already used";"Ho sentim, aquest token no existeix o ja ha estat utilitzat"
 ", confirm your email";", comfirma el teu email"
-", restore your foofind access";", restaura el teu accés a foofind"
+", restore your nolotiro access";", restaura el teu accés a nolotiro"
 "Please, enter your email address. An email to recover your access will be sent to you.";"Si us plau, introdueix el teu email. T'enviarem un missatge per recuperar l'accés."
-"Check your inbox email to restore your Foofind access";"Comprova el teu correu per recuperar el teu accés a Foofind"
+"Check your inbox email to restore your nolotiro access";"Comprova el teu correu per recuperar el teu accés a nolotiro"
 "Check your inbox email to finish the register process";"Comprova la teva bústia de correu per completar el procés de registre"
-"Somebody, probably you, wants to restore your foofind access. Click on this url to restore your foofind account:";"Algú, probablement tú, ha sol·licitat restaurar l'accés al teu compte de Foofind. Clica sobre aquesta url per recuperar el teu compte:"
+"Somebody, probably you, wants to restore your nolotiro access. Click on this url to restore your nolotiro account:";"Algú, probablement tú, ha sol·licitat restaurar l'accés al teu compte de nolotiro.org. Clica sobre aquesta url per recuperar el teu compte:"
 "Otherwise, ignore this message.";"En cas contrari, ignora aquest missatge."
-"The foofind team.";"L'equip de Foofind"
+"The nolotiro.org team.";"L'equip de nolotiro.org"
 "This user does not exist";"L'usuari no existeix"
 "You are now logged in,";"Has iniciat sessió,"
 "(If you already are a registered user, please";"(Si ja ets un usuari registrat, si us plau"
@@ -94,13 +93,18 @@ no lo tiro, te lo regalo (sin condiciones);no lo tiro, te lo regalo (sin condici
 "Please, login to vote";"Si us plau, accedeix per votar"
 "Please, login to comment";"Si us plau, accedeix per afegir un comentari"
 "Sorry, we are experiencing technical problems with the %s service.";"Ens sap greu, estem tenint problemes técnics amb el servei de %s"
+"Choose a username:";"escull el nom d´usuari"
+"Choose a password (5 or more characters):";"escull una contrasenya( no més de 5 caràcters)"
+"This username is taken. Please, try again.";"Aquest nom d´usuari ja existeix. Si us plau, tria´n un altre"
+"The nolotiro.org team.";"l´Equip de nolotiro.org"
+"Welcome,";"benvingut,"
+"Change your nickname:";"canvia el teu nom d´usuari"
+
 
 
 
 #contact
 "Contact form";"Formulari de contacte"
-"Note: If you are claiming for a link removal, you must use <a href='/en/page/complaint'>report link form</a>.";"Important: Si desitges reclamar la supressió d'un ellaç, hauràs d'utilitzar exclusivament el <a href='/ca/page/complaint'>formulari de reclamació</a>."
-"Complaints done trough this form will be ignored.";"Les reclamacions realitzades a través d'aquest formulari seran ignorades."
 "Your email:";"El teu email:"
 "Your message:";"El teu missatge:"
 "Please, insert the 5 characters shown:";"Si us plau, introdueix els 5 caracters mostrats:"
@@ -120,13 +124,11 @@ no lo tiro, te lo regalo (sin condiciones);no lo tiro, te lo regalo (sin condici
 
 
 
-#error
-"Foofind is under maintenance. Please, come back later.";"Foofind està aturat per manteniment. Si us plau, torna-ho a provar més tard."
-"This link does not exist or may have been deleted!";"Aquest enllaç no existeix o ha estat eliminat!"
+
 
 #translate
 "Translate";"Traduïr"
-"Help us to translate Nolotiro to your language";"Ajudans a traduïr Foofind a la teva llengua"
+"Help us to translate nolotiro.org to your language";"Ajudans a traduïr nolotiro.org a la teva llengua"
 "help to translate";"ajuda a traduir"
 "translate text";"Actualment, Nolotiro.org està disponible en poques llengues, però tu pots ajudar-nos a traduïr-lo a la teva. Tria de la llista la llengua que es troba a continuació i omple els camps amb els textos traduïts. No cal omplir tots els camps, qualsevol aportació que puguis realitzar serà de gran ajuda.<br/><br/>Si no trobes la teva llengua a la llista, posa't en contacte amb nosaltres per a afegir-la."
 "Choose language";"Tria llengua"
@@ -157,3 +159,18 @@ no lo tiro, te lo regalo (sin condiciones);no lo tiro, te lo regalo (sin condici
 "by user ";"per l'usuari"
 "page";"pàgina"
 "second hand";"segona mà"
+"second hand and news";"segona mà i nou"
+"about";"referent a"
+"contact";"contactes"
+"terms of use";"termes d´ús"
+"All the ads";"tots els anuncis"
+"all the ads";"tots el anuncis"
+"donate";"donació"
+"facebook group";"grup de facebook"
+"Please, write your message";"si us plau, escriu el teu missatge"
+"Please, insert the 4 characters shown:";"si us plau, introdueix els 4 caràcters que es mostren, que apareixen"
+
+
+
+
+
