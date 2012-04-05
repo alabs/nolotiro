@@ -10,15 +10,25 @@
     <meta name="google-site-verification" content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk"/>
     <?php
     //crawl but don't index the / page (to not appear on search engines, crawl /es or /en)
-    if($this->metaRobots){
+    if ($this->metaRobots) {
         $this->headMeta()->appendName('robots', $this->metaRobots);
     }
     //set hreflang and canonical urls for best multilanguage indexing by crawlers
     if ($this->lang == 'es') {
         $this->headLink(array('rel' => 'alternate', 'hreflang' => 'en', 'href' => str_replace('/es', '/en', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'fr', 'href' => str_replace('/es', '/fr', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'de', 'href' => str_replace('/es', '/de', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'ca', 'href' => str_replace('/es', '/ca', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'nl', 'href' => str_replace('/es', '/nl', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'pt', 'href' => str_replace('/es', '/pt', $_SERVER['SCRIPT_URI'])), 'APPEND');
     }
     if ($this->lang == 'en') {
         $this->headLink(array('rel' => 'alternate', 'hreflang' => 'es', 'href' => str_replace('/en', '/es', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'fr', 'href' => str_replace('/es', '/fr', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'de', 'href' => str_replace('/es', '/de', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'ca', 'href' => str_replace('/es', '/ca', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'nl', 'href' => str_replace('/es', '/nl', $_SERVER['SCRIPT_URI'])), 'APPEND');
+        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'pt', 'href' => str_replace('/es', '/pt', $_SERVER['SCRIPT_URI'])), 'APPEND');
     }
     if ($this->canonicalUrl) {
         $this->headLink(array('rel' => 'canonical', 'href' => $this->canonicalUrl), 'APPEND');
@@ -38,21 +48,21 @@
     <script type="text/javascript" src="/js/jquery.min.js"></script>
 
     <?php
-    echo $this->headMeta() .PHP_EOL;
+    echo $this->headMeta() . PHP_EOL;
     echo $this->headLink() . PHP_EOL;
-    echo $this->headScript() .PHP_EOL;
+    echo $this->headScript() . PHP_EOL;
     ?>
     <script type="text/javascript">
         if (typeof jQuery == 'defined') {
-            $(function() {
-                        $.superbox.settings = {
-                            closeTxt: "<?= $this->translate('Close') ?>",
-                            loadTxt: "<?= $this->translate('Loading') ?>...",
-                            nextTxt: "<?= $this->translate('Next') ?>",
-                            prevTxt: "<?= $this->translate('Previous') ?>"
-                        };
-                        $.superbox();
-                    });
+            $(function () {
+                $.superbox.settings = {
+                    closeTxt:"<?= $this->translate('Close') ?>",
+                    loadTxt:"<?= $this->translate('Loading') ?>...",
+                    nextTxt:"<?= $this->translate('Next') ?>",
+                    prevTxt:"<?= $this->translate('Previous') ?>"
+                };
+                $.superbox();
+            });
         }
 
     </script>
@@ -62,7 +72,7 @@
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-141609-7']);
         _gaq.push(['_trackPageview']);
-        (function() {
+        (function () {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
@@ -73,6 +83,8 @@
     </script>
 
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-        {lang: '<?php echo $this->lang ?>'}
+        {
+            lang: '<?php echo $this->lang ?>'
+        }
     </script>
 </head>

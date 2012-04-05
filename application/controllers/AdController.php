@@ -75,6 +75,9 @@ class AdController extends Zend_Controller_Action
         $this->view->metaDescription = $this->view->translate($type) . ' ' . $this->view->woeidNameShort . '. ' . $this->view->translate('nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.');
 
 
+        //add link rel canonical , better seo
+        $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/woeid/' . $woeid . '/' . $ad_type . '/status/' . $status;
+
         //add the link to the proper rss to layout
         $this->view->headLink()->appendAlternate('http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/rss/feed/woeid/' . $woeid . '/ad_type/' . $ad_type . '/status/' . $status,
             'application/rss+xml',
@@ -298,7 +301,8 @@ class AdController extends Zend_Controller_Action
             $this->view->metaDescription = $this->view->page_title . '. ' . $this->view->ad['body'];
 
             //add link rel canonical , better seo
-            $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/ad/show/id/' . $id . '/' . $this->view->ad['title'] .'.html';
+            $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/ad/show/id/' . $id . '/' .
+               $this->view->slugTitle( $this->view->ad['title']);
 
             //if user logged in, show the comment form, if not show the login link
             $auth = Zend_Auth::getInstance();
