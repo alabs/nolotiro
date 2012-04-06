@@ -133,5 +133,5 @@
 "Choose language";"Scegli la lingua"
 "Your translation has been sent. Thanks for your help!";"La tua traduzione è stata inviata. Grazie per l'aiuto!"
 "Please, translate at least one text.";"Per favore, traduci almeno una frase prima di inviare la tua traduzione."
-"BetaTranslation";"Questa traduzione è in fase di prova. Qualora rilevassi degli errori o un testo senza traduzione, segnalacelo qui."
+"BetaTranslation";"Questa traduzione è in fase di prova. Qualora rilevassi degli errori o un testo senza traduzione, segnalacelo  <a href='%s'>qui</a>."
 "Other";"Altro"
