@@ -217,7 +217,7 @@ class LocationController extends Zend_Controller_Action {
 
             $appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
             $htmlString = "http://where.yahooapis.com/v1/places\$and(.q(" .
-                    urlencode($locationtemp) . "),.type(" . $town . "));count=30?appid=" . $appid . "&lang=" . $lang;
+                    urlencode($locationtemp) . "),.type(Town));count=30?appid=" . $appid . "&lang=" . $lang;
 
             $xml = simplexml_load_file($htmlString);
 

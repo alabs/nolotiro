@@ -19,6 +19,7 @@ class Zend_Controller_Action_Helper_GetLocationGeoIP extends Zend_Controller_Act
 
 
         //this ips are for dev env, to show something (localhost ip doesnt work)
+        $ip = '77.228.16.97';//madrid
         //$ip = '67.195.114.53';//yahoo slurp
         //$ip = '66.249.71.206';//google bot
 

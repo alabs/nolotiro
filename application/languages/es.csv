@@ -10,7 +10,7 @@
 "I can not connect to Yahoo geo service, sorry!";"No puedo conectar al servicio de geolocalización de Yahoo."
 "No location found named:";"No se encontró ninguna ubicación llamada"
 "This location is not a valid town. Please, try again.";"Esa ubicación no es una ciudad válida. Por favor, inténtalo de nuevo."
-
+"Or try with this similar locations:";"O inténtalo con estas ciudades de nombre similar:"
 
 "change location";"cambiar ciudad"
 "Change your location";"Cambia tu ciudad"
@@ -26,7 +26,7 @@
 
 ﻿#header
 "second hand";"segunda mano"
-#"no lo tiro, te lo regalo (sin condiciones)";"no lo tiro, te lo doy (sin condiciones)"
+"no lo tiro, te lo regalo (sin condiciones)";"no lo tiro, te lo regalo (sin condiciones)"
 "new user";"nuevo usuario"
 "or";"o"
 "hello,";"hola,"

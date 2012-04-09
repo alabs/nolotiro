@@ -131,6 +131,14 @@ if (count($this->mensajes) > 0) {
             </h2><br>
 
 
+            <h2>
+                <?php echo $this->translate('Or try with this similar locations:') ?><br>
+                <?php foreach ($this->similarLocations as $loc) : ?>
+                <a href="/<?=$this->lang;?>/location/change2/?location=<?=$loc['name']?>, <?=$loc['admin1']?>, <?=$loc['country']?>">
+                    <?=$loc['name']?>, <?=$loc['admin1']?>, <?=$loc['country']?></a><br>
+                <?php endforeach ?>
+            </h2><br>
+            
             <h5><i>"<?=$this->translate('A journey of a thousand miles starts with a single step') . '" ' .
                 $this->translate('Laozi.');?></i></h5>
         </div>

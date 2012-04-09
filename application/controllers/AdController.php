@@ -86,6 +86,7 @@ class AdController extends Zend_Controller_Action
 
         if (empty($this->view->ad)) {
             $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
+            $this->view->similarLocations = $this->_helper->similarLocations->suggest($this->view->suggestIP,$this->lang);
         }
 
 
@@ -127,11 +128,11 @@ class AdController extends Zend_Controller_Action
         $ad_type = $this->view->ad_type = $this->_request->getParam('ad_type');
 
         if ($ad_type == 'give') {
-            $this->view->page_title .= $this->view->translate('give') . ' - ';
+            $this->view->page_title .= $this->view->translate('give') . ' ';
             $type = 'give';
         }
         elseif ($ad_type == 'want') {
-            $this->view->page_title .= $this->view->translate('want') . ' - ';
+            $this->view->page_title .= $this->view->translate('want') . ' ';
             $type = 'want';
         }
         else {
@@ -147,7 +148,7 @@ class AdController extends Zend_Controller_Action
         $status = $f->filter($status);
 
         if ($status) {
-            $this->view->page_title .= $this->view->translate($status) . ' - ';
+            $this->view->page_title .= $this->view->translate($status) . ' ';
         }
 
 
@@ -265,9 +266,7 @@ class AdController extends Zend_Controller_Action
             $this->view->ad = $cacheAd->load((int)$id);
         }
 
-
         //add jquery and superbox to show modal photo window
-        $this->view->headScript()->appendFile('/js/jquery.min.js', 'text/javascript');
         $this->view->headScript()->appendFile('/js/jquery.superbox-min.js', 'text/javascript');
 
 
@@ -285,24 +284,24 @@ class AdController extends Zend_Controller_Action
 
         if ($this->view->ad != null) { // if the id ad exists then render the ad and comments
             if ($this->view->ad['type'] == 1) {
-                $this->view->page_title .= $this->view->translate('give') . ' ' . $this->view->translate('second hand') . ' - ';
+                $this->view->page_title .= $this->view->translate('give') . ' ' . $this->view->translate('second hand') . ' ';
             }
 
             if ($this->view->ad['type'] == 2) {
-                $this->view->page_title .= $this->view->translate('want') . ' ' . $this->view->translate('second hand') . ' - ';
+                $this->view->page_title .= $this->view->translate('want') . ' ' . $this->view->translate('second hand') . ' ';
             }
 
             $this->view->comments = $model->getComments($id);
             $this->view->woeidName = $this->_helper->woeid->name($this->view->ad['woeid_code'], $this->lang);
 
-            $this->view->page_title .= $this->view->ad['title'] . ' - ' . $this->view->woeidName;
+            $this->view->page_title .= $this->view->ad['title'] . ' ' . $this->view->woeidName;
 
             //add meta description to head
             $this->view->metaDescription = $this->view->page_title . '. ' . $this->view->ad['body'];
 
             //add link rel canonical , better seo
             $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/ad/show/id/' . $id . '/' .
-               $this->view->slugTitle( $this->view->ad['title']);
+                $this->view->slugTitle( $this->view->ad['title']);
 
             //if user logged in, show the comment form, if not show the login link
             $auth = Zend_Auth::getInstance();
