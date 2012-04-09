@@ -86,7 +86,7 @@ class AdController extends Zend_Controller_Action
 
         if (empty($this->view->ad)) {
             $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
-            $this->view->similarLocations = $this->_helper->similarLocations->suggest($this->view->suggestIP,$this->lang);
+            $this->view->similarLocations = $this->_helper->similarLocations->suggest($this->view->woeidName,$this->lang);
         }
 
 
