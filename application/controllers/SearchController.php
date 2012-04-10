@@ -13,6 +13,7 @@ class SearchController extends Zend_Controller_Action {
 
 
         $this->view->ad_type = $ad_type = $this->_getParam('ad_type');
+        $page = $this->_getParam('page');
         $qw = stripcslashes(strip_tags($this->_getParam('q')));
 
 
@@ -39,7 +40,7 @@ class SearchController extends Zend_Controller_Action {
         $this->view->page_title .= $this->view->translate('search');
         $this->view->page_title .= ' - '. $q;
 
-        $page = $this->_request->getParam('page');
+
 
         if ($page) {
             $this->view->page_title .= ' - '.$this->view->translate('page').' '.$page;
@@ -85,9 +86,7 @@ class SearchController extends Zend_Controller_Action {
             
             if (!is_null($result["matches"])) {
                 foreach ($result["matches"] as $doc => $docinfo) {
-
                     $resultzs[$doc] = $modelAd->getAdforSearch($doc, $ad_type, $this->location);
-                   
                 }
                  
                 $this->view->query_time = $result['time'];
