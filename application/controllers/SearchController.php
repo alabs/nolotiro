@@ -14,6 +14,7 @@ class SearchController extends Zend_Controller_Action {
 
         $this->view->ad_type = $ad_type = $this->_getParam('ad_type');
         $page = $this->_getParam('page');
+        var_dump($page);
         $qw = stripcslashes(strip_tags($this->_getParam('q')));
 
 
