@@ -25,18 +25,15 @@ class SearchController extends Zend_Controller_Action {
 
         
 //        $this->cl->SetFieldWeights(array('metadata' => 1, 'filename' => 10));
-//        $this->cl->SetSortMode(SPH_SORT_EXTENDED, "@weight DESC");
+        $this->cl->SetSortMode(SPH_SORT_EXTENDED, "@id DESC");
         $this->cl->SetMaxQueryTime(1000);
         //*************************************************************************************
         
         // Create a filter chain and add filters
         $encoding = array('quotestyle' => ENT_QUOTES, 'charset' => 'UTF-8');
-
         $f = new Zend_Filter();
-        //$f->addFilter(new Zend_Filter_HtmlEntities($encoding));
         $f->addFilter(new Zend_Filter_StringTrim());
         $f->addFilter(new Zend_Filter_StripTags($encoding));
-
         $q = $this->view->q = $f->filter(trim($qw));
 
         $this->view->page_title .= $this->view->translate('search');
@@ -46,13 +43,14 @@ class SearchController extends Zend_Controller_Action {
 
         if ($page) {
             $this->view->page_title .= ' - '.$this->view->translate('page').' '.$page;
-
         }
 
         
 
+        require_once APPLICATION_PATH . '/forms/Search.php';
+        $form = new Form_Search( );
 
-        $form = $this->_getSearchForm();
+
         if (!$q) { // check if query search is empty
             $this->_helper->_flashMessenger->addMessage($this->view->translate('Hey! Write something'));
             $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
@@ -70,15 +68,11 @@ class SearchController extends Zend_Controller_Action {
         $this->view->form = $form;
 
 
-        ////*****************************************        
-
-        //$conds = array('type'=>$ad_type);
-        //$this->cl->SetFilter($conds );
+        ////*****************************************
         $this->cl->SetFilter('type', array($ad_type) );
-        //die(var_dump($this->cl));
+        $this->cl->SetFilter('woeid_code', array($this->location) );
         $result = $this->cl->Query($q, 'ads');
 
-        //Zend_Debug::dump($result);
 
         if ($result === false) {
             echo "Query failed: " . $this->cl->GetLastError() . ".\n";
@@ -91,7 +85,8 @@ class SearchController extends Zend_Controller_Action {
             
             if (!is_null($result["matches"])) {
                 foreach ($result["matches"] as $doc => $docinfo) {
-                    $resultzs[$doc] = $modelAd->getAdforSearch($doc, $ad_type);
+
+                    $resultzs[$doc] = $modelAd->getAdforSearch($doc, $ad_type, $this->location);
                    
                 }
                  
@@ -113,14 +108,6 @@ class SearchController extends Zend_Controller_Action {
         }
     }
 
-    /**
-     *
-     * @return Form_Search
-     */
-    protected function _getSearchForm() {
-        require_once APPLICATION_PATH . '/forms/Search.php';
-        $form = new Form_Search( );
-        return $form;
-    }
+
 
 }

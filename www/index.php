@@ -14,7 +14,7 @@
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
 
-// Define path to foofind directory
+// Define path to nolotiro main directory
 defined('NOLOTIRO_PATH')
     || define('NOLOTIRO_PATH', realpath(dirname(__FILE__) . '/../'));
 

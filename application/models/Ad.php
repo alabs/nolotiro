@@ -53,24 +53,30 @@ class Model_Ad extends Zend_Db_Table_Abstract
         return $result;
     }
 
-    public function getAdforSearch($id, $ad_type)
+    public function getAdforSearch($id, $ad_type, $woeid)
     {
         $id = (int)$id;
         $ad_type = (int)$ad_type;
+        $woeid = (int)$woeid;
 
         $table = new Zend_Db_Table('ads');
         $select = $table->select()->setIntegrityCheck(false);
         $select->from(array('a' => 'ads'), array('a.*'));
-        $select->joinInner(array('u' => 'users'), 'a.user_owner = u.id', array('u.username'));
+        $select->joinLeft(array('u' => 'users'), 'a.user_owner = u.id', array('u.username'));
         $select->joinLeft(array('c' => 'commentsAdCount'), 'a.id = c.id_comment', array('c.count as comments_count'));
         $select->joinLeft(array('r' => 'readedAdCount'), 'a.id = r.id_ad', array('r.counter as readings_count'));
 
         $select->where('a.id = ?', $id);
         $select->where('a.type = ?', $ad_type);
+        $select->where('a.woeid_code = ?', $woeid);
 
         //show only if user is active and not blocked
         $select->where('u.active = ?', 1);
         $select->where('u.locked = ?', 0);
+
+
+        //order desc
+        $select->order('a.id DESC');
 
         if (!$table->fetchRow($select)) {
             $result = null;
@@ -78,6 +84,7 @@ class Model_Ad extends Zend_Db_Table_Abstract
             $result = $table->fetchRow($select)->toArray();
         }
 
+        //var_dump($result);
         return $result;
     }
 
