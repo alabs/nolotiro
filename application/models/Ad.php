@@ -46,12 +46,14 @@ class Model_Ad extends Zend_Db_Table_Abstract
 
         $result = $table->fetchRow($select);
 
-        if ($result != NULL) {
+        if ( !is_null($result)) {
             $result = $result->toArray();
         }
 
         return $result;
     }
+
+
 
     public function getAdforSearch($id, $ad_type, $woeid)
     {
@@ -70,21 +72,14 @@ class Model_Ad extends Zend_Db_Table_Abstract
         $select->where('a.type = ?', $ad_type);
         $select->where('a.woeid_code = ?', $woeid);
 
-        //show only if user is active and not blocked
+        //show only if user is active and not locked
         $select->where('u.active = ?', 1);
         $select->where('u.locked = ?', 0);
 
-
-        //order desc
-        $select->order('a.id DESC');
-
-        if (!$table->fetchRow($select)) {
-            $result = null;
-        } else {
+        if ( !is_null($table->fetchRow($select))) {
             $result = $table->fetchRow($select)->toArray();
         }
 
-        //var_dump($result);
         return $result;
     }
 

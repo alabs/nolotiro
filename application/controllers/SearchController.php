@@ -93,13 +93,6 @@ class SearchController extends Zend_Controller_Action {
                 $this->view->query_time = $result['time'];
                 $this->view->total_found = $result['total_found'];
 
-                //paginator
-                $page = $this->_request->getParam('page');
-
-                if( is_null($page)){ //fix for weird behaviour, nginx eats param value?
-                    $page = 1;
-                }
-
 
                 $paginator = Zend_Paginator::factory($resultzs);
                 $paginator->setDefaultScrollingStyle('Elastic');
