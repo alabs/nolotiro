@@ -23,7 +23,7 @@ class SearchController extends Zend_Controller_Action {
         $this->cl->SetMatchMode(SPH_MATCH_EXTENDED2);
         $this->cl->SetRankingMode(SPH_RANK_PROXIMITY);
 
-        
+
 //        $this->cl->SetFieldWeights(array('metadata' => 1, 'filename' => 10));
         $this->cl->SetSortMode(SPH_SORT_EXTENDED, "@id DESC");
         $this->cl->SetMaxQueryTime(1000);
@@ -94,7 +94,13 @@ class SearchController extends Zend_Controller_Action {
                 $this->view->total_found = $result['total_found'];
 
                 //paginator
-                $page = $this->_getParam('page');
+                $page = $this->_request->getParam('page');
+
+                if( is_null($page)){ //fix for weird behaviour, nginx eats param value?
+                    $page = 1;
+                }
+
+
                 $paginator = Zend_Paginator::factory($resultzs);
                 $paginator->setDefaultScrollingStyle('Elastic');
                 $paginator->setItemCountPerPage(20);
