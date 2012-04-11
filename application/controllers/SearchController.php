@@ -78,6 +78,10 @@ class SearchController extends Zend_Controller_Action {
         $this->cl->SetFilter('type', array($ad_type) );
         //$this->cl->SetFilter('woeid_code', array($this->location) );
         $this->cl->SetFilter('woeid_code', array($woeid) );
+
+        $itemsPerSphinxPage = 1000;
+        $offset = 0;
+        $this->cl->SetLimits( $offset, $itemsPerSphinxPage, MAX_RESULTS, MAX_HITS);
         $result = $this->cl->Query($q, 'ads');
 
 
