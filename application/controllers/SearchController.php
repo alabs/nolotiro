@@ -12,8 +12,16 @@ class SearchController extends Zend_Controller_Action {
         $this->view->mensajes = $this->_flashMessenger->getMessages();
 
 
-        $this->view->ad_type = $ad_type = $this->_getParam('ad_type');
-        $page = $this->_getParam('page');
+        $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
+
+        $page = $this->_request->getParam('page');
+        $woeid = $this->view->woeid = $this->_request->getParam('woeid');
+
+
+
+        $this->view->woeidName = $this->_helper->woeid->name($woeid, $this->lang);
+
+
         $qw = stripcslashes(strip_tags($this->_getParam('q')));
 
 
@@ -25,7 +33,7 @@ class SearchController extends Zend_Controller_Action {
         $this->cl->SetRankingMode(SPH_RANK_PROXIMITY);
 
 
-//        $this->cl->SetFieldWeights(array('metadata' => 1, 'filename' => 10));
+        //$this->cl->SetFieldWeights(array('metadata' => 1, 'filename' => 10));
         $this->cl->SetSortMode(SPH_SORT_EXTENDED, "@id DESC");
         $this->cl->SetMaxQueryTime(1000);
         //*************************************************************************************
@@ -38,15 +46,13 @@ class SearchController extends Zend_Controller_Action {
         $q = $this->view->q = $f->filter(trim($qw));
 
         $this->view->page_title .= $this->view->translate('search');
-        $this->view->page_title .= ' - '. $q;
-
+        $this->view->page_title .= '  '. $q . ' ' . $this->view->woeidName ;
 
 
         if ($page) {
-            $this->view->page_title .= ' - '.$this->view->translate('page').' '.$page;
+            $this->view->page_title .= ' '. $this->view->translate('page').' '.$page;
         }
 
-        
 
         require_once APPLICATION_PATH . '/forms/Search.php';
         $form = new Form_Search( );
@@ -54,12 +60,11 @@ class SearchController extends Zend_Controller_Action {
 
         if (!$q) { // check if query search is empty
             $this->_helper->_flashMessenger->addMessage($this->view->translate('Hey! Write something'));
-            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+            $this->_redirect('/' . $this->lang . '/woeid/' . $woeid . '/give');
             return;
         }
 
         $form->getElement('q')->setValue(trim($q));
-     
 
         $form->loadDefaultDecoratorsIsDisabled(false);
         foreach ($form->getElements() as $element) {
@@ -71,7 +76,8 @@ class SearchController extends Zend_Controller_Action {
 
         ////*****************************************
         $this->cl->SetFilter('type', array($ad_type) );
-        $this->cl->SetFilter('woeid_code', array($this->location) );
+        //$this->cl->SetFilter('woeid_code', array($this->location) );
+        $this->cl->SetFilter('woeid_code', array($woeid) );
         $result = $this->cl->Query($q, 'ads');
 
 
@@ -86,22 +92,21 @@ class SearchController extends Zend_Controller_Action {
             
             if (!is_null($result["matches"])) {
                 foreach ($result["matches"] as $doc => $docinfo) {
-                    $resultzs[$doc] = $modelAd->getAdforSearch($doc, $ad_type, $this->location);
+                    $resultzs[$doc] = $modelAd->getAdforSearch($doc, $ad_type, $woeid);
                 }
                  
                 $this->view->query_time = $result['time'];
                 $this->view->total_found = $result['total_found'];
 
-
                 $paginator = Zend_Paginator::factory($resultzs);
                 $paginator->setDefaultScrollingStyle('Elastic');
-                $paginator->setItemCountPerPage(20);
+                $paginator->setItemCountPerPage(10);
                 $paginator->setCurrentPageNumber($page);
 
                 $this->view->search = $paginator;
             } else {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Sorry, no results for search:') . ' <b>"' . $q . '"</b>');
-                $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+                $this->_redirect('/' . $this->lang . '/woeid/' . $woeid . '/give');
             }
         }
     }

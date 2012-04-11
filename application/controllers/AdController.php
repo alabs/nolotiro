@@ -31,6 +31,8 @@ class AdController extends Zend_Controller_Action
     {
         $this->view->userRole = $this->_helper->checkUserRole->check();
 
+        $this->view->location = $this->_helper->checklocation->check();
+
         $woeid = $this->_request->getParam('woeid');
         $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
 
