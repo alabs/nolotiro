@@ -73,8 +73,8 @@ class Model_Ad extends Zend_Db_Table_Abstract
         $select->where('a.woeid_code = ?', $woeid);
 
         //show only if user is active and not locked
-        $select->where('u.active = ?', 1);
-        $select->where('u.locked = ?', 0);
+        //$select->where('u.active = ?', 1);
+        //$select->where('u.locked = ?', 0);
 
         if ( !is_null($table->fetchRow($select))) {
             $result = $table->fetchRow($select)->toArray();
