@@ -15,15 +15,17 @@
     }
 
 
+
+    //create link rel alternates
     $langs = Zend_Registry::get("languages");
     $url = 'http://'.$_SERVER['SERVER_NAME'] .'/'. $_SERVER['REQUEST_URI'];
 
     foreach ($langs as $keyLang => $valLang) {
         if($keyLang !== $this->lang){
-            $this->headLink(array('rel' => 'alternate', 'hreflang' => $keyLang, 'href' => str_replace('/es', $keyLang, $url)), 'APPEND');
+            $this->headLink(array('rel' => 'alternate', 'hreflang' => $keyLang, 'href' => str_replace('/es', '/'.$keyLang, $url)), 'APPEND');
         }
     }
-    
+
 
     if ($this->canonicalUrl) {
         $this->headLink(array('rel' => 'canonical', 'href' => $this->canonicalUrl), 'APPEND');
