@@ -362,7 +362,7 @@ class AdController extends Zend_Controller_Action
                     //create thumbnail if image exists
                     if (!empty($formulario['photo'])) {
                         $photobrut = $formulario['photo'];
-                        $formulario['photo'] = $this->_createThumbnail($photobrut, '100', '90');
+                        $formulario['photo'] = $this->_createThumbnail($photobrut, '150', '150');
                     }
 
                     // Create a filter chain and add filters to title and body against xss, etc
@@ -694,11 +694,15 @@ class AdController extends Zend_Controller_Action
 
         //save original to right place
         $widthmax = 900;
+        $heightmax = 1000;
+
+        $image->resizeToHeightMax($heightmax);
         $image->resizeToWidthMax($widthmax);
         $image->save(NOLOTIRO_PATH . '/www/images/uploads/ads/original/' . $fileuniquename);
 
         //save thumb 100
         $image->resizeToWidth($x);
+        $image->resizeToHeight($y);
         $image->save(NOLOTIRO_PATH . '/www/images/uploads/ads/100/' . $fileuniquename);
 
         return $fileuniquename;

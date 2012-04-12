@@ -61,6 +61,8 @@ class PageController extends Zend_Controller_Action
 
     public function translateAction()
     {
+        $this->view->page_title .= $this->view->translate('Help us to translate nolotiro.org to your language');
+
         $request = $this->getRequest();
         $newlangs = array('ca'=>'Català', 'gl'=>'Galego','eu'=>'Euskara','nl'=>'Nederlands', 'de'=>'Deutsch', 'fr'=>'Français', 'pt'=>'Português', 'it'=>'Italiano');
 

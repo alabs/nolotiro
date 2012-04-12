@@ -68,7 +68,7 @@ class Form_AdCreate extends Zend_Form {
                     'checked' =>true
                     ));
 
-         $this->addElement ( 'captcha', 'captcha', array ('label' => 'Please, insert the 4 characters shown:', 'required' => true, 'captcha' => array ('captcha' => 'Image', 'wordLen' => 4, 'height' => 50, 'width' => 160, 'gcfreq' => 50, 'timeout' => 300, 'font' => NOLOTIRO_PATH . '/www/images/antigonimed.ttf', 'imgdir' => NOLOTIRO_PATH . '/www/images/captcha' ) ) );
+         $this->addElement ( 'captcha', 'captcha', array ('label' => 'Please, insert the 4 characters shown:', 'required' => true, 'captcha' => array ('captcha' => 'Image', 'wordLen' => 4, 'height' => 60, 'width' => 160, 'gcfreq' => 50, 'timeout' => 1000, 'font' => NOLOTIRO_PATH . '/www/images/antigonimed.ttf', 'imgdir' => NOLOTIRO_PATH . '/www/images/captcha' ) ) );
 
 
 		// add the submit button
