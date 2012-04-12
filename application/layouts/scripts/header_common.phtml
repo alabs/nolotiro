@@ -13,23 +13,18 @@
     if ($this->metaRobots) {
         $this->headMeta()->appendName('robots', $this->metaRobots);
     }
-    //set hreflang and canonical urls for best multilanguage indexing by crawlers
-    if ($this->lang == 'es') {
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'en', 'href' => str_replace('/es', '/en', $_SERVER['SCRIPT_URI'])), 'APPEND');
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'fr', 'href' => str_replace('/es', '/fr', $_SERVER['SCRIPT_URI'])), 'APPEND');
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'de', 'href' => str_replace('/es', '/de', $_SERVER['SCRIPT_URI'])), 'APPEND');
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'ca', 'href' => str_replace('/es', '/ca', $_SERVER['SCRIPT_URI'])), 'APPEND');
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'nl', 'href' => str_replace('/es', '/nl', $_SERVER['SCRIPT_URI'])), 'APPEND');
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'pt', 'href' => str_replace('/es', '/pt', $_SERVER['SCRIPT_URI'])), 'APPEND');
+
+
+    $langs = Zend_Registry::get("languages");
+    $url = 'http://'.$_SERVER['SERVER_NAME'] .'/'. $_SERVER['REQUEST_URI'];
+
+    foreach ($langs as $keyLang => $valLang) {
+        if($keyLang !== $this->lang){
+            $this->headLink(array('rel' => 'alternate', 'hreflang' => $keyLang, 'href' => str_replace('/es', $keyLang, $url)), 'APPEND');
+        }
     }
-    if ($this->lang == 'en') {
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'es', 'href' => str_replace('/en', '/es', $_SERVER['SCRIPT_URI'])), 'APPEND');
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'fr', 'href' => str_replace('/es', '/fr', $_SERVER['SCRIPT_URI'])), 'APPEND');
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'de', 'href' => str_replace('/es', '/de', $_SERVER['SCRIPT_URI'])), 'APPEND');
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'ca', 'href' => str_replace('/es', '/ca', $_SERVER['SCRIPT_URI'])), 'APPEND');
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'nl', 'href' => str_replace('/es', '/nl', $_SERVER['SCRIPT_URI'])), 'APPEND');
-        $this->headLink(array('rel' => 'alternate', 'hreflang' => 'pt', 'href' => str_replace('/es', '/pt', $_SERVER['SCRIPT_URI'])), 'APPEND');
-    }
+    
+
     if ($this->canonicalUrl) {
         $this->headLink(array('rel' => 'canonical', 'href' => $this->canonicalUrl), 'APPEND');
     }
