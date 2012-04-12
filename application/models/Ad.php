@@ -76,8 +76,9 @@ class Model_Ad extends Zend_Db_Table_Abstract
         //$select->where('u.active = ?', 1);
         //$select->where('u.locked = ?', 0);
 
-        if ( !is_null($table->fetchRow($select))) {
-            $result = $table->fetchRow($select)->toArray();
+        $result = $table->fetchRow($select);
+        if ( !is_null($result)) {
+            $result = $result->toArray();
         }
 
         return $result;
@@ -108,6 +109,7 @@ class Model_Ad extends Zend_Db_Table_Abstract
      * @param  int $woeid
      * @param  string $ad_type
      * @param  string $status
+     * @param  int  $limit
      * @return array list of ads with this params
      */
     public function getAdList($woeid, $ad_type, $status = 'give', $limit = NULL)
@@ -154,9 +156,11 @@ class Model_Ad extends Zend_Db_Table_Abstract
         return $result;
     }
 
+
+
+
     public function getAdListAll($ad_type, $status = NULL)
     {
-
         if ($ad_type === 'give') {
             $ad_type = 1;
         }
@@ -189,9 +193,10 @@ class Model_Ad extends Zend_Db_Table_Abstract
         return $result;
     }
 
+
+
     public function getAdListAllHome($ad_type)
     {
-
         $table = new Zend_Db_Table('ads');
         $select = $table->select()->setIntegrityCheck(false);
         $select->from(array('a' => 'ads'), array('a.*'));
@@ -213,9 +218,10 @@ class Model_Ad extends Zend_Db_Table_Abstract
     }
 
 
+
+
     public function getRankingWoeid($limit = 30)
     {
-
         $table = new Zend_Db_Table('ads');
         $query = "SELECT woeid_code, COUNT(ads.id) AS ads_count FROM ads WHERE type = 1
         GROUP BY woeid_code ORDER BY ads_count DESC LIMIT $limit;";
@@ -225,9 +231,10 @@ class Model_Ad extends Zend_Db_Table_Abstract
     }
 
 
+
+
     public function getRankingUsers($limit = 40)
     {
-
         $table = new Zend_Db_Table('ads');
         $query = "SELECT ads.user_owner, users.username AS user_name, COUNT(ads.id) AS ads_count FROM ads, users WHERE type = 1 AND
         ads.user_owner = users.id
@@ -238,12 +245,8 @@ class Model_Ad extends Zend_Db_Table_Abstract
     }
 
 
-    /**
-     * Fetch a list of ads where id_owner user matches
-     *
-     * @param  int $woeid
-     * @return object
-     */
+
+
     public function getAdUserlist($id)
     {
         $ads_user = new Zend_Db_Table('ads');
@@ -254,6 +257,8 @@ class Model_Ad extends Zend_Db_Table_Abstract
         $result = $ads_user->getAdapter()->query($query)->fetchAll();
         return $result;
     }
+
+
 
 
     public function getCountAdWantUser($id)
@@ -268,6 +273,8 @@ class Model_Ad extends Zend_Db_Table_Abstract
     }
 
 
+
+
     public function countReadedAd($id)
     {
 
@@ -280,6 +287,8 @@ class Model_Ad extends Zend_Db_Table_Abstract
         return $result;
     }
 
+
+
     public function updateReadedAd($id)
     {
 
@@ -287,7 +296,7 @@ class Model_Ad extends Zend_Db_Table_Abstract
         $id = (int)$id;
         $sql = "INSERT INTO readedAdCount   ( id_ad, counter ) VALUES  ( $id , 1 )
                             ON DUPLICATE KEY UPDATE  counter=counter+1";
-        $result = $table->getAdapter()->query($sql)->fetch();
+        $table->getAdapter()->query($sql)->fetch();
     }
 
 }
