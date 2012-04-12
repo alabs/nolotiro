@@ -362,7 +362,7 @@ class AdController extends Zend_Controller_Action
                     //create thumbnail if image exists
                     if (!empty($formulario['photo'])) {
                         $photobrut = $formulario['photo'];
-                        $formulario['photo'] = $this->_createThumbnail($photobrut, '150', '150');
+                        $formulario['photo'] = $this->_createThumbnail($photobrut, '100', '90');
                     }
 
                     // Create a filter chain and add filters to title and body against xss, etc
