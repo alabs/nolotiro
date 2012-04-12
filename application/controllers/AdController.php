@@ -566,7 +566,7 @@ class AdController extends Zend_Controller_Action
                 // if photo not empty then show and let change it
                 $current_photo = $advalues['photo'];
                 if ($current_photo) {
-                    $this->view->current_photo = ' <img alt="' . $title . '" src="/images/uploads/ads/100/' . $current_photo . '" />';
+                    $this->view->current_photo = ' <img src="/images/uploads/ads/100/' . $current_photo . '" />';
                 }
 
                 $form->populate($formData);
@@ -582,7 +582,7 @@ class AdController extends Zend_Controller_Action
                 $current_photo = $advalues['photo'];
 
                 if ($current_photo) {
-                    $this->view->current_photo = ' <img alt="' . $title . '" src="/images/uploads/ads/100/' . $current_photo . '" />';
+                    $this->view->current_photo = ' <img  src="/images/uploads/ads/100/' . $current_photo . '" />';
                 }
                 $form->populate($ad->getAd($id));
             }
@@ -695,14 +695,14 @@ class AdController extends Zend_Controller_Action
         //save original to right place
         $widthmax = 900;
         $heightmax = 1000;
-
         $image->resizeToHeightMax($heightmax);
         $image->resizeToWidthMax($widthmax);
         $image->save(NOLOTIRO_PATH . '/www/images/uploads/ads/original/' . $fileuniquename);
 
-        //save thumb 100
-        $image->resizeToWidth($x);
+        //save thumb
         $image->resizeToHeight($y);
+        $image->resizeToWidth($x);
+
         $image->save(NOLOTIRO_PATH . '/www/images/uploads/ads/100/' . $fileuniquename);
 
         return $fileuniquename;
