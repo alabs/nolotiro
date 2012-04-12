@@ -22,7 +22,7 @@
 
     foreach ($langs as $keyLang => $valLang) {
         if($keyLang !== $this->lang){
-            $this->headLink(array('rel' => 'alternate', 'hreflang' => $keyLang, 'href' => str_replace('/es', '/'.$keyLang, $url)), 'APPEND');
+            $this->headLink(array('rel' => 'alternate', 'hreflang' => $keyLang, 'href' => str_replace('/'.$this->lang , $keyLang, $url)), 'APPEND');
         }
     }
 
