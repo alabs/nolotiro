@@ -78,7 +78,7 @@ $auth = Zend_Auth::getInstance ();
            <?php if ($this->ad['status'] != 'delivered'): ?>
 	   <?php echo $this->translate('Interested?') ?>&nbsp;
 <a href="/<?php echo $this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'].'/subject/'.$this->slugTitle($this->escape($this->ad['title']))
-        ?>"><?php echo $this->translate('Send a private message to the owner') ?> <img src="/images/email_send.png" alt="send a message"/></a>
+        ?>" rel="nofollow"><?php echo $this->translate('Send a private message to the owner') ?> <img src="/images/email_send.png" alt="send a message"/></a>
            <?php endif;?>
 
 
