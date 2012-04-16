@@ -109,7 +109,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routeAdAll = new Zend_Controller_Router_Route( ':language/ad/listall/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'listall'));
         $routeAdListUSer = new Zend_Controller_Router_Route( ':language/ad/listuser/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'listuser'));
         $routeAdCreate = new Zend_Controller_Router_Route( ':language/ad/create/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'create'));
-        $routeAdEdit = new Zend_Controller_Router_Route( ':language/ad/create/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'edit'));
+        $routeAdEdit = new Zend_Controller_Router_Route( ':language/ad/edit/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'edit'));
         $routeAdDelete = new Zend_Controller_Router_Route( ':language/ad/delete/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'delete'));
 
 
