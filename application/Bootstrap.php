@@ -24,8 +24,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->setEncoding('UTF-8');
         $view->doctype('XHTML1_STRICT');
 
-        //ZendX_JQuery::enableView($view);
-
     }
 
 
@@ -92,7 +90,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 
 
-    protected function _initPlugins()
+    protected function _initFront()
     {
         Zend_Controller_Action_HelperBroker::addPath( APPLICATION_PATH .'/controllers/helpers');
 
@@ -107,9 +105,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //set the user profile route
         $routeProfile = new Zend_Controller_Router_Route( ':language/profile/:username', array( 'language' => null, 'controller' => 'user', 'action' => 'profile') );
 
+        $routeAd = new Zend_Controller_Router_Route( ':language/ad/:id/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'show'));
+        $routeAdAll = new Zend_Controller_Router_Route( ':language/ad/listall/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'listall'));
+
+
         $router->addRoute ( 'default', $routeLang );//important, put the default route first!
         $router->addRoute ( 'woeid/woeid/ad_type', $routeWoeid );
         $router->addRoute ( 'profile/username', $routeProfile );
+        $router->addRoute ( 'ad/id', $routeAd );
+        $router->addRoute ( 'ad/listall', $routeAdAll );
 
         $front->setRouter ( $router );
         return $front;
