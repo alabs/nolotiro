@@ -171,6 +171,7 @@ class AdController extends Zend_Controller_Action
         $paginator->setCurrentPageNumber($page);
 
         $this->view->paginator = $paginator;
+        $this->view->paginator = $paginator;
     }
 
 
@@ -301,7 +302,7 @@ class AdController extends Zend_Controller_Action
             $this->view->metaDescription = $this->view->page_title . '. ' . $this->view->ad['body'];
 
             //add link rel canonical , better seo
-            $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/ad/show/id/' . $id . '/' .
+            $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/ad/' . $id . '/' .
                 $this->view->slugTitle($this->view->ad['title']);
 
             //if user logged in, show the comment form, if not show the login link
@@ -550,7 +551,7 @@ class AdController extends Zend_Controller_Action
 
 
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad edited succesfully!'));
-                $this->_redirect('/' . $this->lang . '/ad/show/id/' . $id);
+                $this->_redirect('/' . $this->lang . '/ad/' . $id);
             } else {
 
                 $id = $this->_getParam('id');
