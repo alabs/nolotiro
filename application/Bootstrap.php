@@ -109,6 +109,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routeAdAll = new Zend_Controller_Router_Route( ':language/ad/listall/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'listall'));
         $routeAdListUSer = new Zend_Controller_Router_Route( ':language/ad/listuser/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'listuser'));
         $routeAdCreate = new Zend_Controller_Router_Route( ':language/ad/create/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'create'));
+        $routeAdEdit = new Zend_Controller_Router_Route( ':language/ad/create/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'edit'));
+        $routeAdDelete = new Zend_Controller_Router_Route( ':language/ad/delete/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'delete'));
 
 
         $router->addRoute ( 'default', $routeLang );//important, put the default route first!
@@ -118,6 +120,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute ( 'ad/listall', $routeAdAll );
         $router->addRoute ( 'ad/listall', $routeAdListUSer);
         $router->addRoute ( 'ad/create', $routeAdCreate);
+        $router->addRoute ( 'ad/edit', $routeAdEdit);
+        $router->addRoute ( 'ad/delete', $routeAdDelete);
 
         $front->setRouter ( $router );
         return $front;
