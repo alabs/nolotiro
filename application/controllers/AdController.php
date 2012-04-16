@@ -25,8 +25,6 @@ class AdController extends Zend_Controller_Action
     }
 
 
-
-
     public function listAction()
     {
         $this->view->userRole = $this->_helper->checkUserRole->check();
@@ -37,13 +35,15 @@ class AdController extends Zend_Controller_Action
         $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
 
         if ($ad_type == 'give') {
-            $this->view->page_title .= $this->view->translate('give') . ' ' . $this->view->translate('second hand') . ' - ';
+            $this->view->page_title .= $this->view->translate('give') . ' ' . $this->view->translate('second hand') . ' ';
             $type = 'give';
         }
         elseif ($ad_type == 'want') {
-            $this->view->page_title .= $this->view->translate('want') . ' ' . $this->view->translate('second hand') . ' - ';
+            $this->view->page_title .= $this->view->translate('want') . ' ' . $this->view->translate('second hand') . ' ';
             $type = 'want';
         }
+
+
         else {
             //dont accept other values than give/want
             $this->getResponse()->setHttpResponseCode(404);
@@ -52,7 +52,7 @@ class AdController extends Zend_Controller_Action
 
 
         }
-
+        $this->view->page_title .= ' '. $this->view->translate('free') .' ';
 
         $this->view->status = $status = $this->_request->getParam('status');
         $f = new Zend_Filter();
@@ -60,7 +60,7 @@ class AdController extends Zend_Controller_Action
         $status = $f->filter($status);
 
         if ($status) {
-            $this->view->page_title .= $this->view->translate($status) . ' - ';
+            $this->view->page_title .= $this->view->translate($status) . ' ';
         } else {
             $status = 'available';
         }
@@ -88,7 +88,7 @@ class AdController extends Zend_Controller_Action
 
         if (empty($this->view->ad)) {
             $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
-            $this->view->similarLocations = $this->_helper->similarLocations->suggest($this->view->woeidName,$this->lang);
+            $this->view->similarLocations = $this->_helper->similarLocations->suggest($this->view->woeidName, $this->lang);
         }
 
 
@@ -119,8 +119,6 @@ class AdController extends Zend_Controller_Action
     }
 
 
-
-
     public function listallAction()
     {
         $this->view->userRole = $this->_helper->checkUserRole->check();
@@ -144,6 +142,7 @@ class AdController extends Zend_Controller_Action
         }
 
 
+
         $status = $this->_request->getParam('status');
         $f = new Zend_Filter();
         $f->addFilter(new Zend_Filter_HtmlEntities());
@@ -155,7 +154,7 @@ class AdController extends Zend_Controller_Action
 
 
         $this->view->ad = $model->getAdListAll($ad_type, $status);
-        $this->view->page_title .= $this->view->translate('All the ads') . ' (' . $this->view->translate('second hand and news') . ')';
+        $this->view->page_title .= $this->view->translate('All the ads') . ' ' . $this->view->translate('second hand and new') ;
 
         //paginator
         $page = $this->_getParam('page');
@@ -173,8 +172,6 @@ class AdController extends Zend_Controller_Action
 
         $this->view->paginator = $paginator;
     }
-
-
 
 
     public function listuserAction()
@@ -221,8 +218,6 @@ class AdController extends Zend_Controller_Action
             $this->view->page_title .= ' - ' . $this->view->translate('page') . ' ' . $page;
         }
     }
-
-
 
 
     public function showAction()
@@ -296,14 +291,18 @@ class AdController extends Zend_Controller_Action
             $this->view->comments = $model->getComments($id);
             $this->view->woeidName = $this->_helper->woeid->name($this->view->ad['woeid_code'], $this->lang);
 
-            $this->view->page_title .= $this->view->ad['title'] . ' ' . $this->view->woeidName;
+
+            $this->view->page_title .= $this->view->ad['title'] ;
+            $this->view->page_title .= ' '. $this->view->translate('free') .' ';
+            $this->view->page_title .= ' '. $this->view->woeidName;
+
 
             //add meta description to head
             $this->view->metaDescription = $this->view->page_title . '. ' . $this->view->ad['body'];
 
             //add link rel canonical , better seo
             $this->view->canonicalUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/ad/show/id/' . $id . '/' .
-                $this->view->slugTitle( $this->view->ad['title']);
+                $this->view->slugTitle($this->view->ad['title']);
 
             //if user logged in, show the comment form, if not show the login link
             $auth = Zend_Auth::getInstance();
@@ -318,14 +317,14 @@ class AdController extends Zend_Controller_Action
                 $this->view->createcomment = $form;
             }
         } else {
-            //get the last param to pass to 404 action
-            $urlChunks = explode('/', $_SERVER['REQUEST_URI']);
-            $this->_redirect('/' . $this->lang . '/ad/notfound/' . $urlChunks[sizeof($urlChunks) - 1]);
 
+            $urlChunks = explode('/', $_SERVER['REQUEST_URI']);
+            $urlChunks = str_replace('.html', '', $urlChunks);
+            $urlChunks = str_replace('-', ' ', $urlChunks);
+            //redir to search
+            $this->_redirect('/' . $this->lang . '/search/?q=' . $urlChunks[sizeof($urlChunks) - 1] . '&ad_type=1&woeid=' . $this->location);
         }
     }
-
-
 
 
     public function notfoundAction()
@@ -335,8 +334,6 @@ class AdController extends Zend_Controller_Action
         $this->view->headTitle()->append('error 404');
         $this->getResponse()->setHttpResponseCode(404);
     }
-
-
 
 
     public function createAction()
@@ -430,9 +427,6 @@ class AdController extends Zend_Controller_Action
             }
         }
     }
-
-
-
 
 
     public function editAction()
@@ -588,9 +582,6 @@ class AdController extends Zend_Controller_Action
             }
         }
     }
-
-
-
 
 
     public function deleteAction()

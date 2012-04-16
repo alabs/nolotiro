@@ -2,8 +2,6 @@
 class SearchController extends Zend_Controller_Action {
 
     public function indexAction() {
-
-
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
         $this->location = $this->_helper->checklocation->check();
         $this->view->checkMessages  = $this->_helper->checkMessages->check();
@@ -11,19 +9,14 @@ class SearchController extends Zend_Controller_Action {
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->mensajes = $this->_flashMessenger->getMessages();
 
-
         $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
 
         $page = $this->_request->getParam('page');
         $woeid = $this->view->woeid = $this->_request->getParam('woeid');
 
-
-
         $this->view->woeidName = $this->_helper->woeid->name($woeid, $this->lang);
 
-
         $qw = stripcslashes(strip_tags($this->_getParam('q')));
-
 
 
         require_once ( APPLICATION_PATH . '../../library/Sphinx/sphinxapi.php' );
@@ -31,13 +24,9 @@ class SearchController extends Zend_Controller_Action {
         $this->cl->SetServer('127.0.0.1', 3312);
         $this->cl->SetMatchMode(SPH_MATCH_EXTENDED2);
         $this->cl->SetRankingMode(SPH_RANK_PROXIMITY);
-
-
-        //$this->cl->SetFieldWeights(array('metadata' => 1, 'filename' => 10));
         $this->cl->SetSortMode(SPH_SORT_EXTENDED, "@id DESC");
         $this->cl->SetMaxQueryTime(1000);
-        //*************************************************************************************
-        
+
         // Create a filter chain and add filters
         $encoding = array('quotestyle' => ENT_QUOTES, 'charset' => 'UTF-8');
         $f = new Zend_Filter();
@@ -46,7 +35,8 @@ class SearchController extends Zend_Controller_Action {
         $q = $this->view->q = $f->filter(trim($qw));
 
         $this->view->page_title .= $this->view->translate('search');
-        $this->view->page_title .= '  '. $q . ' ' . $this->view->woeidName ;
+        $this->view->page_title .= ' '. $q ;
+        $this->view->page_title .= ' ' .$this->view->translate('free'). ' ' . $this->view->woeidName ;
 
 
         if ($page) {
@@ -74,7 +64,6 @@ class SearchController extends Zend_Controller_Action {
         $this->view->form = $form;
 
 
-        ////*****************************************
         $this->cl->SetFilter('type', array($ad_type) );
         $this->cl->SetFilter('woeid_code', array($woeid) );
 
@@ -101,7 +90,7 @@ class SearchController extends Zend_Controller_Action {
                 $this->view->query_time = $result['time'];
                 $this->view->total_found = $result['total_found'];
 
-                $paginator = Zend_Paginator::factory($resultzs);
+                $paginator = Zend_Paginator::factory($resultzs); //resultzs = results in LOL CAT language
                 $paginator->setDefaultScrollingStyle('Elastic');
                 $paginator->setItemCountPerPage(10);
                 $paginator->setCurrentPageNumber($page);
