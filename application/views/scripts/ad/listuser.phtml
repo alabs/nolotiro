@@ -15,7 +15,7 @@
 
        <?php foreach ($this->paginator as $key => $val): ?>
         <div class="ad_excerpt">
-           <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['ad_id']).'/'.$this->slugTitle($this->escape($val['title'])) ?>">
+           <h4><a href="/<?=$this->lang ?>/ad/<?=$this->escape($val['ad_id']).'/'.$this->slugTitle($this->escape($val['title'])) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
              <?php
