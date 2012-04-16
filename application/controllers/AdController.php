@@ -595,7 +595,7 @@ class AdController extends Zend_Controller_Action
         //check if user is auth
         if ($auth->hasIdentity() == FALSE) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
-            $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+            $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
             return;
         }
 
@@ -649,11 +649,11 @@ class AdController extends Zend_Controller_Action
                     /////
 
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Ad deleted successfully.'));
-                    $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+                    $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
                     return;
                 } else {
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Nice to hear that :-)'));
-                    $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+                    $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
                     return;
                 }
             } else {
@@ -662,7 +662,7 @@ class AdController extends Zend_Controller_Action
         } else {
 
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
-            $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+            $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
             return;
         }
     }
