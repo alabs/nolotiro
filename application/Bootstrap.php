@@ -93,18 +93,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initFront()
     {
         Zend_Controller_Action_HelperBroker::addPath( APPLICATION_PATH .'/controllers/helpers');
-
         $front = Zend_Controller_Front::getInstance();
-
-        //set the routers
         $router = $front->getRouter ();
 
          //set the language route url (the default also)
         $routeLang = new Zend_Controller_Router_Route ( ':language/:controller/:action/*', array ('language' => null, 'controller' => 'index', 'action' => 'index') );
         $routeWoeid = new Zend_Controller_Router_Route( ':language/woeid/:woeid/:ad_type/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'list') );
-        //set the user profile route
         $routeProfile = new Zend_Controller_Router_Route( ':language/profile/:username', array( 'language' => null, 'controller' => 'user', 'action' => 'profile') );
-
         $routeAd = new Zend_Controller_Router_Route( ':language/ad/:id/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'show'));
         $routeAdAll = new Zend_Controller_Router_Route( ':language/ad/listall/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'listall'));
         $routeAdListUSer = new Zend_Controller_Router_Route( ':language/ad/listuser/*', array( 'language' => null, 'controller' => 'ad', 'action' => 'listuser'));
@@ -118,7 +113,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute ( 'profile/username', $routeProfile );
         $router->addRoute ( 'ad/id', $routeAd );
         $router->addRoute ( 'ad/listall', $routeAdAll );
-        $router->addRoute ( 'ad/listall', $routeAdListUSer);
+        $router->addRoute ( 'ad/listuser', $routeAdListUSer);
         $router->addRoute ( 'ad/create', $routeAdCreate);
         $router->addRoute ( 'ad/edit', $routeAdEdit);
         $router->addRoute ( 'ad/delete', $routeAdDelete);
