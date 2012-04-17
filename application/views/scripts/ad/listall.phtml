@@ -50,7 +50,7 @@ if (count ( $this->mensajes ) > 0) {
 	  <?php
 	   if ($val['photo'] !== null){
 		      echo '<div class="ad_list_image">
-		      <a href="/'.$this->lang.'/ad/show/id/'.$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])).' ">
+		      <a href="/'.$this->lang.'/ad/'.$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])).' ">
 		      <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
 		      $this->escape($val['photo']).'" /></a></div>';
 		      
@@ -70,7 +70,7 @@ if (count ( $this->mensajes ) > 0) {
 
 
 
-           <h4><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])) ?>">
+           <h4><a href="/<?=$this->lang ?>/ad/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
 
            <?
