@@ -171,7 +171,6 @@ class AdController extends Zend_Controller_Action
         $paginator->setCurrentPageNumber($page);
 
         $this->view->paginator = $paginator;
-        $this->view->paginator = $paginator;
     }
 
 

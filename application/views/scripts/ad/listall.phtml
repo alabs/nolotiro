@@ -101,7 +101,7 @@ if (count ( $this->mensajes ) > 0) {
                 <?php if ($val['status'] != 'delivered'): ?>
                <b><a rel="nofollow" href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->slugTitle($this->escape($val['title']))
                    ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
-               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/show/id/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title']))
+               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title']))
                    ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
                     <?php endif;?>
 

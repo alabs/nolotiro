@@ -98,6 +98,7 @@ class SearchController extends Zend_Controller_Action {
                 $this->view->search = $paginator;
             } else {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Sorry, no results for search:') . ' <b>"' . $q . '"</b>');
+                $this->getResponse()->setHttpResponseCode(404);
                 $this->_redirect('/' . $this->lang . '/woeid/' . $woeid . '/give');
             }
         }
