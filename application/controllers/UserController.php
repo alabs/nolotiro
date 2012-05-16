@@ -142,7 +142,7 @@ class UserController extends Zend_Controller_Action {
 
         if ($this->view->user == null) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('This user does not exist'));
-            $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+            $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
         }
 
         //lets overwrite the password and token values to assure not passed to the view ever!
@@ -363,8 +363,7 @@ class UserController extends Zend_Controller_Action {
                     $mail->send();
 
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Check your inbox email to restore your nolotiro.org account'));
-
-                    $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+                    $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
                 }
             }
         }
@@ -446,15 +445,16 @@ class UserController extends Zend_Controller_Action {
             } else {
 
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Sorry, register url no valid or expired.'));
-                $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+                $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
                 return;
             }
         } else {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('Sorry, register url no valid or expired.'));
-            $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+            $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
             return;
         }
     }
+
 
     public function editAction() {
 
@@ -466,7 +466,7 @@ class UserController extends Zend_Controller_Action {
 
         if (!$auth->getIdentity()->id) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
-            $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+            $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
             return;
         }
 
@@ -509,7 +509,7 @@ class UserController extends Zend_Controller_Action {
                     $auth->getStorage()->write((object) $data);
 
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Your profile was edited succesfully!'));
-                    $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+                    $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
                     return;
                 } else {
                     $form->populate($formData);
@@ -523,7 +523,7 @@ class UserController extends Zend_Controller_Action {
             }
         } else {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
-            $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+            $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
             return;
         }
     }
@@ -537,7 +537,7 @@ class UserController extends Zend_Controller_Action {
 
         if (!$auth->getIdentity()->id) {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
-            $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+            $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
             return;
         }
 
@@ -557,11 +557,11 @@ class UserController extends Zend_Controller_Action {
                     $this->session->logged_in = false;
                     $this->session->username = false;
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Your account has been deleted.'));
-                    $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+                    $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
                     return;
                 } else {
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Nice to hear that :-)'));
-                    $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+                    $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
                     return;
                 }
             } else {
@@ -570,7 +570,7 @@ class UserController extends Zend_Controller_Action {
         } else {
 
             $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
-            $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+            $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
             return;
         }
     }
@@ -594,7 +594,6 @@ class UserController extends Zend_Controller_Action {
 
                 if ($this->getRequest()->isPost()) {
                     $lock = $this->getRequest()->getPost('lock');
-
                     if ($lock == 'Yes') {
                         //bye bye troll
                         $data['locked'] = 1;
@@ -602,10 +601,9 @@ class UserController extends Zend_Controller_Action {
                         $modelUser->update($data);
 
                         $this->_helper->_flashMessenger->addMessage($this->view->translate('User locked successfully.'));
-                        $this->_redirect('/' . $this->view->lang . '/ad/list/woeid/' . $this->location . '/ad_type/give');
+                        $this->_redirect('/' . $this->view->lang . '/woeid/' . $this->location . '/give');
                         return;
                     }
-
                 }
 
             }
