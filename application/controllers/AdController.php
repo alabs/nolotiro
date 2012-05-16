@@ -48,7 +48,7 @@ class AdController extends Zend_Controller_Action
             //dont accept other values than give/want
             $this->getResponse()->setHttpResponseCode(404);
             $this->_helper->_flashMessenger->addMessage($this->view->translate('this url does not exist'));
-            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give');
+            $this->_redirect('/' . $this->lang . '/woeid/' . $this->location . '/give', array('code'=>301));
 
 
         }
@@ -95,7 +95,7 @@ class AdController extends Zend_Controller_Action
         //TODO , this sucks, do a better way to not show invalid woeids or null
         if ((empty($woeid)) || ($woeid < 10) || ($woeid == 29370606)) { //29370606 españa town
             $this->_helper->_flashMessenger->addMessage($this->view->translate('This location is not a valid town. Please, try again.'));
-            $this->_redirect('/' . $this->lang . '/location/change');
+            $this->_redirect('/' . $this->lang . '/location/change',array('code'=>301));
         }
 
         //set the location name reg var from the woeid helper
@@ -138,7 +138,7 @@ class AdController extends Zend_Controller_Action
         else {
             //dont accept other values than give/want
             $this->_helper->_flashMessenger->addMessage($this->view->translate('this url does not exist'));
-            $this->_redirect('/' . $this->lang . '/ad/listall/ad_type/give');
+            $this->_redirect('/' . $this->lang . '/ad/listall/ad_type/give', array('code'=>301));
         }
 
 
@@ -322,7 +322,7 @@ class AdController extends Zend_Controller_Action
             $urlChunks = str_replace('.html', '', $urlChunks);
             $urlChunks = str_replace('-', ' ', $urlChunks);
             //redir to search
-            $this->_redirect('/' . $this->lang . '/search/?q=' . $urlChunks[sizeof($urlChunks) - 1] . '&ad_type=1&woeid=' . $this->location);
+            $this->_redirect('/' . $this->lang . '/search/?q=' . $urlChunks[sizeof($urlChunks) - 1] . '&ad_type=1&woeid=' . $this->location , array('code'=>301));
         }
     }
 
