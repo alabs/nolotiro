@@ -1,4 +1,4 @@
-"no lo tiro, te lo regalo (sin condiciones)";"no lo tiro, te lo regalo (sin condiciones)"
+"no lo tiro, te lo regalo (sin condiciones)";"no ho llenço, t'ho regalo (sin condiciones)"
 
 #main layout
 "About";"Quant a"
@@ -34,6 +34,7 @@
 
 
 #user profile
+"Please, insert your email and password";"Si us plau, insereix el teu e-mail i la teva contrasenya"
 "User profile";"Perfil d'usuari"
 "Choose your password:";"Tria la teva contrasenya"
 "Insert your password (yep, again):";"Torna a escriure la contrasenya (sí, un altre cop):"
@@ -76,7 +77,7 @@
 "Member since:";"Membre des de:"
 "Location:";"Ubicació:"
 "Delete your nolotiro account";"Eliminar el teu compte de nolotiro"
-"Forgot your password?";"Has oblidat la teva contrasenya ?"
+"Forgot your password?";"Has oblidat la teva contrasenya?"
 "Wrong email or password, please try again";"Adreça de correu o contrasenya errònia. Prova-ho de nou"
 "Welcome";"Benvingut"
 "Please, click on this url to finish your register process:";"Si us plau, fes click en aquest enllaç per completar el teu procés de registre:"
@@ -161,7 +162,7 @@
 "want";"busco"
 "Create new ad";"publicar anunci"
 "View ads in";"veure anuncis a"
-"Posted on ";"publicat el"
+"Posted on ";"publicat el "
 "by user ";"per l'usuari"
 "page";"pàgina"
 "second hand";"segona mà"
@@ -169,14 +170,35 @@
 "about";"referent a"
 "contact";"contactes"
 "terms of use";"termes d´ús"
-"All the ads";"tots els anuncis"
-"all the ads";"tots el anuncis"
+"All the ads";"Tots els anuncis"
+"all the ads";"tots els anuncis"
 "donate";"donació"
 "facebook group";"grup de facebook"
 "Please, write your message";"si us plau, escriu el teu missatge"
 "Please, insert the 4 characters shown:";"si us plau, introdueix els 4 caràcters que es mostren, que apareixen"
 
 
+"Or try with this similar locations:";"O tria entre aquestes ciutats semblants"
+
+"To start to publish ads or send private messages access to your account";"Per començar a publicar anuncis o enviar un missatge privat accedeix al teu compte"
+"second hand and new";"segona mà i nou"
+
+"faqs";"Preguntes frequents"
+
+ "Please, click on this url to finish your register process:";"Si us plau, clica en aquest enllaç per finalitzar el procés de registre:"
+ "/en/user/validate/t/";"/ca/user/validate/t/"
+ "Register finished succesfully. Now you can login.";"Registre finalitzat satisfactòriament. Ara pots iniciar sessió."
+
+ "This email is taken. Please, try again.";"Aquesta adreça de correu ja està donada. Si us plau, torna-ho a intentar."
+ "After validate this link you will be able to access with your email and this password:";"Després de validar aquest enllaç podràs accedir amb la teva adreça de correu i aquesta contrasenya:"
+ "Sorry, register url no valid or expired.";"Ho sentim, adreça de registre no vàlida o caducada."
+ "Sorry, this validation url does not exists.";"Ho sentim, aquesta adreça de validació no existeix."
+
+ "Please, enter your email address. A one time link access will be emailed to you and will be able to change your password.";"Si us plau, introdueix el teu correu electrònic. T'enviarem un enllaç válid per un sol accés, per tal que puguis canviar la teva contrassenya."
+
+"privacy policy";"política de privacitat"
 
 
+"nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.";"nolotiro.org és un lloc web on regalar i buscar regals de franc de segona mà: mobles, cadires, sofas, bicicletes, ordinadors portàtils, taules, cuines, llums, llits, roba, joguines, bressols o cotxets de bebe, telèfons mòbils i altres moltes coses que ja no vols i no necessites per a que siguin reutilitzades per altra gent a qui si poden fer servei o els hi poden donar nova vida"
 
+"'%value%' is not a valid email address in the basic format local-part@hostname";"'%value%' aquesta no és una adreça de e-mail vàlida"

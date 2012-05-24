@@ -73,14 +73,8 @@ class SearchController extends Zend_Controller_Action {
         $result = $this->cl->Query($q, 'ads');
 
 
-        if ($result === false) {
-            echo "Query failed: " . $this->cl->GetLastError() . ".\n";
-        } else {
-            if ($this->cl->GetLastWarning()) {
-                echo "WARNING: " . $this->cl->GetLastWarning() . "";
-            }
 
-            $modelAd = new Model_Ad();
+        $modelAd = new Model_Ad();
             
             if (!is_null($result["matches"])) {
                 foreach ($result["matches"] as $doc => $docinfo) {
@@ -90,7 +84,7 @@ class SearchController extends Zend_Controller_Action {
                 $this->view->query_time = $result['time'];
                 $this->view->total_found = $result['total_found'];
 
-                $paginator = Zend_Paginator::factory($resultzs); //resultzs = results in LOL CAT language
+                $paginator = Zend_Paginator::factory($resultzs); //resultzs = results in LOLCAT language
                 $paginator->setDefaultScrollingStyle('Elastic');
                 $paginator->setItemCountPerPage(10);
                 $paginator->setCurrentPageNumber($page);
@@ -101,7 +95,7 @@ class SearchController extends Zend_Controller_Action {
                 $this->getResponse()->setHttpResponseCode(404);
                 $this->_redirect('/' . $this->lang . '/woeid/' . $woeid . '/give');
             }
-        }
+
     }
 
 
