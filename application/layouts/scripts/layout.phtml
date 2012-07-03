@@ -28,22 +28,7 @@
 
         <div class="user_login_box">
             <?php
-            //search form
 
-            if($this->woeid){
-                require_once APPLICATION_PATH . '/forms/Search.php';
-                $form = new Form_Search();
-
-                $form->addElement('hidden','woeid', array('value' => $this->woeid));
-
-                $form->setAction('/' . $this->lang . '/search/');
-                $form->loadDefaultDecoratorsIsDisabled(false);
-                foreach ($form->getElements() as $element) {
-                    $element->removeDecorator('DtDdWrapper');
-                    $element->removeDecorator('Label');
-                }
-                echo $form;
-            }
 
             $auth = Zend_Auth::getInstance();
             if (!$auth->hasIdentity()) {

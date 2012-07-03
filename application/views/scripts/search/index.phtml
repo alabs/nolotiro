@@ -25,7 +25,30 @@
         </h2>
 
 
-        <?='<br>' . $this->translate('Found') . ' ' . $this->total_found . ' ' . $this->translate('results in') . ' ' . $this->query_time . ' ' . $this->translate('seconds.') ?>
+
+        <?php
+        //search form
+
+        if($this->woeid){
+            require_once APPLICATION_PATH . '/forms/Search.php';
+            $form = new Form_Search();
+
+            $form->addElement('hidden','woeid', array('value' => $this->woeid));
+
+            $form->setAction('/' . $this->lang . '/search/');
+            $form->loadDefaultDecoratorsIsDisabled(false);
+            foreach ($form->getElements() as $element) {
+                $element->removeDecorator('DtDdWrapper');
+                $element->removeDecorator('Label');
+            }
+
+            echo $form;
+        }
+
+        ?>
+
+
+        <?php echo '<br>' . $this->translate('Found') . ' ' . $this->total_found . ' ' . $this->translate('results in') . ' ' . $this->query_time . ' ' . $this->translate('seconds.') ?>
     </div>
 
 </div>

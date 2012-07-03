@@ -10,6 +10,33 @@
     <div class="location_name">
         <h1><?php echo $this->translate($this->ad_type) . ' - ' . $this->woeidName;?></h1><br>
 
+
+          <?php
+        //search form
+
+        if($this->woeid){
+        require_once APPLICATION_PATH . '/forms/Search.php';
+        $form = new Form_Search();
+
+        $form->addElement('hidden','woeid', array('value' => $this->woeid));
+
+        $form->setAction('/' . $this->lang . '/search/');
+        $form->loadDefaultDecoratorsIsDisabled(false);
+        foreach ($form->getElements() as $element) {
+        $element->removeDecorator('DtDdWrapper');
+        $element->removeDecorator('Label');
+        }
+
+        echo $form;
+        }
+
+        ?>
+
+
+
+
+
+
         <a class="world_link" href='/<?=$this->lang?>/location/change'>
             <img src="/images/change_location.png" alt="change location"/>
             <?php echo $this->translate('change location');?></a>
