@@ -1,6 +1,14 @@
 "Help to translate nolotiro.org to your language";"Ayuda a traducir nolotiro.org a tu idioma"
 "help to translate";"ayuda a traducir"
 
+
+#home
+"last gifts published";"últimos regalos publicados"
+"world's most recycling cities";"ciudades del mundo que más reciclan"
+"most active users";"usuarios más activos"
+"view more ads";"ver más anuncios"
+
+
 #location
 "Location changed successfully to:";"Ubicación cambiada con éxito a:"
 #(VERY IMPORTANT TO PARSE THE XML API QUERY!)
@@ -392,11 +400,7 @@ Este sitio también puede albergar publicidad propia, de afiliados, o de redes p
 Actualmente este sitio alberga publicidad de Google Adsense: http://www.google.com/intl/es_ALL/privacypolicy.html
 "
 
-#home
-"last gifts published";"últimos regalos publicados"
-"world's most recycling cities";"ciudades del mundo que más reciclan"
-"most active users";"usuarios más activos"
-"view more ads";"ver más anuncios"
+
 
 #translate
 "Translate";"Traducir"

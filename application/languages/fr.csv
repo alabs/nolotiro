@@ -6,6 +6,13 @@
 "logout";"sortir"
 "login";"acceder"
 
+#home
+"last gifts published";"last gifts published"
+"world's most recycling cities";"world's most recycling cities"
+"most active users";"most active users"
+"view more ads";"view more ads"
+
+
 #location
 
 #(VERY IMPORTANT TO PARSE THE XML API QUERY!)
