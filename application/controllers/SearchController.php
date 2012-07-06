@@ -80,7 +80,9 @@ class SearchController extends Zend_Controller_Action {
                 foreach ($result["matches"] as $doc => $docinfo) {
                     $resultzs[$doc] = $modelAd->getAdforSearch($doc, $ad_type, $woeid);
                 }
-                 
+
+                // $this->getResponse()->setHttpResponseCode(301);
+
                 $this->view->query_time = $result['time'];
                 $this->view->total_found = $result['total_found'];
 
@@ -92,8 +94,7 @@ class SearchController extends Zend_Controller_Action {
                 $this->view->search = $paginator;
             } else {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Sorry, no results for search:') . ' <b>"' . $q . '"</b>');
-                $this->getResponse()->setHttpResponseCode(404);
-                $this->_redirect('/' . $this->lang . '/woeid/' . $woeid . '/give');
+                $this->_redirect('/' . $this->lang . '/woeid/' . $woeid . '/give' , array('code'=>301));
             }
 
     }

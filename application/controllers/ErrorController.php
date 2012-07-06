@@ -4,7 +4,6 @@ class ErrorController extends Zend_Controller_Action
 {
 
     public function init(){
-        //$this->_helper->layout()->setLayout('error');
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
     }
 
@@ -16,48 +15,25 @@ class ErrorController extends Zend_Controller_Action
 
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
-
-                 $this->view->lang =  $this->_helper->checklang->check();
-                 $this->_redirect('/'.$this->view->lang.'/');
-
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
 
             //eat that 404
-            $this->view->lang =  $this->_helper->checklang->check();
-            $this->_redirect('/'.$this->view->lang.'/ad/notfound');
-
+            $this->lang =  $this->_helper->checklang->check();
+            $this->location = $this->_helper->checklocation->check();
+            $urlChunks = explode('/', $_SERVER['REQUEST_URI']);
+            $urlChunks = str_replace('.html', '', $urlChunks);
+            $urlChunks = str_replace('-', ' ', $urlChunks);
+            //redir to search
+            $this->_redirect('/' . $this->lang . '/search/?q=' . $urlChunks[sizeof($urlChunks) - 1] . '&ad_type=1&woeid=' . $this->location , array('code'=>301));
                 break;
             default:
                 // 500 error
                 $this->getResponse()->setHttpResponseCode(500);
-                $this->view->message = $this->view->translate('500 Server error.');
+                $this->view->message = $this->view->translate('500 Nolotiro.org Server error. Do not pray, fix it!');
                 break;
         }
-
-        // Log exception, if logger available
-        if ($log = $this->getLog()) {
-            $log->crit($this->view->message, $errors->exception);
-        }
-
-        // conditionally display exceptions
-        if ($this->getInvokeArg('displayExceptions') == true) {
-            $this->view->exception = $errors->exception;
-        }
-
-        $this->view->request   = $errors->request;
     }
-
-    public function getLog()
-    {
-        $bootstrap = $this->getInvokeArg('bootstrap');
-        if (!$bootstrap->hasPluginResource('Log')) {
-            return false;
-        }
-        $log = $bootstrap->getResource('Log');
-        return $log;
-    }
-
 
 }
 

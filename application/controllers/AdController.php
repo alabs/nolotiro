@@ -263,8 +263,6 @@ class AdController extends Zend_Controller_Action
             $this->view->ad = $cacheAd->load((int)$id);
         }
 
-        //add jquery and superbox to show modal photo window
-        $this->view->headScript()->appendFile('/js/jquery.superbox-min.js', 'text/javascript');
 
 
         //lets count the comments number and update
@@ -327,13 +325,7 @@ class AdController extends Zend_Controller_Action
     }
 
 
-    public function notfoundAction()
-    {
-        // 404 error -- controller or action not found
-        $this->view->headTitle()->append(' - ');
-        $this->view->headTitle()->append('error 404');
-        $this->getResponse()->setHttpResponseCode(404);
-    }
+
 
 
     public function createAction()
