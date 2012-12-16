@@ -214,12 +214,12 @@ class LocationController extends Zend_Controller_Action {
         $cachetest = $cache->test('Loc' . $locationtempHash . $lang);
 
         if ($cachetest == false) {
-            //TODO get the proper $lang from yahoo api  and placeTypeName = town
             $htmlString = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22".
-               urlencode($locationtemp). "%22&lang=$lang";
+               urlencode($locationtemp). "%22%20and%20lang%3D%22$lang%22";
 
             $xml = simplexml_load_file($htmlString);
             $xml = get_object_vars($xml->results);
+
 
             $cache->save($this->_serializemmp($xml), 'Loc' . $locationtempHash . $lang);
         } else {
