@@ -60,9 +60,11 @@ class LocationController extends Zend_Controller_Action {
             $locationtemp = $_GET['location'];
         }
 
-        $town = $this->view->translate('Town');
-        $places = $this->getYahooGeoWoeidList($locationtemp, $this->view->lang, $town);
 
+        $places = $this->getYahooGeoWoeidList($locationtemp, $this->view->lang);
+
+
+        //var_dump(get_object_vars($places));die;
 
         //check if we got response from yahoo geo api
         if ($places === false) {
@@ -112,9 +114,9 @@ class LocationController extends Zend_Controller_Action {
         // assign the form to the view
         $this->view->locationtemp = $locationtemp;
         $this->view->places = $places;
-
         $this->view->form = $form;
 
+        $counter = 0;
         //*** here add the select values to the form from yahoo xml result
         foreach ($places->place as $item) {
             $name = $item->name . ', ' . $item->admin1 . ', ' . $item->country;
@@ -179,7 +181,7 @@ class LocationController extends Zend_Controller_Action {
         }
     }
 
-    public function getYahooGeoWoeidList($locationtemp, $lang, $town) {
+    public function getYahooGeoWoeidList($locationtemp, $lang) {
 
         //lets use memcached to not waste yahoo geo api requests
         // configure caching backend strategy
@@ -213,20 +215,22 @@ class LocationController extends Zend_Controller_Action {
 
         $cachetest = $cache->test('Loc' . $locationtempHash . $lang);
 
-        if ($cachetest == false) {
+
+
+        if ($cachetest) {
+            $xml = $this->_unserializemmp($cache->load('Loc' . $locationtempHash . $lang));
+
+        } else {
             $htmlString = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22".
-               urlencode($locationtemp). "%22%20and%20lang%3D%22$lang%22";
+                urlencode($locationtemp). "%22%20and%20lang%3D%22$lang%22";
 
             $xml = simplexml_load_file($htmlString);
-            $xml = get_object_vars($xml->results);
-
+            $xml = $xml->results;
 
             $cache->save($this->_serializemmp($xml), 'Loc' . $locationtempHash . $lang);
-        } else {
-            $xml = $this->_unserializemmp($cache->load('Loc' . $locationtempHash . $lang));
         }
 
-        return (object) $xml;
+        return (object)$xml;
     }
 
     //*************************************************************
