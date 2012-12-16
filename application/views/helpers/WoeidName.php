@@ -46,11 +46,9 @@ class Zend_View_Helper_WoeidName {
             $name = $name[name] . ', ' . $name[admin1] . ', ' . $name[country];
 
             $cache->save($name, $woeidHash . $lang);
-            //$name .= ' *no cached!';
-        } else {
 
+        } else {
             $name = $cache->load($woeidHash . $lang);
-            //$name .= ' *cached!';
         }
 
         return $name;
