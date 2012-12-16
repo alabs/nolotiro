@@ -35,25 +35,22 @@ class Zend_Controller_Action_Helper_Woeid extends Zend_Controller_Action_Helper_
 
         // build a caching object
         $cache = Zend_Cache::factory($oFrontend, $oBackend);
-
-        //locationtemp normalize spaces and characters not allowed (ñ) by memcached to create the item name
         $woeidHash = md5($woeid);
 
         $cachetest = $cache->test($woeidHash . $lang);
 
         if ($cachetest == false) {
-            $appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
-            $htmlString = 'http://where.yahooapis.com/v1/place/' . $woeid . '?appid=' . $appid . '&lang=' . $lang;
+            //TODO get the lang $lang from yahoo api  and placeTypeName = town
+            $htmlString = "http://query.yahooapis.com/v1/public/yql?q=select%20name%2Cadmin1%2Ccountry%20from%20geo.places%20where%20woeid%3D$woeid";
 
             $name = simplexml_load_file($htmlString);
-            $name = $name->name . ', ' . $name->admin1 . ', ' . $name->country;
+            $name = get_object_vars($name->results->place);
+            $name = $name[name] . ', ' . $name[admin1] . ', ' . $name[country];
 
             $cache->save($name, $woeidHash . $lang);
-            //$name .= ' *no cached!';
-        } else {
 
+        } else {
             $name = $cache->load($woeidHash . $lang);
-            //$name .= ' *cached!';
         }
 
         return $name;
