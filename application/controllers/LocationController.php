@@ -60,9 +60,11 @@ class LocationController extends Zend_Controller_Action {
             $locationtemp = $_GET['location'];
         }
 
-        $town = $this->view->translate('Town');
-        $places = $this->getYahooGeoWoeidList($locationtemp, $this->view->lang, $town);
 
+        $places = $this->getYahooGeoWoeidList($locationtemp, $this->view->lang);
+
+
+        //var_dump(get_object_vars($places));die;
 
         //check if we got response from yahoo geo api
         if ($places === false) {
@@ -112,9 +114,9 @@ class LocationController extends Zend_Controller_Action {
         // assign the form to the view
         $this->view->locationtemp = $locationtemp;
         $this->view->places = $places;
-
         $this->view->form = $form;
 
+        $counter = 0;
         //*** here add the select values to the form from yahoo xml result
         foreach ($places->place as $item) {
             $name = $item->name . ', ' . $item->admin1 . ', ' . $item->country;
@@ -179,7 +181,7 @@ class LocationController extends Zend_Controller_Action {
         }
     }
 
-    public function getYahooGeoWoeidList($locationtemp, $lang, $town) {
+    public function getYahooGeoWoeidList($locationtemp, $lang) {
 
         //lets use memcached to not waste yahoo geo api requests
         // configure caching backend strategy
@@ -195,8 +197,8 @@ class LocationController extends Zend_Controller_Action {
         // configure caching frontend strategy
         $oFrontend = new Zend_Cache_Core(
                         array(
-                            // cache for 1 day
-                            'lifetime' => 3600*24,
+                            // cache for 7 days
+                            'lifetime' => 3600 * 24 * 7,
                             'caching' => true,
                             'cache_id_prefix' => 'woeidList',
                             'logging' => FALSE,
@@ -213,25 +215,22 @@ class LocationController extends Zend_Controller_Action {
 
         $cachetest = $cache->test('Loc' . $locationtempHash . $lang);
 
-        if ($cachetest == false) {
 
-            $appid = ('bqqsQazIkY0X4bnv8F9By.m8ZpodvOu6');
-            $htmlString = "http://where.yahooapis.com/v1/places\$and(.q(" .
-                    urlencode($locationtemp) . "),.type(Town));count=30?appid=" . $appid . "&lang=" . $lang;
+
+        if ($cachetest) {
+            $xml = $this->_unserializemmp($cache->load('Loc' . $locationtempHash . $lang));
+
+        } else {
+            $htmlString = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22".
+                urlencode($locationtemp). "%22%20and%20lang%3D%22$lang%22";
 
             $xml = simplexml_load_file($htmlString);
+            $xml = $xml->results;
 
-            // due to simplexml is unable to put xml into memcached, we have to convert to objects
-            // to stdclass with our special functions serialize and unserialize
             $cache->save($this->_serializemmp($xml), 'Loc' . $locationtempHash . $lang);
-            //var_dump('no cached!!');
-        } else {
-
-            $xml = $this->_unserializemmp($cache->load('Loc' . $locationtempHash . $lang));
-            //var_dump('***********cached!!');
         }
 
-        return (object) $xml;
+        return (object)$xml;
     }
 
     //*************************************************************
