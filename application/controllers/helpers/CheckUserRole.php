@@ -7,6 +7,7 @@ class Zend_Controller_Action_Helper_CheckUserRole extends Zend_Controller_Action
 
              //get user id from auth object
              $auth = Zend_Auth::getInstance ();
+             $userRole = null;
 
              if ($auth->hasIdentity()){
               $userId = $auth->getIdentity()->id;

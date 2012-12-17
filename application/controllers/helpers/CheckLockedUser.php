@@ -6,6 +6,7 @@ class Zend_Controller_Action_Helper_CheckLockedUser extends Zend_Controller_Acti
          function check(){
 
              $auth = Zend_Auth::getInstance ();
+             $locked = null;
 
              if ($auth->hasIdentity()){
 

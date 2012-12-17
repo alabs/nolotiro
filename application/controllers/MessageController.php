@@ -57,11 +57,10 @@ class MessageController extends Zend_Controller_Action {
                 $data['subject'] = $f->filter($this->_request->getPost('subject'));
                 $data['body'] = $f->filter($this->_request->getPost('body'));
 
-
-                if (getenv(HTTP_X_FORWARDED_FOR)) {
-                    $data['ip'] = getenv(HTTP_X_FORWARDED_FOR);
-                } else {
-                    $data['ip'] = getenv(REMOTE_ADDR);
+                if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                  $data['ip'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+                  $data['ip'] = $_SERVER['REMOTE_ADDR'];
                 }
 
                 //get this ad user owner
@@ -271,24 +270,20 @@ class MessageController extends Zend_Controller_Action {
      * @return Model_Message
      */
     protected function _getModelMessage() {
-        if (null === $this->_model) {
+        require_once APPLICATION_PATH . '/models/Message.php';
+        $modelM = new Model_Message();
 
-            require_once APPLICATION_PATH . '/models/Message.php';
-            $this->_model = new Model_Message();
-        }
-        return $this->_model;
+        return $modelM;
     }
 
     /**
      * @return Model_User
      */
     protected function _getModelUser() {
-        if (null === $this->_model) {
+        require_once APPLICATION_PATH . '/models/User.php';
+        $modelU = new Model_User();
 
-            require_once APPLICATION_PATH . '/models/User.php';
-            $this->_model = new Model_User();
-        }
-        return $this->_model;
+        return $modelU;
     }
 
 }

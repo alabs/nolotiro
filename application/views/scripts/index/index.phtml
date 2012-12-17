@@ -2,6 +2,7 @@
     <div class="section_ads">
         <h2><?php echo $this->translate('last gifts published');?></h2>
             <?php if ($this->allGives): ?>
+            <?php $count=0; ?>
                    <?php
 
                    foreach ($this->allGives as $key => $val):?>
@@ -30,11 +31,11 @@
                                   <a  href="/'.$this->lang.'/ad/'.$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])).' ">
                                   <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
                                   $this->escape($val['photo']).'" /></a></div>';
-                       }
+
                       
                         // if you are the ad owner or admin, then show edit link
                          $auth = Zend_Auth::getInstance ();
-                        if ( ($val['user_owner'] == $auth->getIdentity()->id)  || ($this->userRole == 1) ): ?>
+                        if ( ($auth->hasIdentity()) && ($val['user_owner'] == $auth->getIdentity()->id)  || ($this->userRole == 1) ): ?>
                          <div>
                         <a href="/<?php echo $this->lang ?>/ad/edit/id/<?=$val['id'] ?>">
                                     <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a>

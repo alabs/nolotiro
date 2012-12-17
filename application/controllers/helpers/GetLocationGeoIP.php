@@ -11,10 +11,10 @@ class Zend_Controller_Action_Helper_GetLocationGeoIP extends Zend_Controller_Act
     {
         require_once (NOLOTIRO_PATH . '/library/GeoIP/geoipcity.inc');
 
-        if (getenv(HTTP_X_FORWARDED_FOR)) {
-            $ip = getenv(HTTP_X_FORWARDED_FOR);
-        } else {
-            $ip = getenv(REMOTE_ADDR);
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else if (isset($_SERVER['REMOTE_ADDR'])) {
+            $ip = $_SERVER['REMOTE_ADDR'];
         }
 
 
