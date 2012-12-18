@@ -42,6 +42,14 @@ class Zend_View_Helper_WoeidName {
 
             $cache->save($name, $woeidHash . $lang);
 
+
+            //make sure we are going to store not null or empty
+            if($name != null || !empty($name)){
+                $cache->save($name, $woeidHash . $lang);
+            }
+
+
+
         } else {
             $name = $cache->load($woeidHash . $lang);
         }
