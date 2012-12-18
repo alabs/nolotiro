@@ -44,10 +44,11 @@ class Zend_Controller_Action_Helper_Woeid extends Zend_Controller_Action_Helper_
 
             $name = simplexml_load_file($htmlString);
             $name = get_object_vars($name->results->place);
-            $name = $name[name] . ', ' . $name[admin1] . ', ' . $name[country];
+
 
             //make sure we are going to store not null or empty
             if($name != null || !empty($name)){
+                $name = $name[name] . ', ' . $name[admin1] . ', ' . $name[country];
                 $cache->save($name, $woeidHash . $lang);
             }
 
