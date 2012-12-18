@@ -227,7 +227,12 @@ class LocationController extends Zend_Controller_Action {
             $xml = simplexml_load_file($htmlString);
             $xml = $xml->results;
 
-            $cache->save($this->_serializemmp($xml), 'Loc' . $locationtempHash . $lang);
+
+            //make sure we are going to store not null or empty
+            if($xml != null || !empty($xml)){
+                $cache->save($this->_serializemmp($xml), 'Loc' . $locationtempHash . $lang);
+            }
+
         }
 
         return (object)$xml;

@@ -54,7 +54,7 @@ class IndexController extends Zend_Controller_Action {
 
         $modelAd = new Model_Ad();
         $this->view->allGives = $modelAd->getAdListAllHome(1, null);
-        $this->view->rankingWoeid = $modelAd->getRankingWoeid($limit=170);
+        $this->view->rankingWoeid = $modelAd->getRankingWoeid($limit=40);
         $this->view->rankingUsers = $modelAd->getRankingUsers($limit=80);
 
         //add meta description to head
