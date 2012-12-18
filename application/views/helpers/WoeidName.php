@@ -41,7 +41,7 @@ class Zend_View_Helper_WoeidName {
 
 
             //make sure we are going to store not null or empty
-            if($name != null || !empty($name)){
+            if($name){
                 $name = $name[name] . ', ' . $name[admin1] . ', ' . $name[country];
                 $cache->save($name, $woeidHash . $lang);
             }
