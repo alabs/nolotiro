@@ -6,23 +6,21 @@
  */
 class AuthController extends Zend_Controller_Action {
 
+
     public function init() {
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
         $this->location = $this->_helper->checklocation->check();
-
-        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        $this->view->mensajes = $this->_flashMessenger->getMessages();
+        $this->check_messages = $this->_helper->checkMessages;
+        $this->notifications = $this->_helper->Notifications;
     }
 
-    
+
     public function indexAction() {
         $this->_redirect('/');
     }
 
-    
-    public function loginAction() {
 
-        $this->view->page_title .= $this->view->translate ( 'To start to publish ads or send private messages access to your account' );
+    public function loginAction() {
 
         //if the user is logged already redir to home
         $auth = Zend_Auth::getInstance ();
@@ -33,7 +31,6 @@ class AuthController extends Zend_Controller_Action {
         $request = $this->getRequest();
         $form = $this->_getUserLoginForm();
 
-        
         if ($this->getRequest()->isPost()) {
 
             if ($form->isValid($request->getPost())) {
@@ -51,9 +48,11 @@ class AuthController extends Zend_Controller_Action {
                 $authAdapter->setTableName('users');
                 $authAdapter->setIdentityColumn('email');
                 $authAdapter->setCredentialColumn('password');
+
                 // Set the input credential values to authenticate against
                 $authAdapter->setIdentity($email);
                 $authAdapter->setCredential(md5(trim($password))); //trim whitespaces from copy&pasting the pass from email
+
                 // do the authentication
                 $auth = Zend_Auth::getInstance ();
 
@@ -74,8 +73,6 @@ class AuthController extends Zend_Controller_Action {
 
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Welcome,') . ' ' . $auth->getIdentity()->username);
 
-
-
                     Zend_Session::start();
                     //check if user wants to be remembered by 7 days
                     $seconds = 60 * 60 * 24 * 7;
@@ -83,10 +80,8 @@ class AuthController extends Zend_Controller_Action {
                     if ($this->_request->getPost('rememberme') == "1") {
                         Zend_Session::RememberMe($seconds);
                     } else {
-
                         Zend_Session::ForgetMe();
                     }
-
 
                     //check the redir value if setted
                     $aNamespace = new Zend_Session_Namespace('Nolotiro');
@@ -97,7 +92,6 @@ class AuthController extends Zend_Controller_Action {
                         $aNamespace->redir = null; //reset redir value
                         $this->_redirect($redir);
                     } else {
-
                         //if redir empty goto main home ads and set the welcome logged in message
                         $this->_redirect('/' . $this->lang . '/woeid/' . $woeid . '/give');
                     }
@@ -106,20 +100,18 @@ class AuthController extends Zend_Controller_Action {
                     $view = $this->initView();
                     $view->error = $this->view->translate('Wrong email or password, please try again');
                 }
-
-                //_redirect('/');
             }
         }
         // assign the form to the view
         $this->view->form = $form;
     }
 
+
     /**
      *
      * @return Form_UserLogin
      */
     protected function _getUserLoginForm() {
-        require_once APPLICATION_PATH . '/forms/UserLogin.php';
         $form = new Form_UserLogin ( );
         return $form;
     }
@@ -127,6 +119,7 @@ class AuthController extends Zend_Controller_Action {
 
     public function logoutAction() {
         Zend_Auth::getInstance ()->clearIdentity();
+        Zend_Session::destroy();
         $this->session->logged_in = false;
         $this->session->username = false;
         $this->_redirect('/' . $this->lang);

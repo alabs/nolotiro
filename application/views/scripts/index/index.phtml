@@ -1,125 +1,196 @@
+<?
+$this->page_title .=
+    'nolotiro.org - ' .
+    $this->translate('new and second hand gift ads');
+?>
+
 <div id="main">
-    <div class="section_ads">
-        <h2><?php echo $this->translate('last gifts published');?></h2>
-            <?php if ($this->allGives): ?>
-            <?php $count=0; ?>
-                   <?php
 
-                   foreach ($this->allGives as $key => $val):?>
+  <div class="section_ads">
 
-                         <?php
-                        $count++;
-                        //print adsense banner each 4 ads
-                        if( $count == 4 || $count%9==0):
-                        ?>
-                        <script type="text/javascript"><!--
-                        google_ad_client = "ca-pub-5360961269901609";
-                        google_ad_slot = "4409975977";
-                        google_ad_width = 468;
-                        google_ad_height = 60;
-                        //-->
-                        </script>
-                        <script type="text/javascript"
-                        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-                        </script>
-                        <?php endif ?>
+    <h2>
+      <?=$this->translate('last gifts published');?>
+    </h2>
 
-                       <div class="ad_excerpt_home">
-                       <?php
-                       if ($val['photo'] !== null){
-                                  echo '<div class="ad_list_image">
-                                  <a  href="/'.$this->lang.'/ad/'.$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])).' ">
-                                  <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
-                                  $this->escape($val['photo']).'" /></a></div>';
+<?
+if ($this->allGives) {
 
-                      
-                        // if you are the ad owner or admin, then show edit link
-                         $auth = Zend_Auth::getInstance ();
-                        if ( ($auth->hasIdentity()) && ($val['user_owner'] == $auth->getIdentity()->id)  || ($this->userRole == 1) ): ?>
-                         <div>
-                        <a href="/<?php echo $this->lang ?>/ad/edit/id/<?=$val['id'] ?>">
-                                    <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a>
-                         </div><br />
-                        <?php endif;?>
+    $count=0;
+    foreach ($this->allGives as $key => $val) {
 
-                         <div class="ad_excerpt_title"><a  title=" <?php echo $this->translate('give') .' '.$this->escape($val['title']).
-                                                                             ' '.$this->translate('in') .' '.$this->woeidName($val['woeid_code'], $this->lang);
-                             ?>" href="/<?=$this->lang ?>/ad/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title'])) ?>">
-                       <?=$this->escape($val['title']) ?></a></div>
+       $count++;
 
-                      <div class="ad_excerpt_woeid"><a href="/<?php echo $this->lang.'/woeid/'.$val['woeid_code'].'/give' ?>">
-                         <?php echo $this->woeidName($val['woeid_code'], $this->lang).' > '. $this->translate('give') ?> </a></div>
+       //print adsense banner after 4 ads and then every 9
+       if( $count == 4 || $count%9==0) {
+?>
+           <script type="text/javascript"><!--
+           google_ad_client = "ca-pub-5360961269901609";
+           google_ad_slot = "4409975977";
+           google_ad_width = 468;
+           google_ad_height = 60;
+           //-->
+           </script>
+           <script type="text/javascript"
+           src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+           </script>
+<?
+       }
+?>
 
-                        <?php if ($val['type'] == 1): ?>
-                       <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
-                        <?php endif;?>
+    <div class="ad_excerpt_home">
+<?
+        if ($val['photo'] !== null){
+            echo '<div class="ad_list_image">
+                  <a href="/'.$this->lang.'/ad/'.$val['id'].'/'.$this->slugTitle($this->escape($val['title'])).' ">
+                  <img alt="'.$this->escape($val['title']).'" src="/images/uploads/ads/100/'.
+                  $this->escape($val['photo']).'" /></a></div>';
+        }
+        // if you are the ad owner or admin, then show edit link
+        $auth = Zend_Auth::getInstance ();
+        if ( ($auth->hasIdentity()) && ($val['user_owner'] == $auth->getIdentity()->id) ||
+             ($this->userRole == 1) ) {
+?>
+      <div>
+        <a href="/<?=$this->lang?>/ad/edit/id/<?=$val['id']?>"><img
+          alt="<?=$this->translate('Edit this ad')?>"
+          src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad')?></a>
+      </div><br/>
+<?
+        }
+?>
 
-                        <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
-                        <?=$this->translate('by user ') ?>
-                        <a href="/<?=$this->lang ?>/ad/listuser/id/<?=$val['user_owner'] ?>"><?=$this->escape($val['username']) ?></a>
-                        </span>
+      <div class="ad_excerpt_title">
+        <a title="<?=$this->translate('give') . ' ' .
+                   $this->escape($val['title']) . ' ' .
+                   $this->translate('in') . ' ' .
+                   $this->woeidName($val['woeid_code'], $this->lang)?>"
+           href="/<?=$this->lang?>/ad/<?=$val['id']?>/<?$this->slugTitle($this->escape($val['title']))?>">
+          <?=$this->escape($val['title'])?></a>
+      </div>
 
-                       <div><p><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></p></div>
+      <div class="ad_excerpt_woeid">
+        <a href="/<?=$this->lang?>/woeid/<?=$val['woeid_code']?>/give"><?=
+          $this->woeidName($val['woeid_code'], $this->lang) . ' > ' .
+          $this->translate('give')?></a>
+      </div>
 
+<?
+        if ($val['type'] == 1) {
+?>
+      <span class="ad_status <?=$val['status']?>">
+        <?=$this->translate($val['status'])?>
+      </span>
+<?
+        }
+?>
+      <span class="ad_date">
+        <?= $this->translate('Posted on ') .
+            $this->betterDate($val['date_created']) . ' ' .
+            $this->translate('by user') . ' '?>
+        <a href="/<?=$this->lang?>/ad/listuser/id/<?=$val['user_owner']?>"><?=$this->escape($val['username'])?></a>
+      </span>
 
-                        <div class="ad_meta_info">
-                <?php if ($val['status'] != 'delivered'): ?>
-               <b><a rel="nofollow" href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->slugTitle($this->escape($val['title']))
-                   ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
-               &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title']))
-                   ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
-                    <?php endif;?>
+      <div>
+        <p>
+          <?=$this->escapeEmail( $this->escape($val['body']) )?>
+        </p>
+      </div>
 
-               <?php if ($val['readings_count']): ?>&nbsp;&nbsp;
-                    <?=$val['readings_count'] . '&nbsp;&nbsp;' .$this->translate('readings') ?>
-                <?php endif;?>
+      <div class="ad_meta_info">
+<?
+        if ($val['status'] != 'delivered') {
+?>
+        <b>
+          <a rel="nofollow"
+             href="/<?=$this->lang?>/message/create/id_user_to/
+                   <?=$val['user_owner']?>/subject/
+                   <?$this->slugTitle($this->escape($val['title']))
+            ?>">+ <?=$this->translate('Send message to the owner')?></a>
+        </b>
+        &nbsp;&nbsp;&nbsp;
+        <b>
+          <a href="/<?=$this->lang?>/ad/<?=$val['id']?>/
+                    <?$this->slugTitle($this->escape($val['title']))
+            ?>">+ <?=$this->translate('Write a new comment') ?></a>
+        </b>
+<?
+        }
 
-                <?php if ($val['comments_count']): ?>
-                     <?=', '.$this->escape( $val['comments_count'] == null  ? 0 : $val['comments_count'] ).' '.$this->translate('comments') ?>
-                 <?php endif;?>
-           </div>
-                    </div>
+        if ($val['readings_count'])
+            echo '&nbsp;&nbsp;' . $val['readings_count'] .
+                 '&nbsp;&nbsp;' . $this->translate('readings');
 
-                    <?php endforeach; ?>
-        <br /><br />
-        <b><a href="/<?php echo $this->lang ?>/ad/listall/ad_type/give/page/2"><?php echo $this->translate('view more ads')?> > </a></b>
-                <?php endif;?>
+        if ($val['comments_count'])
+            echo ', ' . $val['comments_count'] .
+                 ' ' . $this->translate('comments');
+?>
+      </div>
+
     </div>
 
+<?
+    }
+?>
+    <br /><br />
 
-    <div class="section_locations">
-        <h2><?php echo $this->translate("world's most recycling cities");?></h2>
-        <br>
+    <b><a href="/<?=$this->lang?>/ad/listall/ad_type/give/page/2"><?=$this->translate('view more ads')?> > </a></b>
+<?
+}
+?>
 
-        <?php
-        if ($this->rankingWoeid): ?>
-        <ul>
-                   <?php  foreach ($this->rankingWoeid as $key => $val): ?>
-            <li>
-                <a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/give' ?>">
-                         <?=$this->woeidName($val['woeid_code'], $this->lang) . ' (' .$val['ads_count']. ')'?> </a>
-            </li>
-                    <?php endforeach; ?>
-            </ul>
-       <?php endif;?>
+  </div>
 
-        </div>
-        <div class="section_users">
-        <h2><?php echo $this->translate('most active users');?></h2>
-        <br>
-        <?php if ($this->rankingUsers): ?>
-        <ul>
-                   <?php  foreach ($this->rankingUsers as $key => $val): ?>
-            <li>
-                <a href="/<?=$this->lang.'/ad/listuser/id/'.$val['user_owner'] ?>">
-                         <?=$val['user_name'] . ' (' .$val['ads_count']. ')'?> </a>
-            </li>
-                    <?php endforeach; ?>
-            </ul>
-       <?php endif;?>
+  <div class="section_locations">
 
-    </div>
+    <h2><?=$this->translate("world's most recycling cities");?></h2>
+    <br/>
 
+<?
+if ($this->rankingWoeid) {
+?>
+    <ul>
+<?
+    foreach ($this->rankingWoeid as $key => $val) {
+?>
+      <li>
+        <a href="/<?=$this->lang?>/woeid/<?=$val['woeid_code']?>/give"><?=
+          $this->woeidName($val['woeid_code'], $this->lang)?> (<?=$val['ads_count']?>)</a>
+      </li>
+<?
+    }
+?>
+    </ul>
+
+<?
+}
+?>
+
+  </div>
+
+  <div class="section_users">
+
+    <h2><?=$this->translate('most active users')?></h2>
+    <br/>
+<?
+if ($this->rankingUsers) {
+?>
+    <ul>
+<?
+    foreach ($this->rankingUsers as $key => $val) {
+?>
+      <li>
+        <a href="/<?=$this->lang?>/ad/listuser/id/<?=$val['user_owner']?>"><?=
+          $val['user_name']?> (<?=$val['ads_count']?>)</a>
+      </li>
+<?
+    }
+?>
+    </ul>
+
+<?
+}
+?>
+
+  </div>
 
 </div> <!-- /main -->
-

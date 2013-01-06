@@ -1,42 +1,38 @@
 <?php
 
 /**
- * This is the UserLogin form.   
+ * This is the UserLogin form
  */
 
 class Form_UserLogin extends Zend_Form {
-	/**
-	 * @see    http://framework.zend.com/manual/en/zend.form.html
-	 * @return void
-	 */
-	public function init() {
-		// set the method for the display form to POST
-		$this->setMethod ( 'post' );
-		
-		$this->addElement ( 'text', 'email', array ('label' => 'Your email:', 'filters' => array ('StringTrim', 'StringToLower' ),
-		 'validators' => array ('EmailAddress' ), 'required' => true )
+    /**
+     * @see    http://framework.zend.com/manual/en/zend.form.html
+     * @return void
+     */
+    public function init() {
 
-		 );
-		
-		$this->addElement ( 'password', 'password', array ('filters' => array ('StringTrim' ), 'validators' => array (array ('StringLength', false, array (5, 20 ) ) ), 'required' => true, 'label' => 'Password:' ) );
+        $this->setMethod ( 'post' );
 
-                $checkboxDecorator = array(
-                                'ViewHelper',
-                                'Errors',
-                                array(array('data' => 'HtmlTag'), array('tag' => 'span', 'class' => 'element')),
-                                array('Label', array('tag' => 'dt'),
-                                array(array('row' => 'HtmlTag'), array('tag' => 'span')),
-                            ));
+        $this->addElement ( 'text', 'email', array (
+            'label' => 'Your email:',
+            'filters' => array ('StringTrim', 'StringToLower'),
+            'validators' => array ('EmailAddress'),
+            'required' => true
+        ));
 
-                $this->addElement('checkbox', 'rememberme', array(
-                    'decorators' => $checkboxDecorator,
-                    'required' => true,
-                    'checked' =>false
-                    ));
+        $this->addElement ( 'password', 'password', array (
+            'label' => 'Password:',
+            'filters' => array ('StringTrim'),
+            'validators' => array (array ('StringLength', false, array (5,20))),
+            'required' => true
+        ));
 
+        $this->addElement ( 'checkbox', 'rememberme', array (
+            'label' => 'Remember me',
+            'checked' =>false,
+            'required' => true
+        ));
 
-
-		// add the submit button
-		$this->addElement ( 'submit', 'submit', array ('label' => 'Login' ) );
-	}
+        $this->addElement ( 'submit', 'submit', array ('label' => 'Login' ) );
+  }
 }

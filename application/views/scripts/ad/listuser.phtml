@@ -1,90 +1,132 @@
+<?
+$this->page_title = $this->translate('Ads list') . '  -  ' . $this->userName;
+?>
+
 <div id="default_header_section">
-<h1><?=$this->translate ( 'Ads list' ).'  -  '.$this->escape( $this->user['username'] );?></h1>
+  <h1><?=$this->page_title?></h1>
 </div>
 
 <div id="main">
-<div class="span-18">
 
-<ul id="tabnav">
-        <?=$this->editprofile ?>
-	<li ><a   id="<?=(preg_match("/profile/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/profile/<?=$this->user['username'] ?>"><?=$this->translate('profile');?></a></li>
-	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user['id'] ?>"><?=$this->translate('ads');?></a></li>
-</ul>
+  <div class="span-19">
 
-<?php if ($this->ad != null):?>
+<?
+    if ($this->myUserId == $this->userId) {
+        $this->edit_link = '/' . $this->lang . '/user/edit/id/' . $this->userId;
+        $this->edit_text = $this->translate('edit profile');
+        $this->edit_id   = '';
+        $this->mess_link = '/' . $this->lang . '/message/list';
+        $this->mess_text =  $this->translate('messages');
+        $this->mess_id   = '';
+    }
+    $this->prof_link = '/' . $this->lang . '/profile/' . $this->userId;
+    $this->prof_text = $this->translate('profile');
+    $this->prof_id   = '';
+    $this->ads_link  = '/' . $this->lang . '/ad/listuser/id/' . $this->userId;
+    $this->ads_text  = $this->translate('ads');
+    $this->ads_id    = 'id="tab_active"';
 
-       <?php foreach ($this->paginator as $key => $val): ?>
-        <div class="ad_excerpt">
-           <h4><a href="/<?=$this->lang ?>/ad/<?=$this->escape($val['ad_id']).'/'.$this->slugTitle($this->escape($val['title'])) ?>">
-           <?=$this->escape($val['title']) ?></a></h4>
+    echo $this->render('partials/tabnav.phtml');
 
-             <?php
-// if you are the ad owner or admin, then show edit link
-$auth = Zend_Auth::getInstance ();
-if ($val['user_owner'] == $auth->getIdentity()->id): ?>
- <div>
-<a href="/<?=$this->lang ?>/ad/edit/id/<?=$val['ad_id'] ?>">
-            <img alt="<?=$this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a>
- </div><br />
-<?php endif;?>
+    if ($this->ad)
+        foreach ($this->paginator as $key => $val) {
+?>
+    <div class="ad_excerpt">
 
-            <?
-           if ($val['type'] == 1){
-               $val['type_name'] = 'give';
-           }
-           if ($val['type'] == 2){
-               $val['type_name'] = 'want';
-           }
-           ?>
+      <h4>
+        <a href="/<?=$this->lang?>/ad/<?=$val['ad_id']. '/'. 
+                 $this->slugTitle($this->escape($val['title']))?>"><?=
+          $this->escape($val['title']) ?></a>
+      </h4>
 
-             <h6><a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/'.$val['type_name'] ?>">
-             <?=$this->woeidName($val['woeid_code'], $this->lang).' > '. $this->translate((string)$val['type_name']) ?> </a></h6>
+<?
+    // if you are the ad owner or admin, then show edit link
+    $auth = Zend_Auth::getInstance ();
+    if ( $auth->hasIdentity() &&
+         ($val['user_owner'] == $auth->getIdentity()->id)) {
+?>
+      <div>
+        <a href="/<?=$this->lang ?>/ad/edit/id/<?=$val['ad_id'] ?>"><img
+          alt="<?=$this->translate('Edit this ad') ?>"
+          src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a>
+      </div><br/>
 
+<?
+    }
 
-            <?php
-            if ($val['type'] == 1): ?>
-            <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
-            <?php endif;?>
-            <span class="ad_date"><?=$this->translate('Posted on '). $this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
-            </span>
-	   <div><?php echo $this->escapeEmail( $this->escape($val['body']) ) ?></div>
-            <div class="ad_meta_info">
-               <?php if ($val['readings_count']): ?>
-                    <?=$val['readings_count'] . ' ' .$this->translate('readings') ?>
-                <?php endif;?>
-                <?php if ($val['comments_count']): ?>
-                 <?=', '.$this->escape( $val['comments_count'] == null  ? 0 : $val['comments_count'] ).' '.$this->translate('comments') ?>
-                 <?php endif;?>
-           </div>
+    if ($val['type'] == 1)
+        $val['type_name'] = 'give';
 
-        </div>
-        <?php endforeach; ?>
+    if ($val['type'] == 2)
+        $val['type_name'] = 'want';
+?>
 
+      <h6>
+        <a href="/<?=$this->lang . '/woeid/' . $val['woeid_code'] .
+                '/'. $val['type_name']?>"><?=
+          $this->woeidName($val['woeid_code'], $this->lang) . ' > ' .
+          $this->translate((string)$val['type_name'])?></a>
+      </h6>
 
-<?php else: ?>
-    <h4><?=$this->translate ( 'This user does not have ads yet');?></h4>
-<?php endif;?>
+<?
+    if ($val['type'] == 1) {
+?>
+      <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
+<?
+    }
+?>
 
-<?php echo $this->paginationControl($this->paginator, 'Sliding', 'partials/paginator_ads.phtml'); ?>
+      <span class="ad_date">
+        <?=$this->translate('Posted on ') .
+           $this->betterDate($val['date_created'])?>
+      </span>
 
-</div> <!-- /div ads -->
+      <div>
+        <?=$this->escapeEmail( $this->escape($val['body']) )?>
+      </div>
+
+      <div class="ad_meta_info">
+<?
+    if (isset($val['readings_count']) && $val['readings_count'])
+        echo $val['readings_count'] . ' ' . $this->translate('readings');
+    if (isset($val['comments_count']) && $val['comments_count'])
+        echo ', ' . $val['comments_count'] . ' ' . $this->translate('comments');
+?>
+      </div>
+
+    </div>
+
+<?
+    }
+
+else {
+?>
+    <h4>
+      <?=$this->translate ( 'This user does not have ads yet');?>
+    </h4>
+<?
+}
+
+echo $this->paginationControl($this->paginator,
+                              'Sliding', 'partials/paginator_ads.phtml');
+?>
+
+  </div> <!-- /div ads -->
 
 </div> <!-- /main -->
 
-
 <div class="google_ads">
-<!-- google adsense block -->
-    <script type="text/javascript"><!--
+  <!-- google adsense block -->
+  <script type="text/javascript"><!--
     google_ad_client = "pub-5360961269901609";
-/* 160x600, creado 29/07/11 */
+    /* 160x600, creado 29/07/11 */
     google_ad_slot = "2897112415";
     google_ad_width = 160;
     google_ad_height = 600;
-//-->
-    </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-
-<!-- end  of google adsense block -->
+  //-->
+  </script>
+  <script type="text/javascript"
+          src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+  </script>
+  <!-- end  of google adsense block -->
 </div>

@@ -6,13 +6,13 @@
  *
  * */
 class Model_User {
-   
+
 
     /**
-     *	 * Save a new entry
-     * * @param  array $data
-     * * @return int|string
-     * */
+     * Save a new entry
+     * @param  array $data
+     * @return int|string
+     */
     public function save(array $data) {
         $table = new Zend_Db_Table('users');
         $fields = $table->info ( Zend_Db_Table_Abstract::COLS );
@@ -55,45 +55,43 @@ class Model_User {
         return $table->fetchRow ( $select );
     }
 
+    /*
     public function checkIsLocked($id) {
         $table = new Zend_Db_Table('users');
         $select = $table->select ()->where ( 'id = ?', (int) $id );
         return $table->fetchRow ( $select )->locked;
-    }
-
+    }*/
 
     public function checkWoeidUser($id) {
         $table = new Zend_Db_Table('users');
         $select = $table->select ('woeid')->where ( 'id = ?', (int) $id );
-       return $table->fetchRow ( $select )->woeid;
+        return $table->fetchRow ( $select )->woeid;
     }
 
     public function checkLockedUser($id) {
         $table = new Zend_Db_Table('users');
         $select = $table->select ('locked')->where ( 'id = ?', (int) $id );
-       return $table->fetchRow ( $select )->locked;
+        $result = $table->fetchRow($select);
+        if ($result)
+            return $result->locked;
+        else
+            return null;
     }
-   
+
 
     /**
-     * Fetch an individual entry
-     * @param  int|string $id
+     * Get an individual user by its id
+     *
+     * @param  int $id
      * @return null|Zend_Db_Table_Row_Abstract
      */
     public function fetchUser($id) {
+        if (!$id)
+            return null;
         $table = new Zend_Db_Table('users');
         $select = $table->select ()->where ( 'id = ?', $id );
 
-        if ($select != null) {
-
-            $result = $table->fetchRow ( $select );
-
-        } else {
-            $result = null;
-        }
-
-
-        return $result;
+        return $table->fetchRow ( $select );
     }
 
      public function fetchUserByUsername($username)
@@ -111,15 +109,11 @@ class Model_User {
 
 
     //friends area
-
-    public function checkIfisMyFriend( $id_user, $id_friend ){
-        $id = (int)$id;
-
+    public function isMyFriend( $id_user, $id_friend ){
         $table = new Zend_Db_Table('friends');
-        $select = $table->select()->setIntegrityCheck(false);
-
-        $select->where ( 'id_user = ?', $id_user );
-        $select->where ( 'id_friend = ?', $id_friend );
+        $select = $table->select()
+                        ->where ( 'id_user = ?', $id_user )
+                        ->where ( 'id_friend = ?', $id_friend );
         return $table->fetchRow ( $select );
 
     }
@@ -166,7 +160,7 @@ class Model_User {
 
 
         $db->delete('friends',$where);
-        
+
     }
 
 

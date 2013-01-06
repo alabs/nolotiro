@@ -2,10 +2,10 @@
 
 class RssController extends Zend_Controller_Action {
 
+
     public function init() {
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
     }
-
 
 
     public function preDispatch()  {
@@ -31,7 +31,6 @@ class RssController extends Zend_Controller_Action {
         $rss['generator'] = 'nolotiro.org';
         $rss['entries'] = array();
 
-
         foreach ($this->ads as $value) {
 
             $entry = array();
@@ -44,7 +43,6 @@ class RssController extends Zend_Controller_Action {
 
         $feedObj = Zend_Feed::importArray($rss, 'rss');
         return $feedObj->send();
-
     }
 
 }

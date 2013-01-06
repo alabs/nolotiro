@@ -38,7 +38,7 @@ class Zend_View_Helper_WoeidName {
 
             $name = simplexml_load_file($htmlString);
             $name = get_object_vars($name->results->place);
-            $name = $name[name] . ', ' . $name[admin1] . ', ' . $name[country];
+            $name = $name['name'] . ', ' . $name['admin1'] . ', ' . $name['country'];
 
             $cache->save($name, $woeidHash . $lang);
 

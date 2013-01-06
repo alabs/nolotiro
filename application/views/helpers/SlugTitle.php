@@ -1,15 +1,16 @@
-<?php
+<?
+
 /**
  * Description of Zend_View_Helper_SlugTitle
  *
  * @author Antonio Pardo
  */
- 
+
 class Zend_View_Helper_SlugTitle
 {
 
-    public function slugTitle($title)
-    {
+    public function slugTitle($title) {
+
         $title = strip_tags($title);
 
         $title = $this->remove_accents($title);
@@ -37,8 +38,9 @@ class Zend_View_Helper_SlugTitle
         return $uri;
     }
 
-    private function remove_accents($string)
-    {
+
+    private function remove_accents($string) {
+
         $chars = array(
         // Decompositions for Latin-1 Supplement
         chr(195).chr(128) => 'A', chr(195).chr(129) => 'A',
@@ -141,21 +143,24 @@ class Zend_View_Helper_SlugTitle
         return $string;
     }
 
-    private function remove_shorts($string)
-    {
-        $shorts = array( _('a'), _('e'), _('o'), _('u'), _('y'),
-			_('el'), _('la'), _('le'), _('lo'), _('un'), _('una'), _('en'), _('de'), _('al'), _('se'), _('si'),
-			_('es'), _('su'), _('te'),
-			_('los'), _('las'), _('por') , _('con'), _('que'), _('del'), _('sus'), _('me'), _('mi'), _('para'),
-		);
 
-	    $size = count($shorts);
-	    for($i=0; $i<$size && strlen($string) > 20; $i++) {
-		    $short = $shorts[$i];
-		    $string = preg_replace("/^$short-|-$short$/", '', $string);
-		    $string = preg_replace("/-$short-/", '-', $string);
-	    }
-        
-	    return $string.'.html';
+    private function remove_shorts($string) {
+
+        $shorts = array( _('a'), _('e'), _('o'), _('u'), _('y'), _('el'),
+            _('la'), _('le'), _('lo'), _('un'), _('una'), _('en'), _('de'),
+            _('al'), _('se'), _('si'), _('es'), _('su'), _('te'), _('los'),
+            _('las'), _('por') , _('con'), _('que'), _('del'), _('sus'),
+            _('me'), _('mi'), _('para')
+        );
+
+        $size = count($shorts);
+        for($i=0; $i<$size && strlen($string) > 20; $i++) {
+            $short = $shorts[$i];
+            $string = preg_replace("/^$short-|-$short$/", '', $string);
+            $string = preg_replace("/-$short-/", '-', $string);
+        }
+
+        return $string;
     }
+
 }

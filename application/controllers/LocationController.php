@@ -6,18 +6,18 @@
  */
 class LocationController extends Zend_Controller_Action {
 
+
     public function init() {
-
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
-        $this->view->checkMessages = $this->_helper->checkMessages->check();
-
-        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        $this->view->mensajes = $this->_flashMessenger->getMessages();
+        $this->check_messages = $this->_helper->checkMessages;
+        $this->notifications = $this->_helper->Notifications;
     }
+
 
     public function indexAction() {
         $this->_redirect('/');
     }
+
 
     public function changeAction() {
         $request = $this->getRequest();
@@ -28,7 +28,6 @@ class LocationController extends Zend_Controller_Action {
         $this->view->suggestIP = $this->_helper->getLocationGeoIP->suggest();
 
         if ($this->getRequest()->isPost()) {
-
 
             if ($form->isValid($request->getPost())) {
 
@@ -47,12 +46,12 @@ class LocationController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
+
     public function change2Action() {
 
         $request = $this->getRequest();
         $aNamespace = new Zend_Session_Namespace('Nolotiro');
         $locationtemp = $aNamespace->locationTemp;
-
 
         $this->view->page_title .= $this->view->translate('change location');
         //if is get overwrite the localtemp value
@@ -60,11 +59,7 @@ class LocationController extends Zend_Controller_Action {
             $locationtemp = $_GET['location'];
         }
 
-
         $places = $this->getYahooGeoWoeidList($locationtemp, $this->view->lang);
-
-
-        //var_dump(get_object_vars($places));die;
 
         //check if we got response from yahoo geo api
         if ($places === false) {
@@ -80,8 +75,6 @@ class LocationController extends Zend_Controller_Action {
                     $this->view->translate('No location found named:') . '  "' . $locationtemp . '"');
             $this->_redirect('/' . $this->view->lang . '/woeid/' . $aNamespace->location . '/give');
         }
-
-
 
         //if just one result then jump straight to change location
         if (count($places->place) == 1) {
@@ -108,7 +101,6 @@ class LocationController extends Zend_Controller_Action {
             $this->_helper->_flashMessenger->addMessage($this->view->translate('Location changed successfully to:') . ' ' . $name);
             $this->_redirect('/' . $this->view->lang . '/woeid/' . $places->place->woeid . '/give');
         }
-
 
         $form = $this->_getLocationChange2Form($locationtemp);
         // assign the form to the view
@@ -142,7 +134,6 @@ class LocationController extends Zend_Controller_Action {
         // add the submit button
         $form->addElement('submit', 'submit', array('label' => 'Choose your location'));
 
-
         // check to see if this action has been POST'ed to
         if ($this->getRequest()->isPost()) {
 
@@ -175,11 +166,11 @@ class LocationController extends Zend_Controller_Action {
                 $this->_helper->_flashMessenger->addMessage($this->view->translate('Location changed successfully to:')
                         . ' ' . $values[1]);
 
-
                 $this->_redirect('/' . $this->view->lang . '/woeid/' . $values[0] . '/give');
             }
         }
     }
+
 
     public function getYahooGeoWoeidList($locationtemp, $lang) {
 
@@ -233,6 +224,7 @@ class LocationController extends Zend_Controller_Action {
         return (object)$xml;
     }
 
+
     //*************************************************************
     protected function _serializemmp($toserialize) {
         if (is_a($toserialize, "SimpleXMLElement")) {
@@ -242,6 +234,7 @@ class LocationController extends Zend_Controller_Action {
         }
         return serialize($stdClass);
     }
+
 
     protected function _unserializemmp($tounserialize) {
         $tounserialize = unserialize($tounserialize);
@@ -253,6 +246,7 @@ class LocationController extends Zend_Controller_Action {
         return $tounserialize;
     }
 
+
     /**
      *
      * @return Form_LocationChange
@@ -263,6 +257,7 @@ class LocationController extends Zend_Controller_Action {
         return $form;
     }
 
+
     protected function _getLocationChange2Form($locationtemp) {
         require_once APPLICATION_PATH . '/forms/LocationChange2.php';
         $form = new Form_LocationChange2();
@@ -270,4 +265,3 @@ class LocationController extends Zend_Controller_Action {
     }
 
 }
-

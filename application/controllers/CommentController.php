@@ -3,17 +3,14 @@
 class CommentController extends Zend_Controller_Action
 {
 
-
-    public function init()
-    {
-        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+    public function init() {
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
+        $this->check_messages = $this->_helper->checkMessages;
+        $this->notifications = $this->_helper->Notifications;
     }
 
 
-
-    public function createAction()
-    {
+    public function createAction() {
         $request = $this->getRequest();
         $ad_id = $this->_request->getParam('ad_id');
 
@@ -79,11 +76,10 @@ class CommentController extends Zend_Controller_Action
                 }
             }
         }
-
     }
 
-    public function editAction()
-    {
+
+    public function editAction() {
         $request = $this->getRequest();
         $form = $this->_getCommentForm();
 
@@ -100,12 +96,12 @@ class CommentController extends Zend_Controller_Action
         }
     }
 
+
     /**
      *
      * @return Form_AdEdit
      */
-    protected function _getCommentForm()
-    {
+    protected function _getCommentForm() {
         require_once APPLICATION_PATH . '/forms/Comment.php';
         $form = new Form_Comment ();
 
@@ -118,9 +114,5 @@ class CommentController extends Zend_Controller_Action
     {
     //TODO
     }
-
-
-
-
 
 }

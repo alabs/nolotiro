@@ -29,31 +29,33 @@
 "Create new ad";"Publicar anuncio"
 "View ads in";"Ver anuncios en"
 "Posted on ";"Publicado el "
-"by user ";"por el usuario "
+"by user";"por el usuario"
 "page";"página"
 
-﻿#header
+#header
 "second hand";"segunda mano"
 "no lo tiro, te lo regalo (sin condiciones)";"no lo tiro, te lo regalo (sin condiciones)"
+"new and second hand gift ads";"anuncios de regalos nuevos y de segunda mano"
 "new user";"nuevo usuario"
 "or";"o"
 "hello,";"hola,"
 "logout";"salir"
 "login";"acceder"
-"To start to publish ads or send private messages access to your account";"Para publicar anuncios o enviar mensajes accede a tu cuenta"
-"second hand and new";"segunda mano y gratis"
+"to start publishing ads or sending private messages access your account";"Para publicar anuncios o enviar mensajes accede a tu cuenta"
 
 #footer
 "about";"acerca de"
 "faqs";"preguntas frecuentes"
 "developers";"desarrolladores"
 "contact";"contacto"
+"suggestions";"sugerencias"
 "terms of use";"términos de uso"
 "privacy policy";"política de privacidad"
 "All the ads";"Todos los anuncios"
 "all the ads";"todos los anuncios"
 "donate";"donar"
 "facebook group";"grupo en facebook"
+
 #footer excerpt
 "nolotiro.org is a website where you can give away things you no longer want or no longer need to pick them up other people who may serve or be of much use.";"nolotiro.org es un sitio web donde regalo y busco regalos gratis de segunda mano : muebles, sillas, sofás, bicicletas, ordenadores portátiles, mesas, cocinas, lámparas, camas, ropa, juguetes, cunas o carros para bebes, teléfonos móviles y otras muchas cosas que ya no quieres y ya no necesitas para que las reutilicen otra gente a la que puede servirle o darle nueva vida."
 
@@ -139,7 +141,7 @@
 "This user does not exist";"Ese usuario no existe"
 "You are not allowed to view this page";"No estás autorizado para acceder a esa página"
 "This username is taken. Please choose another one.";"Ese nombre de usuario ya existe. Por favor elige otro diferente."
-"Member since:";"Miembro de nolotiro desde:"
+"Member since:";"Miembro desde:"
 "Your account has been deleted.";"Tu cuenta de nolotiro.org ha sido eliminada"
 "Delete your nolotiro.org account";"Borrar tu cuenta de nolotiro.org"
 "Are you sure you want to delete your nolotiro.org account?";"¿Estás seguro de querer eliminar tu cuenta de nolotiro.org?"
@@ -223,7 +225,11 @@
 "Messages sent";"Mensajes enviados"
 "Interested?";"¿Te interesa?"
 "You have a new message from user";"Tienes un nuevo mensaje del usuario"
-"back to messages received";"volver a mensajes recibidos"
+"back to messages";"volver a mensajes"
+"in the conversation";"en la conversación"
+"still unread by";"aún no leído por";"aún no leídos por"
+"unread";"no leído";"no leídos"
+"message";"mensaje";"mensajes"
 "messages";"mensajes"
 "Go to this url to reply this message:";"Haz click en este enlace para responder el mensaje:"
 "Send message to the owner";"Envía un mensaje al anunciante"
@@ -232,8 +238,6 @@
 "send a private message";"envía un mensaje privado"
 "You have";"Tienes"
 "read this message";"leer este mensaje"
-"delete this message";"borrar este mensaje"
-"Message succesfully deleted";"Mensaje borrado con éxito"
 "Reply to this message";"Responde a este mensaje"
 "new messages";"nuevos mensajes"
 "Share this ad:";"Comparte este anuncio:"
@@ -272,7 +276,8 @@
 "User profile";"Perfil de usuario"
 
 #format date string (date php)
-"l dS \o\f F Y H:i:s";" d \d\e\l m \d\e Y \, H:i:s"
+"today";"hoy"
+"yesterday";"ayer"
 
 #search
 "search";"buscar"
@@ -400,8 +405,6 @@ Google (Analytics): http://www.google.com/intl/es_ALL/privacypolicy.html
 Este sitio también puede albergar publicidad propia, de afiliados, o de redes publicitarias. Esta publicidad se muestra mediante servidores publicitarios que también utilizan cookies para mostrar contenidos publicitarios afines a los usuarios. Cada uno de estos servidores publicitarios dispone de su propia política de privacidad, que puede ser consultada en sus propias páginas web.
 Actualmente este sitio alberga publicidad de Google Adsense: http://www.google.com/intl/es_ALL/privacypolicy.html
 "
-
-
 
 #translate
 "Translate";"Traducir"

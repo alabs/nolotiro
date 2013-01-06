@@ -1,67 +1,63 @@
 <?
-               if ($this->ad['type'] == 1) {
-                    $ad_type_txt = 'give';
-                }
+if ($this->ad['type'] == 1)
+    $ad_type_txt = 'give';
 
-                if ($this->ad['type'] == 2) {
-                    $ad_type_txt = 'want';
-                }
-
+if ($this->ad['type'] == 2)
+    $ad_type_txt = 'want';
 ?>
 
 <div id="default_header_section">
-<h2>
-<a href="/<?=$this->lang ?>/woeid/<?=$this->ad['woeid_code'].'/'.$ad_type_txt?>">
-           <?=$this->woeidName.' > '. $this->translate((string)$ad_type_txt) ?></a>
-</h2>
-<h1><?php echo $this->escape($this->ad['title']); ?></h1>
+  <h2>
+    <a href="/<?=$this->lang?>/woeid/<?=$this->ad['woeid_code']?>/<?=
+            $ad_type_txt?>"><?=
+      $this->woeidName . ' > ' . $this->translate((string)$ad_type_txt)?></a>
+  </h2>
+  <h1><?= $this->escape($this->ad['title']) ?></h1>
 </div>
-
 
 <?
 if (count ( $this->mensajes ) > 0) {
-	echo '<div class="success">';
-	foreach ( $this->mensajes as $msg ) {
-		echo $msg . '<br>';
-	}
-	echo '</div>';
+  echo '<div class="success">';
+  foreach ( $this->mensajes as $msg ) {
+    echo $msg . '<br>';
+  }
+  echo '</div>';
 }
 ?>
 
-
 <div id="main">
-<div class="span-15">
 
+  <div class="span-15">
 
 <?php
 // if you are the ad owner or admin, then show edit link
 $auth = Zend_Auth::getInstance ();
- if ( ($this->ad['user_owner'] == $auth->getIdentity()->id)  || ($this->userRole == 1) ): ?>
+ if ( ($auth->hasIdentity() && $this->ad['user_owner'] == $auth->getIdentity()->id)  || ($this->userRole == 1) ): ?>
     <div class="edit_ad">
         <a href="/<?php echo $this->lang ?>/ad/edit/id/<?php echo $this->ad['id'] ?>">
             <img alt="<?php echo $this->translate('Edit this ad') ?>" src="/images/edit_ad.png"/>&nbsp;<?php echo $this->translate('Edit this ad') ?></a></div>
 <?php endif;?>
 
-       
+
         <div class="ad_excerpt_show">
-          
+
            <?php
                if ($this->ad['photo'] !== null){
                       echo '<div class="ad_list_image">
                       <a title="'.$this->translate('Click to enlarge photo').'" href="/images/uploads/ads/original/'.$this->ad['photo'].'" rel="superbox[image]">
                       <img alt="'.$this->slugTitle($this->escape($this->ad['title'])).'" src="/images/uploads/ads/100/'.$this->ad['photo'].'" /></a></div>';
                }
-	        ?>
+          ?>
 
            <?php if ($this->ad['type'] == 1): ?>
            <span class="ad_status <?=$this->ad['status'] ?>"><?=$this->translate($this->ad['status']) ?></span>
            <?php endif;?>
 
            <span class="ad_date"><?=$this->translate('Posted on '). $this->ad['date_created'] ?>
-            <?=$this->translate('by user ') ?> 
+            <?=$this->translate('by user') . ' ' ?>
             <a href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->ad['user_owner'] ?>"><?=$this->ad['username'] ?></a>
             </span>
-            
+
            <br>
            <p><?php echo $this->escapeEmail( $this->escape($this->ad['body']) ) ?></p>
 
@@ -76,7 +72,7 @@ $auth = Zend_Auth::getInstance ();
 
 
            <?php if ($this->ad['status'] != 'delivered'): ?>
-	   <?php echo $this->translate('Interested?') ?>&nbsp;
+     <?php echo $this->translate('Interested?') ?>&nbsp;
 <a href="/<?php echo $this->lang ?>/message/create/id_user_to/<?=$this->ad['user_owner'].'/subject/'.$this->slugTitle($this->escape($this->ad['title']))
         ?>" rel="nofollow"><?php echo $this->translate('Send a private message to the owner') ?> <img src="/images/email_send.png" alt="send a message"/></a>
            <?php endif;?>
@@ -87,7 +83,7 @@ $auth = Zend_Auth::getInstance ();
 <div class="sharelinks">
 
     <p style="text-align:left;margin-bottom:5px;"><?=$this->translate('Share this ad:');?></p>
-           
+
 
     <div id="google-button">
         <g:plusone size="medium" href="<?php echo "http://nolotiro.org/" . $this->lang . "/ad/" . $this->ad['id'] . '/' . $this->slugTitle($this->escape($this->ad['title'])) ?>"></g:plusone>
@@ -115,9 +111,9 @@ $auth = Zend_Auth::getInstance ();
         <div class="ad_comment">
            <h4><a href="/<?=$this->lang ?>/ad/<?=$this->escape($val['id']).'/'.$this->escape($val['title']) ?>">
            <?=$this->escape($val['title']) ?></a></h4>
-           
+
            <span class="ad_date"><?=$this->translate('Posted on '). $this->escape($val['date_created']) ?>
-            <?=$this->translate('by user ') ?>            
+            <?=$this->translate('by user') . ' ' ?>
                 <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>
             </span>
            <br>

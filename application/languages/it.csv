@@ -1,11 +1,12 @@
 "no lo tiro, te lo regalo (sin condiciones)";"non buttare, io regalo (senza condizioni)."
-"translate text";"Nolotiro.org is currently available in a few languages, but you can help us to translate it to your own language. Just choose it from the following list and filling the fields with the translated texts. You don't need to fill all the fields to submit the form, any help will be very appreciated.<br/><br/>If your language is not in the list, please contact us for adding it.<br/><br/>"
+
+#translate
+"Nolotiro.org is currently available in a few languages, but you can help us to translate it to your own language. Just choose it from the following list and fill in the fields with the translated texts. You don't need to fill all the fields to submit the form, any help will be very appreciated.<br/><br/>If your language is not in the list, please contact us for adding it.<br/><br/>;"Per il momento, Nolotiro.org è disponibile in poche lingue, ma tu puoi aiutarci a tradurlo a la tua. Scegliela e completa i campi con i testi tradotti. Non bisogna completare tutti i campi per inviare il formulario. Qualche aiuto è benvenuto.<br/><br/>. Si la tua lingua non c'è sulla lista, contattaci per aggiungerla.<br/></br>"
 "Help to translate nolotiro.org to your language";"Aiuta a tradurre nolotiro.org nella tua lingua"
 "help to translate";"aiuta a tradurre"
 "Location changed successfully to:";"Località cambiata in:"
 
-
-;"Town";"Paese"
+"Town";"Paese"
 "Choose your location";"Scegli una località"
 "Choose your";"Scegli te"
 "I can not connect to Yahoo geo service, sorry!";"Non riesco a collegarmi al servizio di gelocalizzazione di Yahoo."
@@ -20,7 +21,7 @@
 "Create new ad";"Pubblica annuncio"
 "View ads in";"Leggi gli annunci in"
 "Posted on ";"Pubblicato il"
-"by user ";"dall'utente"
+"by user";"dall'utente"
 "page";"pagina"
 "second hand";"seconda mano"
 "new user";"nuovo utente"
@@ -41,7 +42,6 @@
 "donate";"regalare"
 "facebook group";"gruppo su Facebook"
 
-
 "please, select ad type";"per favore, seleziona una tipologia di annuncio"
 "i give...";"regalo..."
 "i want...";"cerco..."
@@ -49,14 +49,11 @@
 "Ad body:";"Testo dell'annuncio:"
 "Allowed format files: gif, jpg, png. Max size:1Mb";"Formati previsti: .GIF, .JPG, .PNG. "
 
-
 "Click to enlarge photo";"Fai click per ingrandire la foto"
 "available";"disponibile"
 "booked";"riservato"
 
 "all";"tutti"
-
-
 
 "add";"aggiungi a"
 "to your friends list";"nella tua lista di amici"
@@ -81,8 +78,6 @@
 "send a private message";"invia un messaggio privato"
 "You have";"Hai"
 "read this message";"leggi questo messaggio"
-"delete this message";"elimina questo messaggio"
-"Message succesfully deleted";"Messaggio eliminato."
 "Reply to this message";"Rispondi a questo messaggio"
 "new messages";"nuovi messaggi"
 "Share this ad:";"Condividi questo annuncio:"
