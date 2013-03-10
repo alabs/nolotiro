@@ -1,5 +1,5 @@
 <div id="default_header_section">
-<h1><?=$this->translate ( 'Ads list' ).'  -  '.$this->escape( $this->user[username] );?></h1>
+<h1><?=$this->translate ( 'Ads list' ).'  -  '.$this->escape( $this->user['username'] );?></h1>
 </div>
 
 <div id="main">
@@ -7,8 +7,8 @@
 
 <ul id="tabnav">
         <?=$this->editprofile ?>
-	<li ><a   id="<?=(preg_match("/profile/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/profile/<?=$this->user[username] ?>"><?=$this->translate('profile');?></a></li>
-	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[id] ?>"><?=$this->translate('ads');?></a></li>
+	<li ><a   id="<?=(preg_match("/profile/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/profile/<?=$this->user['username'] ?>"><?=$this->translate('profile');?></a></li>
+	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user['id'] ?>"><?=$this->translate('ads');?></a></li>
 </ul>
 
 <?php if ($this->ad != null):?>
@@ -38,7 +38,7 @@ if ($val['user_owner'] == $auth->getIdentity()->id): ?>
            ?>
 
              <h6><a href="/<?=$this->lang.'/woeid/'.$val['woeid_code'].'/'.$val['type_name'] ?>">
-             <?=$this->woeidName($val['woeid_code'], $this->lang).' > '. $this->translate((string)$val[type_name]) ?> </a></h6>
+             <?=$this->woeidName($val['woeid_code'], $this->lang).' > '. $this->translate((string)$val['type_name']) ?> </a></h6>
 
 
             <?php

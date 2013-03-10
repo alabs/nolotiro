@@ -10,7 +10,7 @@ class Form_Search extends Zend_Form
 
         $this->addElement ( 'text', 'q', array (
                 'required' => false,
-                'value' => $_GET['q'],
+                'value' => isset($_GET['q']) ? $_GET['q'] : null,
                 'filters' => array ('StringTrim' , 'StripTags')
                 ) );
 

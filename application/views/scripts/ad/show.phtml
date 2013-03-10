@@ -49,7 +49,7 @@ $auth = Zend_Auth::getInstance ();
                if ($this->ad['photo'] !== null){
                       echo '<div class="ad_list_image">
                       <a title="'.$this->translate('Click to enlarge photo').'" href="/images/uploads/ads/original/'.$this->ad['photo'].'" rel="superbox[image]">
-                      <img alt="'.$this->slugTitle($this->escape($ad['title'])).'" src="/images/uploads/ads/100/'.$this->ad['photo'].'" /></a></div>';
+                      <img alt="'.$this->slugTitle($this->escape($this->ad['title'])).'" src="/images/uploads/ads/100/'.$this->ad['photo'].'" /></a></div>';
                }
 	        ?>
 

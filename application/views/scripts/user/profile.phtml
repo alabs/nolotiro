@@ -31,8 +31,8 @@ if (count ( $this->mensajes ) > 0) {
 <?php echo  $this->userLockLink; ?>
 <ul id="tabnav">
     <?=$this->editprofile_tab; ?>
-	<li ><a   id="<?=(preg_match("/profile/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/profile/<?=$this->user[username] ?>"><?=$this->translate('profile');?></a></li>
-	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user[id] ?>"><?=$this->translate('ads');?></a></li>
+	<li ><a   id="<?=(preg_match("/profile/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/profile/<?=$this->user['username'] ?>"><?=$this->translate('profile');?></a></li>
+	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user['id'] ?>"><?=$this->translate('ads');?></a></li>
 
 </ul>
 
@@ -67,4 +67,3 @@ if (count ( $this->mensajes ) > 0) {
 </div>
 
 </div>
-

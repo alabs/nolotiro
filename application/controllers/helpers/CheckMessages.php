@@ -6,6 +6,7 @@ class Zend_Controller_Action_Helper_CheckMessages extends Zend_Controller_Action
     function check() {
 
         $auth = Zend_Auth::getInstance ();
+        $checkMessages = null;
         if ($auth->hasIdentity()) {
 
             $modelM = new Model_Message();
