@@ -116,8 +116,6 @@
 "Change your nickname:";"Canvia el teu nom d´usuari"
 "Here you could change your user settings";"Aquí pots canviar les teves opcions de perfil d'usuari"
 
-
-
 #contact
 "Contact form";"Formulari de contacte"
 "Your email:";"El teu email:"
@@ -128,18 +126,13 @@
 "'%value%' is less than 20 characters long";"'%value%' té menys de 20 caracters"
 "'%value%' is less than 9 characters long";"'%value%' té menys de 9 caracters"
 "'%value%' is less than 5 characters long";"'%value%' té menys de 5 caracters"
-"'%value%' is less than %min% characters long";'%value%' té menys de %min% caracters"
+"'%value%' is less than %min% characters long";"'%value%' té menys de %min% caracters"
 "'%value%' is no valid email address in the basic format local-part@hostname";"'%value%' no es una adreça de correu vàlida amb el format usuari@exemple.cat"
 "'%hostname%' is no valid hostname for email address '%value%'";"'%hostname%' no és correcte el domini per l'adreça de correu '%value%'"
 "'%value%' appears to be a local network name but local network names are not allowed";"'%value%' sembla ser una adreça de xarxa local i no estan permeses"
 "'%value%' does not match the expected structure for a DNS hostname";"'%value%' no coincideix amb la estructura demanada per a un nom de domini DNS"
 "'%value%' appears to be a DNS hostname but cannot match TLD against known list";"'%value%' sembla ser un nom de domini però no coincideix amb cap TLD conegut"
 "Message sent successfully!";" El teu missatge s'ha enviat correctament!"
-
-
-
-
-
 
 #translate
 "Translate";"Traduïr"
@@ -154,7 +147,6 @@
 "Other";"Un altre"
 
 "Location changed successfully to:";"Ubicació canviada amb èxit a:"
-
 
 #dont change town or geoapi breaks (only search by Town, in english)
 "Town";"Town"
@@ -172,7 +164,7 @@
 "Create new ad";"publicar anunci"
 "View ads in";"veure anuncis a"
 "Posted on ";"publicat el "
-"by user ";"per l'usuari"
+"by user";"per l'usuari"
 "page";"pàgina"
 "second hand";"segona mà"
 "second hand and news";"segona mà i nou"
@@ -185,7 +177,6 @@
 "facebook group";"grup de facebook"
 "Please, write your message";"si us plau, escriu el teu missatge"
 "Please, insert the 4 characters shown:";"si us plau, introdueix els 4 caràcters que es mostren, que apareixen"
-
 
 "Or try with this similar locations:";"O tria entre aquestes ciutats semblants"
 
@@ -291,8 +282,6 @@
 "send a private message";"Envia un missatge privat"
 "You have";"Tens"
 "read this message";"Llegir aquest missatge"
-"delete this message";"Esborrar aquest missatge"
-"Message succesfully deleted";"Missatge esborrat amb èxit"
 "Reply to this message";"Respon a aquest missatge"
 "new messages";"Nous missatges"
 
@@ -317,8 +306,6 @@
 "Ad list of user";"Llista d'anuncis de l'usuari"
 
 "ads";"anuncis"
-
-"l dS \o\f F Y H:i:s";"d \d\e\l m \d\e Y \, H:i:s"
 
 "Search results for";"resultats de la cerca per"
 

@@ -1,16 +1,16 @@
 <div id="footer">
 
     <div id="social-butttons">
-		<div id="google-button">
+    <div id="google-button">
             <g:plusone size="medium" href="http://nolotiro.org/"></g:plusone>
         </div>
-		<div id="twitter-button">
-		    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://nolotiro.org/" data-text="No lo tiro, te lo regalo (sin condiciones)" data-count="horizontal" data-via="nolotiro" data-related="alabs_es" data-lang="es">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-		</div>
+    <div id="twitter-button">
+        <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://nolotiro.org/" data-text="No lo tiro, te lo regalo (sin condiciones)" data-count="horizontal" data-via="nolotiro" data-related="alabs_es" data-lang="es">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </div>
         <div id="facebook-button">
             <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/nolotiroteloregalo%2F&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
         </div>
-	</div>
+  </div>
 
     <div class="links-right">
         <a href='/<?= $this->lang ?>/page/about'><?= $this->translate('about'); ?></a>
@@ -32,11 +32,17 @@
             ?>
         </p>
     </div>
+
     <div class="links-left">
-        <a href="/<?= $this->lang ?>/page/tos"><?= $this->translate('terms of use'); ?></a> |
-        <a href="/<?= $this->lang ?>/page/privacy"><?= $this->translate('privacy policy'); ?></a> |
-        <a href="https://github.com/alabs/nolotiro"><?= $this->translate('developers'); ?></a> |
-        <a href='/<?= $this->lang ?>/contact'><?= $this->translate('contact'); ?></a> |
-        <a href='http://nolotiro.uservoice.com/forums/30282?lang=<?=$this->lang ?>' target="_blank"><?= $this->translate('suggestions'); ?> </a>
+        <a href="/<?= $this->lang ?>/page/tos"><?=
+          $this->translate('terms of use')?></a> |
+        <a href="/<?= $this->lang ?>/page/privacy"><?=
+          $this->translate('privacy policy')?></a> |
+        <a href="https://github.com/alabs/nolotiro"><?=
+           $this->translate('developers')?></a> |
+        <a href='/<?= $this->lang ?>/contact'><?=
+           $this->translate('contact')?></a> |
+        <a href='http://nolotiro.uservoice.com/forums/30282?lang=<?=$this->lang?>'
+           target="_blank"><?= $this->translate('suggestions'); ?> </a>
     </div>
 </div>

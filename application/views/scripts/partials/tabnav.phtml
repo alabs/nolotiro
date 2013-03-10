@@ -1,0 +1,44 @@
+<ul id="tabnav">
+
+<?
+if ($this->edit_link) {
+?>
+  <li>
+    <a <?=$this->edit_id?> href="<?=$this->edit_link?>">
+      <?=$this->edit_text?>
+    </a>
+  </li>
+<?
+}
+
+if ($this->mess_link) {
+?>
+  <li>
+    <a <?=$this->mess_id?> href="<?=$this->mess_link?>">
+      <?=$this->mess_text?>
+    </a>
+  </li>
+<?
+}
+
+if ($this->prof_link) {
+?>
+  <li>
+    <a <?=$this->prof_id?> href="<?=$this->prof_link?>">
+      <?=$this->prof_text?>
+    </a>
+  </li>
+<?
+}
+
+if ($this->ads_link) {
+?>
+  <li>
+    <a <?=$this->ads_id?> href="<?=$this->ads_link?>">
+      <?=$this->ads_text?>
+    </a>
+  </li>
+</ul>
+<?
+}
+?>

@@ -1,0 +1,114 @@
+<?
+$this->page_title = ucfirst($this->translate('messages')) .
+       '  -  ' .  $this->username;
+?>
+
+<div id="default_header_section">
+  <h1><?=$this->page_title?></h1>
+</div>
+
+<?
+if (count ( $this->mensajes ) > 0) {
+  echo '<div class="success">';
+  foreach ( $this->mensajes as $msg ) {
+    echo $msg . '<br>';
+  }
+  echo '</div>';
+}
+?>
+
+<div id="main">
+
+  <div class="span-19">
+
+<?
+$this->edit_link = '/' . $this->lang . '/user/edit/id/' . $this->userid;
+$this->edit_text = $this->translate('edit profile');
+$this->edit_id = '';
+$this->mess_link = '/' . $this->lang . '/message/list';
+$this->mess_text = $this->translate('messages');
+$this->mess_id = 'id="tab_active"';
+$this->prof_link = '/' . $this->lang . '/profile/' . $this->userid;
+$this->prof_text = $this->translate('profile');
+$this->prof_id = '';
+$this->ads_link = '/' . $this->lang . '/ad/listuser/id/' . $this->userid;
+$this->ads_text = $this->translate('ads');
+$this->ads_id = '';
+echo $this->render('partials/tabnav.phtml');
+
+foreach ($this->paginator as $key => $val) {
+    $id_with = $val['id_with'];
+    $name_with = $this->escape($val['name_with']);
+    $lang = $this->lang;
+    $subject = $this->escape($val['subject']);
+    $t_date = $val['last_updated']; ?>
+
+    <div class="thread_excerpt">
+
+      <div class="thread-from">
+        <h4><a href="/<?=$lang?>/profile/<?=$id_with?>"><?=$name_with?></a></h4>
+      </div>
+<?
+    $tooltip = $val['total_messages'] . ' ' .
+               $this->translate(array('message',
+                                      'messages',
+                                      $val['total_messages'])) . ' ' .
+               $this->translate('in the conversation');
+    $text = $val['total_messages'];
+    if ($val['unread'] > 0) {
+        $tooltip .= '&#10;' . $val['unread'] . ' ';
+        if ($id_with != $val['last_speaker']) {
+            $tooltip .= $this->translate( array ('still unread by',
+                                                 'still unread by',
+                                                 $val['unread'])) .
+                        ' ' . $name_with;
+            $text .= ' [' . $val['unread'] . ']';
+        } else {
+            $tooltip .= $this->translate( array ('unread',
+                                                 'unread',
+                                                 $val['unread']));
+            $text .= ' (' . $val['unread'] . ')';
+        }
+    }
+?>
+      <div class="thread-messages"
+           title="<?=$tooltip?>"><?=$text?>
+      </div>
+
+      <div class="thread-subject">
+          <a href="/<?=$lang?>/message/show/<?=
+                  $val['thread_id']?>/subject/<?=$subject?>"><?=$subject?></a>
+      </div>
+
+      <div class="thread-date">
+        <?=$this->betterDate($t_date)?>
+      </div>
+
+    </div>
+
+<?
+}
+
+echo $this->paginationControl($this->paginator, 'Sliding',
+                                                'partials/paginator_ads.phtml');
+?>
+
+  </div>
+
+  <div class="google_ads">
+    <!-- google adsense block -->
+    <script type="text/javascript"><!--
+      google_ad_client = "pub-5360961269901609";
+      /* 160x600, creado 29/07/11 */
+      google_ad_slot = "2897112415";
+      google_ad_width = 160;
+      google_ad_height = 600;
+      //-->
+    </script>
+    <script type="text/javascript"
+            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+    <!-- end  of google adsense block -->
+  </div>
+
+</div>

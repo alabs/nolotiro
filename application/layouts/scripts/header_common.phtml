@@ -1,46 +1,50 @@
-<?php echo $this->doctype() . PHP_EOL; ?>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->lang; ?>">
+<?= $this->doctype() . PHP_EOL ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<?=$this->lang?>">
+
 <head>
-    <title><?php echo $this->page_title  ?></title>
+    <title><?=$this->page_title?></title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="content-language" content="<?php echo $this->lang; ?>">
+    <meta http-equiv="content-language" content="<?=$this->lang?>">
     <meta name="author" content="aLabs"/>
     <meta name="alexaVerifyID" content="3nRFpyasuPpTttUm-zy1QPTPlmA"/>
-    <meta name="google-site-verification" content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk"/>
-    <?php
-    //crawl but don't index the / page (to not appear on search engines, crawl /es or /en)
-    if ($this->metaRobots) {
-        $this->headMeta()->appendName('robots', $this->metaRobots);
+    <meta name="google-site-verification"
+          content="QvnYhzWWmqvuIm2pVRbYsu36hAAAoqsa_wYbAWZ_3mk"/>
+<?
+//crawl but don't index the / page (to not appear on search engines, crawl /es or /en)
+if ($this->metaRobots) {
+    $this->headMeta()->appendName('robots', $this->metaRobots);
+}
+
+//create link rel alternates
+$langs = Zend_Registry::get("languages");
+$url = 'http://'.$_SERVER['SERVER_NAME'] .'/'. $_SERVER['REQUEST_URI'];
+
+foreach ($langs as $keyLang => $valLang) {
+    if($keyLang !== $this->lang){
+        $this->headLink( array (
+            'rel' => 'alternate',
+            'hreflang' => $keyLang,
+            'href' => str_replace('/'.$this->lang , $keyLang, $url)),
+                        'APPEND');
     }
+}
 
-
-
-    //create link rel alternates
-    $langs = Zend_Registry::get("languages");
-    $url = 'http://'.$_SERVER['SERVER_NAME'] .'/'. $_SERVER['REQUEST_URI'];
-
-    foreach ($langs as $keyLang => $valLang) {
-        if($keyLang !== $this->lang){
-            $this->headLink(array('rel' => 'alternate', 'hreflang' => $keyLang, 'href' => str_replace('/'.$this->lang , $keyLang, $url)), 'APPEND');
-        }
-    }
-
-
-    if ($this->canonicalUrl) {
-        $this->headLink(array('rel' => 'canonical', 'href' => $this->canonicalUrl), 'APPEND');
-    }
-    //add meta keywords
-    if ($this->metaKeywords) {
-        $this->headMeta()->appendName('keywords', $this->metaKeywords);
-    }
-    //add meta description
-    if ($this->metaDescription) {
-        $this->headMeta()->appendName('description', $this->metaDescription);
-    }
-    $css_num = 25;
-    $this->headLink()->appendStylesheet('/css/common.css?num=' . $css_num);
-    ?>
+if ($this->canonicalUrl) {
+    $this->headLink( array ('rel' => 'canonical', 'href' => $this->canonicalUrl),
+                     'APPEND');
+}
+//add meta keywords
+if ($this->metaKeywords) {
+    $this->headMeta()->appendName('keywords', $this->metaKeywords);
+}
+//add meta description
+if ($this->metaDescription) {
+    $this->headMeta()->appendName('description', $this->metaDescription);
+}
+$css_num = 25;
+$this->headLink()->appendStylesheet('/css/common.css?num=' . $css_num);
+?>
 
     <script type="text/javascript" src="/js/jquery.min.js"></script>
 

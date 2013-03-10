@@ -1,16 +1,14 @@
 <?php
 
-class ErrorController extends Zend_Controller_Action
-{
+class ErrorController extends Zend_Controller_Action {
 
-    public function init(){
-        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+
+    public function init() {
+        $this->notifications = $this->_helper->Notifications;
     }
 
 
-
-    public function errorAction()
-    {
+    public function errorAction() {
         $errors = $this->_getParam('error_handler');
 
         switch ($errors->type) {

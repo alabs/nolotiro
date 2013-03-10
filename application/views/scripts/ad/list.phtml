@@ -1,50 +1,38 @@
 <div id="location_header_section">
-<span class="give-want">
-<a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI'])) ? "actual" : ""?>"
-   href='/<?=$this->lang?>/woeid/<?=$this->woeid?>/give'><?=$this->translate('give');?></a>
-&nbsp;
-<a class="<?=(preg_match("/want/", $_SERVER['REQUEST_URI'])) ? "actual" : ""?>"
-   href='/<?=$this->lang?>/woeid/<?=$this->woeid?>/want'><?=$this->translate('want');?></a>
-</span>
 
-    <div class="location_name">
-        <h1><?php echo $this->translate($this->ad_type) . ' - ' . $this->woeidName;?></h1><br>
+  <span class="give-want">
+    <a class="<?=(preg_match("/give/", $_SERVER['REQUEST_URI'])) ? "actual" : ""?>"
+       href='/<?=$this->lang?>/woeid/<?=$this->woeid?>/give'><?=$this->translate('give');?></a>
+    &nbsp;
+    <a class="<?=(preg_match("/want/", $_SERVER['REQUEST_URI'])) ? "actual" : ""?>"
+       href='/<?=$this->lang?>/woeid/<?=$this->woeid?>/want'><?=$this->translate('want');?></a>
+  </span>
 
+  <div class="location_name">
+    <h1><?php echo $this->translate($this->ad_type) . ' - ' . $this->woeidName;?></h1><br>
+<?
+    //search form
+    if($this->woeid) {
+      require_once APPLICATION_PATH . '/forms/Search.php';
+      $form = new Form_Search();
+      $form->addElement('hidden','woeid', array('value' => $this->woeid));
+      $form->setAction('/' . $this->lang . '/search/');
+      $form->loadDefaultDecoratorsIsDisabled(false);
+      foreach ($form->getElements() as $element) {
+      $element->removeDecorator('DtDdWrapper');
+      $element->removeDecorator('Label');
+    }
+    echo $form;
+}
+?>
+    <a class="world_link" href="/<?=$this->lang?>/location/change"><img
+        src="/images/change_location.png"
+        alt="change location"/> <?=$this->translate('change location')?></a>
+  </div>
 
-          <?php
-        //search form
-
-        if($this->woeid){
-        require_once APPLICATION_PATH . '/forms/Search.php';
-        $form = new Form_Search();
-
-        $form->addElement('hidden','woeid', array('value' => $this->woeid));
-
-        $form->setAction('/' . $this->lang . '/search/');
-        $form->loadDefaultDecoratorsIsDisabled(false);
-        foreach ($form->getElements() as $element) {
-        $element->removeDecorator('DtDdWrapper');
-        $element->removeDecorator('Label');
-        }
-
-        echo $form;
-        }
-
-        ?>
-
-
-
-
-
-
-        <a class="world_link" href='/<?=$this->lang?>/location/change'>
-            <img src="/images/change_location.png" alt="change location"/>
-            <?php echo $this->translate('change location');?></a>
-    </div>
 </div>
 
-
-<?php
+<?
 if (count($this->mensajes) > 0) {
     echo '<div class="success">';
     foreach ($this->mensajes as $msg) {
@@ -55,143 +43,172 @@ if (count($this->mensajes) > 0) {
 ?>
 
 <div id="main">
+
     <div class="span-18">
 
-        <?php if ($this->ad_type == 'give'): ?>
-        <div class="filter_status">
-            <?=$this->partial('partials/filter_status_nav.phtml', array(
-            'woeid' => $this->woeid,
-            'lang' => $this->lang,
-            'ad_type' => $this->ad_type)); ?>
-        </div>
-        <?php endif;?>
+<?
+if ($this->ad_type == 'give') {
+?>
+    <div class="filter_status">
+      <?=$this->partial('partials/filter_status_nav.phtml', array (
+          'woeid'   => $this->woeid,
+          'lang'    => $this->lang,
+          'ad_type' => $this->ad_type))?>
+    </div>
+<?
+}
 
-        <?php if ($this->ad): ?>
+if ($this->ad)
 
-        <?php
-        foreach ($this->paginator as $key => $val): ?>
-            <div class="ad_excerpt">
+    foreach ($this->paginator as $key => $val) {
+?>
 
-                <?php
-                if ($val['photo'] !== null) {
-                    echo '<div class="ad_list_image">
-		      <a href="/' . $this->lang . '/ad/' . $this->escape($val['id']) . '/' . $this->slugTitle($this->escape($val['title'])) . ' ">
-		      <img alt="' . $this->escape($val['title']) . '" src="/images/uploads/ads/100/' .
+    <div class="ad_excerpt">
+
+<?
+if ($val['photo'] !== null) {
+    echo '<div class="ad_list_image">
+          <a href="/' . $this->lang . '/ad/' . $this->escape($val['id']) . '/' . $this->slugTitle($this->escape($val['title'])) . ' ">
+          <img alt="' . $this->escape($val['title']) . '" src="/images/uploads/ads/100/' .
                         $this->escape($val['photo']) . '" /></a></div>';
-                }
-                ?>
+    }
+    // TODO: shouldn't be done here..
+    // if you are the ad owner or admin, then show edit link
+
+    $auth = Zend_Auth::getInstance();
+    if (($auth->hasIdentity() && ($val['user_owner'] == $auth->getIdentity()->id)) ||
+        ($this->userRole == 1)) {
+?>
+
+      <div>
+        <a href="/<?=$this->lang?>/ad/edit/id/<?=$val['id']?>"><img
+          alt="<?=$this->translate('Edit this ad')?>"
+          src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad')?></a>
+      </div>
+      <br/>
+<?
+    }
+?>
+      <h4>
+        <a title="<?=$this->translate($this->ad_type) . ' ' .
+                     $this->escape($val['title']) . ' ' .
+                     $this->translate('in') . ' ' .
+                     $this->woeidName($val['woeid_code'], $this->lang);?>"
+           href="/<?=$this->lang?>/ad/<?=$this->escape($val['id']) . '/' .
+                     $this->slugTitle($this->escape($val['title'])) ?>">
+          <?=$this->escape($val['title']) ?></a>
+      </h4>
+
+<?
+    if ($val['type'] == 1) {
+?>
+      <span class="ad_status <?=$val['status']?>">
+        <?=$this->translate($val['status'])?>
+      </span>
+<?
+    }
+?>
+      <span class="ad_date">
+        <?=$this->translate('Posted on ') .
+           $this->betterDate($val['date_created']) .
+           ' ' . $this->translate('by user') . ' '?>
+        <a href="/<?=$this->lang?>/ad/listuser/id/<?=$val['user_owner']?>"><?=
+          $this->escape($val['username'])?></a>
+      </span>
 
 
-                <?php
-                $auth = Zend_Auth::getInstance();
-                // if you are the ad owner or admin, then show edit link
-                if (($val['user_owner'] == $auth->getIdentity()->id) || ($this->userRole == 1)): ?>
-                    <div>
-                        <a href="/<?=$this->lang ?>/ad/edit/id/<?=$val['id'] ?>">
-                            <img alt="<?=$this->translate('Edit this ad') ?>"
-                                 src="/images/edit_ad.png"/>&nbsp;<?=$this->translate('Edit this ad') ?></a>
-                    </div><br/>
-                    <?php endif;?>
+      <div><p><?=$this->escapeEmail($this->escape($val['body']))?></p></div>
 
-                <h4><a
-                    title="<?php echo  $this->translate($this->ad_type) . ' ' . $this->escape($val['title']) . ' ' . $this->translate('in')
-                        . ' ' . $this->woeidName($val['woeid_code'], $this->lang);?>"
-                    href="/<?=$this->lang ?>/ad/<?php echo $this->escape($val['id']) . '/' .
-                        $this->slugTitle($this->escape($val['title'])) ?>">
-                    <?php echo $this->escape($val['title']) ?></a></h4>
+      <div class="ad_meta_info">
+          <?php if ($val['status'] != 'delivered'): ?>
+          <b><a rel="nofollow"
+                href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'] . '/subject/' . $this->slugTitle($this->escape($val['title']))
+                    ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
+          &nbsp;&nbsp;&nbsp;<b><a
+              href="/<?=$this->lang ?>/ad/<?=$this->escape($val['id']) . '/' . $this->slugTitle($this->escape($val['title']))
+                  ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
+          <?php endif;?>
 
+          <?php if ($val['readings_count']): ?>&nbsp;&nbsp;
+          <?= $val['readings_count'] . '&nbsp;&nbsp;' . $this->translate('readings') ?>
+          <?php endif;?>
 
-                <?php if ($val['type'] == 1): ?>
-                <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
-                <?php endif;?>
-
-                <span
-                    class="ad_date"><?=$this->translate('Posted on ') . $this->escape(date($this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
-                    <?php echo $this->translate('by user ') ?>
-                    <a href="/<?php echo $this->lang ?>/ad/listuser/id/<?php echo $this->escape($val['user_owner']) ?>"><?php echo $this->escape($val['username']) ?></a>
-            </span>
-
-
-                <div><p><?php echo $this->escapeEmail($this->escape($val['body'])) ?></p></div>
-
-                <div class="ad_meta_info">
-                    <?php if ($val['status'] != 'delivered'): ?>
-                    <b><a rel="nofollow"
-                          href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'] . '/subject/' . $this->slugTitle($this->escape($val['title']))
-                              ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
-                    &nbsp;&nbsp;&nbsp;<b><a
-                        href="/<?=$this->lang ?>/ad/<?=$this->escape($val['id']) . '/' . $this->slugTitle($this->escape($val['title']))
-                            ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
-                    <?php endif;?>
-
-                    <?php if ($val['readings_count']): ?>&nbsp;&nbsp;
-                    <?= $val['readings_count'] . '&nbsp;&nbsp;' . $this->translate('readings') ?>
-                    <?php endif;?>
-
-                    <?php if ($val['comments_count']): ?>
-                    <?= ', ' . $this->escape($val['comments_count'] == null ? 0 : $val['comments_count']) . ' ' . $this->translate('comments') ?>
-                    <?php endif;?>
-
-
-                </div>
-
-            </div>
-
-            <?php endforeach; ?>
-
-
-
-        <?php else: ?>
-        <div class="no_results">
-            <h2><?=$this->translate('No ads to display for this location.');?></h2><br>
-
-            <h2><?=$this->translate('You could try one of these things:');?></h2><br>
-
-            <h2>1. <?=$this->translate('Be the first to') . ' ';?>
-                <a href="/<?=$this->lang?>/ad/create"><?=$this->translate('post an ad on this location.');?></a></h2>
-            <br>
-
-            <h2>2. <?=$this->translate('Try to change the location to another city bigger near you.');?></h2><br>
-
-            <h2>3. <?=$this->translate('Our autosuggest system (based on your IP) says you are located near:') . ' ' .
-                '<br /><a href="/' . $this->lang . '/location/change2/?location=' . $this->escape($this->suggestIP) . '" > ' . $this->suggestIP . '</a>';?>
-            </h2><br>
-
-
-            <h2>
-                <?php echo $this->translate('Or try with this similar locations:') ?><br>
-                <?php foreach ($this->similarLocations as $loc) : ?>
-                <a href="/<?=$this->lang;?>/location/change2/?location=<?=$loc['name']?>, <?=$loc['admin1']?>, <?=$loc['country']?>">
-                    <?=$loc['name']?>, <?=$loc['admin1']?>, <?=$loc['country']?></a><br>
-                <?php endforeach ?>
-            </h2><br>
-            
-            <h5><i>"<?=$this->translate('A journey of a thousand miles starts with a single step') . '" ' .
-                $this->translate('Laozi.');?></i></h5>
-        </div>
-
-        <?php endif;?>
-
-
-        <?php echo $this->paginationControl($this->paginator,
-        'Sliding',
-        'partials/paginator_ads.phtml'); ?>
-
-
-        <?php
-        echo '<div class="rss">
-		      <a href="http://' . $_SERVER['HTTP_HOST'] . '/' . $this->lang . '/rss/feed/woeid/' . $this->woeid . '/ad_type/' . $this->ad_type . ' ">
-		      <img alt="' . $this->translate('Suscribe via rss to') . '" src="/images/icons/rss.png" />&nbsp;' . $this->translate('Subscribe via rss to') . ' ' .
-            $this->woeidName . ' - ' . $this->translate((string)$this->ad_type) . '</a></div>';
-        ?>
-
+          <?php if ($val['comments_count']): ?>
+          <?= ', ' . $this->escape($val['comments_count'] == null ? 0 : $val['comments_count']) . ' ' . $this->translate('comments') ?>
+          <?php endif;?>
+      </div>
 
     </div>
-    <!-- /div ads -->
+<?
+    }
+
+    else {
+?>
+    <div class="no_results">
+      <h2><?=$this->translate('No ads to display for this location.')?></h2>
+      <br>
+
+      <h2><?=$this->translate('You could try one of these things:')?></h2>
+      <br>
+
+      <h2>1. <?=$this->translate('Be the first to ')?> 
+        <a href="/<?=$this->lang?>/ad/create"><?=
+          $this->translate('post an ad on this location.')?></a>
+      </h2>
+      <br>
+
+      <h2>2. <?=$this->translate('Try to change the location to another city bigger near you.')?></h2>
+      <br>
+
+      <h2>3. <?=$this->translate('Our autosuggest system (based on your IP) says you are located near:') . ' ' .
+        '<br /><a href="/' . $this->lang . '/location/change2/?location=' . $this->escape($this->suggestIP) . '" > ' .
+        $this->suggestIP . '</a>';?>
+      </h2><br>
+
+      <h2>
+        <?=$this->translate('Or try with this similar locations:') ?><br>
+<?
+        foreach ($this->similarLocations as $loc) {
+?>
+        <a href="/<?=$this->lang?>/location/change2/?location=
+                <?=$loc['name']?>,
+                <?=$loc['admin1']?>,
+                <?=$loc['country']?>"><?=$loc['name']?>,<?=$loc['admin1']?>,<?=$loc['country']?></a>
+        <br>
+<?
+        }
+?>
+      </h2>
+      <br>
+
+      <h5>
+        <i>"<?=$this->translate('A journey of a thousand miles starts with a single step') .
+          '" ' . $this->translate('Laozi.')?>
+        </i>
+      </h5>
+
+    </div>
+<?
+    }
+
+    echo $this->paginationControl($this->paginator,
+            'Sliding', 'partials/paginator_ads.phtml');
+
+    echo '<div class="rss">
+            <a href="http://' . $_SERVER['HTTP_HOST'] . '/' .  $this->lang . '
+                     /rss/feed/woeid/' . $this->woeid . '
+                     /ad_type/' . $this->ad_type . '">
+              <img alt="' . $this->translate('Subscribe via rss to') . '"
+                   src="/images/icons/rss.png"/>&nbsp;' . 
+                $this->translate('Subscribe via rss to') . ' ' .
+                $this->woeidName . ' - ' . 
+                $this->translate((string)$this->ad_type) . '</a></div>';
+?>
+
+
+  </div> <!-- /div ads -->
 
 </div> <!-- /main -->
-
-
 
 <div class="google_ads">
     <!-- google adsense block -->

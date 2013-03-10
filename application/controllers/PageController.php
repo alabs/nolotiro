@@ -1,80 +1,67 @@
 <?php
 
-class PageController extends Zend_Controller_Action
-{
+class PageController extends Zend_Controller_Action {
 
 
-    public function init()
-    {
-
+    public function init() {
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
         $this->location = $this->_helper->checklocation->check();
-        $this->view->checkMessages = $this->_helper->checkMessages->check();
-        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        $this->view->mensajes = $this->_flashMessenger->getMessages();
-
+        $this->check_messages = $this->_helper->checkMessages;
+        $this->notifications = $this->_helper->Notifications;
 
         //check if user is locked
         $locked = $this->_helper->checkLockedUser->check();
         if ($locked == 1) {
             $this->_redirect('/' . $this->view->lang . '/auth/logout');
         }
-
-        if ($this->view->checkMessages > 0) {
-            $this->_helper->_flashMessenger->addMessage($this->view->translate('You have') . ' ' .
-                '<b><a href="/' . $this->view->lang . '/message/received">' . $this->view->translate('new messages') . ' (' . $this->view->checkMessages . ')</a></b>');
-        }
     }
 
 
     /*default action */
-    public function indexAction()
-    {
+    public function indexAction() {
         $this->_redirect('/');
     }
 
 
-    public function tosAction()
-    {
+    public function tosAction() {
         $this->view->page_title .= $this->view->translate('Terms of service');
     }
 
 
-    public function privacyAction()
-    {
+    public function privacyAction() {
         $this->view->page_title .= $this->view->translate('Privacy');
     }
 
 
-    public function faqsAction()
-    {
+    public function faqsAction() {
         $this->view->page_title .= $this->view->translate('Frequently asked questions');
     }
 
 
-    public function aboutAction()
-    {
+    public function aboutAction() {
         $this->view->page_title .= $this->view->translate('About nolotiro.org');
-
-
     }
 
-    public function translateAction()
-    {
+
+    public function translateAction() {
         $this->view->page_title .= $this->view->translate('Help us to translate nolotiro.org to your language');
 
         $request = $this->getRequest();
-        $newlangs = array('ca'=>'Català', 'gl'=>'Galego','eu'=>'Euskara','nl'=>'Nederlands', 'de'=>'Deutsch', 'fr'=>'Français', 'pt'=>'Português', 'it'=>'Italiano');
+        $newlangs = array('ca'=>'Català', 'gl'=>'Galego', 'eu'=>'Euskara',
+                          'nl'=>'Nederlands', 'de'=>'Deutsch', 'fr'=>'Français',
+                          'pt'=>'Português', 'it'=>'Italiano');
 
         $lform = new Zend_Form();
         $lform->setMethod('get');
-        $lform->addElement('select', 'lang', array('multiOptions' => $newlangs));
+        $lform->addElement('select', 'lang', 
+                            array('multiOptions' => $newlangs));
         $elem_newlang = $lform->getElement('lang');
-        $elem_newlang->removeDecorator('label')->removeDecorator('HtmlTag')->setAttrib('onchange', 'this.form.submit()');
+        $elem_newlang->removeDecorator('label')
+                     ->removeDecorator('HtmlTag')
+                     ->setAttrib('onchange', 'this.form.submit()');
 
         $lform->populate($request->getParams());
         $newlang = $elem_newlang->getValue();
-
 
         $this->view->langsform = $lform;
 
@@ -108,16 +95,22 @@ class PageController extends Zend_Controller_Action
             $tform = new Zend_Form();
             $tform->setMethod('post');
             $tform->setAttrib('class', 'texts');
-            $tform->addElement('captcha', 'safe_captcha', array(
-                'label' => 'Please, insert the 4 characters shown:', 'required' => true,
-                'captcha' => array('captcha' => 'Image', 'wordLen' => 4, 'height' => 50, 'width' => 160, 'gcfreq' => 50, 'timeout' => 300,
-                    'font' => NOLOTIRO_PATH . '/www/images/antigonimed.ttf',
-                    'imgdir' => NOLOTIRO_PATH . '/www/images/captcha')));
+            $tform->addElement('captcha', 'safe_captcha', array (
+                'label' => 'Please, insert the 4 characters shown:',
+                'required' => true,
+                'captcha' => array (
+                        ' captcha' => 'Image',
+                        'wordLen' => 4,
+                        'height' => 50,
+                        'width' => 160,
+                        'gcfreq' => 50,
+                        'timeout' => 300,
+                        'font' => NOLOTIRO_PATH . '/www/images/antigonimed.ttf',
+                        'imgdir' => NOLOTIRO_PATH . '/www/images/captcha')));
             $tform->setTranslator($adapter);
 
             $index = 0;
-            foreach ($es as $key => $text)
-            {
+            foreach ($es as $key => $text) {
                 if (strpos($key, "safe_") === 0) continue;
 
                 if (isset($userlang[$key]))
@@ -139,8 +132,8 @@ class PageController extends Zend_Controller_Action
                     $val = preg_replace("/(\'?%[a-zA-Z\-]*%?\'?)/", "...", $val);
                 } else {
                     $val = '';
-
                 }
+
                 if ($maxlen < 20) $maxlen = 20;
                 if ($maxlen < 140) {
                     $type = "text";
@@ -150,16 +143,28 @@ class PageController extends Zend_Controller_Action
                     $rows = round($maxlen / 50);
                 }
 
-                $tform->addElement($type, "text$index", array(
-                    'validators' => array(array('StringLength', false, array(1, $maxlen))), 'required' => false,
-                    'label' => $text, 'value' => $val, 'cols' => 40, 'rows' => $rows));
+                $tform->addElement($type, "text$index", array (
+                    'validators' => array (
+                        array('StringLength', false, array(1, $maxlen))),
+                    'required' => false,
+                    'label' => $text,
+                    'value' => $val,
+                    'cols' => 40,
+                    'rows' => $rows
+                ));
                 $input = $tform->getElement("text$index");
-                if ($val == '') $input->getDecorator('Label')->setOption('class', 'empty');
-                $valid = $input->getValidator("StringLength")->setEncoding('UTF-8');
+                if ($val == '')
+                    $input->getDecorator('Label')->setOption('class', 'empty');
+                $valid = $input->getValidator("StringLength")
+                                ->setEncoding('UTF-8');
                 $index++;
             }
+
             // add the submit button
-            $tform->addElement('submit', 'submit_texts', array('label' => 'Send texts', 'class' => 'magenta awesome'));
+            $tform->addElement('submit', 'submit_texts', array(
+                'label' => 'Send texts',
+                'class' => 'magenta awesome'
+            ));
             $this->view->textsform = $tform;
 
             $this->view->newlang = $newlang;
@@ -170,9 +175,9 @@ class PageController extends Zend_Controller_Action
                 if ($tform->isValid($data)) {
                     $newdata = false;
                     $index = 0;
-                    foreach ($es as $key => $text)
-                    {
-                        if (strpos($key, "safe_") === 0 || strpos($key, "lang") === 0) continue;
+                    foreach ($es as $key => $text) {
+                        if (strpos($key, "safe_") === 0 ||
+                            strpos($key, "lang") === 0) continue;
 
                         $mod = false;
                         $val = $data["text$index"];
@@ -199,14 +204,12 @@ class PageController extends Zend_Controller_Action
                     $mail = new Zend_Mail ('utf-8');
                     $mail->setBodyHtml($body);
 
-
                     $auth = Zend_Auth::getInstance();
                     if ($auth->hasIdentity()) {
                         $mail->setFrom($auth->getIdentity()->email, $auth->getIdentity()->username);
                     } else {
                         $mail->setFrom("noreply@nolotiro.org");
                     }
-
 
                     $mail->addTo('daniel.remeseiro@gmail.com');
                     $mail->setSubject("Translation: $newlang.csv");
@@ -218,6 +221,4 @@ class PageController extends Zend_Controller_Action
         }
     }
 
-
 }
-

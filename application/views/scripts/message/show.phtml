@@ -1,61 +1,84 @@
 <div id="default_header_section">
-<h5>
-    <a href="/<?=$this->lang ?>/message/received">< <?=$this->translate('back to messages received') ?></a>
-</h5>
-<h1><?=$this->escape($this->message['subject']) ?></h1>
+  <h5>
+    <a href="/<?=$this->lang?>/message/list">&lt; <?=
+      $this->translate('back to messages')?></a></h5>
+
+    <h1><?=$this->escape($this->subject)?></h1>
 </div>
+
 <?
 if (count ( $this->mensajes ) > 0) {
-	echo '<div class="success">';
-	foreach ( $this->mensajes as $msg ) {
-		echo $msg . '<br>';
-	}
-	echo '</div>';
+    echo '<div class="success">';
+    foreach ( $this->mensajes as $msg ) {
+        echo $msg . '<br>';
+    }
+    echo '</div>';
 }
 ?>
+
 <div id="main">
-<div class="span-15">
-<div class="delete_message">
-            <a href="/<?=$this->lang ?>/message/delete/id/<?=$this->escape($this->message['id']) ?>">
-                <?=$this->translate('delete this message') ?>
-            </a></div>
 
-        <div class="ad_excerpt_show">
-           <span class="ad_date"><?=$this->translate('Sent'). ' ' .$this->message['date_created'] ?>
-            <?=$this->translate('by user ') ?> 
-            <a href="/<?=$this->lang ?>/profile/<?=$this->username_from['username'] ?>"><?=$this->username_from['username'] ?></a>
-            </span>
-           <br />
-           <span><?php echo $this->escape($this->message['body']) ?></span>
-</div>
+  <div class="span-15">
 
+<?
+foreach ( $this->thread as $message ) {
+    $from = $message['user_from'];
+?>
+    <div class="message-excerpt">
 
-<?php //don't show reply form if its a sent message 
-$auth = Zend_Auth::getInstance ();
-if ($this->message['user_to'] == $auth->getIdentity()->id): ?>
-<div class="ad_comment_form">
-    <h5><?=$this->translate('Reply to this message') ;?></h5>
-        <?=$this->createreply ?>
-</div>
-<?php endif;?>
+    <div class="message-from-<?=($from==$this->me)?'left':'right'?>">
+        <a href="/<?=$this->lang?>/profile/<?=$from?>"><img
+           src="/images/contact.png"/><?=$message['username_from']?></a>
+      </div>
 
+      <div class="message-container-<?=($from==$this->me)?'right':'left'?>">
+        <div class="triangle-<?=($from==$this->me)?'me':'other'?>">
+        </div>
+        <div class="bubble<?=($from==$this->me)?' bg-bubble-me':''?>">
+            <?=$this->escape($message['body'])?>
+          <div class="message-date">
+            <?=$this->betterDate($message['date_created'])?>
+          </div>
+        </div>
+      </div>
+    </div>
+<?
+}
+?>
 
+    <div class="message-excerpt">
 
+      <div class="message-from-left">
+        <a href="/<?=$this->lang?>/profile/<?=$from?>"><img
+           src="/images/contact.png"/><?=$this->my_name?></a>
+      </div>
 
-</div>
-<!-- google adsense block -->
-<div class="google_ads">
-<script type="text/javascript"><!--
-google_ad_client = "pub-5360961269901609";
-/* 300x250, creado 29/07/11 */
-google_ad_slot = "5046916921";
-google_ad_width = 300;
-google_ad_height = 250;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-<!-- end of google adsense block -->
+      <div class="message-container-right">
+        <div class="triangle-me">
+        </div>
+        <div class="bubble-reply bg-bubble-me">
+           <?=$this->createreply ?>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- google adsense block -->
+  <div class="google_ads">
+    <script type="text/javascript"><!--
+      google_ad_client = "pub-5360961269901609";
+      /* 300x250, creado 29/07/11 */
+      google_ad_slot = "5046916921";
+      google_ad_width = 300;
+      google_ad_height = 250;
+      //-->
+    </script>
+    <script type="text/javascript"
+            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+  </div>
+  <!-- end of google adsense block -->
+
 </div>

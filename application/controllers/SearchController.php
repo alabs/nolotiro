@@ -2,12 +2,11 @@
 class SearchController extends Zend_Controller_Action {
 
     public function indexAction() {
+
         $this->lang = $this->view->lang = $this->_helper->checklang->check();
         $this->location = $this->_helper->checklocation->check();
-        $this->view->checkMessages  = $this->_helper->checkMessages->check();
-
-        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        $this->view->mensajes = $this->_flashMessenger->getMessages();
+        $this->check_messages = $this->_helper->checkMessages;
+        $this->notifications = $this->_helper->Notifications;
 
         $this->view->ad_type = $ad_type = $this->_request->getParam('ad_type');
 
@@ -17,7 +16,6 @@ class SearchController extends Zend_Controller_Action {
         $this->view->woeidName = $this->_helper->woeid->name($woeid, $this->lang);
 
         $qw = stripcslashes(strip_tags($this->_getParam('q')));
-
 
         require_once ( APPLICATION_PATH . '../../library/Sphinx/sphinxapi.php' );
         $this->cl = new SphinxClient();
@@ -38,15 +36,11 @@ class SearchController extends Zend_Controller_Action {
         $this->view->page_title .= ' '. $q ;
         $this->view->page_title .= ' ' .$this->view->translate('free'). ' ' . $this->view->woeidName ;
 
-
         if ($page) {
             $this->view->page_title .= ' '. $this->view->translate('page').' '.$page;
         }
 
-
-        require_once APPLICATION_PATH . '/forms/Search.php';
         $form = new Form_Search( );
-
 
         if (!$q) { // check if query search is empty
             $this->_helper->_flashMessenger->addMessage($this->view->translate('Hey! Write something'));
@@ -63,7 +57,6 @@ class SearchController extends Zend_Controller_Action {
         }
         $this->view->form = $form;
 
-
         $this->cl->SetFilter('type', array($ad_type) );
         $this->cl->SetFilter('woeid_code', array($woeid) );
 
@@ -72,33 +65,29 @@ class SearchController extends Zend_Controller_Action {
         $this->cl->SetLimits( $offset, $itemsPerSphinxPage, MAX_RESULTS, MAX_HITS);
         $result = $this->cl->Query($q, 'ads');
 
-
-
         $modelAd = new Model_Ad();
-            
-            if (!is_null($result["matches"])) {
-                foreach ($result["matches"] as $doc => $docinfo) {
-                    $resultzs[$doc] = $modelAd->getAdforSearch($doc, $ad_type, $woeid);
-                }
 
-                // $this->getResponse()->setHttpResponseCode(301);
-
-                $this->view->query_time = $result['time'];
-                $this->view->total_found = $result['total_found'];
-
-                $paginator = Zend_Paginator::factory($resultzs); //resultzs = results in LOLCAT language
-                $paginator->setDefaultScrollingStyle('Elastic');
-                $paginator->setItemCountPerPage(10);
-                $paginator->setCurrentPageNumber($page);
-
-                $this->view->search = $paginator;
-            } else {
-                $this->_helper->_flashMessenger->addMessage($this->view->translate('Sorry, no results for search:') . ' <b>"' . $q . '"</b>');
-                $this->_redirect('/' . $this->lang . '/woeid/' . $woeid . '/give' , array('code'=>301));
+        if (!is_null($result["matches"])) {
+            foreach ($result["matches"] as $doc => $docinfo) {
+                $resultzs[$doc] = $modelAd->getAdforSearch($doc, $ad_type, $woeid);
             }
 
+            // $this->getResponse()->setHttpResponseCode(301);
+
+            $this->view->query_time = $result['time'];
+            $this->view->total_found = $result['total_found'];
+
+            $paginator = Zend_Paginator::factory($resultzs); //resultzs = results in LOLCAT language
+            $paginator->setDefaultScrollingStyle('Elastic');
+            $paginator->setItemCountPerPage(10);
+            $paginator->setCurrentPageNumber($page);
+
+            $this->view->search = $paginator;
+        } else {
+            $this->_helper->_flashMessenger->addMessage($this->view->translate('Sorry, no results for search:') . ' <b>"' . $q . '"</b>');
+            $this->_redirect('/' . $this->lang . '/woeid/' . $woeid . '/give' , array('code'=>301));
+        }
+
     }
-
-
 
 }

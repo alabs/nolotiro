@@ -1,69 +1,83 @@
-<?php $this->page_title = $this->translate ( 'User profile' ).'  -  '.$this->user['username'] ;?>
+<?
+$this->page_title = $this->translate('User profile') .'  -  '. $this->userName;
+?>
 
 <div id="default_header_section">
-<h1><?php echo $this->translate ( 'User profile' ).'  -  '.$this->user['username'];?></h1>
-<?php echo $this->sendmessage_tab; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<?php echo $this->friend_link; ?>&nbsp;&nbsp;
-
+  <h1><?=$this->page_title?></h1>
 </div>
-
-<?php
-if (isset ( $this->error )) :
-?>
-<div class="error">
-		<?=$this->escape ( $this->error );?>
-</div>
-<?php endif;?>
-
 
 <?
+if (isset ( $this->error )) {
+?>
+
+<div class="error">
+  <?=$this->escape ( $this->error )?>
+</div>
+
+<?
+}
+
 if (count ( $this->mensajes ) > 0) {
-	echo '<div class="success">';
-	foreach ( $this->mensajes as $msg ) {
-		echo $msg . '<br>';
-	}
-	echo '</div>';
+  echo '<div class="success">';
+  foreach ( $this->mensajes as $msg ) {
+    echo $msg . '<br>';
+  }
+  echo '</div>';
 }
 ?>
 
 <div id="main">
-<div class="span-18">
-<?php echo  $this->userLockLink; ?>
-<ul id="tabnav">
-    <?=$this->editprofile_tab; ?>
-	<li ><a   id="<?=(preg_match("/profile/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/profile/<?=$this->user['username'] ?>"><?=$this->translate('profile');?></a></li>
-	<li ><a  id="<?=(preg_match("/listuser/", $_SERVER['REQUEST_URI']))?"tab_active":"lala"?>" href="/<?=$this->lang ?>/ad/listuser/id/<?=$this->user['id'] ?>"><?=$this->translate('ads');?></a></li>
 
-</ul>
+  <div class="span-18">
 
+<?
+echo $this->userLockLink;
 
-    <div class="user_profile">
-        <h4><?=$this->translate('User name:').' '.$this->user['username'];?></h4>
-        <h4><?=$this->translate('Member since:').' '.$this->escape(date( $this->translate('l dS \o\f F Y H:i:s'), strtotime($this->user['created'])));?></h4>
+if ($this->myUserId == $this->userId) {
+    $this->edit_link = '/' . $this->lang . '/user/edit/id/' . $this->userId;
+    $this->edit_text = $this->translate('edit profile');
+    $this->edit_id   = '';
+    $this->mess_link = '/' . $this->lang . '/message/list';
+    $this->mess_text =  $this->translate('messages');
+    $this->mess_id   = '';
+}
+$this->prof_link = '/' . $this->lang . '/profile/' . $this->userId;
+$this->prof_text = $this->translate('profile');
+$this->prof_id   = 'id="tab_active"';
+$this->ads_link  = '/' . $this->lang . '/ad/listuser/id/' . $this->userId;
+$this->ads_text  = $this->translate('ads');
+$this->ads_id    = '';
 
-     <?php if ($this->friendlist):
-            //var_dump($this->friendlist);
-            echo '<div><h4>' . $this->translate('Friends list:'). '</h4>';
+echo $this->render('partials/tabnav.phtml');
+?>
 
-     ?>
+    <div class="ad_excerpt">
 
+      <h4>
+        <?= $this->translate('User name:') . ' ' .
+            $this->userName?>
+      </h4>
+      <h4>
+        <?= $this->translate('Member since:') . ' ' .
+            $this->betterDate($this->created)?>
+      </h4>
 
-         <?php
-       foreach ($this->friendlist as $key => $val):
+      <?=$this->sendmessage_tab?><br/>
 
-       echo  '<a href=" '. '/' . $this->lang . '/profile/' .  $val['username'] . ' ">' . $val['username'] . '</a><br>';
-               ?>
+      <?=$this->friend_link?>
 
-        <?php endforeach; ?>
-
-        <?php
-        echo '</div>';
-        endif; ?>
-
-       
+<?
+if ($this->friendlist) {
+    echo '<div><h4>' . $this->translate('Friends list:'). '</h4>';
+    foreach ($this->friendlist as $key => $val) {
+        echo  '<a href=" '. '/' . $this->lang . '/profile/' .  $val['username'] . ' ">' . $val['username'] . '</a><br>';
+    }
+    echo '</div>';
+}
+?>
 
     </div>
 
-</div>
+  </div>
 
 </div>
