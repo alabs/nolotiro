@@ -15,10 +15,11 @@ ALTER TABLE messages ADD COLUMN thread_id int(11) NOT NULL after id |
 ALTER TABLE messages ADD foreign key (thread_id) REFERENCES `threads`(`id`) ON DELETE CASCADE |
 
 /* Estas foreign key no son necesarias para la migración pero está bien meterlas, creo */
-ALTER TABLE messages MODIFY COLUMN user_from int(11) |
+ALTER TABLE messages MODIFY COLUMN user_from int(11) unsigned|
 ALTER TABLE messages ADD FOREIGN KEY (`user_from`) REFERENCES `users`(`id`) ON DELETE SET NULL |
-ALTER TABLE messages MODIFY COLUMN user_to int(11) |
+ALTER TABLE messages MODIFY COLUMN user_to int(11) unsigned|
 ALTER TABLE messages ADD FOREIGN KEY (`user_to`) REFERENCES `users`(`id`) ON DELETE SET NULL |
+SET FOREIGN_KEY_CHECKS=1;
 
 DROP PROCEDURE IF EXISTS messages2threads |
 
@@ -43,7 +44,7 @@ END |
 
 CALL messages2threads |
 
-ALTER TABLE messages DROP COLUMN subject |
-ALTER TABLE messages DROP COLUMN readed;
+ALTER TABLE `messages` DROP COLUMN subject;
+ALTER TABLE `messages` DROP COLUMN readed;
 
 SET FOREIGN_KEY_CHECKS=1;
