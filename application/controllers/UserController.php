@@ -129,7 +129,7 @@ class UserController extends Zend_Controller_Action {
         }
 
         $modelU = new Model_User();
-        $user = $modelU->fetchUser($userId);
+        $user = $this->view->user = $modelU->fetchUser($userId);
         $userName = $this->view->userName = $user['username'];
 
         $this->view->friendlist = $modelU->fetchUserFriends($userId);

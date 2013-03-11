@@ -59,7 +59,7 @@ echo $this->render('partials/tabnav.phtml');
       </h4>
       <h4>
         <?= $this->translate('Member since:') . ' ' .
-            $this->betterDate($this->created)?>
+            date("d-m-Y",strtotime($this->user->created));?>
       </h4>
 
       <?=$this->sendmessage_tab?><br/>
