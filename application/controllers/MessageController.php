@@ -159,7 +159,8 @@ class MessageController extends Zend_Controller_Action {
             $mail->setSubject('[nolotiro.org] - ' . $this->view->translate('You have a new message from user') . ' ' . $username_from);
             $mail->send();
 
-            $this->_helper->_flashMessenger->addMessage($this->view->translate('Message sent successfully!'));
+            $this->_helper->_flashMessenger->addMessage(
+                $this->view->translate('Message sent successfully!'));
             $this->_redirect('/' . $this->lang . '/message/list');
         }
 
@@ -207,50 +208,58 @@ class MessageController extends Zend_Controller_Action {
      */
     public function showAction() {
 
-        $id = $this->_request->getParam('id');
+        $request = $this->getRequest();
+        $id = $request->getParam('id');
         $lang = $this->lang;
-        $subject = $this->view->subject = $this->_request->getParam('subject');
 
-        $m_message = new Model_Message();
-        $this->view->thread = $m_message->getMessagesFromThread($id);
-
-        if (!$this->view->thread) {
-            $this->_helper->_flashMessenger->addMessage($this->view->translate('This thread does not exist!'));
-            $this->_redirect('/' . $lang . '/woeid/' . $this->location . '/give');
-            return;
-        }
-
+        /* First check wheter the user should be looking here */
         $auth = Zend_Auth::getInstance ();
         if ($auth->hasIdentity()) {
-            // if not the sender or receiver of the message, go to hell
+
+            /* Information for the view */
             $this->view->me = $me = $auth->getIdentity()->id;
-            // i need the username in the view
             $this->view->my_name = $auth->getIdentity()->username;
-            $to = $this->view->thread[0]['user_to'];
-            $from = $this->view->thread[0]['user_from'];
-            if (($to != $me) && ($from != $me) ) {
-                $this->_helper->_flashMessenger->addMessage($this->view->translate('You are not allowed to view this page'));
+
+            /* Grab thread from database */
+            $m_message = new Model_Message();
+            $thread = $m_message->getThreadFromId($id);
+
+            /* Check if user is allowed to see the conversation */
+            if ( ($thread->user_to != $me && $thread->user_from != $me) ||
+                 ($thread->user_to == $me && $thread->deleted_to) ||
+                 ($thread->user_from == $me && $thread->deleted_from) ) {
+
+                 $this->_helper->_flashMessenger->addMessage(
+                     $this->view->translate('You are not allowed to view this page'));
                 $this->_redirect('/' . $lang . '/woeid/' . $this->location . '/give');
             }
-        } else { //maybe the owner , but not logged, redir to login
-                 //keep this url in zend session to redir after login
-            $aNamespace = new Zend_Session_Namespace('Nolotiro');
-            $aNamespace->redir = $lang . '/message/show/' . $id . '/subject/' . $subject;
-            $this->_redirect($lang . '/auth/login');
+
+            /* Grab the whole conversation from database */
+            $this->view->thread = $m_message->getMessagesFromThread($id);
+
+            if (!$this->view->thread) {
+                $this->_helper->_flashMessenger->addMessage(
+                    $this->view->translate('This thread does not exist!'));
+                $this->_redirect('/' . $lang . '/woeid/' . $this->location . '/give');
+            }
+
+            /* Mark conversation as read */
+            $m_message = new Model_Message();
+            $m_message->markAsRead($id, $me);
+
+            $reply_to = ($me == $thread->user_to) ? $thread->user_from : $thread->user_to;
+
+            $this->view->subject = $thread->subject;
+            $this->view->page_title .= $thread->subject;
+
+            $f_message_reply = new Form_MessageReply();
+
+            $f_message_reply->setAction('/' . $lang . '/message/reply/' . $id .
+                                        '/to/' . $reply_to);
+
+            $this->view->createreply = $f_message_reply;
         }
 
-        $m_message = new Model_Message();
-        $m_message->markAsRead($id, $me);
-
-        $reply_to = ($me == $to) ? $from : $to;
-        $this->view->page_title .= $subject;
-
-        $f_message_reply = new Form_MessageReply();
-
-        $f_message_reply->setAction('/' . $lang . '/message/reply/' . $id .
-                                    '/to/' . $reply_to);
-
-        $this->view->createreply = $f_message_reply;
     }
 
 
