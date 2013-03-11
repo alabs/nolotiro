@@ -54,8 +54,8 @@ foreach ($langs as $lang => $name) {
              '/profile/' . $auth_userid . '">' . $this->escape($auth_username) .
              '</a></b>';
 
-        echo ' | <a title="' . $this->n_unread . ' unread ' .
-             $this->translate( array('message', 'messages', $this->n_unread)) .
+        echo ' | <a title="' . $this->n_unread . ' ' .
+             $this->translate( array('unread message', 'unread messages', $this->n_unread)) .
              '" href="/' . $this->lang . '/message/list">
              <img src="/images/icons/ico_email.gif" />&nbsp;<b>' .
              $this->n_unread . '</b>

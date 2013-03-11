@@ -1,13 +1,11 @@
 "Help to translate nolotiro.org to your language";"Ayuda a traducir nolotiro.org a tu idioma"
 "help to translate";"ayuda a traducir"
 
-
 #home
 "last gifts published";"últimos regalos publicados"
 "world's most recycling cities";"ciudades del mundo que más reciclan"
 "most active users";"usuarios más activos"
 "view more ads";"ver más anuncios"
-
 
 #location
 "Location changed successfully to:";"Ubicación cambiada con éxito a:"
@@ -149,7 +147,6 @@
 "Your account has been deleted.";"Tu cuenta ha sido eliminada"
 "This user does not have ads yet";"Este usuario no tiene anuncios todavía"
 
-
 #user/locked
 "Lock user";"Bloquear usuario"
 "User locked successfully.";"Usuario bloqueado con éxito."
@@ -231,6 +228,8 @@
 "unread";"no leído";"no leídos"
 "message";"mensaje";"mensajes"
 "messages";"mensajes"
+"unread message";"mensaje no leído";"mensajes no leídos"
+"unread messages";"mensajes no leídos"
 "Go to this url to reply this message:";"Haz click en este enlace para responder el mensaje:"
 "Send message to the owner";"Envía un mensaje al anunciante"
 "Send a private message to the owner";"Envía un mensaje privado al anunciante"
@@ -244,11 +243,13 @@
 "This is an automated notification. Please, don't reply  at this email address.";"Este es un mensaje automático. Por favor, no respondas a esta dirección de email."
 "New private message to user";"Nuevo mensaje privado para el usuario"
 "Subject:";"Tema"
+"Re:";"Re:"
+"Message succesfully deleted";"Mensaje borrado correctamente"
+
 "delete this ad";"borrar anuncio"
 "Delete ad";"Borrar anuncio"
 "Are you sure you want to delete this ad?";"¿Seguro que quieres borrar este anuncio?"
 "Ad deleted successfully.";"El anuncio ha sido eliminado."
-"Re:";"Re:"
 
 #comment
 "Create a new comment";"Escribe un comentario"

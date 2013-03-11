@@ -280,7 +280,7 @@ class MessageController extends Zend_Controller_Action {
         $modelM = new Model_Message();
         $thread = $modelM->getThreadFromId($data['thread_id']);
 
-        // check current user is sender or recpient
+        /* check current user is sender or recpient */
         if ($data['user_id'] == $thread->user_to ||
             $data['user_id'] == $thread->user_from) {
 
@@ -288,8 +288,8 @@ class MessageController extends Zend_Controller_Action {
             $this->_helper->_flashMessenger->addMessage(
                 $this->view->translate('Message succesfully deleted'));
             $aNamespace = new Zend_Session_Namespace('Nolotiro');
-            $this->_redirect($aNamespace->redir);
-        
+            $this->_redirect('/' . $lang . '/message/list');
+
         } else {
 
             $this->_helper->_flashMessenger->addMessage(
