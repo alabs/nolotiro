@@ -145,6 +145,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             ':language/message/list/*', array ( 'language' => null,
                                                 'controller' => 'message',
                                                 'action' => 'list'));
+        $routeMessageDelete = new Zend_Controller_Router_Route (
+            ':language/message/delete/:id/*', array ( 'language' => null,
+                                                      'controller' => 'message',
+                                                      'action' => 'delete'));
 
         $router->addRoute ( 'default', $routeLang );//important, put the default route first!
         $router->addRoute ( 'woeid/woeid/ad_type', $routeWoeid );
@@ -158,6 +162,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute ( 'message/reply', $routeMessageReply);
         $router->addRoute ( 'message/show', $routeMessageShow);
         $router->addRoute ( 'message/list', $routeMessageList);
+        $router->addRoute ( 'message/delete', $routeMessageDelete);
 
         $front->setRouter ( $router );
         return $front;

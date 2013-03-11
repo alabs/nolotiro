@@ -253,4 +253,50 @@ class MessageController extends Zend_Controller_Action {
         $this->view->createreply = $f_message_reply;
     }
 
+
+    /**
+     * Delete a conversation
+     */
+    public function deleteAction() {
+
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout()->disableLayout();
+        $lang = $this->lang;
+        $location = $this->location;
+        $request = $this->getRequest();
+
+        /* User not logging, not allowed */
+        $auth = Zend_Auth::getInstance ();
+        if (!$auth->hasIdentity()) {
+            $this->_helper->_flashMessenger->addMessage(
+                $this->view->translate('You are not allowed to view this page'));
+            $this->_redirect('/' . $lang . '/woeid/' . $location . '/give');
+            return;
+        }
+
+        $data['user_id'] = $auth->getIdentity()->id;
+        $data['thread_id'] = (int)$request->getParam('id');
+
+        $modelM = new Model_Message();
+        $thread = $modelM->getThreadFromId($data['thread_id']);
+
+        // check current user is sender or recpient
+        if ($data['user_id'] == $thread->user_to ||
+            $data['user_id'] == $thread->user_from) {
+
+            $modelM->deleteThread($data);
+            $this->_helper->_flashMessenger->addMessage(
+                $this->view->translate('Message succesfully deleted'));
+            $aNamespace = new Zend_Session_Namespace('Nolotiro');
+            $this->_redirect($aNamespace->redir);
+        
+        } else {
+
+            $this->_helper->_flashMessenger->addMessage(
+                $this->view->translate('You are not allowed to view this page'));
+            $this->_redirect('/' . $lang . '/woeid/' . $location . '/give');
+            return;
+        }
+    }
+
 }

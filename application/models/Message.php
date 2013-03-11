@@ -13,12 +13,46 @@ class Model_Message {
         $threads_table = new Zend_Db_Table('threads');
         $thread_data['subject'] = $data['subject'];
         $thread_data['last_speaker'] = $data['user_from'];
+        $thread_data['user_from'] = $data['user_from'];
+        $thread_data['user_to'] = $data['user_to'];
         $data['thread_id'] = $threads_table->insert($thread_data);
 
         unset($data['subject']);
         $this->createMessage($data);
 
         return $data['thread_id'];
+    }
+
+    /**
+     * Deletes a new thread, by marking it as deleted. If both users deleted it
+     * it is phisically deleted as well
+     *
+     * @param array $data: thread_id and user_id who is deleting
+     */
+    public function deleteThread(array $data) {
+
+        /* Fetch thread */
+        $threads_table = new Zend_Db_Table('threads');
+        $select = $threads_table->select()->where('id = ?', $data['thread_id']);
+        $thread = $threads_table->fetchRow($select);
+
+        /* Update flags */
+        if ($thread->user_from == $data['user_id'])
+            $thread->deleted_from = 1;
+        elseif ($thread->user_to == $data['user_id'])
+            $thread->deleted_to = 1;
+        else
+            return null;
+        $thread->save();
+
+        /* If both deleted, delete physically */
+        if ($thread->deleted_from && $thread->deleted_to) {
+            $messages_table = new Zend_Db_Table('messages');
+            $whereM = $messages_table->getAdapter()->quoteInto('id = ?', $data['thread_id']);
+            $messages_table->delete($whereM);
+            $thread->delete();
+        }
+        return;
     }
 
 
@@ -42,6 +76,19 @@ class Model_Message {
 
 
     /**
+     * get thread of specific id
+     *
+     * @param id
+     */
+    public function getThreadFromId($id) {
+        if (!$id)
+            return null;
+        $threads_table = new Zend_Db_Table('threads');
+        $select = $threads_table->select()->where('id = ?', $id);
+        return $threads_table->fetchRow($select);
+    }
+
+    /**
      * get threads from an user_id
      *
      * @param user_id
@@ -57,15 +104,15 @@ class Model_Message {
                          'total_messages' => '(count(*))',
                          'last_updated' => '(max(date_created))',
                          'id_with' =>
-                "(CASE user_to WHEN $id THEN u2.id ELSE u1.id END)",
+                "(CASE m.user_to WHEN $id THEN u2.id ELSE u1.id END)",
                          'name_with' =>
-                "(CASE user_to WHEN $id THEN u2.username ELSE u1.username END)"
+                "(CASE m.user_to WHEN $id THEN u2.username ELSE u1.username END)"
             ))
             ->join(array('t' => 'threads'), 'm.thread_id = t.id',
                    array('subject', 'unread', 'last_speaker'))
-            ->join(array('u1' => 'users'), 'user_to = u1.id', array())
-            ->join(array('u2' => 'users'), 'user_from = u2.id', array())
-            ->where('user_from = ? OR user_to = ?', $id, $id)
+            ->join(array('u1' => 'users'), 'm.user_to = u1.id', array())
+            ->join(array('u2' => 'users'), 'm.user_from = u2.id', array())
+            ->where('m.user_from = ? OR m.user_to = ?', $id, $id)
             ->group('thread_id')
             ->order('last_updated DESC');
         $result = $messages_table->fetchAll($select)->toArray();
@@ -131,16 +178,15 @@ class Model_Message {
             ->from(array( 'm' => 'messages' ))
             ->join(array( 't' => 'threads' ), 'm.thread_id = t.id',
                 array( 'unread' ))
-            ->where('user_from = ? OR user_to = ?', $user_id, $user_id)
+            ->where('m.user_from = ? OR m.user_to = ?', $user_id, $user_id)
             ->where('last_speaker != ?', $user_id)
             ->group('thread_id');
 
         $readConf = new Zend_Config_Ini(APPLICATION_PATH . '/config/nolotiro.ini', 'production');
         $dbAdapter = Zend_Db::factory($readConf->resources->db);
         $select = $dbAdapter->select()
-            ->from(array('tmp' => $subselect),
-                   array( 'unread_count' => 'sum(unread)' ));
-
+                            ->from(array('tmp' => $subselect),
+                                   array( 'unread_count' => 'sum(unread)' ));
         $result = $dbAdapter->fetchOne($select);
 
         return (!$result) ? 0 : $result;
