@@ -99,21 +99,23 @@ class Model_Message {
         $messages_table = new Zend_Db_Table('messages');
         $select = $messages_table->select()
             ->setIntegrityCheck(false)
-            ->from(array('m' => 'messages'), array (
-                         'thread_id',
-                         'total_messages' => '(count(*))',
-                         'last_updated' => '(max(date_created))',
+            ->from(array('t' => 'threads'),
+                   array('subject',
+                         'unread',
+                         'last_speaker',
                          'id_with' =>
-                "(CASE m.user_to WHEN $id THEN u2.id ELSE u1.id END)",
+                "(CASE t.user_to WHEN $id THEN u2.id ELSE u1.id END)",
                          'name_with' =>
-                "(CASE m.user_to WHEN $id THEN u2.username ELSE u1.username END)"
-            ))
-            ->join(array('t' => 'threads'), 'm.thread_id = t.id',
-                   array('subject', 'unread', 'last_speaker'))
-            ->join(array('u1' => 'users'), 'm.user_to = u1.id', array())
-            ->join(array('u2' => 'users'), 'm.user_from = u2.id', array())
-            ->where('m.user_from = ? OR m.user_to = ?', $id, $id)
-            ->group('thread_id')
+                "(CASE t.user_to WHEN $id THEN u2.username ELSE u1.username END)"))
+            ->join(array('m' => 'messages'), 't.id = m.thread_id',
+                   array('thread_id',
+                         'total_messages' => '(count(*))',
+                         'last_updated' => '(max(date_created))'))
+            ->join(array('u1' => 'users'), 't.user_to = u1.id', array())
+            ->join(array('u2' => 'users'), 't.user_from = u2.id', array())
+            ->where('t.user_from = ? AND t.deleted_from = 0', $id)
+            ->orWhere('t.user_to = ? AND t.deleted_to = 0', $id)
+            ->group('t.id')
             ->order('last_updated DESC');
         $result = $messages_table->fetchAll($select)->toArray();
 
@@ -177,9 +179,9 @@ class Model_Message {
             ->setIntegrityCheck(false)
             ->from(array( 'm' => 'messages' ))
             ->join(array( 't' => 'threads' ), 'm.thread_id = t.id',
-                array( 'unread' ))
-            ->where('m.user_from = ? OR m.user_to = ?', $user_id, $user_id)
-            ->where('last_speaker != ?', $user_id)
+                   array( 'unread' ))
+            ->where('last_speaker != ? AND t.user_from = ? AND t.deleted_from = 0', $user_id, $user_id)
+            ->orWhere('last_speaker != ? AND t.user_to = ? AND t.deleted_to = 0', $user_id, $user_id)
             ->group('thread_id');
 
         $readConf = new Zend_Config_Ini(APPLICATION_PATH . '/config/nolotiro.ini', 'production');
