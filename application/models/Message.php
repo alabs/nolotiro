@@ -13,7 +13,6 @@ class Model_Message {
         $threads_table = new Zend_Db_Table('threads');
         $thread_data['subject'] = $data['subject'];
         $thread_data['last_speaker'] = $data['user_from'];
-        $thread_data['unread'] = '1';
         $data['thread_id'] = $threads_table->insert($thread_data);
 
         unset($data['subject']);
