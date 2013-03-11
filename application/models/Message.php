@@ -69,6 +69,7 @@ class Model_Message {
 
         $threads_table = new Zend_Db_Table('threads');
         $thread_data = array ( 'unread' => new Zend_Db_Expr('unread + 1'),
+                               'deleted_to' => 0,
                                'last_speaker' => $data['user_from'] );
         $where = array ( 'id = ?' => $data['thread_id'] );
         $threads_table->update($thread_data, $where);
