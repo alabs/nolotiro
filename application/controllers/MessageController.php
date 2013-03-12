@@ -27,22 +27,31 @@ class MessageController extends Zend_Controller_Action {
     public function createAction() {
 
         $request = $this->getRequest();
-
         $id_user_to = $request->getParam('id_user_to');
+        $lang = $this->lang;
+
+        // first we check if user is logged, if not redir to login
+        $auth = Zend_Auth::getInstance ();
+        if (!$auth->hasIdentity()) {
+            //keep this url in zend session to redir after login
+            $aNamespace = new Zend_Session_Namespace('Nolotiro');
+            $aNamespace->redir = $lang . '/message/create/id_user_to/' . $id_user_to . '/subject/' .
+                                 $request->getParam('subject');
+            $this->_redirect($lang . '/auth/login');
+        }
+
+        // check sender and recipient are not the same
+        if ($auth->getIdentity()->id == $id_user_to) {
+            $this->_helper->_flashMessenger->addMessage(
+                $this->view->translate('You are not allowed to do that'));
+                $this->_redirect('/' . $lang . '/woeid/' . $this->location . '/give');
+        }
+
         $m_user = new Model_User();
         $object_user = $m_user->fetchUser($id_user_to);
         $this->view->user_to = $object_user->username;
 
         $f_message_create = new Form_MessageCreate();
-
-        //first we check if user is logged, if not redir to login
-        $auth = Zend_Auth::getInstance ();
-        if (!$auth->hasIdentity()) {
-            //keep this url in zend session to redir after login
-            $aNamespace = new Zend_Session_Namespace('Nolotiro');
-            $aNamespace->redir = $this->lang . '/message/create/id_user_to/' . $id_user_to . '/subject/' . $request->getParam('subject');
-            $this->_redirect($this->lang . '/auth/login');
-        }
 
         if ($this->getRequest()->isPost()) {
 
@@ -241,7 +250,7 @@ class MessageController extends Zend_Controller_Action {
                  ($thread->user_to == $me && $thread->deleted_to) ||
                  ($thread->user_from == $me && $thread->deleted_from) ) {
 
-                 $this->_helper->_flashMessenger->addMessage(
+                $this->_helper->_flashMessenger->addMessage(
                      $this->view->translate('You are not allowed to view this page'));
                 $this->_redirect('/' . $lang . '/woeid/' . $this->location . '/give');
             }

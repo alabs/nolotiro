@@ -124,7 +124,8 @@ class UserController extends Zend_Controller_Action {
         $userId = $this->view->userId = $this->getRequest()->getParam('id');
 
         if (!$userId) {
-            $this->_helper->_flashMessenger->addMessage($this->view->translate('This user does not exist'));
+            $this->_helper->_flashMessenger->addMessage(
+                $this->view->translate('This user does not exist'));
             $this->_redirect('/' . $lang . '/woeid/' . $this->location . '/give');
         }
 
@@ -135,32 +136,36 @@ class UserController extends Zend_Controller_Action {
         $this->view->friendlist = $modelU->fetchUserFriends($userId);
 
         $send_link = '/' . $lang . '/message/create/id_user_to/' . $userId;
-        $this->view->sendmessage_tab = '
-            <a class="world_link" href="' . $send_link . '">' .
-              $this->view->translate('send message to') . ' ' . $userName . '
-              <img src="/images/email_send.png" alt="send a message"/></a>';
 
         $auth = Zend_Auth::getInstance ();
         if ($auth->hasIdentity()) {
-            $this->view->myUserId = $auth->getIdentity()->id;
+            $myUserId = $this->view->myUserId = $auth->getIdentity()->id;
 
-            //check if this user is friend or not to paint proper link
-            if ($modelU->isMyFriend($this->view->myUserId, $userId)) {
-                $this->view->friend_link = '
-                  <a class="world_link"
-                     href="/' . $lang . '/user/addfriend/id/' . $userId . '">
-                       ' . $this->view->translate('add') .  ' ' .
-                       $userName .  ' ' .
-                       $this->view->translate('to your friends list'). '
-                    <img src="/images/friend_add.png" alt="Add friend"/></a>';
-            } else {
-                $this->view->friend_link = '
-                  <a class="world_link"
-                     href="/' . $lang . '/user/deletefriend/id/' . $userId . '">
-                       ' . $this->view->translate('remove') . ' ' .
-                       $userName . ' ' .
-                       $this->view->translate('from your friends list'). '
-                    <img src="/images/friend_delete.png" alt="Delete friend"/></a>';
+            // Don't display message or add_friend links if it's my own profile
+            if ($myUserId != $userId) {
+                $this->view->sendmessage_tab = '
+                    <a class="world_link" href="' . $send_link . '">' .
+                    $this->view->translate('send message to') . ' ' . $userName . '
+                    <img src="/images/email_send.png" alt="send a message"/></a>';
+
+                // Check if this user is friend or not to paint proper link
+                if ($modelU->isMyFriend($myUserId, $userId)) {
+                    $this->view->friend_link = '
+                      <a class="world_link"
+                         href="/' . $lang . '/user/addfriend/id/' . $userId . '">
+                           ' . $this->view->translate('add') .  ' ' .
+                           $userName .  ' ' .
+                           $this->view->translate('to your friends list'). '
+                        <img src="/images/friend_add.png" alt="Add friend"/></a>';
+                } else {
+                    $this->view->friend_link = '
+                    <a class="world_link"
+                         href="/' . $lang . '/user/deletefriend/id/' . $userId . '">
+                           ' . $this->view->translate('remove') . ' ' .
+                           $userName . ' ' .
+                           $this->view->translate('from your friends list'). '
+                        <img src="/images/friend_delete.png" alt="Delete friend"/></a>';
+                }
             }
         } else
             $this->view->myUserId = null;
