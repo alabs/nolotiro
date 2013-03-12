@@ -98,9 +98,14 @@ if (count ( $this->mensajes ) > 0) {
 
 
                 <div class="ad_meta_info">
-                    <?php if ($val['status'] != 'delivered'): ?>
+                    <?php // XXX: Is this page only seen by logged in users? If
+                          //      that's the case all this checks aren't needed
+                      if ($val['status'] != 'delivered'):
+                              $auth = Zend_Auth::getInstance ();
+                              if (!$auth->hasIdentity() || $val['owner'] != $auth->getIdentity()->id): ?>
                     <b><a rel="nofollow" href="/<?=$this->lang ?>/message/create/id_user_to/<?=$val['user_owner'].'/subject/'.$this->slugTitle($this->escape($val['title']))
                         ?>">+ <?=$this->translate('Send message to the owner') ?></a></b>
+                        <?php endif;?>
                     &nbsp;&nbsp;&nbsp;<b><a href="/<?=$this->lang ?>/ad/<?=$this->escape($val['id']).'/'.$this->slugTitle($this->escape($val['title']))
                         ?>">+ <?=$this->translate('Write a new comment') ?></a></b>
                     <?php endif;?>
