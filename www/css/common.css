@@ -1064,7 +1064,7 @@ form.searchbox dl {
 
 
 .thread-from {
-    width: 200px;
+    width: 185px;
     float: left;
     height: 80px;
 }
@@ -1090,23 +1090,28 @@ form.searchbox dl {
 }
 
 .thread-subject {
-    width: 285px;
+    width: 280px;
     float: left;
     height: 80px;
     margin-right:20px
 }
 
 .thread-date {
-    width: 135px;
+    width: 130px;
     color: #666;
     font-size: 0.9em;
     font-weight: normal;
-    float: right;
+    float: left;
     height: 80px;
     text-align: right;
 }
 
-
+.thread-delete {
+    width: 15px;
+    padding-left: 10px;
+    height: 80px;
+    float: right;
+}
 
 
 /**

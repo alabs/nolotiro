@@ -77,11 +77,16 @@ foreach ($this->paginator as $key => $val) {
 
       <div class="thread-subject">
           <a href="/<?=$lang?>/message/show/<?=
-                  $val['thread_id']?>/subject/<?=$subject?>"><?=$subject?></a>
+                  $val['thread_id']?>"><?=$subject?></a>
       </div>
 
       <div class="thread-date">
         <?=$this->betterDate($t_date)?>
+      </div>
+
+      <div class="thread-delete">
+        <a href="/<?=$lang?>/message/delete/<?=$val['thread_id']?>"><img
+          src="/images/delete.ico"/></a>
       </div>
 
     </div>
