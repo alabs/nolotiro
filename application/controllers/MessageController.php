@@ -91,7 +91,6 @@ class MessageController extends Zend_Controller_Action {
             }
         } else {
             $data['subject'] = $this->_getParam('subject');
-
             $f_message_create->populate($data);
         }
 
@@ -124,46 +123,59 @@ class MessageController extends Zend_Controller_Action {
 
         if ($request->isPost()) {
 
-            // collect data
-            $f = new Zend_Filter_StripTags ( );
-            $data['body'] = $f->filter($request->getPost('body'));
-            $data['user_from'] = $auth->getIdentity()->id;
+            $f_message_reply = new Form_MessageReply();
+            if ($f_message_reply->isValid($request->getPost())) {
 
-            if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-              $data['ip'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
-            } elseif (isset($_SERVER['REMOTE_ADDR'])) {
-              $data['ip'] = $_SERVER['REMOTE_ADDR'];
+                // collect data
+                $f = new Zend_Filter_StripTags ( );
+                $data['body'] = $f->filter($request->getPost('body'));
+                $data['user_from'] = $auth->getIdentity()->id;
+
+                if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                  $data['ip'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+                  $data['ip'] = $_SERVER['REMOTE_ADDR'];
+                }
+
+                // Insert new message in database
+                $m_message = new Model_Message();
+                $m_message->createMessage($data);
+
+                // Send notification e-mail
+                $mail = new Zend_Mail('utf-8');
+                $hostname = 'http://' . $this->getRequest()->getHttpHost();
+                $username_from = $auth->getIdentity()->username;
+                $data['body'] = $data['subject'] . '<br/>' . $data['body'] . '<br/>';
+                $data['body'] .= $this->view->translate(
+                    'Go to this url to reply this message:') . '<br/>
+                    <a href="' . $hostname . '/' . $this->lang . '/message/received">' .
+                    $hostname . '/' . $this->lang .  '/message/received</a>
+                    <br>---------<br/>';
+                $data['body'] .= $this->view->translate(
+                    'This is an automated notification. Please, don\'t reply  at this email address.');
+                $mail->setBodyHtml($data['body']);
+                $mail->setFrom('noreply@nolotiro.org', 'nolotiro.org');
+                $m_user = new Model_User();
+                $object_user = $m_user->fetchUser($data['user_to']);
+                $mail->addTo($object_user->email);
+                $mail->setSubject('[nolotiro.org] - ' . $this->view->translate('You have a new message from user') . ' ' . $username_from);
+                $mail->send();
+
+                // Show flash success notification
+                $this->_helper->_flashMessenger->addMessage(
+                    $this->view->translate('Message sent successfully!'));
+
+            } else {
+                // Show flash failure notification
+                $this->_helper->_flashMessenger->addMessage(
+                    $this->view->translate('There was an error sending your message'));
             }
 
-            // Insert new message in database
-            $m_message = new Model_Message();
-            $m_message->createMessage($data);
-
-            // Send notification e-mail
-            $mail = new Zend_Mail('utf-8');
-            $hostname = 'http://' . $this->getRequest()->getHttpHost();
-            $username_from = $auth->getIdentity()->username;
-            $data['body'] = $data['subject'] . '<br/>' . $data['body'] . '<br/>';
-            $data['body'] .= $this->view->translate(
-                'Go to this url to reply this message:') . '<br/>
-                <a href="' . $hostname . '/' . $this->lang . '/message/received">' .
-                $hostname . '/' . $this->lang .  '/message/received</a>
-                <br>---------<br/>';
-            $data['body'] .= $this->view->translate(
-                'This is an automated notification. Please, don\'t reply  at this email address.');
-            $mail->setBodyHtml($data['body']);
-            $mail->setFrom('noreply@nolotiro.org', 'nolotiro.org');
-            $m_user = new Model_User();
-            $object_user = $m_user->fetchUser($data['user_to']);
-            $mail->addTo($object_user->email);
-            $mail->setSubject('[nolotiro.org] - ' . $this->view->translate('You have a new message from user') . ' ' . $username_from);
-            $mail->send();
-
-            $this->_helper->_flashMessenger->addMessage(
-                $this->view->translate('Message sent successfully!'));
-            $this->_redirect('/' . $this->lang . '/message/list');
+            /* Redirect back to message list.
+             * XXX: Do this in a way validation errors are kept. Javascript I
+             *      guess */
+            $this->_redirect('/' . $this->lang . '/message/show/' . $id);
         }
-
     }
 
 

@@ -8,7 +8,7 @@ class Form_MessageReply extends Zend_Form {
 
         $this->addElement ( 'textarea', 'body', array (
             'validators' => array (
-                array ('StringLength', false, array (3, 800) )),
+                array ('StringLength', false, array (2, 800) )),
             'rows' => 3,
             'required' => true
         ));

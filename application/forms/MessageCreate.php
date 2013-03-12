@@ -17,7 +17,7 @@ class Form_MessageCreate extends Zend_Form {
         $this->addElement ( 'textarea', 'body', array (
             'validators' => array (
                 array ('StringLength', false, array (3, 800) )),
-            'rows' => 3,
+            'rows' => 6,
             'required' => true
         ));
         $this->getElement('body')->removeDecorator('label');
