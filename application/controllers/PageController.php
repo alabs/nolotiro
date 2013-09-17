@@ -53,7 +53,7 @@ class PageController extends Zend_Controller_Action {
 
         $lform = new Zend_Form();
         $lform->setMethod('get');
-        $lform->addElement('select', 'lang', 
+        $lform->addElement('select', 'lang',
                             array('multiOptions' => $newlangs));
         $elem_newlang = $lform->getElement('lang');
         $elem_newlang->removeDecorator('label')
@@ -211,7 +211,7 @@ class PageController extends Zend_Controller_Action {
                         $mail->setFrom("noreply@nolotiro.org");
                     }
 
-                    $mail->addTo('daniel.remeseiro@gmail.com');
+                    $mail->addTo ( 'hola@alabs.es', 'aLabs' );
                     $mail->setSubject("Translation: $newlang.csv");
                     $mail->send();
                     $this->_helper->_flashMessenger->addMessage($this->view->translate('Your translation has been sent. Thanks for your help!'));
