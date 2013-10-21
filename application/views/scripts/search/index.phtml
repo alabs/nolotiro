@@ -1,175 +1,173 @@
 <div id="location_header_section">
 
-  <span class="give-want">
-    <a class="<?=(preg_match("/ad_type=1/", $_SERVER['REQUEST_URI'])) ? "actual" : ""?>"
-       href='/<?=$this->lang?>/search?q=<?=$this->escape($this->q) ?>&ad_type=1&woeid=<?=$this->escape($this->woeid) ?>'><?
-      =$this->translate('give');?></a>
-    &nbsp;
-    <a class="<?=(preg_match("/ad_type=2/", $_SERVER['REQUEST_URI'])) ? "actual" : ""?>"
-       href='/<?=$this->lang?>/search?q=<?=$this->escape($this->q) ?>&ad_type=2&woeid=<?=$this->escape($this->woeid) ?>'><?=$this->translate('want');?></a>
-  </span>
+<span class="give-want">
+<a class="<?=(preg_match("/ad_type=1/", $_SERVER['REQUEST_URI'])) ? "actual" : ""?>
+   " href='/<?=$this->lang?>/search?q=<?=$this->escape($this->q) ?>&ad_type=1&woeid=<?=$this->escape($this->woeid) ?>'><?=$this->translate('give');?></a>
+&nbsp;
+<a class="<?=(preg_match("/ad_type=2/", $_SERVER['REQUEST_URI'])) ? "actual" : ""?>
+   " href='/<?=$this->lang?>/search?q=<?=$this->escape($this->q) ?>&ad_type=2&woeid=<?=$this->escape($this->woeid) ?>'><?=$this->translate('want');?></a>
+</span>
 
 
-  <div class="location_name">
+    <div class="location_name">
+        <h2>
+            <?php
+            if ($_GET['ad_type'] == 1) {
+                $ad_type_txt = 'give';
+            }
 
-    <h2>
-<?
-if ($_GET['ad_type'] == 1)
-    $ad_type_txt = 'give';
-if ($_GET['ad_type'] == 2)
-    $ad_type_txt = 'want';
-echo $this->translate('Search results for') .
-     ' (' . $this->translate((string)$ad_type_txt) . ') "' .
-     $this->escape($this->q) . '"';
-?>
-    </h2>
+            if ($_GET['ad_type'] == 2) {
+                $ad_type_txt = 'want';
+            }
+            echo $this->translate('Search results for') . ' (' . $this->translate((string)$ad_type_txt) . ') "' . $this->escape($this->q) . '"';
 
-<?
-//search form
-if($this->woeid){
+            ?>
+        </h2>
 
-    $form = new Form_Search();
-    $form->addElement('hidden','woeid', array('value' => $this->woeid));
-    $form->setAction('/' . $this->lang . '/search/');
-    $form->loadDefaultDecoratorsIsDisabled(false);
-    foreach ($form->getElements() as $element) {
-        $element->removeDecorator('DtDdWrapper');
-        $element->removeDecorator('Label');
-    }
-    echo $form;
-}
-echo '<br>' . $this->translate('Found') . ' ' . $this->total_found . ' ' .
-     $this->translate('results in') . ' ' . $this->query_time . ' ' .
-     $this->translate('seconds.')
-?>
 
-  </div>
+
+        <?php
+        //search form
+
+        if($this->woeid){
+            require_once APPLICATION_PATH . '/forms/Search.php';
+            $form = new Form_Search();
+
+            $form->addElement('hidden','woeid', array('value' => $this->woeid));
+
+            $form->setAction('/' . $this->lang . '/search/');
+            $form->loadDefaultDecoratorsIsDisabled(false);
+            foreach ($form->getElements() as $element) {
+                $element->removeDecorator('DtDdWrapper');
+                $element->removeDecorator('Label');
+            }
+
+            echo $form;
+        }
+
+        ?>
+
+
+        <?php echo '<br>' . $this->translate('Found') . ' ' . $this->total_found . ' ' . $this->translate('results in') . ' ' . $this->query_time . ' ' . $this->translate('seconds.') ?>
+    </div>
 
 </div>
 
 <?php
-if (count($this->mensajes) > 0) {
-    echo '<div class="success">';
-    foreach ($this->mensajes as $msg) {
-        echo $msg . '<br>';
+    if (count($this->mensajes) > 0) {
+        echo '<div class="success">';
+        foreach ($this->mensajes as $msg) {
+            echo $msg . '<br>';
+        }
+        echo '</div>';
     }
-    echo '</div>';
-}
 ?>
 
 <div id="main">
-
-  <div class="span-18">
-
-<?
-if ($this->search) {
-    foreach ($this->search as $key => $val) {
-?>
-    <div class="ad_excerpt">
-
-<?
-        if ($val['photo'] !== null) {
-            echo '<div class="ad_list_image">
-                  <a href="/' . $this->lang . '/ad/' . $val['id'] . '/' .
-                           $this->slugTitle($this->escape($val['title'])) . ' ">
-                    <img alt="' . $this->escape($val['title']) . '"
-                         src="/images/uploads/ads/100/' .
+    <div class="span-18">
+        <?php if ($this->search): ?>
+        <?php foreach ($this->search as $key => $val): ?>
+            <div class="ad_excerpt">
+                <?php
+                if ($val['photo'] !== null) {
+                    echo '<div class="ad_list_image">
+		      <a href="/' . $this->lang . '/ad/' . $this->escape($val['id']) . '/' . $this->slugTitle($this->escape($val['title'])) . ' ">
+		      <img alt="' . $this->escape($val['title']) . '" src="/images/uploads/ads/100/' .
                         $this->escape($val['photo']) . '" /></a></div>';
-            }
-?>
-      <h4>
-        <a href="/<?=$this->lang?>/ad/<?=$val['id'] . '/' . $this->slugTitle($this->escape($val['title'])) ?>">
-          <?=$this->escape($val['title']) ?></a>
-      </h4>
+                }
+                ?>
 
-<?
-        if ($val['type'] == 1)
-            $val['type_name'] = 'give';
-        if ($val['type'] == 2)
-            $val['type_name'] = 'want';
-?>
+                <h4><a
+                    href="/<?=$this->lang ?>/ad/<?=$this->escape($val['id']) . '/' . $this->slugTitle($this->escape($val['title'])) ?>">
+                    <?=$this->escape($val['title']) ?></a></h4>
 
-      <h6>
-        <a href="/<?=$this->lang?>/woeid/<?=$val['woeid_code']?>/<?=$val['type_name']?>">
-          <?=$this->woeidName($val['woeid_code'], $this->lang) . ' > ' . $this->translate((string)$val[type_name]) ?></a>
-      </h6>
+                <?
+                if ($val['type'] == 1) {
+                    $val['type_name'] = 'give';
+                }
 
-<?
-        if ($val['type'] == 1) {
-?>
-      <span class="ad_status <?=$val['status'] ?>">
-        <?=$this->translate($val['status']) ?>
-      </span>
-<?
-        }
-?>
-      <span class="ad_date">
-        <?=$this->translate('Posted on ')
-           $this->betterDate($val['date_created'])
-           $this->translate('by user') . ' '?>
-        <a href="/<?=$this->lang?>/profile/<?=$this->escape($val['username'])?>">
-          <?=$this->escape($val['username']) ?></a>
-      </span>
+                if ($val['type'] == 2) {
+                    $val['type_name'] = 'want';
+                }
+                ?>
 
-      <div>
-<?
-        $val['body'] = preg_replace("/\b(" . $this->q . ")\b/i", '<b>\1</b>', $this->escape($val['body']));
-        echo $this->escapeEmail($val['body'])
-?>
-      </div>
+                <h6><a href="/<?=$this->lang . '/woeid/' . $val['woeid_code'] . '/' . $val['type_name'] ?>">
+                    <?=$this->woeidName($val['woeid_code'], $this->lang) . ' > ' . $this->translate((string)$val[type_name]) ?> </a>
+                </h6>
 
-      <div class="ad_meta_info">
-<?
-        if ($val['readings_count']) 
-            echo $val['readings_count'] . ' ' . $this->translate('readings');
-        if ($val['comments_count'])
-            echo ', ' . $val['comments_count'] . ' ' . $this->translate('comments');
-?>
-      </div>
+
+                <?php if ($val['type'] == 1): ?>
+                <span class="ad_status <?=$val['status'] ?>"><?=$this->translate($val['status']) ?></span>
+                <?php endif; ?>
+
+                <?php if ($val['type']): ?>
+            <span class="ad_date"><?= $this->translate('Posted on ') . $this->escape(date($this->translate('l dS \o\f F Y H:i:s'), strtotime($val['date_created']))) ?>
+                <?= $this->translate('by user ') ?>
+                <?php endif; ?>
+                <a href="/<?=$this->lang ?>/profile/<?=$this->escape($val['username']) ?>"><?=$this->escape($val['username']) ?></a>
+            </span>
+
+
+
+                <div>
+                    <?php
+                    $val['body'] = preg_replace("/\b(" . $this->q . ")\b/i", '<b>\1</b>', $this->escape($val['body']));
+                    echo $this->escapeEmail($val['body']) ?></div>
+
+                <div class="ad_meta_info">
+                    <?php if ($val['readings_count']): ?>
+                    <?= $val['readings_count'] . ' ' . $this->translate('readings') ?>
+                    <?php endif; ?>
+                    <?php if ($val['comments_count']): ?>
+                    <?= ', ' . $this->escape($val['comments_count'] == null ? 0 : $val['comments_count']) . ' ' . $this->translate('comments') ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+
+
+
+        <?php else: die() ?>
+        <div class="no_results">
+            <h3><?=$this->translate('No ads to display for this location.'); ?></h3>
+            <h5><?=$this->translate('You could try one of these things:'); ?></h5>
+            <h5>1. <?=$this->translate('Be the first to') . ' '; ?>
+                <a href="/<?=$this->lang ?>/ad/create"><?=$this->translate('post an ad on this location.'); ?></a></h5>
+            <h5>2. <?=$this->translate('Try to change the location to another city bigger near you.'); ?></h5>
+            <h5>
+                3. <?=$this->translate('Our autosuggest system (based on your IP) says you are located near:') . ' ' . $this->suggestIP; ?></h5>
+
+        </div>
+
+        <?php endif; ?>
+
+
+        <?php
+        echo $this->paginationControl($this->search,
+            'Sliding',
+            'partials/paginator_search.phtml');
+        ?>
+
 
     </div>
 
-<?
-    }
-else
-    die();
-?>
-    <div class="no_results">
-      <h3><?=$this->translate('No ads to display for this location.'); ?></h3>
-      <h5><?=$this->translate('You could try one of these things:'); ?></h5>
-      <h5>1. <?=$this->translate('Be the first to') . ' '; ?>
-        <a href="/<?=$this->lang ?>/ad/create"><?=$this->translate('post an ad on this location.'); ?></a></h5>
-      <h5>2. <?=$this->translate('Try to change the location to another city bigger near you.'); ?></h5>
-      <h5>
-          3. <?=$this->translate('Our autosuggest system (based on your IP) says you are located near:') . ' ' . $this->suggestIP; ?></h5>
 
+    <div class="google_ads">
+        <!-- google adsense block -->
+        <script type="text/javascript"><!--
+        google_ad_client = "pub-5360961269901609";
+        /* 160x600, creado 29/07/11 */
+        google_ad_slot = "2897112415";
+        google_ad_width = 160;
+        google_ad_height = 600;
+        //-->
+        </script>
+        <script type="text/javascript"
+                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+
+        <!-- end  of google adsense block -->
     </div>
 
-<?
-}
-
-echo $this->paginationControl($this->search,
-                              'Sliding',
-                              'partials/paginator_search.phtml');
-?>
-
-  </div>
-
-  <div class="google_ads">
-      <!-- google adsense block -->
-      <script type="text/javascript"><!--
-      google_ad_client = "pub-5360961269901609";
-      /* 160x600, creado 29/07/11 */
-      google_ad_slot = "2897112415";
-      google_ad_width = 160;
-      google_ad_height = 600;
-      //-->
-      </script>
-      <script type="text/javascript"
-              src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-      </script>
-
-      <!-- end  of google adsense block -->
-  </div>
 
 </div> <!-- /main -->
