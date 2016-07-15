@@ -1,3 +1,7 @@
+# :warning: DEPRECATED REPO
+
+Current development of Nolotiro v3 is hosted at https://github.com/alabs/nolotiro.org
+
 # Nolotiro v2
 
 This is the http://nolotiro.org version 2 (from scratch).
