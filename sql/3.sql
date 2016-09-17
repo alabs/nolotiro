@@ -21,7 +21,7 @@ CREATE TABLE `ads` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `body` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `user_owner` int(11) NOT NULL,
+  `user_owner` int(11) unsigned NOT NULL,
   `type` int(11) NOT NULL,
   `woeid_code` int(11) NOT NULL,
   `date_created` datetime NOT NULL,
@@ -61,34 +61,33 @@ CREATE TABLE `friends` (
   UNIQUE KEY `iduser_idfriend` (`id_user`,`id_friend`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT |
 
+CREATE TABLE `threads` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `last_speaker` int(11) unsigned,
+  `unread` int(2) NOT NULL DEFAULT '0',
+  `user_from` int(11) unsigned,
+  `user_to` int(11) unsigned,
+  `deleted_from` int(1) NOT NULL DEFAULT '0',
+  `deleted_to` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_from`) REFERENCES `users`(`id`) ON DELETE SET NULL,
+  FOREIGN KEY (`user_to`) REFERENCES `users`(`id`) ON DELETE SET NULL,
+  FOREIGN KEY (`last_speaker`) REFERENCES `users`(`id`) ON DELETE SET NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT |
 
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `thread_id` int(11) NOT NULL,
   `date_created` datetime NOT NULL,
-  `user_from` int(11),
-  `user_to` int(11),
+  `user_from` int(11) unsigned,
+  `user_to` int(11) unsigned,
   `ip` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `body` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`thread_id`) REFERENCES `threads`(`id`) ON DELETE CASCADE,
   FOREIGN KEY (`user_from`) REFERENCES `users`(`id`) ON DELETE SET NULL,
   FOREIGN KEY (`user_to`) REFERENCES `users`(`id`) ON DELETE SET NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT |
-
-CREATE TABLE `threads` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `subject` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `last_speaker` int(11),
-  `unread` int(2) NOT NULL DEFAULT '0',
-  `user_from` int(11),
-  `user_to` int(11),
-  `deleted_from` int(1) NOT NULL DEFAULT '0',
-  `deleted_to` int(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_from`) REFERENCES `users`(`id`) ON DELETE SET NULL,
-  FOREIGN KEY (`user_to`) REFERENCES `users`(`id`) ON DELETE SET NULL
-  FOREIGN KEY (`last_speaker`) REFERENCES `users`(`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT |
 
 CREATE TABLE `readedAdCount` (
