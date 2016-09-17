@@ -1,12 +1,14 @@
+# :warning: DEPRECATED REPO
+
+Current development of Nolotiro v3 is hosted at https://github.com/alabs/nolotiro.org
+
+# Nolotiro v2
+
 This is the http://nolotiro.org version 2 (from scratch).
 
 This project uses the Affero GPL License Version 3. That means (among other things) you have to publish the code if you use the source from this project.
 
-
-
-nolotiro.org v2 third party code and stuff:
-===========================================
-
+## Third party code and stuff
 
 Core based on Zend Framework: ( http://framework.zend.com/ )
 
